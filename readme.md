@@ -11,7 +11,8 @@ I've added tons of features, will update soon.
 - User profiles
 - User suspending
 - Settings management
-
+- Google charts
+- Activity monitoring
 
 ![alt tag](http://i.imgur.com/j8drkz8.png)
 
