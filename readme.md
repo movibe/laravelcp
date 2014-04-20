@@ -13,6 +13,9 @@ I've added tons of features, will update soon.
 - Settings management
 
 
+![alt tag](http://i.imgur.com/j8drkz8.png)
+
+
 
 
 # From the original:
