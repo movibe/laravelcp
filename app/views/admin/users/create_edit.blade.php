@@ -1,0 +1,182 @@
+@extends('admin.layouts.modal')
+
+@section('content')
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
+		<li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('core.profile') }}}</a></li>
+		@if ($mode != 'create')
+			<li><a href="#tab-logs" data-toggle="tab">{{{ Lang::get('core.activity') }}}</a></li>
+			<li class="hidden-xs"><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
+		@endif
+	</ul>
+
+	@if ($message = Session::get('success'))
+	<script type="text/javascript">
+		if(parent.$('#users').html()){
+			var oTable = parent.$('#users').dataTable();
+			oTable.fnReloadAjax();
+		}
+	</script>
+	@endif
+
+	@if (isset($user))
+		{{ Form::open(array('url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal')) }}
+	@else
+		{{ Form::open(array('class' => 'form-horizontal')) }}
+	@endif
+
+		<div class="tab-content">
+			@if ($mode != 'create')
+				<div class="tab-pane" id="tab-details">
+					<div class="list-group">
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">{{{ Lang::get('core.created') }}}</h4>
+						<p class="list-group-item-text">{{{ $user->created_at }}}</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
+						<p class="list-group-item-text">{{{ $user->last_login }}}</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
+						<p class="list-group-item-text">{{{ $user->last_activity }}}</p>
+					  </a>
+					</div>
+				</div>
+			@endif
+
+			<div class="tab-pane active" id="tab-general">
+
+
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
+					<div class="col-md-10">
+						<input class="form-control" type="text" name="displayname" id="displayname" value="{{{ Input::old('displayname', isset($user) ? $user->displayname : null) }}}" />
+					</div>
+				</div>
+
+				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
+					<div class="col-md-10">
+						<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
+						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+					</div>
+				</div>
+
+				
+				<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
+					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.passsword') }}}</label>
+					<div class="col-md-10">
+						<input class="form-control" type="password" name="password" id="password" value="" />
+						{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
+					</div>
+				</div>
+
+				
+				<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
+					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.passsword') }}} {{{ Lang::get('core.confirm') }}}</label>
+					<div class="col-md-10">
+						<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
+						{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
+					</div>
+				</div>
+
+				
+				<div class="form-group {{{ $errors->has('activated') || $errors->has('confirm') ? 'error' : '' }}}">
+					<label class="col-md-2 control-label" for="confirm">{{{ Lang::get('core.active') }}}</label>
+					<div class="col-md-6">
+						@if ($mode == 'create')
+							<select class="form-control" name="confirm" id="confirm">
+								<option value="1"{{{ (Input::old('confirm', 0) === 1 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
+								<option value="0"{{{ (Input::old('confirm', 0) === 0 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
+							</select>
+						@else
+							<select class="form-control" {{{ ($user->id === Confide::user()->id ? ' disabled="disabled"' : '') }}} name="confirm" id="confirm">
+								<option value="1"{{{ ($user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
+								<option value="0"{{{ ( ! $user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
+							</select>
+						@endif
+						{{{ $errors->first('confirm', '<span class="help-inline">:message</span>') }}}
+					</div>
+				</div>
+
+				<div class="form-group {{{ $errors->has('roles') ? 'error' : '' }}}">
+	                <label class="col-md-2 control-label" for="roles">{{{ Lang::get('core.roles') }}}</label>
+	                <div class="col-md-6">
+		                <select class="form-control" name="roles[]" id="roles[]" multiple>
+		                        @foreach ($roles as $role)
+									@if ($mode == 'create')
+		                        		<option value="{{{ $role->id }}}"{{{ ( in_array($role->id, $selectedRoles) ? ' selected="selected"' : '') }}}>{{{ $role->name }}}</option>
+		                        	@else
+										<option value="{{{ $role->id }}}"{{{ ( array_search($role->id, $user->currentRoleIds()) !== false && array_search($role->id, $user->currentRoleIds()) >= 0 ? ' selected="selected"' : '') }}}>{{{ $role->name }}}</option>
+									@endif
+		                        @endforeach
+						</select>
+
+						<span class="help-block">
+							{{{ Lang::get('admin/users/messages.select_group') }}}
+						</span>
+	            	</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>'parent.bootbox.hideAll()')); }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane" id="tab-profile">
+				<ul class="nav nav-pills">
+					@if ($mode != 'create')
+						<li ><a href="#tab-create" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign"></span>  {{{ Lang::get('button.create') }}}</a></li>
+						@foreach($profiles as $index=>$pro)
+							<li @if ($index == 0)class="active"@endif><a href="#tab-{{{$pro->id}}}" data-toggle="tab" id="tab-c{{{$pro->id}}}">@if ($pro->title){{$pro->title}}@else#{{{$pro->id}}}@endif</a></li>
+						@endforeach
+					@endif
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane @if ($mode == 'create')active@endif" id="tab-create">
+						@include('admin/users/profiles')
+					</div>
+
+				@if ($mode != 'create')
+					@foreach($profiles as $index=>$profile)
+						<div class="tab-pane @if (isset($index) && $index == 0)active@endif" id="tab-@if(isset($profile)){{{$profile->id}}}@endif">
+							@include('admin/users/profiles')
+						</div>
+					@endforeach
+				@endif
+				</div>
+			</div>
+
+			<div class="tab-pane" id="tab-logs">
+				@include('admin/dt-loading')
+
+				<div class="dt-wrapper">
+					<table id="activitylog" class="table-responsive table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>{{{ Lang::get('admin/users/table.description') }}}</th>
+								<th>{{{ Lang::get('admin/users/table.details') }}}</th>
+								<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
+								<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+			</div>
+		</div>
+	{{ Form::close(); }}
+@stop
+
+@section('scripts')
+@if (isset($user))
+<script type="text/javascript">
+	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+</script>
+@endif
+@stop

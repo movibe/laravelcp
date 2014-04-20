@@ -1,0 +1,110 @@
+body {
+	padding: 52px 0 0 0;
+}
+
+
+
+
+
+
+
+
+
+.dt-wrapper{ display: none; }
+.dataTables_length label{ font-weight: normal}
+.datatable-loading{ position: absolute; padding: 10px}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+.page-header div{
+	margin-top: 15px
+}
+.full-modal .modal-body{ height: 80%}
+
+.full-modal .modal-dialog {
+  width: 80%;
+  height: 90%;
+}
+
+.full-modal .modal-content {
+  height: 90%;
+  overflow: auto
+
+}
+
+iframe{ border: 0px}
+
+
+@media (max-width:992px){
+	.dataTables_length {
+		display: none;
+		padding:0px;
+		margin:0;
+	}
+}
+@media (max-width:768px){
+	.full-modal .modal-dialog {
+		width:95%;
+		height:95%;
+	}
+}
+
+@media (min-width: 768px) { 
+	ul.nav li.dropdown:hover > ul.dropdown-menu {
+		display: block;    
+	}
+}
+
+
+.dataTables_processing {
+        position: absolute;
+        left: 50%;
+        width: 250px;
+        height: 30px;
+        margin-left: -125px;
+        margin-top: -15px;
+        padding: 14px;
+        border: 1px solid #ddd;
+        text-align: center;
+        color: #000;
+        font-size: 14px;
+        background-color: white;
+		display: table;
+}
+.dataTables_filter label{font-weight:normal}
+.sidebar ul, .sidebar .panel{ margin: 5px}
+
+.highlight{ opacity:.5}
+
+.dt-pop-control{ 
+display: none;
+
+
+}
+
+
+
+
+
+
+
+

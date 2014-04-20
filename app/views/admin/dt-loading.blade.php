@@ -1,0 +1,1 @@
+<p class="datatable-loading label label-default"><i class="glyphicon glyphicon-refresh"></i> {{{ Lang::get('core.loading') }}} ...</p>

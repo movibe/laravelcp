@@ -1,0 +1,56 @@
+
+
+.sidebar {
+	position: fixed;
+	top: 0px;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+
+	margin:0;
+	padding:0;
+
+	padding-top: 60px;
+	border-top:0;
+	overflow-x: hidden;
+	overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+.sidebar-with-bread {
+	top: 90px;
+}
+@media (max-width: 768px) {
+	.sidebar {
+	  display: none;
+	}
+}
+
+
+
+
+
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.breadcrumb{ position: fixed;width:100%}
+.dataTable{ width: 100%}
