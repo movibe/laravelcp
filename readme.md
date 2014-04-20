@@ -6,11 +6,16 @@ This is a pretty heavily modded version of the latest l4 bootstrap starter site.
 I've added tons of features, will update soon.
 
 
+# Features
+- Drag & Drop dashboard
+- User profiles
+- User suspending
+- Settings management
 
 
 
 
-# The Original!
+# From the original:
 
 
 Laravel 4 Bootstrap Starter Site is a sample application for beginning development with Laravel 4.
