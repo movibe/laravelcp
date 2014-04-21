@@ -401,7 +401,6 @@ class Lavacharts
 		
 				function _resize_gcharts () {
 					setTimeout(function(){
-						var chart = new google.visualization.LineChart(document.getElementById('".$chart->elementID."'));
 						chart.draw(data, options);
 					}, 500);
 				 

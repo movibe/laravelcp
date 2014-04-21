@@ -1,6 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('styles')
+<link rel="stylesheet" href="{{{ asset('assets/css/simpleweather.css') }}}"/>
 <link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-colorselector.css') }}}"/>
 <link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.css') }}}"/>
 <link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.responsive.css') }}}"/>
@@ -12,6 +13,7 @@
 
 @section('scripts')
 	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-colorselector.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
@@ -39,6 +41,25 @@ function fnUpdateGrowler(id, args){
 	});
 }
 
+{
+            }
+
+
+
+
+function _resize_sparkline(){
+	if( $( window ).width() > 760){
+		var _w=(($( window ).width()/4)/10)-9;
+	} else 	var _w=(($( window ).width()/2)/10)-10;
+
+	$('.sparklines').sparkline([4,6,1,4,7,1,5,8,9,2], { enableTagOptions: true , barWidth: _w, barSpacing: '3' });
+
+}
+
+$(window).bind('load resize', throttle(_resize_sparkline, 200));
+
+
+
 
 	</script>
 @stop
@@ -47,7 +68,51 @@ function fnUpdateGrowler(id, args){
 	<br>
 	<div class="gridster">
 		<ul>
-			<li id="li1" data-row="1" data-col="1" data-sizex="1" data-sizey="5">
+
+			<li id="li5" data-row="1" data-col="1" data-sizex="2" data-sizey="2" data-max-sizex="2" data-max-sizey="2"  data-min-sizey="2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="pull-left col-xs-6  col-sm-3 col-md-3 panel-default-sm">
+							<div class="panel panel-default ">
+								<div class="panel-body panel-body-full panel-handel">
+									<span class="sparklines"  sparkWidth="100%" sparkHeight="60" sparkType="bar" sparkBarColor="green"></span>
+									<div class="datas-text">12,000 visitors/day</div>
+								</div>
+							</div>
+						</div>
+						<div class="pull-left hidden-xs  col-sm-3 col-md-3 panel-default-sm">
+							<div class="panel panel-default">
+								<div class="panel-body panel-body-full panel-handel">
+									<span class="sparklines"  sparkHeight="60" sparkType="bar" sparkBarColor="lightblue"></span>
+									<div class="datas-text">2,000 unique/day</div>
+								</div>
+							</div>
+						</div>
+						<div class="pull-left col-xs-6 col-sm-3 col-md-3 panel-default-sm">
+							<div class="panel panel-default">
+								<div class="panel-body panel-body-full panel-handel">
+									<span class="sparklines"  sparkHeight="60" sparkType="bar" sparkBarColor="yellow"></span>
+									<div class="datas-text">25,000 hits/day</div>
+								</div>
+							</div>
+						</div>
+						<div class="pull-left hidden-xs col-sm-3  col-md-3 panel-default-sm">
+							<div class="panel panel-default">
+								<div class="panel-body panel-body-full  panel-handel">
+									<div class="sparklines" sparkHeight="60" sparkType="bar" sparkBarColor="orange"></div>
+									<div class="datas-text">2,000 beers/day</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</li>
+
+
+
+
+			<li id="li1" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">Featuring</span></span>
@@ -57,15 +122,29 @@ function fnUpdateGrowler(id, args){
 						<ul class="list-group">
 							<li class="list-group-item">http://kevinkhill.github.io/LavaCharts/</li>
 							<li class="list-group-item">https://github.com/Crinsane/LaravelShoppingcart</li>
-							<li class="list-group-item">http://bootstrapper.aws.af.cm/components</li>
-							<li class="list-group-item">maybe http://payum.forma-dev.com/documentation/0.8/Core/get-it-started</li>
+							<!--<li class="list-group-item">maybe http://payum.forma-dev.com/documentation/0.8/Core/get-it-started</li>-->
 							<li class="list-group-item">http://bootboxjs.com/documentation.html</li>
 							<li class="list-group-item">https://github.com/Regulus343/ActivityLog</li>
+							<li class="list-group-item">this would be sweet - http://anahkiasen.github.io/former/</li>
 						</ul>
 				  </div>
 				</div>			
 			</li>
-			<li id="li3" data-row="2" data-col="1" data-sizex="2" data-sizey="5">
+
+			<li id="li4" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
+				<div class="panel panel-default">
+					<div class="panel-heading clearfix">
+						 <span class="panel-title pull-left"><span class="glyphicon glyphicon-user"></span> <span class="panel-title-text">{{{ Lang::get('core.users_online') }}}</span></span>
+						@include('admin/widget-controls', array('id' => 'li4'))
+					</div>
+					<div class="panel-body">
+						@include('admin/helpers/users-online')
+					</div>
+				</div>	
+			</li>
+
+
+			<li id="li3" data-row="3" data-col="1" data-sizex="2" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-signal"></span> <span class="panel-title-text">Graph Example</span></span>
@@ -77,17 +156,14 @@ function fnUpdateGrowler(id, args){
 					</div>
 				</div>			
 			</li>
-			<li id="li4" data-row="1" data-col="1" data-sizex="1" data-sizey="5">
-				<div class="panel panel-default">
-					<div class="panel-heading clearfix">
-						 <span class="panel-title pull-left"><span class="glyphicon glyphicon-user"></span> <span class="panel-title-text">{{{ Lang::get('core.users_online') }}}</span></span>
-						@include('admin/widget-controls', array('id' => 'li4'))
-					</div>
-					<div class="panel-body">
-						@include('admin/helpers/users-online')
-					</div>
-				</div>	
-			</li>
+
+
+
+
+
+
+
 		</ul>
-	</div>
+</div>
+
 @stop

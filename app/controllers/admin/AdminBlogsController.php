@@ -201,8 +201,6 @@ class AdminBlogsController extends AdminController {
                 <a data-row="{{{  $id }}}" data-table="blogs"  href="{{{ URL::to(\'admin/slugs/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 
-        ->remove_column('id')
-
         ->make();
     }
 

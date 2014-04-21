@@ -232,7 +232,6 @@ class AdminRolesController extends AdminController {
                                 <a data-row="{{{  $id }}}" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
                     ')
 
-        ->remove_column('id')
 
         ->make();
     }

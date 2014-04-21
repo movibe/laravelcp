@@ -43,7 +43,7 @@ class AdminDashboardController extends AdminController {
 							//$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>array('test1','test2'));
 						break;
 						case "users_online":
-							$_results[$_poll->id]=array('type'=>'html', 'args'=>'my html');
+							$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());
 						break;
 					}
 

@@ -132,7 +132,6 @@ class AdminCommentsController extends AdminController
                 <a  data-row="{{{  $id }}}" data-table="comments" href="{{{ URL::to(\'admin/comments/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 
-        ->remove_column('id')
         ->remove_column('postid')
         ->remove_column('userid')
 

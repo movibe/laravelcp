@@ -66,6 +66,7 @@ iframe{ border: 0px}
 		width:95%;
 		height:95%;
 	}
+	.dropdown-menu li{ padding:10px}
 }
 
 @media (min-width: 768px) { 
@@ -79,7 +80,6 @@ iframe{ border: 0px}
         position: absolute;
         left: 50%;
         width: 250px;
-        height: 30px;
         margin-left: -125px;
         margin-top: -15px;
         padding: 14px;
@@ -101,10 +101,28 @@ display: none;
 
 }
 
+.pagination{ margin:0; }
 
 
 
 
+.datas-text{
+	font-size: 11px;
+	padding: 7px 0px 0px 0px;
+	font-weight: normal;
+	text-align: center
+}
+
+.jqstooltip {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.modal-backdrop.mobile-loading {
+
+top: 54px;
 
 
 
+}

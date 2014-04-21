@@ -1,13 +1,20 @@
+
+
+
 /* modalfy @ https://github.com/gcphost/modalfy */
-function modalfy(){
-	$( '.modalfy').click(function() {
-		bootbox.dialog({
-			message:'<iframe border="0" height="100%" width="100%" src="'+$(this).attr("href")+'">',
-			onEscape: function() {},
-			animate: true,
-			className: "full-modal",
-		});
-		return false;
+$(document).on("click", ".modalfy", function(e) {
+	e.preventDefault();    
+	modalfyRun($(this).attr("href"));
+	return false;
+});
+
+
+function modalfyRun(src){
+	bootbox.dialog({
+		message:'<iframe border="0" height="100%" width="100%" src="'+src+'">',
+		onEscape: function() {},
+		animate: true,
+		className: "full-modal",
 	});
 }
 
@@ -15,8 +22,8 @@ function modalfyIframes(){
 	$('.modal-dialog iframe').each(function(){
 		$(this).css('height',($(this).parents().find('.modal-body').height() + 75) + 'px' );
 	});
-
 }
+
 $(window).on('resize load',modalfyIframes);
 
 /* security for ajax */
@@ -30,10 +37,12 @@ $.ajaxSetup({
 
 
 function styledt(){
+	$('.dataTables_filter label').addClass('pull-right'); 
 	$('.dataTables_filter input').attr('placeholder', 'Search'); 
 	$('.dataTables_filter input').addClass('form-control');
 	$('.dataTables_length select').addClass('form-control');
-	$(".dt-pop-control").detach().appendTo('.dataTables_filter')
+	$(".dt-pop-control").detach().prependTo('.dataTables_filter')
+	$('.dataTables_paginate').addClass('pull-right');
 }
 
 function dtLoad(table, action, hidemd, hidesm){
@@ -56,39 +65,41 @@ function dtLoad(table, action, hidemd, hidesm){
 			  }
 		  },
 		"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-			if ( jQuery.inArray(aData.DT_RowId, aSelected) !== -1 ) {
-				$(nRow).addClass('highlight');
-			}
+			if ( $.inArray(aData[0], aSelected) !== -1 )  $(nRow).addClass('highlight');
 		 },
 		"fnDrawCallback": function ( oSettings ) {
-			modalfy();
 			
-			$(table+' tr').find(hidemd).addClass('hidden-sm, hidden-xs'); 
+			oTable.fnSetColumnVis( 0, false,false );
+
+			$(table+' tr').find(hidemd).addClass('hidden-sm hidden-xs'); 
 			$(table+' tr').find(hidesm).addClass('hidden-xs'); 
 
-			
 			$('.datatable-loading').fadeOut();
 			$(' .dt-wrapper').fadeIn();
-
-			$(table+' tbody tr').click( function () {
-				var aData = oTable.fnGetData( this );
-				var id = $(this).find('.btn-group').attr('data-id');
-				var index = jQuery.inArray(id, aSelected);
-
-				if ( index === -1 ) {
-					aSelected.push( id );
-				} else aSelected.splice( index, 1 );
-				
-				 if(aSelected.length > 0){
-					 $('.dt-pop-control').fadeIn();
-				 } else $('.dt-pop-control').fadeOut();
-
-				$(this).toggleClass('highlight');
-			} );
+			
 
 
 		}
 	});
+
+	$(document).on("click", table+' tbody tr', function(e) {
+		e.preventDefault();    
+		var aData = oTable.fnGetData( this );
+		var id = aData[0];
+		var index = $.inArray(id, aSelected);
+		if ( index === -1 ) {
+			aSelected.push( id );
+		} else aSelected.splice( index, 1 );
+		
+		 if(aSelected.length > 0){
+			 $('.dt-pop-control').fadeIn();
+		 } else $('.dt-pop-control').fadeOut();
+
+		$(this).toggleClass('highlight');
+	} );
+
+
+
 }
 
 $(document).on("click", ".ajax-alert", function(e) {
@@ -125,7 +136,21 @@ $(document).on("click", ".dt-mass", function(e) {
 	e.preventDefault();    
 	var action=$(this).attr('data-action');
 	var run=false;
-	if($(this).attr('data-method') == 'delete'){
+	if($(this).attr('data-method') == 'email'){
+
+		var _ids='';
+		$.each(aSelected, function(i,value){
+			_ids+=value+',';
+
+		});
+
+
+
+		modalfyRun($(this).attr('data-action')+'?ids='+_ids);
+
+
+		run=false;
+	}else if($(this).attr('data-method') == 'delete'){
 		bootbox.confirm('Are you sure?', function(result) {
 			if(result) run=true;
 		});
@@ -169,3 +194,30 @@ $(document).on("click", ".dt-mass", function(e) {
 
 
     });
+$(document).ready(function() {
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
+  });
+} else loadWeather('Seattle',''); 
+});
+
+
+
+function loadWeather(location, woeid) {
+  $.simpleWeather({
+    location: location,
+    woeid: woeid,
+    unit: 'f',
+    success: function(weather) {
+		 $(".panel-weather").hide();
+      $(".panel-weather").html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
+	  $(".panel-weather").attr('title', weather.city + ', '+ weather.region );
+	   $(".panel-weather").show();
+    },
+    error: function(error) {
+      $(".panel-weather").html(error);
+    }
+  });
+}
+

@@ -22,10 +22,11 @@
 		<table id="roles" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
+					<th></th>
 					<th class="col-md-6">{{{ Lang::get('admin/roles/table.name') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/roles/table.users') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/roles/table.created_at') }}}</th>
-					<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+					<th class="col-md-2" >{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,6 +38,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-	dtLoad('#roles', 'roles/data', 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+	dtLoad('#roles', 'roles/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
 </script>
 @stop

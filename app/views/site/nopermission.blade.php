@@ -1,6 +1,5 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
 @section('title')
 Permission Denied ::
 @parent
@@ -10,7 +9,7 @@ Permission Denied ::
 	@if (!Auth::user())
 		<h3>You do not have permission to access this page.</h3>
 		You must <a href ="{{{ URL::to('user/login') }}}">log-in</a> to see this page.
-	@elseif
+	@else
 		<h3>You do not have permission to access this page.</h3>
 	@endif
 

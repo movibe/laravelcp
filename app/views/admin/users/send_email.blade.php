@@ -23,8 +23,16 @@
 @stop
 
 @section('content')
-	{{ Form::open(array('class' => 'form-horizontal')) }}
-
+	{{ Form::open(array('action' => 'AdminUsersController@postEmail', 'class' => 'form-horizontal')) }}
+	@if(isset($multi) && count($multi) > 0)
+		<p>
+			<select name="to[]" multiple style="width: 100%; height: 40px;" class="form-control">
+				@foreach ($multi as $i=>$email)
+					<option value="{{{ $i }}}" selected>{{{ $email }}}</option>
+				@endforeach
+			</select>		
+		</p>
+	@endif
 		<p><input type="text" name="subject" placeholder="{{{ Lang::get('core.subject') }}}" style="width:100%" class="form-control"/></p>
 
 		<p><textarea name="body" class="wysiwyg"></textarea></p>

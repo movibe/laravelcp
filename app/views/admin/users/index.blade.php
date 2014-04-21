@@ -29,18 +29,26 @@
 		<table id="users" class="table-responsive table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
-					<th>{{{ Lang::get('admin/users/table.username') }}}</th>
-					<th>{{{ Lang::get('admin/users/table.email') }}}</th>
-					<th>{{{ Lang::get('admin/users/table.roles') }}}</th>
-					<th>{{{ Lang::get('table.actions') }}}</th>
+					<th></th>
+					<th class="col-md-3">{{{ Lang::get('admin/users/table.username') }}}</th>
+					<th class="col-md-3">{{{ Lang::get('admin/users/table.email') }}}</th>
+					<th class="col-md-3">{{{ Lang::get('admin/users/table.roles') }}}</th>
+					<th class="col-md-3">{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
-		<div class="dt-pop-control pull-right">
+		<div class="dt-pop-control pull-right">&nbsp;
 			<div class="btn-group">
-				<button data-action="user/mass/delete" data-method="delete" type="button" class="dt-mass btn btn-danger dropdown-toggle">{{{ Lang::get('button.delete') }}}</button>
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					{{{ Lang::get('table.actions') }}} <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="#" data-action="user/mass/email" data-method="email" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
+					<li class="divider"></li>
+					<li><a href="#" data-action="user/mass/delete" data-method="delete"  class="label-danger dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -49,6 +57,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-	dtLoad('#users', 'users/data', 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+	dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
 </script>
 @stop

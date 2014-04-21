@@ -10,4 +10,5 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
 <script src="{{{ asset('assets/js/jquery.poller.js') }}}"></script>
+<script src="{{{ asset('assets/js/jquery.simpleWeather.min.js') }}}"></script>
 @yield('scripts')

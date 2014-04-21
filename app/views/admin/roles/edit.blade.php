@@ -22,7 +22,7 @@
 				<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="name">{{{ Lang::get('core.name') }}}</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $role->name) }}}" />
+						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $role->name) }}}" @if($role->name == "admin")disabled@endif/>
 						{{{ $errors->first('name', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
@@ -32,13 +32,14 @@
 				<div class="form-group">
 					<div class="btn-group" data-toggle="buttons">
 						<button class="btn btn-success" onclick="$('.btn-group').find('.btn').button('toggle')">{{{ Lang::get('core.all') }}}</button>
+					</div><p></p><div class="btn-group" data-toggle="buttons">
 						@foreach ($permissions as $index => $permission)
-							<label class="btn btn-primary">
+							<label class="btn btn-primary {{{ (isset($permission['checked']) && $permission['checked'] == true ? ' active' : '')}}}">
 								<input type="hidden" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="0" />
-								<input type="checkbox" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="1"{{{ (isset($permission['checked']) && $permission['checked'] == true ? ' checked="checked"' : '')}}} /></span>
+								<input  type="checkbox" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="1"{{{ (isset($permission['checked']) && $permission['checked'] == true ? ' checked' : '')}}} /></span>
 								{{{ $permission['display_name'] }}}
 							 </label>
-							 @if ($index % 2 == 0)
+							 @if ($index % 4 == 0)
 								</div><p></p><div class="btn-group" data-toggle="buttons">
 							 @endif
 						@endforeach

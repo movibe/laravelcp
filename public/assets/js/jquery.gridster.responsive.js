@@ -85,7 +85,6 @@ function fnCreateGridster(page, colors, states, titles){
 	if(localdata_states){
 		$.each(localdata_states, function(i,value){
 			if(value){
-				console.log(value);
 				if(value.state == 'closed'){
 					$(".gridster > ul").data('gridster').remove_widget($('#'+value.panel));
 				}else if(value.state == false) _state_minimize(value.panel);
@@ -118,7 +117,7 @@ function fnCreateGridster(page, colors, states, titles){
 			$('.main-nav').show();
 			$('#'+panel).find('.hide-full').show();
 			$('#'+panel +' .gs-resize-handle').hide();
-			$('#'+panel).css({'position':'absolute', 'top':$('#'+panel).attr('data-top'), 'left':$('#'+panel).attr('data-left'),'width':$('#'+panel).attr('data-width'), 'height':$('#'+panel).attr('data-height'), 'z-index':'0'});
+			$('#'+panel).css({'position':'absolute', 'top':$('#'+panel).attr('data-top'), 'left':$('#'+panel).attr('data-left'),'width':$('#'+panel).attr('data-width'), 'height':'calc(auto + 6px)', 'z-index':'0'});
 			$(this).removeClass('glyphicon-resize-small').addClass('glyphicon-resize-full');
 
 		} else {
@@ -198,9 +197,10 @@ function fnCreateGridster(page, colors, states, titles){
 	}
 
 	function _resize_gridster(){
+		var _max=2;
+		if( $( window ).width()< 760) _max=1
 		gridster.resize_widget_dimensions({
 			widget_base_dimensions: [(((base_size*($( window ).width()/base_size))/cols)-offset), 50],
-			widget_margins: [5, 5],
 		});
 	}
 
@@ -252,11 +252,14 @@ function fnCreateGridster(page, colors, states, titles){
 	});
 
 	/* we're ready for the show */
-	$(window).on('resize load',_resize_gridster);
+    $(window).bind('resize.gridster-draggable', throttle(_resize_gridster, 200));
 
-	/* give it a bit to fully load then fade in */
-	setTimeout(function(){
-		$('.gridster').fadeIn('fast');
-	}, 400);
+	if( $( window ).width()< 760 && !localdata_states){
+		$('#li1, #li3, #li4').each(function(){
+			_state_minimize($(this).attr('id'));
+			_state_update($(this).attr('id'), false)
+		});
+	}
+
 
 }

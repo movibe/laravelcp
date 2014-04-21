@@ -357,15 +357,12 @@ class AdminUsersController extends AdminController {
     {
         if ( $user->id )
         {
-            $roles = $this->role->all();
-            $permissions = $this->permission->all();
-
             // Title
         	$title = $user->email;
         	// mode
         	$mode = 'edit';
 
-        	return View::make('admin/users/send_email', compact('user', 'roles', 'permissions', 'title', 'mode'));
+        	return View::make('admin/users/send_email', compact('user', 'title', 'mode'));
         }
         else
         {
@@ -373,43 +370,81 @@ class AdminUsersController extends AdminController {
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $user
-     * @return Response
-     */
-    public function postEmail($user)
+    
+	private function sendEmail($user){
+		$this->email=$user->email;
+		$send=Mail::send('emails.default', array('body'=>Input::get('body')), function($message)
+		{
+
+			$message->to($this->email)->subject(Input::get('subject'));
+
+			$files=Input::file('email_attachment');
+			if(count($files) > 1){
+				foreach($files as $file) $message->attach($file->getRealPath(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()));
+			} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
+
+		});
+		return $send;
+
+	}
+
+
+    public function postEmail($user=false)
     {
-		
-        if ( $user->email )
+ 		
+		$to=Input::get('to');
+		if(is_array($to) && count($to) >0){
+			$_results=false;
+			foreach ($to as $user_id){
+				$user=User::find($user_id);
+				$_results=$this->sendEmail($user);
+			}
+
+//...
+
+		} elseif (is_object($user) &&  $user->email )
         {
-
-			$this->email=$user->email;
-			$send=Mail::send('emails.default', array('body'=>Input::get('body')), function($message)
-			{
-
-				$message->to($this->email)->subject(Input::get('subject'));
-
-				$files=Input::file('email_attachment');
-				if(count($files) > 1){
-					foreach($files as $file) $message->attach($file->getRealPath(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()));
-				} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
-
-			});
-
-
-			if($send == true) {
-				// Redirect to the new user page
+			if($this->sendEmail($user)) {
 				return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.edit.success'));
 			} else {
 				return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.edit.error'));
 			}
 		} else {
-			return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.edit.error'));
+		
+			
+			//return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.edit.error'));
 		}
     }
 
+
+
+
+	public function getEmailMass($a=false){
+		$ids=explode(',',rtrim(Input::get('ids'),','));
+		$multi=array();
+		if(is_array($ids) && count($ids) > 0){
+			foreach($ids as $id){
+
+				$user=User::find($id);
+				$multi[$id]=$user->email;
+			}
+		
+		}
+
+            // Title
+        	$title = 'Mass Mail';
+        	// mode
+        	$mode = 'edit';
+
+			//if(Input::get('to'))
+
+        	return View::make('admin/users/send_email', compact('title', 'mode', 'multi'));
+     
+	
+	
+	
+	
+	}
 
 
     /**
@@ -431,7 +466,7 @@ class AdminUsersController extends AdminController {
         // ->edit_column('created_at','{{{ Carbon::now()->diffForHumans(Carbon::createFromFormat(\'Y-m-d H\', $test)) }}}')
 
 
-        ->add_column('actions', '<div class="btn-group" data-id="{{{$id}}}">
+        ->add_column('actions', '<div class="btn-group">
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>
 		@if($id == Auth::user()->id)
@@ -440,8 +475,6 @@ class AdminUsersController extends AdminController {
 			<a data-row="{{{  $id }}}" data-table="users" href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@endif</div>
             ')
-
-        ->remove_column('id')
 
         ->make();
     }

@@ -2,9 +2,9 @@ var _pols=[];
 var _last_active=new Date().getTime();
 var _run_count=1;
 var _poll_timer;
-var _default_delay=5000;
-var _default_delay_cap=300;
-var _default_max_delay=15000;
+var _default_delay=8000; // ms
+var _default_delay_cap=300; // seconds 
+var _default_max_delay=15000; // ms
 
 $('*').bind('mousemove keydown scroll', function () {
 	if((new Date().getTime()- _last_active)/1000 > _default_delay_cap) fnResetPollTimer();
@@ -43,7 +43,6 @@ function fnRunPoll(){
 				data: {'polls':JSON.stringify(_final_pols)},
 				complete: function(data){
 					$.each(data.responseJSON, function(i,value){
-
 						switch (value.type) {
 							case "html":
 								$(i).html(value.args);

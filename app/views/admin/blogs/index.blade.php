@@ -22,6 +22,7 @@
 		<table id="blogs" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
+					<th></th>
 					<th class="col-md-4">{{{ Lang::get('admin/blogs/table.title') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
@@ -37,6 +38,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-	dtLoad('#blogs', 'slugs/data', 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+	dtLoad('#blogs', 'slugs/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
 </script>
 @stop

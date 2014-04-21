@@ -120,7 +120,6 @@ return array(
 		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
-        'Robbo\Presenter\PresenterServiceProvider', // Presenter
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
 		'anlutro\LaravelSettings\ServiceProvider',
 		'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
@@ -206,8 +205,6 @@ return array(
         /* Additional Aliases */
         'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
         'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
-        'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
-        'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
         'String'          => 'Andrew13\Helpers\String', // String
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables

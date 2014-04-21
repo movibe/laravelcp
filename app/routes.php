@@ -91,6 +91,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     # User Management
     Route::get('users/{user}/email', 'AdminUsersController@getEmail');
     Route::post('users/{user}/email', 'AdminUsersController@postEmail');
+    Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
+    Route::post('user/mass/email', 'AdminUsersController@postEmail');
 
 	Route::get('users/{user}/profile/{profile}/delete', 'AdminUsersController@postProfileDelete');
 
