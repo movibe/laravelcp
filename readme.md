@@ -7,19 +7,29 @@ I've added tons of features, will update soon.
 
 
 # Features
-- Drag & Drop dashboard
+- Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
+- [BootSwatch Themed](http://bootswatch.com/)
+- [BootBox Dialogs](https://github.com/makeusabrew/bootbox)
 - User profiles
 - User suspending
-- Settings management
-- Google charts
-- Activity monitoring
+- User e-mailing, single and multiple w/ attachments
+- Ajax polling w/ [jQuery poller](https://github.com/gcphost/jquery.poller)
+- [L4-Settings](https://github.com/anlutro/laravel-settings)
+- [L4-DataTables](https://github.com/bllim/laravel4-datatables-package)
+- [LavaCharts](http://kevinkhill.github.io/LavaCharts/)
+- [ActivityLog](https://github.com/Regulus343/ActivityLog)
+- [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/)
+- [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
 
-![alt tag](http://i.imgur.com/j8drkz8.png)
+![alt tag](http://i.imgur.com/neThWyO.png)
 
 
+# Forked from Andrew's Repo
+
+[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
-# From the original:
+# From the his repo:
 
 
 Laravel 4 Bootstrap Starter Site is a sample application for beginning development with Laravel 4.
