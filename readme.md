@@ -1,9 +1,13 @@
 #Laravel 4 Bootstrap Starter Site
 
+I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start, had all the basic features one could want but really lacked in those that let you make the example an actual product.
 
-This is a pretty heavily modded version of the latest l4 bootstrap starter site.
+I decided to create my own based on his but this time include everything I wanted for a simple starter site, more user control, better design (responsive!), graphs, etc. 
 
-I've added tons of features, will update soon.
+Let me know what you think!
+
+
+
 
 
 # Features
@@ -199,32 +203,6 @@ Should work, if not try
 
     chmod -R 777 app/storage
 
-### Step 9: Build Assets
-
-If you have setup your environments, basset will know you are in development and will build the assets automatically and will not apply certain filters such as minification or combination to keep the code readable. You will need to make the folder where the assets are built writable:
-
-If permissions are set correctly:
-
-    chmod -R 775 public/assets/compiled
-
-Should work, if not try
-
-    chmod -R 777 public/assets/compiled
-
-To force a build of the dev collection use:
-
-```
-php artisan basset:build
-```
-
-The starter site uses two asset collections, ***public*** and ***admin***. While in development, assets will be built in two folders, ***public*** and ***admin***, inside of ***public/assets/compiled***. These are ignored by git as you do not want them on your production server. Once you are ready to push or upload the code to production run:
-
-```
-php artisan basset:build -p public
-php artisan basset:build -p admin
-```
-
-This will build the production assets in ***public/assets/compiled*** which will be versioned in git and should be uploaded to your production server.
 
 ### Step 10: Start Page
 
