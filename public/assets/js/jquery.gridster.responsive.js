@@ -252,10 +252,10 @@ function fnCreateGridster(page, colors, states, titles){
 	});
 
 	/* we're ready for the show */
-    $(window).bind('resize.gridster-draggable', throttle(_resize_gridster, 200));
+    $(window).bind('load resize.gridster-draggable', throttle(_resize_gridster, 200));
 
 	if( $( window ).width()< 760 && !localdata_states){
-		$('#li1, #li3, #li4').each(function(){
+		$('#widget-usersonline,#widget-features, #widiget-todo, #widget-graph').each(function(){
 			_state_minimize($(this).attr('id'));
 			_state_update($(this).attr('id'), false)
 		});

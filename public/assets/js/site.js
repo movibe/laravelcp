@@ -76,9 +76,6 @@ function dtLoad(table, action, hidemd, hidesm){
 
 			$('.datatable-loading').fadeOut();
 			$(' .dt-wrapper').fadeIn();
-			
-
-
 		}
 	});
 
@@ -97,9 +94,6 @@ function dtLoad(table, action, hidemd, hidesm){
 
 		$(this).toggleClass('highlight');
 	} );
-
-
-
 }
 
 $(document).on("click", ".ajax-alert", function(e) {
@@ -144,10 +138,7 @@ $(document).on("click", ".dt-mass", function(e) {
 
 		});
 
-
-
 		modalfyRun($(this).attr('data-action')+'?ids='+_ids);
-
 
 		run=false;
 	}else if($(this).attr('data-method') == 'delete'){
@@ -172,37 +163,6 @@ $(document).on("click", ".dt-mass", function(e) {
 	}
 });
 
- $(function() {      
-      $(".main-nav").swipe( {
-        swipe:function(event, direction, distance, duration, fingerCount) {
-			if(direction == "down") $('.main-nav .collapse').collapse('show');
-			if(direction == "up") $('.main-nav .collapse').collapse('hide');
-			if(direction == "right") $('.sidebar').collapse('show');
-			if(direction == "left") $('.sidebar').collapse('hide');
-        },
-         threshold:0
-      });
-
-      $(".sidebar").swipe( {
-        swipe:function(event, direction, distance, duration, fingerCount) {
-			if(direction == "left") $('.sidebar').collapse('hide');
-        },
-         threshold:0
-      });
-
-
-
-
-    });
-$(document).ready(function() {
-if ("geolocation" in navigator) {
-  navigator.geolocation.getCurrentPosition(function(position) {
-    loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
-  });
-} else loadWeather('Seattle',''); 
-});
-
-
 
 function loadWeather(location, woeid) {
   $.simpleWeather({
@@ -220,4 +180,38 @@ function loadWeather(location, woeid) {
     }
   });
 }
+
+
+
+$(document).ready(function() {
+
+
+	$(".main-nav").swipe( {
+	swipe:function(event, direction, distance, duration, fingerCount) {
+		if(direction == "down") $('.main-nav .collapse').collapse('show');
+		if(direction == "right") $('.sidebar').collapse('show');
+		if(direction == "left") $('.sidebar').collapse('hide');
+	},
+	 threshold:0
+	});
+
+	$(".sidebar").swipe( {
+	swipe:function(event, direction, distance, duration, fingerCount) {
+		if(direction == "left") $('.sidebar').collapse('hide');
+	},
+	 threshold:0
+	});
+
+
+
+	if ("geolocation" in navigator) {
+	  navigator.geolocation.getCurrentPosition(function(position) {
+		loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
+	  });
+	} else loadWeather('Seattle',''); 
+
+
+
+
+});
 

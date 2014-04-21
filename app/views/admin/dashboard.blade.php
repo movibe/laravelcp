@@ -8,7 +8,8 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 @stop
 @section('sub-nav-settings')
-	<li><a href="" onclick="localStorage.clear();"><span class="glyphicon glyphicon-remove"></span> {{{ Lang::get('button.clearlocalsettings') }}}</a></li>
+	<li class="divider"></li>
+	<li><a href="" onclick="localStorage.clear();"><span class="glyphicon glyphicon-remove"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
 @stop
 
 @section('scripts')
@@ -69,7 +70,7 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 	<div class="gridster">
 		<ul>
 
-			<li id="li5" data-row="1" data-col="1" data-sizex="2" data-sizey="2" data-max-sizex="2" data-max-sizey="2"  data-min-sizey="2">
+			<li id="widget-minigraphs" data-row="1" data-col="1" data-sizex="2" data-sizey="2" data-max-sizex="2" data-min-sizex="2" data-max-sizey="2"  data-min-sizey="2">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="pull-left col-xs-6  col-sm-3 col-md-3 panel-default-sm">
@@ -106,17 +107,16 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 						</div>
 					</div>
 				</div>
-			
 			</li>
 
 
 
 
-			<li id="li1" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
+			<li id="widget-features" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">Featuring</span></span>
-					  @include('admin/widget-controls', array('id' => 'li1'))
+					  @include('admin/widget-controls', array('id' => 'widget-features'))
 				  </div>
 				  <div class="panel-body ">
 						<ul class="list-group">
@@ -125,17 +125,16 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 							<!--<li class="list-group-item">maybe http://payum.forma-dev.com/documentation/0.8/Core/get-it-started</li>-->
 							<li class="list-group-item">http://bootboxjs.com/documentation.html</li>
 							<li class="list-group-item">https://github.com/Regulus343/ActivityLog</li>
-							<li class="list-group-item">this would be sweet - http://anahkiasen.github.io/former/</li>
 						</ul>
 				  </div>
 				</div>			
 			</li>
 
-			<li id="li4" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
+			<li id="widget-usersonline" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
 						 <span class="panel-title pull-left"><span class="glyphicon glyphicon-user"></span> <span class="panel-title-text">{{{ Lang::get('core.users_online') }}}</span></span>
-						@include('admin/widget-controls', array('id' => 'li4'))
+						@include('admin/widget-controls', array('id' => 'widget-usersonline'))
 					</div>
 					<div class="panel-body">
 						@include('admin/helpers/users-online')
@@ -144,11 +143,11 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 			</li>
 
 
-			<li id="li3" data-row="3" data-col="1" data-sizex="2" data-sizey="5">
+			<li id="widget-graph" data-row="3" data-col="1" data-sizex="2" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-signal"></span> <span class="panel-title-text">Graph Example</span></span>
-					  @include('admin/widget-controls', array('id' => 'li3'))
+					  @include('admin/widget-controls', array('id' => 'widget-graph'))
 				  </div>
 				  <div class="panel-body" style="overflow: hidden">
 						{{ Lava::LineChart('Stocks')->outputInto('stocks_div') }}
@@ -157,7 +156,35 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 				</div>			
 			</li>
 
+			<li id="widget-todo" data-row="4" data-col="1" data-sizex="1" data-sizey="5">
+				<div class="panel panel-default">
+				  <div class="panel-heading clearfix">
+					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">To-do</span></span>
 
+					  @include('admin/widget-controls', array('id' => 'widget-todo'))
+<ul class="nav nav-tabs pull-right hidden-xs  hidden-sm">
+  <li class="active"><a href="#home" data-toggle="tab">Pending</a></li>
+  <li><a href="#profile" data-toggle="tab">Completed</a></li>
+</ul>
+
+				  </div>
+				  <div class="panel-body ">
+					<div class="tab-content">
+					<div class="tab-pane active" id="home">
+						<ul class="list-group">
+							<li class="list-group-item">Pending</li>
+							<li class="list-group-item">Completed</li>
+							<li class="list-group-item">add email log viewer to edit user</li>
+							<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
+							<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
+						</ul>
+					</div>
+					<div class="tab-pane" id="profile">...</div>
+					</div>
+
+				  </div>
+				</div>			
+			</li>
 
 
 

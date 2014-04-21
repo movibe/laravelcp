@@ -25,15 +25,16 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				@yield('sub-nav-pre')
-				<li title="{{ date('l, d M Y', time()) }}"><a href="#">{{ date('l, d M Y', time()) }}</a></li>
-				<li class="panel-weather"></li>
+				<li class="hidden-xs" title="{{ date('l, d M Y', time()) }}"><a href="#">{{ date('l, d M Y', time()) }}</a></li>
+				<li class="hidden-xs panel-weather"></li>
 
 				<li class="dropdown{{ (Request::is('admin/settings*') ? ' active' : '') }}" title="{{{ Lang::get('core.settings') }}}">
-					<a class="dropdown-toggle" data-toggle="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-cog"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/settings') }}}"><span class="glyphicon glyphicon-th-list"></span>  &nbsp; {{{ Lang::get('core.settings') }}}</a></li>
+						<li class="divider"></li>
 						<li{{ (Request::is('admin/slugs*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/slugs') }}}"><span class="glyphicon glyphicon-list-alt"></span>  &nbsp; {{{ Lang::get('core.slugs') }}}</a></li>						
 						<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bullhorn"></span>  &nbsp; {{{ Lang::get('core.comments') }}}</a></li>
 						@yield('sub-nav-settings')

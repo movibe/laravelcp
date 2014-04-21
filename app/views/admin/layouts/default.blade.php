@@ -30,7 +30,7 @@
 <body>
 	@include('admin/navigation')
 
-	<div class="visible-xs modal-backdrop mobile-loading">loading...</div>
+	<div class="visible-xs modal-content mobile-loading"><div class="">@include('admin/dt-loading')</div></div>
 
 	@yield('breadcrumb')
 

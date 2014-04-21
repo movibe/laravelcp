@@ -10,5 +10,5 @@ return array(
 	'save' => 'Save',
 	'cancel' => 'Cancel',
 	'submit' => 'Submit',
-	'clearlocalsettings' => 'Clear Local Settings'
+	'cleardashsettings' => 'Reset Dashboard'
 );
