@@ -129,39 +129,44 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 $(document).on("click", ".dt-mass", function(e) {
 	e.preventDefault();    
 	var action=$(this).attr('data-action');
+	var table=$(this).attr('data-table');
 	var run=false;
-	if($(this).attr('data-method') == 'email'){
-
+	if($(this).attr('data-method') == 'modal'){
 		var _ids='';
-		$.each(aSelected, function(i,value){
-			_ids+=value+',';
-
-		});
-
+		$.each(aSelected, function(i,value){ _ids+=value+','; });
 		modalfyRun($(this).attr('data-action')+'?ids='+_ids);
-
-		run=false;
-	}else if($(this).attr('data-method') == 'delete'){
+	}else if($(this).attr('data-confirm') == 'true'){
 		bootbox.confirm('Are you sure?', function(result) {
-			if(result) run=true;
+			if(result) fnRunMass(action, table);
 		});
-	} else run=true;
+	} else fnRunMass(action, table);
 
-	if(run){
+});
+
+
+function fnRunMass(action,data_table){
+	console.log(data_table);
 		$.ajax({
 		  type: "POST",
 		  url: action,
+			dataType: 'json',
 		  data: { rows: JSON.stringify(aSelected) }
 		})
-		  .done(function( msg ) {
-			oTable.fnReloadAjax();
-			$(".dt-pop-control").fadeOut();
-			aSelected=[];
-		  }).fail(function(msg) {
-			bootbox.alert( "Unable to delete rows. " +msg );
-		  });
-	}
-});
+	  .done(function( msg ) {
+			if(msg.result == "success"){
+				aSelected=[];
+				oTable = $('#'+data_table).dataTable();
+				oTable.fnReloadAjax();
+				$(".dt-pop-control").fadeOut();
+			}else {
+				console.log(msg);
+				bootbox.alert( "Unable to execute command, "+ msg.error);
+			}
+	  }).fail(function(msg) {
+		console.log(msg);
+		bootbox.alert( "Unable to execute command");
+	  });
+}
 
 
 function loadWeather(location, woeid) {

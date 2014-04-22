@@ -45,9 +45,11 @@
 					{{{ Lang::get('table.actions') }}} <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="#" data-action="user/mass/email" data-method="email" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
+					<li><a href="#" data-action="user/mass/email" data-method="modal"  data-table="users" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
 					<li class="divider"></li>
-					<li><a href="#" data-action="user/mass/delete" data-method="delete"  class="dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
+					<li><a href="#" data-action="user/mass/merge" data-method="default"  data-table="users" data-confirm="true" class="dt-mass">{{{ Lang::get('button.merge') }}}</a></li>
+					<li class="divider"></li>
+					<li><a href="#" data-action="user/mass/delete" data-method="default"  data-table="users" data-confirm="true"   class="dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
 				</ul>
 			</div>
 		</div>

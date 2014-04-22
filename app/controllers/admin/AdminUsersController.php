@@ -314,6 +314,39 @@ class AdminUsersController extends AdminController {
         }
 	}
 
+	private function runMerge($_merge_to, $user){
+		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
+		DB::update('UPDATE posts set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
+		DB::update('UPDATE comments set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
+		DB::update('UPDATE activity_log set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
+		DB::table('assigned_roles')->where('user_id', '=', $user->id)->delete();
+		$user->delete();
+	}
+
+
+    public function postMerge()
+    {
+		$rows=json_decode(Input::get('rows'));
+		if(is_array($rows) && count($rows) > 0){
+			if(count($rows) < 2) return Response::json(array('result'=>'failure', 'error' =>  'Merge more then one user'));
+			$_merge_to=false;
+			foreach($rows as $i=>$r){
+				if ($r != Confide::user()->id){
+					$user = User::find($r);
+					try {
+						if(!$_merge_to){
+							$_merge_to=$user;
+							continue;
+						}
+						$this->runMerge($_merge_to, $user);
+					} catch (Exception $e) {
+						return Response::json(array('result'=>'failure', 'error' =>  $e->getMessage()));
+					}
+				}
+			}
+		}
+		return Response::json(array('result'=>'success'));
+    }
 
 
     public function postDeleteMass()
@@ -327,11 +360,12 @@ class AdminUsersController extends AdminController {
 						AssignedRoles::where('user_id', $user->id)->delete();
 						$user->delete();
 					} catch (Exception $e) {
-						echo 'Caught exception: ',  $e->getMessage(), "\n";
+						return Response::json(array('result'=>'failure', 'error' =>  $e->getMessage()));
 					}
 				}
 			}
 		}
+		return Response::json(array('result'=>'success'));
 	}
 
 

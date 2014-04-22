@@ -30,15 +30,15 @@
 			@if ($mode != 'create')
 				<div class="tab-pane" id="tab-details">
 					<div class="list-group">
-					  <a href="#" class="list-group-item">
+					  <a href="#" class="list-group-item" title="{{{ $user->created_at }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.created') }}}</h4>
-						<p class="list-group-item-text">{{{ $user->created_at }}}</p>
+						<p class="list-group-item-text">{{{ Carbon::parse($user->created_at)->diffForHumans() }}}</p>
 					  </a>
-					  <a href="#" class="list-group-item">
+					  <a href="#" class="list-group-item" title="{{{ $user->last_login }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_login)->diffForHumans() }}}</p>
 					  </a>
-					  <a href="#" class="list-group-item">
+					  <a href="#" class="list-group-item" title="{{{ $user->last_activity }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_activity)->diffForHumans() }}}</p>
 					  </a>

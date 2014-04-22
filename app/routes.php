@@ -94,6 +94,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
     Route::post('user/mass/email', 'AdminUsersController@postEmail');
 
+    Route::post('user/mass/merge', 'AdminUsersController@postMerge');
+
 	Route::get('users/{user}/profile/{profile}/delete', 'AdminUsersController@postProfileDelete');
 
 
