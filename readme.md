@@ -24,6 +24,7 @@ Let me know what you think!
 - [ActivityLog](https://github.com/Regulus343/ActivityLog)
 - [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/)
 - [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
+- [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
 
 ![alt tag](http://i.imgur.com/neThWyO.png)
 
