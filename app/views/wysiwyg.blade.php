@@ -47,4 +47,4 @@
 </div>
 </div>
 
-<div id="editor" class="form-control"></div>
+<div id="editor" class="form-control">@yield('wysiywg-content')</div>

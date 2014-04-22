@@ -16,9 +16,9 @@
 	@endif
 
 	@if (isset($post))
-		{{ Form::open(array('url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal')) }}
+		{{ Form::open(array('url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@else
-		{{ Form::open(array('class' => 'form-horizontal')) }}
+		{{ Form::open(array('class' => 'form-horizontal', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@endif
 
 		<div class="tab-content">
@@ -26,16 +26,19 @@
 
 				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
                     <div class="col-md-12">
-                        <label class="control-label" for="title">{{{ Lang::get('admin/slugs.post_title') }}}</label>
-						<input class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
+						<input placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
 						{{{ $errors->first('title', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
 
 				<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
 					<div class="col-md-12">
-                        <label class="control-label" for="content">{{{ Lang::get('core.content') }}}</label>
-						<textarea class="form-control full-width wysiwyg" name="content" value="content" rows="10">{{{ Input::old('content', isset($post) ? $post->content : null) }}}</textarea>
+						@section('wysiywg-content')
+							{{ Input::old('content', isset($post) ? $post->content : null) }}
+						@stop
+						<p>@include('wysiwyg')</p>
+
+						<textarea id="wysiwyg-body" class="hide" name="content" value="content" rows="10"></textarea>
 						{{{ $errors->first('content', '<span class="help-inline">:message</span>') }}}
 					</div>
 				</div>
@@ -80,13 +83,16 @@
 	{{ Form::close(); }}
 @stop
 @section('styles')
-	<link rel="stylesheet" href="{{{ asset('assets/css/summernote.css') }}}"/>
-	<link rel="stylesheet" href="{{{ asset('assets/css/summernote-bs3.css') }}}"/>
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+	<style type="text/css"> 
+		#editor {
+			height: 200px;
+			overflow: auto;
+		}
+	</style>
 @stop
 @section('scripts')
-	<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.5.0/summernote.min.js"></script>
-	<script type="text/javascript">
-	  $('.wysiwyg').summernote();
-	</script>
+	<script src="//cdn.jsdelivr.net/jquery.hotkeys/0.8b/jquery.hotkeys.min.js"></script>
+	<script src="{{{ asset('assets/js/bootstrap-wysiwyg.js') }}}"></script>
+	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
 @stop
