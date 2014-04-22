@@ -475,10 +475,10 @@ class AdminUsersController extends AdminController {
 			}
 			if($_results == true){
 				$message=Lang::get('admin/users/messages.email.success');
-				return View::make('admin/users/email_results', compact('title', 'message'));
+				return View::make('admin/users/email_results', compact('title', 'message', '_results'));
 			} else {
 				$message=Lang::get('admin/users/messages.email.error');
-				return View::make('admin/users/email_results', compact('title', 'message'));
+				return View::make('admin/users/email_results', compact('title', 'message', '_results'));
 			}
 
 
