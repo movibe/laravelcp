@@ -1,20 +1,11 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
 @section('title')
 {{{ Lang::get('user/user.settings') }}} ::
 @parent
 @stop
 
-{{-- New Laravel 4 Feature in use --}}
-@section('styles')
-@parent
-body {
-	background: #f2f2f2;
-}
-@stop
 
-{{-- Content --}}
 @section('content')
 <div class="page-header">
 	<h3>Edit your settings</h3>
@@ -26,11 +17,11 @@ body {
     <!-- General tab -->
     <div class="tab-pane active" id="tab-general">
         <!-- username -->
-        <div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="username">Username</label>
+        <div class="form-group {{{ $errors->has('displayname') ? 'error' : '' }}}">
+            <label class="col-md-2 control-label" for="displayname">Full Name</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" />
-                {{ $errors->first('username', '<span class="help-inline">:message</span>') }}
+                <input class="form-control" type="text" name="displayname" id="username" value="{{{ Input::old('displayname', $user->displayname) }}}" />
+                {{ $errors->first('displayname', '<span class="help-inline">:message</span>') }}
             </div>
         </div>
         <!-- ./ username -->

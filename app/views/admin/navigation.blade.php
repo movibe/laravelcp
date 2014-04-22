@@ -45,7 +45,7 @@
 						<span class="glyphicon"><img alt="{{{ Auth::user()->email }}}" src="{{ Gravatar::src(Auth::user()->email, 20) }}"></span>  &nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon glyphicon-wrench"></span>  &nbsp; {{{ Lang::get('core.profile') }}}</a></li>
+						<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span>  &nbsp; {{{ Lang::get('core.profile') }}}</a></li>
 						<li class="divider"></li>
 						<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span>  &nbsp; {{{ Lang::get('core.logout') }}}</a></li>
 						@yield('sub-nav-user')

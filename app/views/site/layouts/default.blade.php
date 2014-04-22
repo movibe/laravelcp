@@ -53,7 +53,7 @@
 		<div class="navbar navbar-default  navbar-fixed-top">
 			 <div class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">{{{ Setting::get('site.name') }}}</a>
+                    <a href="{{{ URL::to('/') }}}" class="navbar-brand">{{{ Setting::get('site.name') }}}</a>
                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -71,7 +71,7 @@
                         @if (Auth::user()->hasRole('admin'))
                         <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
                         @endif
-                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
+                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->email }}}</a></li>
                         <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
                         @else
                         <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
