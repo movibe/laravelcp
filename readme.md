@@ -1,5 +1,13 @@
 #Laravel 4 Bootstrap Starter Site
 
+![ScreenShot](http://i.imgur.com/jXWwr1e.png)
+
+**Mobile**
+<img src="http://i.imgur.com/PyYwOzL.png" width="320">
+
+<img src="http://i.imgur.com/y1XN7MY.png" width="640">
+
+# Preamble 
 I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start, had all the basic features one could want but really lacked in those that let you make the example an actual product.
 
 I decided to create my own based on his but this time include everything I wanted for a simple starter site, more user control, better design (responsive!), graphs, etc. 
@@ -13,7 +21,7 @@ Let me know what you think!
 # Features
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
 - [BootSwatch Themed](http://bootswatch.com/)
-- [BootBox Dialogs](https://github.com/makeusabrew/bootbox)
+- [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
 - User profiles
 - User suspending
 - User e-mailing, single and multiple w/ attachments
@@ -26,15 +34,12 @@ Let me know what you think!
 - [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
 - [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
 
-![alt tag](http://i.imgur.com/neThWyO.png)
 
 
-# Forked from Andrew's Repo
-
-[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
-# From the his repo:
+# From the forked repo:
+@[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
 Laravel 4 Bootstrap Starter Site is a sample application for beginning development with Laravel 4.
