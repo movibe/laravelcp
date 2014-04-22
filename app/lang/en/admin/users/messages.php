@@ -9,6 +9,11 @@ return array(
 	'password_required' => 'The password is required.',
 	'password_does_not_match' => 'The passwords provided do not match.',
 
+	'email' => array(
+		'error'   => 'E-mail was not sent, please try again.',
+		'success' => 'E-mail sent successfully.'
+	),
+	
 	'create' => array(
 		'error'   => 'User was not created, please try again.',
 		'success' => 'User created successfully.'

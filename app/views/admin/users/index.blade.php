@@ -47,7 +47,7 @@
 				<ul class="dropdown-menu pull-right" role="menu">
 					<li><a href="#" data-action="user/mass/email" data-method="email" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
 					<li class="divider"></li>
-					<li><a href="#" data-action="user/mass/delete" data-method="delete"  class="label-danger dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
+					<li><a href="#" data-action="user/mass/delete" data-method="delete"  class="dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
 				</ul>
 			</div>
 		</div>

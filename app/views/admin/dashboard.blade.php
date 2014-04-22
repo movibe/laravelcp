@@ -162,19 +162,16 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">To-do</span></span>
 
 					  @include('admin/widget-controls', array('id' => 'widget-todo'))
-<ul class="nav nav-tabs pull-right hidden-xs  hidden-sm">
-  <li class="active"><a href="#home" data-toggle="tab">Pending</a></li>
-  <li><a href="#profile" data-toggle="tab">Completed</a></li>
-</ul>
+						<ul class="nav nav-tabs pull-right hidden-xs  hidden-sm">
+						  <li class="active"><a href="#home" data-toggle="tab">Pending</a></li>
+						  <li><a href="#profile" data-toggle="tab">Completed</a></li>
+						</ul>
 
 				  </div>
 				  <div class="panel-body ">
 					<div class="tab-content">
 					<div class="tab-pane active" id="home">
 						<ul class="list-group">
-							<li class="list-group-item">Pending</li>
-							<li class="list-group-item">Completed</li>
-							<li class="list-group-item">add email log viewer to edit user</li>
 							<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
 							<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
 						</ul>

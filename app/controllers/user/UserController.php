@@ -191,7 +191,7 @@ class UserController extends BaseController {
         {
 
 			// added login activity
-			DB::update('UPDATE users SET last_login = ? WHERE id = ?', array(time(), Auth::user()->id));
+			DB::update('UPDATE users SET last_login = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time() ), Auth::user()->id));
 
             $r = Session::get('loginRedirect');
             if (!empty($r))

@@ -23,7 +23,7 @@
 @stop
 
 @section('content')
-	{{ Form::open(array('action' => 'AdminUsersController@postEmail', 'class' => 'form-horizontal')) }}
+	{{ Form::open(array('action' => array('AdminUsersController@postEmail', @$user), 'class' => 'form-horizontal')) }}
 	@if(isset($multi) && count($multi) > 0)
 		<p>
 			<select name="to[]" multiple style="width: 100%; height: 40px;" class="form-control">

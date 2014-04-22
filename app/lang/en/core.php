@@ -20,6 +20,7 @@ return array(
 	'passsword' => 'Password',
 	'confirm' => 'Confirm',
 	'subject' => 'Subject',
+	'body' => 'Body',
 	'comments' => 'Comments',
 	'settings' => 'Settings',
 	'slugs' => 'Slugs',
@@ -27,6 +28,7 @@ return array(
 	'profile' => 'Profile',
 	'logout' => 'Logout',
 	'content' => 'Content',
+	'emails' => 'E-mails',
 	'all' => 'All',
 
 );

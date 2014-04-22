@@ -35,11 +35,11 @@ Route::pattern('token', '[0-9a-z]+');
 Route::filter('checkuser', function()
 {
 	if (Auth::check()){
-		DB::update('UPDATE users SET last_activity = ? WHERE id = ?', array(time(), Auth::user()->id));
+		DB::update('UPDATE users SET last_activity = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time()), Auth::user()->id));
 
 		Activity::log(array(
 			'contentID'   => Confide::user()->id,
-			'contentType' => 'Admin',
+			'contentType' => 'activity',
 			'description' => 'Page Loaded',
 			'details'     => '<a href="'.$_SERVER['REQUEST_URI'].'" target="_new" class="btn">link</a>',
 			'updated'     => Confide::user()->id ? true : false,
@@ -102,6 +102,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     Route::post('users/{user}/edit', 'AdminUsersController@postEdit');
     Route::get('users/{user}/delete', 'AdminUsersController@getDelete');
     Route::get('users/{user}/activity', 'AdminUsersController@getActivity');
+    Route::get('users/{user}/emails', 'AdminUsersController@getEmails');
     Route::post('users/{user}/delete', 'AdminUsersController@postDelete');
     Route::post('user/mass/delete', 'AdminUsersController@postDeleteMass');
     Route::controller('users', 'AdminUsersController');

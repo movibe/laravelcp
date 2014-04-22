@@ -10,5 +10,6 @@ return array(
 	'save' => 'Save',
 	'cancel' => 'Cancel',
 	'submit' => 'Submit',
+	'close' => 'Close',
 	'cleardashsettings' => 'Reset Dashboard'
 );

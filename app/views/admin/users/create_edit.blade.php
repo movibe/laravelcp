@@ -6,6 +6,7 @@
 		<li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('core.profile') }}}</a></li>
 		@if ($mode != 'create')
 			<li><a href="#tab-logs" data-toggle="tab">{{{ Lang::get('core.activity') }}}</a></li>
+			<li class="hidden-xs"><a href="#tab-email" data-toggle="tab">{{{ Lang::get('core.emails') }}}</a></li>
 			<li class="hidden-xs"><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
 		@endif
 	</ul>
@@ -35,11 +36,11 @@
 					  </a>
 					  <a href="#" class="list-group-item">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
-						<p class="list-group-item-text">{{{ $user->last_login }}}</p>
+						<p class="list-group-item-text">{{{ Carbon::parse($user->last_login)->diffForHumans() }}}</p>
 					  </a>
 					  <a href="#" class="list-group-item">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
-						<p class="list-group-item-text">{{{ $user->last_activity }}}</p>
+						<p class="list-group-item-text">{{{ Carbon::parse($user->last_activity)->diffForHumans() }}}</p>
 					  </a>
 					</div>
 				</div>
@@ -159,6 +160,7 @@
 					<table id="activitylog" class="table-responsive table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
+								<th></th>
 								<th>{{{ Lang::get('admin/users/table.description') }}}</th>
 								<th>{{{ Lang::get('admin/users/table.details') }}}</th>
 								<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
@@ -168,8 +170,27 @@
 						<tbody>
 						</tbody>
 					</table>
+				</div>
 			</div>
-		</div>
+			<div class="tab-pane" id="tab-email">
+				@include('admin/dt-loading')
+
+				<div class="dt-wrapper">
+					<table id="emaillog" class="table-responsive table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th></th>
+								<th>{{{ Lang::get('core.subject') }}}</th>
+								<th>{{{ Lang::get('core.body') }}}</th>
+								<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
+								<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
 	{{ Form::close(); }}
 @stop
 
@@ -177,6 +198,7 @@
 @if (isset($user))
 <script type="text/javascript">
 	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 </script>
 @endif
 @stop

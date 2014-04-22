@@ -36,7 +36,7 @@ $.ajaxSetup({
 /* datatables helpers */
 
 
-function styledt(){
+function styledt(table){
 	$('.dataTables_filter label').addClass('pull-right'); 
 	$('.dataTables_filter input').attr('placeholder', 'Search'); 
 	$('.dataTables_filter input').addClass('form-control');
@@ -54,7 +54,7 @@ function dtLoad(table, action, hidemd, hidesm){
 		"bServerSide": true,
 		"sAjaxSource": action,"bRetrieve": true,
 		"fnInitComplete": function ( oSettings ) {
-			styledt();
+			styledt(table);
 		},
 		"oLanguage": {
 				"sLengthMenu": "Limit _MENU_",

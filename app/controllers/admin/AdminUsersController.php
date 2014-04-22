@@ -162,12 +162,29 @@ class AdminUsersController extends AdminController {
 	 public function getActivity($user){
         if ( $user->id )
         {
-			$list = Activity::where('user_id', '=', $user->id)->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+			$list = Activity::whereRaw('user_id = ? AND content_type="activity"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
 
 			if(BaseController::$api){
 				$u=$list->get();
 				return $u->toArray();
-			} else return Datatables::of($list)->remove_column('user_id')->make();
+			} else return Datatables::of($list)
+				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
+				->make();
+		}
+	 }
+
+	 public function getEmails($user){
+        if ( $user->id )
+        {
+			$list = Activity::whereRaw('user_id = ? AND content_type="email"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+
+			if(BaseController::$api){
+				$u=$list->get();
+				return $u->toArray();
+			} else return Datatables::of($list)
+				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
+				->edit_column('details','{{{ strip_tags(substr($details,0,100))}}}')
+				->make();
 		}
 	 }
 
@@ -384,14 +401,25 @@ class AdminUsersController extends AdminController {
 			} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
 
 		});
+
+		Activity::log(array(
+			'contentID'   => $user->id,
+			'contentType' => 'email',
+			'description' => Input::get('subject'),
+			'details'     => Input::get('body'),
+			'updated'     => $user->id ? true : false,
+		));
+
 		return $send;
 
 	}
 
 
+
     public function postEmail($user=false)
     {
- 		
+
+		$title = 'E-mail';
 		$to=Input::get('to');
 		if(is_array($to) && count($to) >0){
 			$_results=false;
@@ -399,20 +427,19 @@ class AdminUsersController extends AdminController {
 				$user=User::find($user_id);
 				$_results=$this->sendEmail($user);
 			}
+			$message=Lang::get('admin/users/messages.email.success');
+			return View::make('admin/users/email_results', compact('title', 'message'));
 
-//...
 
-		} elseif (is_object($user) &&  $user->email )
+		} elseif (isset($user))
         {
+			$user=(json_decode($user));
 			if($this->sendEmail($user)) {
-				return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.edit.success'));
-			} else {
-				return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.edit.error'));
-			}
+				return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.email.success'));
+			} else return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
 		} else {
-		
-			
-			//return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.edit.error'));
+			$message=Lang::get('admin/users/messages.email.error');
+			return View::make('admin/users/email_results', compact('title', 'message'));
 		}
     }
 
@@ -431,19 +458,9 @@ class AdminUsersController extends AdminController {
 		
 		}
 
-            // Title
-        	$title = 'Mass Mail';
-        	// mode
-        	$mode = 'edit';
-
-			//if(Input::get('to'))
-
-        	return View::make('admin/users/send_email', compact('title', 'mode', 'multi'));
-     
-	
-	
-	
-	
+		$title = 'Mass Mail';
+		$mode = 'edit';
+		return View::make('admin/users/send_email', compact('title', 'mode', 'multi'));
 	}
 
 
