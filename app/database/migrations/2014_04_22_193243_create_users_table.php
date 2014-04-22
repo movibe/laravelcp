@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration {
             $table->boolean('confirmed');
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
-            $table->integer('last_activity');
-            $table->integer('last_login');
+            $table->timestamp('last_activity')->default("0000-00-00 00:00:00");
+            $table->timestamp('last_login')->default("0000-00-00 00:00:00");
             $table->string('displayname', 256);
         });
     }

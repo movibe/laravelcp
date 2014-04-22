@@ -13,7 +13,7 @@ class CreatePostsTable extends Migration {
     {
         Schema::create('posts', function($table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('title', 255);
             $table->string('slug', 255);
             $table->text('content');
@@ -22,7 +22,8 @@ class CreatePostsTable extends Migration {
             $table->string('meta_keywords', 255);
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
-        });
+ 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+       });
     }
 
     /**

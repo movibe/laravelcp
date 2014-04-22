@@ -13,7 +13,7 @@ class CreateUserprofilesTable extends Migration {
     {
         Schema::create('user_profiles', function($table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned()->index();
             $table->string('displayname', 255);
             $table->string('website', 160);
             $table->timestamp('updated_at')->default("CURRENT_TIMESTAMP");
@@ -27,6 +27,7 @@ class CreateUserprofilesTable extends Migration {
             $table->string('phone', 128);
             $table->string('mobile', 128);
             $table->string('taxcode', 128);
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

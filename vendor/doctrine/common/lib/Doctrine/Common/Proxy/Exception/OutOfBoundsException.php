@@ -17,38 +17,27 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Doctrine\Common\Annotations\Annotation;
+namespace Doctrine\Common\Proxy\Exception;
+
+use Doctrine\Common\Persistence\Proxy;
+use OutOfBoundsException as BaseOutOfBoundsException;
 
 /**
- * Annotation that can be used to signal to the parser to ignore specific
- * annotations during the parsing process.
+ * Proxy Invalid Argument Exception.
  *
- * @Annotation
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+ * @link   www.doctrine-project.org
+ * @author Fredrik Wendel <fredrik_w@users.sourceforge.net>
  */
-final class IgnoreAnnotation
+class OutOfBoundsException extends BaseOutOfBoundsException implements ProxyException
 {
     /**
-     * @var array
-     */
-    public $names;
-
-    /**
-     * Constructor.
+     * @param string $className
+     * @param string $idField
      *
-     * @param array $values
-     *
-     * @throws \RuntimeException
+     * @return self
      */
-    public function __construct(array $values)
+    public static function missingPrimaryKeyValue($className, $idField)
     {
-        if (is_string($values['value'])) {
-            $values['value'] = array($values['value']);
-        }
-        if (!is_array($values['value'])) {
-            throw new \RuntimeException(sprintf('@IgnoreAnnotation expects either a string name, or an array of strings, but got %s.', json_encode($values['value'])));
-        }
-
-        $this->names = $values['value'];
+        return new self(sprintf("Missing value for primary key %s on %s", $idField, $className));
     }
 }

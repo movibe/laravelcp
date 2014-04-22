@@ -36,7 +36,7 @@ class MigrationGenerator
         // Add the class name
         $result = $this->addClassName($result, $migration->tableName);
 
-        // Populate the fields
+		// Populate the fields
         // First, the primary key
         $result = $this->addFieldLine($result,
             $this->getFieldLine(array(

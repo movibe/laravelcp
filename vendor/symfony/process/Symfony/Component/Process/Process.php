@@ -238,10 +238,11 @@ class Process
         $commandline = $this->commandline;
 
         if (defined('PHP_WINDOWS_VERSION_BUILD') && $this->enhanceWindowsCompatibility) {
-            $commandline = 'cmd /V:ON /E:ON /C "('.$commandline.')"';
+            $commandline = 'cmd /V:ON /E:ON /C "('.$commandline.')';
             foreach ($this->processPipes->getFiles() as $offset => $filename) {
-                $commandline .= ' '.$offset.'>'.$filename;
+                $commandline .= ' '.$offset.'>'.ProcessUtils::escapeArgument($filename);
             }
+            $commandline .= '"';
 
             if (!isset($this->options['bypass_shell'])) {
                 $this->options['bypass_shell'] = true;
@@ -928,9 +929,15 @@ class Process
      * @param string|null $stdin The new contents
      *
      * @return self The current Process instance
+     *
+     * @throws LogicException In case the process is running
      */
     public function setStdin($stdin)
     {
+        if ($this->isRunning()) {
+            throw new LogicException('STDIN can not be set while the process is running.');
+        }
+
         $this->stdin = $stdin;
 
         return $this;
