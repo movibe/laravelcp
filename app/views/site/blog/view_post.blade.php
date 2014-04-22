@@ -26,13 +26,25 @@
 
 {{-- Content --}}
 @section('content')
-<h3>{{ $post->title }}</h3>
 
-<p>{{ $post->content() }}</p>
+<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
 
-<div>
-	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
+
+<div class="clearfix">
+<div class="pull-left"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 80) }}"></div>
+<div class="pull-left"><h1>{{ $post->title }}</h1>
+<div>By {{ $post->author->displayname }}, Posted {{{ $post->date() }}}</div>
 </div>
+</div>
+
+<hr />
+
+<div class="panel panel-default">
+  <div class="panel-body">
+  <p>{{ $post->content() }}</p>
+</div></div>
+
+
 
 <hr />
 
@@ -43,12 +55,12 @@
 @foreach ($comments as $comment)
 <div class="row">
 	<div class="col-md-1">
-		<img class="thumbnail" src="http://placehold.it/60x60" alt="">
+		<img alt="{{{ $comment->author->email }}}" src="{{ Gravatar::src($comment->author->email, 60) }}">
 	</div>
 	<div class="col-md-11">
 		<div class="row">
 			<div class="col-md-11">
-				<span class="muted">{{{ $comment->author->username }}}</span>
+				<span class="muted">{{{ $comment->author->displayname }}}</span>
 				&bull;
 				{{{ $comment->date() }}}
 			</div>
@@ -70,10 +82,14 @@
 @endif
 
 @if ( ! Auth::check())
-You need to be logged in to add comments.<br /><br />
-Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account.
+<div class="alert alert-danger">
+<p>You need to be logged in to add comments.<br /><br />
+Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account. If you don't have an account click <a href="{{{ URL::to('user/create') }}}">here</a> to sign up.
+</div>
+
+
 @elseif ( ! $canComment )
-You don't have the correct permissions to add comments.
+You don't have the correct permissions to add comments.</p>
 @else
 
 @if($errors->has())
