@@ -93,6 +93,6 @@
 @stop
 @section('scripts')
 	<script src="//cdn.jsdelivr.net/jquery.hotkeys/0.8b/jquery.hotkeys.min.js"></script>
-	<script src="{{{ asset('assets/js/bootstrap-wysiwyg.js') }}}"></script>
+	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
 @stop
