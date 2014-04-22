@@ -30,15 +30,15 @@
 			@if ($mode != 'create')
 				<div class="tab-pane" id="tab-details">
 					<div class="list-group">
-					  <a href="#" class="list-group-item" title="{{{ $user->created_at }}}">
+					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->created_at }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.created') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->created_at)->diffForHumans() }}}</p>
 					  </a>
-					  <a href="#" class="list-group-item" title="{{{ $user->last_login }}}">
+					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->last_login }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_login)->diffForHumans() }}}</p>
 					  </a>
-					  <a href="#" class="list-group-item" title="{{{ $user->last_activity }}}">
+					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->last_activity }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_activity)->diffForHumans() }}}</p>
 					  </a>
@@ -197,6 +197,7 @@
 @section('scripts')
 @if (isset($user))
 <script type="text/javascript">
+	$('a').tooltip();
 	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 </script>

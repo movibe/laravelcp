@@ -454,10 +454,10 @@ class AdminUsersController extends AdminController {
     {
 
 		$title = 'E-mail';
-		$to=Input::get('to');
-		if(is_array($to) && count($to) >0){
+
+		if(is_array(Input::get('to')) && count(Input::get('to')) >0){
 			$_results=false;
-			foreach ($to as $user_id){
+			foreach (Input::get('to') as $user_id){
 				$user=User::find($user_id);
 				$_results=$this->sendEmail($user);
 			}
@@ -467,7 +467,6 @@ class AdminUsersController extends AdminController {
 
 		} elseif (isset($user))
         {
-			$user=(json_decode($user));
 			if($this->sendEmail($user)) {
 				return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.email.success'));
 			} else return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));

@@ -49,7 +49,6 @@
     <script type="text/javascript">
         $(prettyPrint);
 		fnRunPoll();
-
 		$('.mobile-loading').removeClass('visible-xs').hide();
 
 		/* close dialogs on back button in phones */
