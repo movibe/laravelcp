@@ -2,7 +2,8 @@
 
 return array(
 
-	'email'   => 'Email',
+	'send'   => 'Send',
+	'email'   => 'E-mail',
 	'edit'   => 'Edit',
 	'delete' => 'Delete',
 	'create' => 'Create',

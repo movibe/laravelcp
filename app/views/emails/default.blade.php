@@ -4,6 +4,6 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		{{ $body }}
+	{{ $body }}
 	</body>
 </html>

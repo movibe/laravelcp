@@ -228,8 +228,8 @@ class AdminRolesController extends AdminController {
         ->edit_column('users', '{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}')
 
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a>
-                                <a data-row="{{{  $id }}}" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<div class="btn-group"><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a>
+                                <a data-row="{{{  $id }}}" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a></div>
                     ')
 
 

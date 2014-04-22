@@ -216,3 +216,4 @@ pip-log.txt
 app/config/database.php
 app/config/database.php
 app/config/mail.php
+app/config/mail.php

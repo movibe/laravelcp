@@ -10,8 +10,8 @@ return array(
 	'groups'     => 'Groups',
 	'roles'     => 'Roles',
 	'activated'  => 'Activated',
-	'created_at' => 'Created at',
-	'updated_at' => 'Updated at',
+	'created_at' => 'Created',
+	'updated_at' => 'Updated',
 	'description' => 'Description',
 	'details' => 'Details',
 	'ip_address' => 'IP Address'

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Filesystem\Filesystem;
 class AdminUsersController extends AdminController {
 
 
@@ -397,6 +397,13 @@ class AdminUsersController extends AdminController {
         
     }
 
+	private function getEmailTemplates(){
+		$path=Config::get('view.paths');
+		$fileSystem = new Filesystem;
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR."emails");
+		return $files;
+	}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -412,8 +419,8 @@ class AdminUsersController extends AdminController {
         	$title = $user->email;
         	// mode
         	$mode = 'edit';
-
-        	return View::make('admin/users/send_email', compact('user', 'title', 'mode'));
+			$templates=$this->getEmailTemplates();
+        	return View::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
         }
         else
         {
@@ -422,27 +429,33 @@ class AdminUsersController extends AdminController {
     }
 
     
-	private function sendEmail($user){
+	private function sendEmail($user, $template='emails.default'){
+		if (!View::exists($template))$template='emails.default';
 		$this->email=$user->email;
-		$send=Mail::send('emails.default', array('body'=>Input::get('body')), function($message)
-		{
 
-			$message->to($this->email)->subject(Input::get('subject'));
+		try{
+			$send=Mail::send($template, array('body'=>Input::get('body'), 'user' => $user), function($message)
+			{
+				$message->to($this->email)->subject(Input::get('subject'));
 
-			$files=Input::file('email_attachment');
-			if(count($files) > 1){
-				foreach($files as $file) $message->attach($file->getRealPath(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()));
-			} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
+				$files=Input::file('email_attachment');
+				if(count($files) > 1){
+					foreach($files as $file) $message->attach($file->getRealPath(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()));
+				} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
 
-		});
+			});
 
-		Activity::log(array(
-			'contentID'   => $user->id,
-			'contentType' => 'email',
-			'description' => Input::get('subject'),
-			'details'     => Input::get('body'),
-			'updated'     => $user->id ? true : false,
-		));
+			Activity::log(array(
+				'contentID'   => $user->id,
+				'contentType' => 'email',
+				'description' => Input::get('subject'),
+				'details'     => Input::get('body'),
+				'updated'     => $user->id ? true : false,
+			));
+
+		} catch (Exception $e) {
+			return false;
+		}
 
 		return $send;
 
@@ -454,20 +467,24 @@ class AdminUsersController extends AdminController {
     {
 
 		$title = 'E-mail';
-
 		if(is_array(Input::get('to')) && count(Input::get('to')) >0){
 			$_results=false;
 			foreach (Input::get('to') as $user_id){
 				$user=User::find($user_id);
-				$_results=$this->sendEmail($user);
+				$_results=$this->sendEmail($user, Input::get('template'));
 			}
-			$message=Lang::get('admin/users/messages.email.success');
-			return View::make('admin/users/email_results', compact('title', 'message'));
+			if($_results == true){
+				$message=Lang::get('admin/users/messages.email.success');
+				return View::make('admin/users/email_results', compact('title', 'message'));
+			} else {
+				$message=Lang::get('admin/users/messages.email.error');
+				return View::make('admin/users/email_results', compact('title', 'message'));
+			}
 
 
 		} elseif (isset($user))
         {
-			if($this->sendEmail($user)) {
+			if($this->sendEmail($user, Input::get('template'))) {
 				return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.email.success'));
 			} else return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
 		} else {
@@ -493,7 +510,8 @@ class AdminUsersController extends AdminController {
 
 		$title = 'Mass Mail';
 		$mode = 'edit';
-		return View::make('admin/users/send_email', compact('title', 'mode', 'multi'));
+		$templates=$this->getEmailTemplates();
+		return View::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
 	}
 
 
@@ -513,9 +531,6 @@ class AdminUsersController extends AdminController {
 				
 			return $u->toArray();
 		} else return Datatables::of($users)
-        // ->edit_column('created_at','{{{ Carbon::now()->diffForHumans(Carbon::createFromFormat(\'Y-m-d H\', $test)) }}}')
-
-
         ->add_column('actions', '<div class="btn-group">
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>
