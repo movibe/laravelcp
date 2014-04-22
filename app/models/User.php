@@ -40,9 +40,6 @@ class User extends ConfideUser {
 
     public function delete()
     {
-		$this->posts()->delete();
-		$this->profiles()->delete();
-		$this->assignedroles()->delete();
         return parent::delete();
     }
 

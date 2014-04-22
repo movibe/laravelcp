@@ -27,7 +27,7 @@
 				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
                     <div class="col-md-12">
 						<input placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
-						{{{ $errors->first('title', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('title', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -39,7 +39,7 @@
 						<p>@include('wysiwyg')</p>
 
 						<textarea id="wysiwyg-body" class="hide" name="content" value="content" rows="10"></textarea>
-						{{{ $errors->first('content', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('content', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -50,7 +50,7 @@
 					<div class="col-md-12">
                         <label class="control-label" for="meta-title">{{{ Lang::get('admin/slugs.meta_title') }}}</label>
 						<input class="form-control" type="text" name="meta-title" id="meta-title" value="{{{ Input::old('meta-title', isset($post) ? $post->meta_title : null) }}}" />
-						{{{ $errors->first('meta-title', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('meta-title', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -66,7 +66,7 @@
 					<div class="col-md-12">
                         <label class="control-label" for="meta-keywords">{{{ Lang::get('admin/slugs.meta_keywords') }}}</label>
 						<input class="form-control" type="text" name="meta-keywords" id="meta-keywords" value="{{{ Input::old('meta-keywords', isset($post) ? $post->meta_keywords : null) }}}" />
-						{{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -92,7 +92,6 @@
 	</style>
 @stop
 @section('scripts')
-	<script src="//cdn.jsdelivr.net/jquery.hotkeys/0.8b/jquery.hotkeys.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
 @stop

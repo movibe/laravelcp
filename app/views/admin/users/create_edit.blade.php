@@ -60,7 +60,7 @@
 					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
-						{{{ $errors->first('email', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -69,7 +69,7 @@
 					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.passsword') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password" id="password" value="" />
-						{{{ $errors->first('password', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('password', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -78,7 +78,7 @@
 					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.passsword') }}} {{{ Lang::get('core.confirm') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
-						{{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -97,7 +97,7 @@
 								<option value="0"{{{ ( ! $user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
 							</select>
 						@endif
-						{{{ $errors->first('confirm', '<span class="help-inline">:message</span>') }}}
+						{{ $errors->first('confirm', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
@@ -134,7 +134,7 @@
 					@if ($mode != 'create')
 						<li ><a href="#tab-create" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign"></span>  {{{ Lang::get('button.create') }}}</a></li>
 						@foreach($profiles as $index=>$pro)
-							<li @if ($index == 0)class="active"@endif><a href="#tab-{{{$pro->id}}}" data-toggle="tab" id="tab-c{{{$pro->id}}}">@if ($pro->title){{$pro->title}}@else#{{{$pro->id}}}@endif</a></li>
+							<li @if ($index == 0)class="active"@endif><a href="#tab-{{{$pro->id}}}" data-toggle="tab" id="tab-c{{{$pro->id}}}">@if ($pro->title){{$pro->title}}@elseif($index == 0)Default @else#{{{$index}}}@endif</a></li>
 						@endforeach
 					@endif
 				</ul>

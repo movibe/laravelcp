@@ -22,8 +22,7 @@
 				<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="name">{{{ Lang::get('core.name') }}}</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $role->name) }}}" @if($role->name == "admin")disabled@endif/>
-						{{{ $errors->first('name', '<span class="help-inline">:message</span>') }}}
+							<input class="form-control" type="text"  name="name" id="name" value="{{{ Input::old('name', $role->name) }}}"/>
 					</div>
 				</div>
 			</div>

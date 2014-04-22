@@ -180,8 +180,9 @@ class AdminBlogsController extends AdminController {
 
 		$post = Post::find($id);
 		if(empty($post)){
-		   echo "true";
-		} else echo "false";
+		  return Response::json(array('result'=>'success'));
+		} else return Response::json(array('result'=>'failure', 'error' =>Lang::get('admin/blogs/messages.delete.error')));
+
     }
 
     /**

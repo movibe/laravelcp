@@ -22,6 +22,12 @@ class AdminRolesController extends AdminController {
     protected $permission;
 
     /**
+     * Protected Roles
+     */
+	private $protected_roles=array('admin','client');
+
+
+    /**
      * Inject the models.
      * @param User $user
      * @param Role $role
@@ -90,7 +96,11 @@ class AdminRolesController extends AdminController {
         // Check if the form validates with success
         if ($validator->passes())
         {
-            // Get the inputs, with some exceptions
+
+			if(in_array(Input::get('name'), $this->protected_roles)) 
+				return Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
+
+			// Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token');
 
             $this->role->name = $inputs['name'];
@@ -166,6 +176,9 @@ class AdminRolesController extends AdminController {
             'name' => 'required'
         );
 
+		if((in_array(Input::old('name', $role->name), $this->protected_roles) &&Input::old('name', $role->name) != Input::get('name'))||( in_array(Input::get('name'), $this->protected_roles)  && Input::old('name', $role->name) != Input::get('name'))) 
+			return Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
+
         // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
 
@@ -207,11 +220,11 @@ class AdminRolesController extends AdminController {
             // Was the role deleted?
             if($role->delete()) {
                 // Redirect to the role management page
-                return Redirect::to('admin/roles')->with('success', Lang::get('admin/roles/messages.delete.success'));
+				return Response::json(array('result'=>'success'));
             }
 
             // There was a problem deleting the role
-            return Redirect::to('admin/roles')->with('error', Lang::get('admin/roles/messages.delete.error'));
+			return Response::json(array('result'=>'failure', 'error' =>Lang::get('admin/roles/messages.delete.error')));
     }
 
     /**
@@ -229,7 +242,7 @@ class AdminRolesController extends AdminController {
 
 
         ->add_column('actions', '<div class="btn-group"><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a>
-                                <a data-row="{{{  $id }}}" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a></div>
+                                <a data-row="{{{  $id }}}" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger" @if($name == "admin" || $name == "users")disabled@endif>{{{ Lang::get(\'button.delete\') }}}</a></div>
                     ')
 
 
