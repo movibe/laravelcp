@@ -1,11 +1,11 @@
 @extends('admin.layouts.default')
 
 @section('styles')
-<link rel="stylesheet" href="{{{ asset('assets/css/simpleweather.css') }}}"/>
-<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-colorselector.css') }}}"/>
-<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.css') }}}"/>
-<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.responsive.css') }}}"/>
-<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/simpleweather.css') }}}"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-colorselector.css') }}}"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.css') }}}"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.responsive.css') }}}"/>
+	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 @stop
 @section('sub-nav-settings')
 	<li class="divider"></li>
@@ -53,7 +53,6 @@
 	<br>
 	<div class="gridster">
 		<ul>
-
 			<li id="widget-minigraphs" data-row="1" data-col="1" data-sizex="2" data-sizey="2" data-max-sizex="2" data-min-sizex="2" data-max-sizey="2"  data-min-sizey="2">
 				<div class="container-fluid">
 					<div class="row">
@@ -144,34 +143,26 @@
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
 					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">To-do</span></span>
-
 					  @include('admin/widget-controls', array('id' => 'widget-todo'))
 						<ul class="nav nav-tabs pull-right hidden-xs  hidden-sm">
 						  <li class="active"><a href="#home" data-toggle="tab">Pending</a></li>
 						  <li><a href="#profile" data-toggle="tab">Completed</a></li>
 						</ul>
-
 				  </div>
 				  <div class="panel-body ">
 					<div class="tab-content">
-					<div class="tab-pane active" id="home">
-						<ul class="list-group">
-							<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
-							<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
-						</ul>
+						<div class="tab-pane active" id="home">
+							<ul class="list-group">
+								<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
+								<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
+							</ul>
+						</div>
+						<div class="tab-pane" id="profile">...</div>
 					</div>
-					<div class="tab-pane" id="profile">...</div>
-					</div>
-
 				  </div>
 				</div>			
 			</li>
-
-
-
-
-
 		</ul>
-</div>
+	</div>
 
 @stop

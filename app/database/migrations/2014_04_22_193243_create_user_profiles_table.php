@@ -16,8 +16,8 @@ class CreateUserprofilesTable extends Migration {
             $table->integer('user_id')->unsigned()->index();
             $table->string('displayname', 255);
             $table->string('website', 160);
-            $table->timestamp('updated_at')->default("CURRENT_TIMESTAMP");
-            $table->timestamp('created_at')->default("0000-00-00 00:00:00");
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
             $table->string('title', 128);
             $table->string('address', 128);
             $table->string('city', 128);

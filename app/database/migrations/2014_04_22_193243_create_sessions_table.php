@@ -13,7 +13,6 @@ class CreateSessionsTable extends Migration {
     {
         Schema::create('sessions', function($table) {
             $table->increments('id');
-            $table->string('id', 255)->primary();
             $table->text('payload');
             $table->integer('last_activity');
         });
