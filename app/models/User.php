@@ -29,10 +29,20 @@ class User extends ConfideUser {
         return $this->hasMany('UserProfile');
     }
 
+	public function assignedroles()
+    {
+        return $this->hasMany('AssignedRole');
+    }
+	public function posts()
+    {
+        return $this->hasMany('Post');
+    }
 
     public function delete()
     {
-        $this->profiles()->delete();
+		$this->posts()->delete();
+		$this->profiles()->delete();
+		$this->assignedroles()->delete();
         return parent::delete();
     }
 

@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\URL; # not sure why i need this here :c
 
 class Post extends Eloquent {
 
+	public function user()
+    {
+		return $this->belongsTo('User');
+    }
+
+
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.

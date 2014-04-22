@@ -286,22 +286,7 @@ class AdminUsersController extends AdminController {
         }
     }
 
-    /**
-     * Remove user page.
-     *
-     * @param $user
-     * @return Response
-     */
-    public function getDelete($user)
-    {
-        // Title
-        $title = Lang::get('admin/users/title.user_delete');
-
-        // Show the page
-        return View::make('admin/users/delete', compact('user', 'title'));
-    }
-
-
+   
 
     public function postProfileDelete($user, $profile)
     {
@@ -357,7 +342,6 @@ class AdminUsersController extends AdminController {
 				if ($r != Confide::user()->id){
 					$user = User::find($r);
 					try {
-						AssignedRoles::where('user_id', $user->id)->delete();
 						$user->delete();
 					} catch (Exception $e) {
 						return Response::json(array('result'=>'failure', 'error' =>  $e->getMessage()));
@@ -384,16 +368,19 @@ class AdminUsersController extends AdminController {
             return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.delete.impossible'));
         }
 
-        AssignedRoles::where('user_id', $user->id)->delete();
+		$id=$user->id;
 
-        $id = $user->id;
-        $user->delete();
+		try {
+			$user->delete();
+		} catch (Exception $e) {
+			return Response::json(array('result'=>'failure', 'error' =>  $e->getMessage()));
+		}
 
         // Was the comment post deleted?
         $user = User::find($id);
         if (empty($user)){
-            echo "true";
-        } else  echo "false";
+			return Response::json(array('result'=>'success'));
+        } else  return Response::json(array('result'=>'failure', 'error' =>  $e->getMessage()));
         
     }
 

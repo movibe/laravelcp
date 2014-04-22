@@ -112,14 +112,19 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 		if (result) {
 			$.ajax({
 				type: 'POST',
+				dataType: 'json',
 				url: link
-			}).done(function() {
-				bootbox.hideAll();
-				oTable = $('#'+data_table).dataTable();
-				oTable.fnReloadAjax();
-				var index = jQuery.inArray(data_row, aSelected);
-				aSelected.splice( index, 1 );
-
+			}).done(function(msg) {
+				if(msg.result == "success"){
+					bootbox.hideAll();
+					oTable = $('#'+data_table).dataTable();
+					oTable.fnReloadAjax();
+					var index = jQuery.inArray(data_row, aSelected);
+					aSelected.splice( index, 1 );
+				}else {
+					console.log(msg);
+					bootbox.alert( "Unable to execute command, "+ msg.error);
+				}
 			});
 		}    
 	});

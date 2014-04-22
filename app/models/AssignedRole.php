@@ -4,12 +4,12 @@ use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
 use Zizaco\Confide\ConfideEloquentRepository;
 
-class UserProfile  extends Eloquent {
-
-	protected $table = 'user_profiles';
+class AssignedRole extends Eloquent {
+	
+	protected $table = 'assigned_roles';
 	public static $unguarded = true;
 	public function user()
     {
-        return $this->belongsTo('User');
+		return $this->belongsTo('User');
     }
 }
