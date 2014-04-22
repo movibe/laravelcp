@@ -37,12 +37,9 @@ Let me know what you think!
 
 
 
-# Forked from Andrew's Repo
 
-[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
-
-
-# From the his repo:
+# From the forked repo:
+@[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
 Laravel 4 Bootstrap Starter Site is a sample application for beginning development with Laravel 4.
