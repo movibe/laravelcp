@@ -21,7 +21,7 @@ Let me know what you think!
 # Features
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
 - [BootSwatch Themed](http://bootswatch.com/)
-- [BootBox Dialogs](https://github.com/makeusabrew/bootbox)
+- [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
 - User profiles
 - User suspending
 - User e-mailing, single and multiple w/ attachments
