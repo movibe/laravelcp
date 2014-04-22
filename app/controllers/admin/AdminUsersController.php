@@ -486,6 +486,8 @@ class AdminUsersController extends AdminController {
 	public function getEmailMass($a=false){
 		$ids=explode(',',rtrim(Input::get('ids'),','));
 		$multi=array();
+
+
 		if(is_array($ids) && count($ids) > 0){
 			foreach($ids as $id){
 

@@ -145,7 +145,6 @@ $(document).on("click", ".dt-mass", function(e) {
 			if(result) fnRunMass(action, table);
 		});
 	} else fnRunMass(action, table);
-
 });
 
 
@@ -191,6 +190,12 @@ function loadWeather(location, woeid) {
   });
 }
 
+function _resize_sparkline(){
+	if( $( window ).width() > 760){
+		var _w=(($( window ).width()/4)/10)-9;
+	} else 	var _w=(($( window ).width()/2)/10)-10;
+	$('.sparklines').sparkline([4,6,1,4,7,1,5,8,9,2], { enableTagOptions: true , barWidth: _w, barSpacing: '3' });
+}
 
 
 $(document).ready(function() {

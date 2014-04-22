@@ -39,8 +39,13 @@ class AdminDashboardController extends AdminController {
 			if(is_array($polls) && count($polls) > 0){
 				foreach($polls as $i => $_poll){
 					switch($_poll->type){
+						/*
+							type: function or html
+								html: results are passed back in the 'args' field and updated to the element defined in fnAddPoll
+								function: results are passed back to the function, func, with whatever results you want, example parses an array				
+						*/
 						case "check_logs":
-							//$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>array('test1','test2'));
+							$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>array('Notifaction triggered'));
 						break;
 						case "users_online":
 							$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());

@@ -166,7 +166,7 @@ class UserController extends BaseController {
     public function getLogin()
     {
 		$user = Auth::user();
-		if(!empty($user->id)) return Redirect::to('/loggedin');
+		if(!empty($user->id)) return Redirect::to('/');
 
 		return View::make('site/user/login');
     }

@@ -19,49 +19,33 @@
 	<script src="{{{ asset('assets/js/jquery.gridster.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
 	<script type="text/javascript">
-
+		/* dashboard */
 		var localdata_position = JSON.parse(localStorage.getItem('dashboard.grid'));
 		var localdata_colors = JSON.parse(localStorage.getItem('dashboard.colors'));
 		var localdata_states = JSON.parse(localStorage.getItem('dashboard.states'));
 		var localdata_titles = JSON.parse(localStorage.getItem('dashboard.titles'));
-
-
 		fnCreateGridster('dashboard.grid', 'dashboard.colors', 'dashboard.states', 'dashboard.titles');
 
+		/*  polling 
+		
+			- Add new polling results to function postPolling in the AdminDashboardController
+		
+			fnAddPoll(element to update, command for backend, delay[1,2,3,4etc]);
 
+		*/
 
+		fnAddPoll('#widget-usersonline .panel-body', 'users_online', '5');
+		fnAddPoll('logs', 'check_logs', '10');
 
-fnAddPoll('#li4 .panel-body', 'users_online', '1');
-fnAddPoll('logs', 'check_logs', '1');
+		/* call back from results */
+		function fnUpdateGrowler(id, args){
+			$.each(args, function(i,value){
+				$.bootstrapGrowl(value, { type: 'success' });
+			});
+		}
 
-
-/* call back from results */
-function fnUpdateGrowler(id, args){
-	$.each(args, function(i,value){
-		$.bootstrapGrowl(value, { type: 'success' });
-	});
-}
-
-{
-            }
-
-
-
-
-function _resize_sparkline(){
-	if( $( window ).width() > 760){
-		var _w=(($( window ).width()/4)/10)-9;
-	} else 	var _w=(($( window ).width()/2)/10)-10;
-
-	$('.sparklines').sparkline([4,6,1,4,7,1,5,8,9,2], { enableTagOptions: true , barWidth: _w, barSpacing: '3' });
-
-}
-
-$(window).bind('load resize', throttle(_resize_sparkline, 200));
-
-
-
-
+		/* resize sparklines */
+		$(window).bind('load resize', throttle(_resize_sparkline, 200));
 	</script>
 @stop
 
@@ -173,7 +157,6 @@ $(window).bind('load resize', throttle(_resize_sparkline, 200));
 					<div class="tab-pane active" id="home">
 						<ul class="list-group">
 							<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
-							<li class="list-group-item">fix editing role, admin or client, disable name validation
 							<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
 						</ul>
 					</div>
