@@ -25,7 +25,7 @@
 
 	@include('admin/dt-loading')
 
-	<div class="dt-wrapper">
+	<div id="users-container" class="dt-wrapper">
 		<table id="users" class="table-responsive table table-striped table-hover table-bordered">
 			<thead>
 				<tr>

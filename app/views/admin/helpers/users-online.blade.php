@@ -6,7 +6,7 @@
 				<span class="pull-right">{{{ Carbon::parse($row->last_activity)->diffForHumans() }}}</span>
 				<p class="list-group-item-text">
 					<span class="glyphicon"><img alt="{{{ $row->email }}}" src="{{ Gravatar::src($row->email, 40) }}"></span>  
-					{{{ $row->email }}}
+					<span class="hidden-sm">{{{ $row->email }}}</span>
 					
 				</p>
 			</a>

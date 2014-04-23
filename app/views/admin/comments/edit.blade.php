@@ -14,7 +14,7 @@
 	</script>
 	@endif
 
-	{{ Form::open(array('class' => 'form-horizontal')) }}
+	{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">
 				<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
@@ -27,12 +27,10 @@
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-md-12">
-				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>'parent.bootbox.hideAll()')); }} 
-				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-				{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-			</div>
+		<div class="modal-footer">
+			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
 		</div>
 	{{ Form::close(); }}
 @stop

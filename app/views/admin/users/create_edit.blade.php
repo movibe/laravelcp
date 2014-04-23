@@ -6,24 +6,24 @@
 		<li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('core.profile') }}}</a></li>
 		@if ($mode != 'create')
 			<li><a href="#tab-logs" data-toggle="tab">{{{ Lang::get('core.activity') }}}</a></li>
-			<li class="hidden-xs"><a href="#tab-email" data-toggle="tab">{{{ Lang::get('core.emails') }}}</a></li>
-			<li class="hidden-xs"><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
+			<li><a href="#tab-email" data-toggle="tab">{{{ Lang::get('core.emails') }}}</a></li>
+			<li><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
 		@endif
 	</ul>
 
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">
-		if(parent.$('#users').html()){
-			var oTable = parent.$('#users').dataTable();
+		if($('#users').html()){
+			var oTable = $('#users').dataTable();
 			oTable.fnReloadAjax();
 		}
 	</script>
 	@endif
 
 	@if (isset($user))
-		{{ Form::open(array('url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal')) }}
+		{{ Form::open(array('url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal form-ajax')) }}
 	@else
-		{{ Form::open(array('class' => 'form-horizontal')) }}
+		{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
 	@endif
 
 		<div class="tab-content">
@@ -120,12 +120,10 @@
 	            	</div>
 				</div>
 
-				<div class="form-group">
-					<div class="col-md-offset-2 col-md-10">
-						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>'parent.bootbox.hideAll()')); }} 
-						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-					</div>
+				<div class="modal-footer">
+					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+					{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+					{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
 				</div>
 			</div>
 
@@ -151,12 +149,21 @@
 					@endforeach
 				@endif
 				</div>
+				<div class="modal-footer">
+					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+
+						@if(isset($profile))
+							<a href="{{{ URL::to('admin/users/' . $user->id . '/profile/'.$profile->id.'/delete' ) }}} " class="alert-confirm btn btn-danger">Delete {{{ $profile->title }}} </a>
+						@endif
+				</div>
 			</div>
 
 			<div class="tab-pane" id="tab-logs">
 				@include('admin/dt-loading')
 
-				<div class="dt-wrapper">
+				<div  id="activitylog-container" class="dt-wrapper">
 					<table id="activitylog" class="table-responsive table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
@@ -175,7 +182,7 @@
 			<div class="tab-pane" id="tab-email">
 				@include('admin/dt-loading')
 
-				<div class="dt-wrapper">
+				<div id="emaillog-container" class="dt-wrapper">
 					<table id="emaillog" class="table-responsive table table-striped table-hover table-bordered">
 						<thead>
 							<tr>
@@ -193,6 +200,7 @@
 			</div>
 	{{ Form::close(); }}
 @stop
+
 
 @section('scripts')
 @if (isset($user))

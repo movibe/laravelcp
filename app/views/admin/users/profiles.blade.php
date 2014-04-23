@@ -74,15 +74,3 @@
 		<input class="form-control" type="text" name="user_profiles[@if(isset($profile)){{{$profile->id}}}@elsenew@endif][website]" id="website" value="@if(isset($profile)){{{ Input::old('website', isset($user) ? $profile->website : null) }}}@endif" />
 	</div>
 </div>
-
-<div class="form-group">
-	<div class="col-md-offset-2 col-md-10">
-		{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>'parent.bootbox.hideAll()')); }} 
-		{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-		{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-
-		@if(isset($profile))
-			<a href="{{{ URL::to('admin/users/' . $user->id . '/profile/'.$profile->id.'/delete' ) }}} " class="alert-confirm btn btn-danger">Delete {{{ $profile->title }}} </a>
-		@endif
-	</div>
-</div>

@@ -17,9 +17,9 @@
 	@endif
 
 	@if (isset($post))
-		{{ Form::open(array('url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
+		{{ Form::open(array('url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@else
-		{{ Form::open(array('class' => 'form-horizontal', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
+		{{ Form::open(array('class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@endif
 
 		<div class="tab-content">
@@ -115,12 +115,10 @@
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-md-12">
-				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>'parent.bootbox.hideAll()')); }} 
-				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-				{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-			</div>
+		<div class="modal-footer">
+			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
 		</div>
 	{{ Form::close(); }}
 @stop
