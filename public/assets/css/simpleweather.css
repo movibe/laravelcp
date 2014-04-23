@@ -28,7 +28,7 @@
 	line-height: 1;
 	font-size: 50px; 
 	line-height: 0;
-	top: 1px;
+	top: 8px;
   }
 
 .icon-0:before { content: ":"; }
