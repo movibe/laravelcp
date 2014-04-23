@@ -81,7 +81,11 @@ class AdminBlogsController extends AdminController {
             $this->post->meta_keywords    = Input::get('meta-keywords');
             $this->post->user_id          = $user->id;
 
-            // Was the blog post created?
+ 			$this->banner			 = Input::get('banner');
+            $this->display_author    = (int)Input::get('display_author');
+            $this->allow_comments    = (int)Input::get('allow_comments');
+
+           // Was the blog post created?
             if($this->post->save())
             {
                 // Redirect to the new blog post page
@@ -150,6 +154,10 @@ class AdminBlogsController extends AdminController {
             $post->meta_title       = Input::get('meta-title');
             $post->meta_description = Input::get('meta-description');
             $post->meta_keywords    = Input::get('meta-keywords');
+        
+			$post->banner			 = Input::get('banner');
+            $post->display_author    = (int)Input::get('display_author');
+            $post->allow_comments    = (int)Input::get('allow_comments');
 
             // Was the blog post updated?
             if($post->save())

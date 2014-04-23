@@ -16,7 +16,11 @@
 		<!-- Post Content -->
 		<div class="row">
 			<div class="col-md-2">
-				<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+				@if($post->banner)<a href="{{{ $post->url() }}}" class="thumbnail"><img src="{{{ $post->banner }}}" alt=""></a>
+				@else
+				<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180/000000/000000" alt=""></a>
+				@endif
+
 			</div>
 			<div class="col-md-6">
 				<p>
@@ -32,10 +36,12 @@
 			<div class="col-md-8">
 				<p></p>
 				<p>
-					<span class="glyphicon"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 20) }}"></span>
+					@if($post->display_author)<span class="glyphicon"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 20) }}"></span>
 					by <span class="muted">{{{ $post->author->displayname }}}</span>
-					| <span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $post->date() }}}
-					| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $post->comments()->count()) }}</a>
+					|@endif <span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $post->date() }}}
+					@if($post->allow_comments)
+						| <span class="glyphicon glyphicon-comment"></span> <a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $post->comments()->count()) }}</a>
+					@endif
 				</p>
 			</div>
 		</div>

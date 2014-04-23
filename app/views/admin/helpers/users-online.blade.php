@@ -1,5 +1,5 @@
 <ul class="list-group">
-	@foreach (DB::select('SELECT email, displayname, id FROM users WHERE date(`last_activity`) > ? LIMIT 50', array(time()-600)) as $row)
+	@foreach (DB::select('SELECT email, displayname, id FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ? LIMIT 50', array(time()-150)) as $row)
 		<li class="list-group-item">
 			<a href="{{{ URL::to('admin/users/'. $row->id  .'/edit') }}}" class="modalfy">
 				<h4 class="list-group-item-heading">{{{ $row->displayname }}}</h4>

@@ -27,13 +27,14 @@
 {{-- Content --}}
 @section('content')
 
-<a href="{{{ $post->url() }}}" class="thumbnail"><img src="http://placehold.it/260x180" alt=""></a>
+@if($post->banner)<a href="{{{ $post->url() }}}" class="thumbnail"><img width="100%" src="{{{ $post->banner }}}" alt=""></a>@endif
 
 
 <div class="clearfix">
-<div class="pull-left"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 80) }}"></div>
+@if($post->display_author)<div class="pull-left"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 80) }}"></div>@endif
 <div class="pull-left"><h1>{{ $post->title }}</h1>
-<div>By {{ $post->author->displayname }}, Posted {{{ $post->date() }}}</div>
+
+@if($post->display_author)<div>By {{ $post->author->displayname }}, Posted {{{ $post->date() }}}</div>@endif
 </div>
 </div>
 
@@ -46,7 +47,9 @@
 
 
 
+@if($post->allow_comments)
 <hr />
+
 
 <a id="comments"></a>
 <h4>{{{ $comments->count() }}} Comments</h4>
@@ -91,6 +94,9 @@ Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your accoun
 @elseif ( ! $canComment )
 You don't have the correct permissions to add comments.</p>
 @else
+
+@endif
+
 
 @if($errors->has())
 <div class="alert alert-danger alert-block">

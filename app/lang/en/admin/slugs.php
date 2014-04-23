@@ -7,5 +7,6 @@ return array(
 	'meta_description' => 'Meta Description',
 	'meta_keywords' => 'Meta Keywords',
 	'meta_data' => 'Meta data',
+	'banner' => 'Banner',
 
 );

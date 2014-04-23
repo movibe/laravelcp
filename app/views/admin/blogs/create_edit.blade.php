@@ -4,6 +4,7 @@
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
 		<li><a href="#tab-meta-data" data-toggle="tab">{{{ Lang::get('admin/slugs.meta_data') }}}</a></li>
+		<li><a href="#tab-settings" data-toggle="tab">{{{ Lang::get('core.settings') }}}</a></li>
 	</ul>
 
 	@if ($message = Session::get('success'))
@@ -67,6 +68,47 @@
                         <label class="control-label" for="meta-keywords">{{{ Lang::get('admin/slugs.meta_keywords') }}}</label>
 						<input class="form-control" type="text" name="meta-keywords" id="meta-keywords" value="{{{ Input::old('meta-keywords', isset($post) ? $post->meta_keywords : null) }}}" />
 						{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+
+			</div>
+
+			<div class="tab-pane" id="tab-settings">
+				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="control-label" for="banner">{{{ Lang::get('admin/slugs.banner') }}}</label>
+						<input class="form-control" type="text" name="banner" id="banner" value="{{{ Input::old('banner', isset($post) ? $post->banner : null) }}}" />
+						{{ $errors->first('banner', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="control-label" for="template">{{{ Lang::get('core.template') }}}</label>
+						<input class="form-control" type="text" name="template" id="template" value="{{{ Input::old('template', isset($post) ? $post->template : null) }}}" />
+						{{ $errors->first('template', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+
+				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="control-label" for="parent">{{{ Lang::get('core.parent') }}}</label>
+						<input class="form-control" type="text" name="parent" id="parent" value="{{{ Input::old('parent', isset($post) ? $post->parent : null) }}}" />
+						{{ $errors->first('parent', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+
+				<div class="form-group {{{ $errors->has('display_navigation') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="control-label" for="display_navigation">{{{ Lang::get('core.display_navigation') }}}</label>
+						<input class="form-control" type="text" name="display_navigation" id="pardisplay_navigationent" value="{{{ Input::old('display_navigation', isset($post) ? $post->display_navigation : null) }}}" />
+						{{ $errors->first('display_navigation', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+
+				<div class="form-group {{{ $errors->has('meta-description') ? 'error' : '' }}}">
+					<div class="col-md-12 controls">
+						Display Author: <input value="1" type="checkbox" name="display_author" class="form-control" >
+						Allow Comments: <input value="1" type="checkbox" name="allow_comments" class="form-control" >
 					</div>
 				</div>
 
