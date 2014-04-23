@@ -21,7 +21,6 @@ function modalfyRunIframe(src){
 }
 
 function modalfyRun(src){
-
 	$.ajax({
 		type: 'GET',
 		url: src
@@ -35,8 +34,6 @@ function modalfyRun(src){
 			bootbox.alert( "Unable to execute command.");
 		}
 	});
-
-
 }
 
 function modalfyIframes(){
@@ -132,7 +129,6 @@ function dtLoad(table, action, hidemd, hidesm){
 			});
 		} else fnRunMass(action, table);
 	});
-
 }
 
 $(document).on("click", ".ajax-alert", function(e) {
@@ -170,8 +166,6 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 	return false;
 });
 
-
-
 $(document).on("submit", ".form-ajax", function(e) {
   $.post(
    $(this).attr('action'),
@@ -183,7 +177,9 @@ $(document).on("submit", ".form-ajax", function(e) {
   return false;   
 }); 
 
-
+$(document).on("click", "a", function(e) {
+	if($(this).attr('href')=='#') return false;
+});
 
 
 function fnRunMass(action,data_table){
