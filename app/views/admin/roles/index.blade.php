@@ -18,7 +18,7 @@
 
 	@include('admin/dt-loading')
 
-	<div class="dt-wrapper">
+	<div id="roles-container" class="dt-wrapper">
 		<table id="roles" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>

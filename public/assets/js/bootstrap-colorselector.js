@@ -8,7 +8,6 @@
  */
 
 (function($) {
-  "use strict";
 
   var ColorSelector = function(select, options) {
     this.options = options;

@@ -18,7 +18,7 @@
 
 	@include('admin/dt-loading')
 
-	<div class="dt-wrapper">
+	<div id="blogs-container" class="dt-wrapper">
 		<table id="blogs" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>

@@ -1,6 +1,3 @@
-<script>var aSelected = [];</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="{{{ asset('assets/js/site.js') }}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
 <script src="{{{ asset('assets/js/datatables.fnReloadAjax.js') }}}"></script>

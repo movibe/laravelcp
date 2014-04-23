@@ -132,6 +132,8 @@
 	</style>
 @stop
 @section('scripts')
-	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
-	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
+	<script type="text/javascript">
+		initToolbarBootstrapBindings();  
+		$('#editor').wysiwyg({ fileUploadError: showErrorAlert, hotKeys: {}} );
+	</script>
 @stop

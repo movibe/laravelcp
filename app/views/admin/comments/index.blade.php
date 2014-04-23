@@ -15,7 +15,7 @@
 
 	@include('admin/dt-loading')
 
-	<div class="dt-wrapper">
+	<div id="comments-container" class="dt-wrapper">
 		<table id="comments" class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>

@@ -22,6 +22,11 @@
 
 	@include('admin/css')
 
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
+	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
+
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -44,6 +49,7 @@
 		@yield('footer')
 	</footer>
 
+	@include('admin/js')
 
 	<!-- default modal dialog -->
 	<div id="site-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -65,7 +71,6 @@
 
 
 
-	@include('admin/js')
 
     <script type="text/javascript">
 		fnRunPoll();

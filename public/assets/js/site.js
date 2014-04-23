@@ -67,7 +67,8 @@ function styledt(table){
 }
 
 function dtLoad(table, action, hidemd, hidesm){
-	 var oTable=$(table).dataTable( {
+	var aSelected = [];
+	var oTable=$(table).dataTable( {
 		"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 		"sPaginationType": "bootstrap",
 		"bAutoWidth": false,
@@ -115,6 +116,23 @@ function dtLoad(table, action, hidemd, hidesm){
 
 		$(this).toggleClass('highlight');
 	} );
+
+	$(document).on("click", ".dt-mass", function(e) {
+		e.preventDefault();    
+		var action=$(this).attr('data-action');
+		var table=$(this).attr('data-table');
+		var run=false;
+		if($(this).attr('data-method') == 'modal'){
+			var _ids='';
+			$.each(aSelected, function(i,value){ _ids+=value+','; });
+			modalfyRun($(this).attr('data-action')+'?ids='+_ids);
+		}else if($(this).attr('data-confirm') == 'true'){
+			bootbox.confirm('Are you sure?', function(result) {
+				if(result) fnRunMass(action, table);
+			});
+		} else fnRunMass(action, table);
+	});
+
 }
 
 $(document).on("click", ".ajax-alert", function(e) {
@@ -152,21 +170,6 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 	return false;
 });
 
-$(document).on("click", ".dt-mass", function(e) {
-	e.preventDefault();    
-	var action=$(this).attr('data-action');
-	var table=$(this).attr('data-table');
-	var run=false;
-	if($(this).attr('data-method') == 'modal'){
-		var _ids='';
-		$.each(aSelected, function(i,value){ _ids+=value+','; });
-		modalfyRun($(this).attr('data-action')+'?ids='+_ids);
-	}else if($(this).attr('data-confirm') == 'true'){
-		bootbox.confirm('Are you sure?', function(result) {
-			if(result) fnRunMass(action, table);
-		});
-	} else fnRunMass(action, table);
-});
 
 
 $(document).on("submit", ".form-ajax", function(e) {
@@ -259,9 +262,6 @@ $(document).ready(function() {
 		loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
 	  });
 	} else loadWeather('Seattle',''); 
-
-
-
 
 });
 

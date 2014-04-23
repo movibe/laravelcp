@@ -10,8 +10,8 @@
 		</div>
       </div>
       <div class="modal-body">
-		@include('notifications')
 		@yield('content')
+		@include('notifications')
       </div>
   </div>
  @yield('scripts')

@@ -1,4 +1,3 @@
-  $(function(){
     function initToolbarBootstrapBindings() {
       var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
             'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
@@ -26,6 +25,3 @@
 		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
 		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
 	};
-    initToolbarBootstrapBindings();  
-	$('#editor').wysiwyg({ fileUploadError: showErrorAlert, hotKeys: {}} );
-  });
