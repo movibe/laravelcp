@@ -22,9 +22,10 @@
 		
 		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="//bootswatch.com/{{{ Setting::get('site.bootswatch') }}}/bootstrap.min.css" />
-	
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<style type="text/css">
 
-		<style>
+
 			body{ padding-top: 54px}
 		@section('styles')
 		@show
@@ -122,5 +123,6 @@
 		================================================== -->
 <script src="//code.jquery.com/jquery-latest.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+@yield('scripts')
 </body>
 </html>

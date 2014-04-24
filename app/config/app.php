@@ -125,8 +125,8 @@ return array(
 		'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
 		'Regulus\ActivityLog\ActivityLogServiceProvider',
 
-'Raahul\LarryFour\LarryFourServiceProvider'
-
+'Raahul\LarryFour\LarryFourServiceProvider',
+'Atticmedia\Anvard\AnvardServiceProvider',
 
 
 
@@ -211,6 +211,7 @@ return array(
 		'Setting' => 'anlutro\LaravelSettings\Facade',
 'Activity' => 'Regulus\ActivityLog\Activity',
 'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
+'Anvard'=>'Atticmedia\Anvard\Anvard',
 ),
 
     'available_language' => array('en', 'pt', 'es'),

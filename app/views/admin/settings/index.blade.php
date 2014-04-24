@@ -13,13 +13,17 @@
 		 @foreach($settings as $a => $b)
 		 @if (is_array($b))
 				@section('tabs')
+					@parent
+
 					<li><a href="#{{{ $a }}}" data-toggle="tab">
 						@if (Lang::has('core::all.'.$a)){{ trans('core::all.'.$a) }}@else{{ $a }}@endif
 					</a></li>
 				@stop
 			
 				@section('tab-content')
-					<div class="tab-pane fade in active" id="{{{ $a }}}">
+					@parent
+
+					<div class="tab-pane " id="{{{ $a }}}">
 					<table width="80%" class="table table-striped table-hover">
 					@foreach($b as $c => $d)
 							<tr>

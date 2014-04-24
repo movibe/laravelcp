@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "264ab4b678298e0717f6a8135ffd6a44",
+    "hash": "68f92e6d8085d5141f2252c64bb79a1b",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -364,6 +364,55 @@
             "time": "2014-03-19 14:42:43"
         },
         {
+            "name": "hybridauth/hybridauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hybridauth/hybridauth.git",
+                "reference": "fd51fb6d260ef48fe85494b55d9931374230074b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/fd51fb6d260ef48fe85494b55d9931374230074b",
+                "reference": "fd51fb6d260ef48fe85494b55d9931374230074b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Hybrid": "hybridauth/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(MIT or GPL-3.0+)"
+            ],
+            "authors": [
+                {
+                    "name": "Miled",
+                    "email": "hybridauth@gmail.com"
+                }
+            ],
+            "description": "Open source social sign on PHP library.",
+            "homepage": "http://hybridauth.sourceforge.net",
+            "keywords": [
+                "OpenId",
+                "facebook",
+                "google",
+                "hybridauth",
+                "login",
+                "oauth",
+                "social",
+                "twitter",
+                "yahoo"
+            ],
+            "time": "2014-04-17 12:12:22"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "1.0.x-dev",
             "source": {
@@ -701,6 +750,38 @@
             "time": "2014-02-01 17:48:14"
         },
         {
+            "name": "madewithlove/laravel-oauth2",
+            "version": "0.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/madewithlove/laravel-oauth2.git",
+                "reference": "dc57803eae55c35e03372783fbfc19eeb4d7cbd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/madewithlove/laravel-oauth2/zipball/dc57803eae55c35e03372783fbfc19eeb4d7cbd4",
+                "reference": "dc57803eae55c35e03372783fbfc19eeb4d7cbd4",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "OAuth2": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Authorize users in your application with multiple OAuth 2.0 providers.",
+            "homepage": "http://github.com/madewithlove/laravel-oauth2",
+            "keywords": [
+                "laravel",
+                "oauth2"
+            ],
+            "time": "2014-02-24 12:27:00"
+        },
+        {
             "name": "maximebf/debugbar",
             "version": "1.9.13",
             "source": {
@@ -757,12 +838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "0b654cec865d66042161e3f584f0b18f9b444e18"
+                "reference": "7567cecfa5f60e9a311e96d8becec2e232748155"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/0b654cec865d66042161e3f584f0b18f9b444e18",
-                "reference": "0b654cec865d66042161e3f584f0b18f9b444e18",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/7567cecfa5f60e9a311e96d8becec2e232748155",
+                "reference": "7567cecfa5f60e9a311e96d8becec2e232748155",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +898,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-04-23 07:20:48"
+            "time": "2014-04-23 13:56:51"
         },
         {
             "name": "nesbot/carbon",
@@ -2026,12 +2107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "916bad70c99e6e66487ebaa3efb335808b13830d"
+                "reference": "74229f66e16bce6d2415ca44d4756f8e7ea880f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/916bad70c99e6e66487ebaa3efb335808b13830d",
-                "reference": "916bad70c99e6e66487ebaa3efb335808b13830d",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/74229f66e16bce6d2415ca44d4756f8e7ea880f8",
+                "reference": "74229f66e16bce6d2415ca44d4756f8e7ea880f8",
                 "shasum": ""
             },
             "require": {
@@ -2085,7 +2166,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-04-18 20:37:09"
+            "time": "2014-04-23 14:04:21"
         },
         {
             "name": "symfony/security",
@@ -2094,12 +2175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Security.git",
-                "reference": "013e84fe863ea6de2f314ae5b813e9fc51aabe55"
+                "reference": "51da92e1e61e4ab73e5de664e6f8e22c59147deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Security/zipball/013e84fe863ea6de2f314ae5b813e9fc51aabe55",
-                "reference": "013e84fe863ea6de2f314ae5b813e9fc51aabe55",
+                "url": "https://api.github.com/repos/symfony/Security/zipball/51da92e1e61e4ab73e5de664e6f8e22c59147deb",
+                "reference": "51da92e1e61e4ab73e5de664e6f8e22c59147deb",
                 "shasum": ""
             },
             "require": {
@@ -2161,7 +2242,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-22 08:11:06"
+            "time": "2014-04-23 14:04:21"
         },
         {
             "name": "symfony/translation",

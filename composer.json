@@ -28,7 +28,8 @@
 		"barryvdh/laravel-debugbar": "dev-master",
 		"regulus/activity-log": "dev-master",
 		"caouecs/laravel4-lang": "dev-master",
-		"raahul/larryfour": "1.*"
+		"raahul/larryfour": "1.*",
+		"hybridauth/hybridauth": "*"
 	},
 	"require-dev": {
         "way/generators": "dev-master",
@@ -48,7 +49,11 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/library"
-		]
+		],
+		"psr-0": {
+		    "Atticmedia\\Anvard": "vendor/atticmedia/anvard/src"
+		}
+
 	},
 	"scripts": {
 		"pre-update-cmd": [

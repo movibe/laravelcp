@@ -155,7 +155,10 @@ class UserController extends BaseController {
      */
     public function getCreate()
     {
-        return View::make('site/user/create');
+ 		$anvard = App::make('anvard');
+		$providers = $anvard->getProviders();
+
+		return View::make('site/user/create', compact('providers'));
     }
 
 
@@ -167,8 +170,11 @@ class UserController extends BaseController {
     {
 		$user = Auth::user();
 		if(!empty($user->id)) return Redirect::to('/');
+		
+		$anvard = App::make('anvard');
+		$providers = $anvard->getProviders();
 
-		return View::make('site/user/login');
+		return View::make('site/user/login', compact('providers'));
     }
 
     /**
