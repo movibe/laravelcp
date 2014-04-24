@@ -21,7 +21,7 @@ Let me know what you think!
 
 
 # Features
-- jQuery 1.9.1, Bootstrap 3.1.1, FontAwesome 4.0.3
+- jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
 - [BootSwatch Themed](http://bootswatch.com/)
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
@@ -74,7 +74,7 @@ It began as a fork of [laravel4-starter-kit](https://github.com/brunogaspar/lara
 	* [Entrust](#entrust)
 	* [Ardent](#ardent)
 	* [Carbon](#carbon)
-	* [Basset](#basset)
+	* [Basset](#basset) -- removed
 	* [Presenter](#presenter)
 	* [Generators](#generators)
 
