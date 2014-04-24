@@ -17,11 +17,6 @@ class UserTest extends TestCase {
         $this->assertNotEquals( $user->isConfirmed(array('email'=>'non-user@example.org')), true );
     }
 
-    public function testIsConfirmedByUsernameFail()
-    {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertNotEquals( $user->isConfirmed(array('username'=>'non-user')), true );
-    }
 
 
 }

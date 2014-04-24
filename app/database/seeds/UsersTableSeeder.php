@@ -10,19 +10,19 @@ class UsersTableSeeder extends Seeder {
         $users = array(
             array(
                 'email'      => 'admin@example.org',
+                'displayname'      => 'admin@example.org',
+                'username'      => 'admin@example.org',
                 'password'   => Hash::make('admin'),
                 'confirmed'   => 1,
                 'confirmation_code' => md5(microtime().Config::get('app.key')),
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
             ),
             array(
                 'email'      => 'user@example.org',
-                'password'   => Hash::make('user'),
+                 'displayname'      => 'admin@example.org',
+                  'username'      => 'admin@example.org',
+             'password'   => Hash::make('user'),
                 'confirmed'   => 1,
                 'confirmation_code' => md5(microtime().Config::get('app.key')),
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
             )
         );
 

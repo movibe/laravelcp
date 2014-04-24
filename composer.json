@@ -1,9 +1,13 @@
 {
-    "name": "andrew13/Laravel-4-Bootstrap-Starter-Site",
-    "description": "Laravel 4 Starter Site",
-    "keywords": ["laravel","Starter Site"],
+    "name": "gcphost/l4-bootstrap-admin",
+    "description": "Laravel 4 Bootstrap Admin Site",
+    "keywords": ["laravel","Starter Site", "Admin Site", "Portal"],
     "license": "MIT",
     "authors": [
+        {
+            "name": "William Bowman",
+            "homepage": "http://www.github.com/gcphost"
+        },
         {
             "name": "Andrew Elkins",
             "homepage": "http://www.andrewelkins.com"
@@ -36,7 +40,8 @@
         "mockery/mockery": "dev-master@dev",
         "summerstreet/woodling": "0.1.*",
         "barryvdh/laravel-ide-helper": "dev-master",
-        "lmammino/jsmin4assetic": "1.0.*"
+        "lmammino/jsmin4assetic": "1.0.*",
+	"phpunit/phpunit": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -37,8 +37,8 @@ Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei s
                 'meta_title' => 'meta_title1',
                 'meta_description' => 'meta_description1',
                 'meta_keywords' => 'meta_keywords1',
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
+                //'created_at' => new DateTime,
+                //'updated_at' => new DateTime,
             ),
             array(
                 'user_id'    => $user_id,
@@ -48,8 +48,8 @@ Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei s
                 'meta_title' => 'meta_title2',
                 'meta_description' => 'meta_description2',
                 'meta_keywords' => 'meta_keywords2',
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
+                //'created_at' => new DateTime,
+                //'updated_at' => new DateTime,
             ),
             array(
                 'user_id'    => $user_id,
@@ -59,8 +59,8 @@ Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei s
                 'meta_title' => 'meta_title3',
                 'meta_description' => 'meta_description3',
                 'meta_keywords' => 'meta_keywords3',
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime,
+                //'created_at' => new DateTime,
+                //'updated_at' => new DateTime,
             ))
         );
     }

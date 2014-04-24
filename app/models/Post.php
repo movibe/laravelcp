@@ -67,7 +67,7 @@ class Post extends Eloquent {
         if(is_null($date)) {
             $date = $this->created_at;
         }
-
+if(!$date) $date=Carbon::now();
         return String::date($date);
     }
 
