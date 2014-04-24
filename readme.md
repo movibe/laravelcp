@@ -19,12 +19,14 @@ Let me know what you think!
 
 
 # Features
+- jQuery 1.9.1, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
 - [BootSwatch Themed](http://bootswatch.com/)
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
 - User profiles
 - User suspending
 - User e-mailing, single and multiple w/ attachments
+- oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview)& [HybridAuth](http://hybridauth.sourceforge.net/)
 - Ajax polling w/ [jQuery poller](https://github.com/gcphost/jquery.poller)
 - [L4-Settings](https://github.com/anlutro/laravel-settings)
 - [L4-DataTables](https://github.com/bllim/laravel4-datatables-package)
