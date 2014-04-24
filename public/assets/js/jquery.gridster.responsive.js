@@ -96,7 +96,7 @@ function fnCreateGridster(page, colors, states, titles){
 	$(document).on("click", ".panel-hide", function(e) {
 		e.preventDefault();    
 		var panel = $(this).attr("data-id");
-		if($(this).hasClass('glyphicon-minus')){
+		if($(this).hasClass('fa-minus')){
 			_state_minimize(panel);
 			var _state=false;
 
@@ -112,13 +112,13 @@ function fnCreateGridster(page, colors, states, titles){
 	$(document).on("click", ".panel-max", function(e) {
 		e.preventDefault();    
 		var panel = $(this).attr("data-id");
-		if($(this).hasClass('glyphicon-resize-small')){
+		if($(this).hasClass('fa-compress')){
 
 			$('.main-nav').show();
 			$('#'+panel).find('.hide-full').show();
 			$('#'+panel +' .gs-resize-handle').hide();
 			$('#'+panel).css({'position':'absolute', 'top':$('#'+panel).attr('data-top'), 'left':$('#'+panel).attr('data-left'),'width':$('#'+panel).attr('data-width'), 'height':'calc(auto + 6px)', 'z-index':'0'});
-			$(this).removeClass('glyphicon-resize-small').addClass('glyphicon-resize-full');
+			$(this).removeClass('fa-compress').addClass('fa-expand');
 
 		} else {
 			$('.main-nav').hide();
@@ -131,7 +131,7 @@ function fnCreateGridster(page, colors, states, titles){
 			});
 			$('#'+panel).css({'position':'fixed', 'top':'0', 'left':'0','width':'100%', 'height':'100%', 'z-index':'9999'});
 
-			$(this).removeClass('glyphicon-resize-full').addClass('glyphicon-resize-small');
+			$(this).removeClass('fa-expand').addClass('fa-compress');
 			$('#'+panel +' .gs-resize-handle').show();
 			$('#'+panel).find('.hide-full').hide();
 		}
@@ -179,7 +179,7 @@ function fnCreateGridster(page, colors, states, titles){
 		$(".gridster > ul").data('gridster').resize_widget($('#'+panel),$('#'+panel).attr('data-sizex'),_oldsize);
 		$('#'+panel +' .panel').css('padding-bottom', '60px');
 		$('#'+panel +' .panel-body').slideDown();
-		$('#'+panel +' .panel-hide').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+		$('#'+panel +' .panel-hide').removeClass('fa-plus').addClass('fa-minus');
 		$('#'+panel +' .gs-resize-handle').show();
 		$('#'+panel +' .panel-color, #'+panel +' .panel-max, #'+panel +' .panel-close').show();
 	}
@@ -191,7 +191,7 @@ function fnCreateGridster(page, colors, states, titles){
 		$('#'+panel).attr('data-sizey', '1');
 		$('#'+panel +' .gs-resize-handle').hide();
 		$('#'+panel +' .panel-body').slideUp();
-		$('#'+panel +' .panel-hide').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+		$('#'+panel +' .panel-hide').removeClass('fa-minus').addClass('fa-plus');
 		$('#'+panel +' .panel').css('padding-bottom', '0px');
 		$('#'+panel +' .panel-color, #'+panel +' .panel-max, #'+panel +' .panel-close').hide();
 	}

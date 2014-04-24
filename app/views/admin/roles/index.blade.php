@@ -12,7 +12,7 @@
 	<div class="page-header clearfix">		
 		<div class="pull-left"><h3>{{{ $title }}}</h3></div>
 		<div class="pull-right">
-			<a href="{{{ URL::to('admin/roles/create') }}}" class="btn btn-small btn-info modalfy"><span class="glyphicon glyphicon-plus-sign"></span> {{{ Lang::get('button.create') }}}</a>
+			<a href="{{{ URL::to('admin/roles/create') }}}" class="btn btn-small btn-info modalfy"><span class="fa fa-lg fa-plus-square"></span> {{{ Lang::get('button.create') }}}</a>
 		</div>
 	</div>
 

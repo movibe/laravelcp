@@ -78,7 +78,7 @@
   border-radius: 2;
   z-index:9999
 }
-.panel-color{margin-top:1px}
+.panel-color{margin-top:-10px;display:block;}
 .dropdown-menu.dropdown-caret:before {
   border-bottom: 7px solid rgba(0, 0, 0, 0.2);
   border-left: 7px solid transparent;

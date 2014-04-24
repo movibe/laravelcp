@@ -130,7 +130,7 @@
 			<div class="tab-pane" id="tab-profile">
 				<ul class="nav nav-pills">
 					@if ($mode != 'create')
-						<li ><a href="#tab-create" data-toggle="tab"><span class="glyphicon glyphicon-plus-sign"></span>  {{{ Lang::get('button.create') }}}</a></li>
+						<li ><a href="#tab-create" data-toggle="tab"><span class="fa fa-plus-square"></span>  {{{ Lang::get('button.create') }}}</a></li>
 						@foreach($profiles as $index=>$pro)
 							<li @if ($index == 0)class="active"@endif><a href="#tab-{{{$pro->id}}}" data-toggle="tab" id="tab-c{{{$pro->id}}}">@if ($pro->title){{$pro->title}}@elseif($index == 0)Default @else#{{{$index}}}@endif</a></li>
 						@endforeach

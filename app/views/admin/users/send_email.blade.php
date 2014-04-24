@@ -59,7 +59,7 @@
 
 			<div class="btn-group">
 				<span class="btn btn-default btn-file">
-				   <span class="glyphicon glyphicon-paperclip"> </span> <input type="file" name="email_attachment" multiple>
+				   <span class="fa fa-lg fa-paperclip"> </span> <input type="file" name="email_attachment" multiple>
 				</span>
 				<div class="btn-group dropup">
 					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

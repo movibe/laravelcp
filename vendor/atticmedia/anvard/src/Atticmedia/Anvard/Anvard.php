@@ -187,6 +187,7 @@ class Anvard {
             // @todo this is all very custom ... how to fix?
 
             $user->username = $adapter_profile->email;
+            $user->displayname = $adapter_profile->firstName . " " . $adapter_profile->lastName;
             $user->email = $adapter_profile->email;
             $user->password = uniqid();
             $user->password_confirmation = $user->password;

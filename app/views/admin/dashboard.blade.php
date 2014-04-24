@@ -9,7 +9,7 @@
 @stop
 @section('sub-nav-settings')
 	<li class="divider"></li>
-	<li><a href="" onclick="localStorage.clear();"><span class="glyphicon glyphicon-remove"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
+	<li><a href="" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
 @stop
 
 @section('scripts')
@@ -98,7 +98,7 @@
 			<li id="widget-features" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
-					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">Featuring</span></span>
+					  <span class="panel-title pull-left"><span class="fa fa-lg fa-asterisk"></span> <span class="panel-title-text">Featuring</span></span>
 					  @include('admin/widget-controls', array('id' => 'widget-features'))
 				  </div>
 				  <div class="panel-body ">
@@ -116,7 +116,7 @@
 			<li id="widget-usersonline" data-row="2" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 					<div class="panel-heading clearfix">
-						 <span class="panel-title pull-left"><span class="glyphicon glyphicon-user"></span> <span class="panel-title-text">{{{ Lang::get('core.users_online') }}}</span></span>
+						 <span class="panel-title pull-left"><span class="fa fa-lg fa-users"></span> <span class="panel-title-text">{{{ Lang::get('core.users_online') }}}</span></span>
 						@include('admin/widget-controls', array('id' => 'widget-usersonline'))
 					</div>
 					<div class="panel-body">
@@ -129,7 +129,7 @@
 			<li id="widget-graph" data-row="3" data-col="1" data-sizex="2" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
-					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-signal"></span> <span class="panel-title-text">Graph Example</span></span>
+					  <span class="panel-title pull-left"><span class="fa fa-lg fa-signal"></span> <span class="panel-title-text">Graph Example</span></span>
 					  @include('admin/widget-controls', array('id' => 'widget-graph'))
 				  </div>
 				  <div class="panel-body" style="overflow: hidden">
@@ -142,7 +142,7 @@
 			<li id="widget-todo" data-row="4" data-col="1" data-sizex="1" data-sizey="5">
 				<div class="panel panel-default">
 				  <div class="panel-heading clearfix">
-					  <span class="panel-title pull-left"><span class="glyphicon glyphicon-asterisk"></span> <span class="panel-title-text">To-do</span></span>
+					  <span class="panel-title pull-left"><span class="fa fa-lg fa-asterisk"></span> <span class="panel-title-text">To-do</span></span>
 					  @include('admin/widget-controls', array('id' => 'widget-todo'))
 						<ul class="nav nav-tabs pull-right hidden-xs  hidden-sm">
 						  <li class="active"><a href="#home" data-toggle="tab">Pending</a></li>
