@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Filesystem\Filesystem;
 
 class AdminBlogsController extends AdminController {
 
@@ -18,6 +19,19 @@ class AdminBlogsController extends AdminController {
         parent::__construct();
         $this->post = $post;
     }
+
+
+
+	private function getPostTemplates(){
+		$path=Config::get('view.paths');
+		$fileSystem = new Filesystem;
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'layouts');
+		return $files;
+	}
+	private function getPostParents(){
+		// return Post::select(array('posts.id', 'posts.title'))->get();
+		return array_merge(array('0'=>''),DB::table('posts')->orderBy('title', 'asc')->lists('title','id'));
+	}
 
     /**
      * Show a list of all the blog posts.
@@ -45,9 +59,11 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.create_a_new_blog');
+		$templates=$this->getPostTemplates();
+		$parents=$this->getPostParents();
 
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('title'));
+        return View::make('admin/blogs/create_edit', compact('title', 'templates', 'parents'));
 	}
 
 	/**
@@ -62,7 +78,6 @@ class AdminBlogsController extends AdminController {
             'title'   => 'required|min:3',
             'content' => 'required|min:3'
         );
-
         // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
 
@@ -84,8 +99,11 @@ class AdminBlogsController extends AdminController {
  			$this->banner			 = Input::get('banner');
             $this->display_author    = (int)Input::get('display_author');
             $this->allow_comments    = (int)Input::get('allow_comments');
+            $this->template    = Input::get('template');
+            $this->parent    = (int)Input::get('parent');
+            $this->display_navigation    = (int)Input::get('display_navigation');
 
-           // Was the blog post created?
+		   // Was the blog post created?
             if($this->post->save())
             {
                 // Redirect to the new blog post page
@@ -121,9 +139,11 @@ class AdminBlogsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/blogs/title.blog_update');
+		$templates=$this->getPostTemplates();
+		$parents=$this->getPostParents();
 
-        // Show the page
-        return View::make('admin/blogs/create_edit', compact('post', 'title'));
+		// Show the page
+        return View::make('admin/blogs/create_edit', compact('post', 'title', 'templates', 'parents'));
 	}
 
     /**
@@ -135,7 +155,7 @@ class AdminBlogsController extends AdminController {
 	public function postEdit($post)
 	{
 
-        // Declare the rules for the form validation
+   // Declare the rules for the form validation
         $rules = array(
             'title'   => 'required|min:3',
             'content' => 'required|min:3'
@@ -155,11 +175,14 @@ class AdminBlogsController extends AdminController {
             $post->meta_description = Input::get('meta-description');
             $post->meta_keywords    = Input::get('meta-keywords');
         
-			$post->banner			 = Input::get('banner');
+ 			$post->banner			 = Input::get('banner');
             $post->display_author    = (int)Input::get('display_author');
             $post->allow_comments    = (int)Input::get('allow_comments');
+            $post->template    = Input::get('template');
+            $post->parent    = (int)Input::get('parent');
+            $post->display_navigation    = (int)Input::get('display_navigation');
 
-            // Was the blog post updated?
+			// Was the blog post updated?
             if($post->save())
             {
                 // Redirect to the new blog post page

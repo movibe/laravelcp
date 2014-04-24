@@ -10,7 +10,6 @@
 @stop
 
 @section('scripts')
-
 	<script type="text/javascript">
 		$('.template-dropdown a').on('click', function(e){
 			e.preventDefault();   

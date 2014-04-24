@@ -81,36 +81,83 @@
 						{{ $errors->first('banner', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
-				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="template">{{{ Lang::get('core.template') }}}</label>
-						<input class="form-control" type="text" name="template" id="template" value="{{{ Input::old('template', isset($post) ? $post->template : null) }}}" />
-						{{ $errors->first('template', '<span class="help-inline">:message</span>') }}
-					</div>
-				</div>
 
-				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
+
+				<div class="form-group {{{ $errors->has('parent') ? 'error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="parent">{{{ Lang::get('core.parent') }}}</label>
-						<input class="form-control" type="text" name="parent" id="parent" value="{{{ Input::old('parent', isset($post) ? $post->parent : null) }}}" />
+						{{ Form::select('parent', $parents, Input::old('parent', isset($post) ? $post->parent : null),array('class' => 'form-control')); }}
 						{{ $errors->first('parent', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
+				<div class="form-group {{{ $errors->has('template') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="col-md-4 control-label">{{{ Lang::get('core.template') }}}</label>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="template-tag">Default</span>
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu template-dropdown">
+								<li><a href="site.layout.default">Default</a></li>
+								@foreach($templates as $id=>$var)
+									@if($var->getFilename() != 'default.blade.php')
+									<li><a href="site.layout.{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
+									@endif
+								@endforeach
+							</ul>
+							<input type="hidden" id="template" name="template" value="site.layout.default"/>
+						</div>
+						{{ $errors->first('template', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
 				<div class="form-group {{{ $errors->has('display_navigation') ? 'error' : '' }}}">
 					<div class="col-md-12">
-                        <label class="control-label" for="display_navigation">{{{ Lang::get('core.display_navigation') }}}</label>
-						<input class="form-control" type="text" name="display_navigation" id="pardisplay_navigationent" value="{{{ Input::old('display_navigation', isset($post) ? $post->display_navigation : null) }}}" />
+                        <label class="col-md-4 control-label" for="display_navigation">{{{ Lang::get('core.display_navigation') }}}</label>
+						<div class="btn-group btn-toggle" data-toggle="buttons">
+							<label class="btn btn-default {{(Input::old('display_navigation', isset($post) ? $post->display_navigation : null) ? 'active btn-primary' : null)}}">
+								{{ Form::radio('display_navigation', '1', (Input::old('display_navigation', isset($post) ? $post->display_navigation : null) ? true : null)) }} Yes
+							</label>
+							<label class="btn btn-default {{(Input::old('display_navigation', isset($post) ? $post->display_navigation : null) ? null : 'active btn-primary')}}">
+								{{ Form::radio('display_navigation', '0', (Input::old('display_navigation', isset($post) ? $post->display_navigation : null) ? null : true)) }} No
+							</label>
+						 </div>
 						{{ $errors->first('display_navigation', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('meta-description') ? 'error' : '' }}}">
-					<div class="col-md-12 controls">
-						Display Author: <input value="1" type="checkbox" name="display_author" class="form-control" >
-						Allow Comments: <input value="1" type="checkbox" name="allow_comments" class="form-control" >
+
+				<div class="form-group {{{ $errors->has('display_author') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="col-md-4 control-label" for="display_author">{{{ Lang::get('core.display_author') }}}</label>
+						<div class="btn-group btn-toggle" data-toggle="buttons">
+							<label class="btn btn-default {{(Input::old('display_author', isset($post) ? $post->display_author : null) ? 'active btn-primary' : null)}}">
+								{{ Form::radio('display_author', '1', (Input::old('display_author', isset($post) ? $post->display_author : null) ? true : null)) }} Yes
+							</label>
+							<label class="btn btn-default {{(Input::old('display_author', isset($post) ? $post->display_author : null) ? null : 'active btn-primary')}}">
+								{{ Form::radio('display_author', '0', (Input::old('display_author', isset($post) ? $post->display_author : null) ? null : true)) }} No
+							</label>
+						 </div>
+						{{ $errors->first('display_author', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
+
+				<div class="form-group {{{ $errors->has('allow_comments') ? 'error' : '' }}}">
+					<div class="col-md-12">
+                        <label class="col-md-4 control-label" for="allow_comments">{{{ Lang::get('core.allow_comments') }}}</label>
+						<div class="btn-group btn-toggle" data-toggle="buttons">
+							<label class="btn btn-default {{(Input::old('allow_comments', isset($post) ? $post->allow_comments : null) ? 'active btn-primary' : null)}}">
+								{{ Form::radio('allow_comments', '1', (Input::old('allow_comments', isset($post) ? $post->allow_comments : null) ? true : null)) }} Yes
+							</label>
+							<label class="btn btn-default {{(Input::old('allow_comments', isset($post) ? $post->allow_comments : null) ? null : 'active btn-primary')}}">
+								{{ Form::radio('allow_comments', '0', (Input::old('allow_comments', isset($post) ? $post->allow_comments : null) ? null : true)) }} No
+							</label>
+						 </div>
+						{{ $errors->first('allow_comments', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+
 
 			</div>
 		</div>
@@ -134,5 +181,13 @@
 	<script type="text/javascript">
 		initToolbarBootstrapBindings();  
 		$('#editor').wysiwyg({ fileUploadError: showErrorAlert, hotKeys: {}} );
+
+		$(document).on("click", ".template-dropdown a", function(e) {
+			e.preventDefault();   
+			$('#template').val($(this).attr('href'));
+			$('.template-tag').html($(this).html());
+		});
 	</script>
+
+
 @stop

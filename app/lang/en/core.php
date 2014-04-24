@@ -32,7 +32,9 @@ return array(
 	'all' => 'All',
 	'template'=>'Template',
 	'parent'=>'Parent',
-	'display_navigation'=>'Show in navigation?',
+	'display_navigation'=>'Display in navigation',
+	'display_author'=>'Display Author',
+	'allow_comments'=>'Allow Comments',
 
 );
 

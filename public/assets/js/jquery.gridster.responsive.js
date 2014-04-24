@@ -129,7 +129,7 @@ function fnCreateGridster(page, colors, states, titles){
 				'data-left':_position.left,
 				'data-top':_position.top
 			});
-			$('#'+panel).css({'position':'fixed', 'top':'0', 'left':'0','width':'100%', 'height':'100%', 'z-index':'9999'});
+			$('#'+panel).css({'position':'fixed', 'top':'0', 'left':'0','width':'100%', 'height':'100%', 'z-index':'1049'});
 
 			$(this).removeClass('fa-expand').addClass('fa-compress');
 			$('#'+panel +' .gs-resize-handle').show();

@@ -212,12 +212,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "b90deb5e835be55dfe109f9806395b29499e726a"
+            "reference": "60a9631219ff799e96b2b529db6a796d58f8ce77"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b90deb5e835be55dfe109f9806395b29499e726a",
-            "reference": "b90deb5e835be55dfe109f9806395b29499e726a",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/60a9631219ff799e96b2b529db6a796d58f8ce77",
+            "reference": "60a9631219ff799e96b2b529db6a796d58f8ce77",
             "shasum": ""
         },
         "require": {
@@ -233,7 +233,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a wide variety of cryptographic operations.",
             "pear-pear/PHP_Compat": "Install PHP_Compat to get phpseclib working on PHP < 4.3.3."
         },
-        "time": "2014-04-19 13:44:29",
+        "time": "2014-04-23 22:41:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -965,12 +965,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/annotations.git",
-            "reference": "510afadeb61247418c57da011701fa22f428a7a0"
+            "reference": "373c0d08bf1f326ff40bc237046aa10638bf28f6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/annotations/zipball/510afadeb61247418c57da011701fa22f428a7a0",
-            "reference": "510afadeb61247418c57da011701fa22f428a7a0",
+            "url": "https://api.github.com/repos/doctrine/annotations/zipball/373c0d08bf1f326ff40bc237046aa10638bf28f6",
+            "reference": "373c0d08bf1f326ff40bc237046aa10638bf28f6",
             "shasum": ""
         },
         "require": {
@@ -981,7 +981,7 @@
             "doctrine/cache": "1.*",
             "phpunit/phpunit": "4.*"
         },
-        "time": "2014-04-22 11:44:09",
+        "time": "2014-04-24 04:07:43",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1021,7 +1021,7 @@
             {
                 "name": "Johannes Schmitt",
                 "email": "schmittjoh@gmail.com",
-                "homepage": "http://jmsyst.com",
+                "homepage": "https://github.com/schmittjoh",
                 "role": "Developer of wrapped JMSSerializerBundle"
             }
         ],
@@ -2689,12 +2689,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "7567cecfa5f60e9a311e96d8becec2e232748155"
+            "reference": "65026b610f8c19e61d7242f600530677b0466aac"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/7567cecfa5f60e9a311e96d8becec2e232748155",
-            "reference": "7567cecfa5f60e9a311e96d8becec2e232748155",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/65026b610f8c19e61d7242f600530677b0466aac",
+            "reference": "65026b610f8c19e61d7242f600530677b0466aac",
             "shasum": ""
         },
         "require": {
@@ -2719,7 +2719,7 @@
             "rollbar/rollbar": "Allow sending log messages to Rollbar",
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
         },
-        "time": "2014-04-23 13:56:51",
+        "time": "2014-04-24 13:29:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3318,40 +3318,6 @@
         ],
         "description": "Symfony Process Component",
         "homepage": "http://symfony.com"
-    },
-    {
-        "name": "madewithlove/laravel-oauth2",
-        "version": "0.4.4",
-        "version_normalized": "0.4.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/madewithlove/laravel-oauth2.git",
-            "reference": "dc57803eae55c35e03372783fbfc19eeb4d7cbd4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/madewithlove/laravel-oauth2/zipball/dc57803eae55c35e03372783fbfc19eeb4d7cbd4",
-            "reference": "dc57803eae55c35e03372783fbfc19eeb4d7cbd4",
-            "shasum": ""
-        },
-        "require": {
-            "laravel/framework": "~4"
-        },
-        "time": "2014-02-24 12:27:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "OAuth2": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "description": "Authorize users in your application with multiple OAuth 2.0 providers.",
-        "homepage": "http://github.com/madewithlove/laravel-oauth2",
-        "keywords": [
-            "laravel",
-            "oauth2"
-        ]
     },
     {
         "name": "symfony/routing",
