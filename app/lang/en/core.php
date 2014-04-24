@@ -30,6 +30,9 @@ return array(
 	'content' => 'Content',
 	'emails' => 'E-mails',
 	'all' => 'All',
+	'template'=>'Template',
+	'parent'=>'Parent',
+	'display_navigation'=>'Show in navigation?',
 
 );
 

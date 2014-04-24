@@ -13,27 +13,25 @@
 		 @foreach($settings as $a => $b)
 		 @if (is_array($b))
 				@section('tabs')
-					@parent
 
-					<li><a href="#{{{ $a }}}" data-toggle="tab">
+					<li @if($a == 'site')class="active"@endif><a href="#{{{ $a }}}" data-toggle="tab">
 						@if (Lang::has('core::all.'.$a)){{ trans('core::all.'.$a) }}@else{{ $a }}@endif
 					</a></li>
-				@stop
+				@append
 			
 				@section('tab-content')
-					@parent
 
-					<div class="tab-pane " id="{{{ $a }}}">
+					<div class="tab-pane @if($a == 'site')active@endif" id="{{{ $a }}}">
 					<table width="80%" class="table table-striped table-hover">
 					@foreach($b as $c => $d)
 							<tr>
-								  <td><label class="control-label">@if (Lang::has('core::all.'.$c)){{ trans('core::all.'.$c) }}@else{{ $c }}@endif</label></td>
+								  <td><label class="control-label">@if (Lang::has('core::settings.'.$c)){{ trans('core::settings.'.$c) }}@else{{ $c }}@endif</label></td>
 								  <td><input class="col-lg-12 form-control" type="text" name="settings[{{ $a }}.{{ $c }}]" value="{{ $d }}"></td>
 							</tr>
 					 @endforeach
 					</table>
 					</div>
-				@stop
+				@append
 		@endif
 		@endforeach
 
