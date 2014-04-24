@@ -8,7 +8,6 @@
 
 {{-- Content --}}
 @section('content')
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 <div class="page-header">
 	<h1>Login into your account</h1>
 </div>

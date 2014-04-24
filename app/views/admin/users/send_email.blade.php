@@ -1,7 +1,6 @@
 @extends('admin.layouts.modal')
 
 @section('styles')
-	<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 	<style type="text/css"> 
 		#editor {
 			height: 200px;

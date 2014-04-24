@@ -19,7 +19,6 @@
 <br/>
 <h4>Or create a new account:</h4>
 {{ Confide::makeSignupForm()->render() }}
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 
 
 
