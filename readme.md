@@ -3,9 +3,11 @@
 ![ScreenShot](http://i.imgur.com/jXWwr1e.png)
 
 **Mobile**
-<img src="http://i.imgur.com/PyYwOzL.png" width="320">
+- <img src="http://i.imgur.com/PyYwOzL.png" width="80">
+- <img src="http://i.imgur.com/y1XN7MY.png" width="80">
 
-<img src="http://i.imgur.com/y1XN7MY.png" width="640">
+**login page**
+- <img src="http://i.imgur.com/UlH6WHi.png" width="80">
 
 # Preamble 
 I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
