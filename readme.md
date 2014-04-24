@@ -8,7 +8,7 @@
 <img src="http://i.imgur.com/y1XN7MY.png" width="640">
 
 # Preamble 
-I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start, had all the basic features one could want but really lacked in those that let you make the example an actual product.
+I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
 
 I decided to create my own based on his but this time include everything I wanted for a simple starter site, more user control, better design (responsive!), graphs, etc. 
 
