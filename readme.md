@@ -1,4 +1,9 @@
 #Laravel 4 Bootstrap Starter Site
+[![ProjectStatus](http://stillmaintained.com/gcphost/l4-bootstrapper.png)](http://stillmaintained.com/gcphost/l4-bootstrapper)
+[![Build Status](https://travis-ci.org/gcphost/l4-bootstrap-admin.png)](https://travis-ci.org/gcphost/l4-bootstrap-admin)
+
+
+
 
 ![ScreenShot](http://i.imgur.com/jXWwr1e.png)
 
