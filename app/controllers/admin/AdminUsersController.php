@@ -39,7 +39,7 @@ class AdminUsersController extends AdminController {
     }
 
 
-	public function userChart(){
+	private function userChart(){
 		$chart = Lava::DataTable('activeusers');
 		$chart->addColumn('string', 'Active', 'active');
 		$chart->addColumn('string', 'Inactive', 'inactive');
@@ -334,9 +334,6 @@ class AdminUsersController extends AdminController {
 		return Response::json(array('result'=>'success'));
 	}
 
-function getMass_Email(){
-echo "hi";
-}
 
     /**
      * Remove the specified user from storage.

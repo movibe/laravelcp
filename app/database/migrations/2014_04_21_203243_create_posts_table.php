@@ -22,8 +22,14 @@ class CreatePostsTable extends Migration {
             $table->string('meta_keywords', 255);
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
+            $table->string('banner', 255)->nullable();
+            $table->integer('display_author')->unsigned();
+            $table->integer('allow_comments')->unsigned();
+            $table->string('template', 255)->nullable();
+            $table->integer('parent')->unsigned();
+            $table->integer('display_navigation')->unsigned();
  			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-       });
+        });
     }
 
     /**

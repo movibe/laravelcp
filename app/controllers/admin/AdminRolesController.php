@@ -127,16 +127,7 @@ class AdminRolesController extends AdminController {
         return Redirect::to('admin/roles/create')->withInput()->withErrors($validator);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param $id
-     * @return Response
-     */
-    public function getShow($id)
-    {
-        // redirect to the frontend
-    }
+
 
     /**
      * Show the form for editing the specified resource.

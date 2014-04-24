@@ -118,16 +118,6 @@ class AdminBlogsController extends AdminController {
         return Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param $post
-     * @return Response
-     */
-	public function getShow($post)
-	{
-        // redirect to the frontend
-	}
 
     /**
      * Show the form for editing the specified resource.

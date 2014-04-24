@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration {
             $table->timestamp('last_activity')->default("0000-00-00 00:00:00");
             $table->timestamp('last_login')->default("0000-00-00 00:00:00");
             $table->string('displayname', 256);
+            $table->string('username', 255);
         });
     }
 
