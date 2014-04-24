@@ -29,7 +29,7 @@
       var $markupUl = $("<ul>").addClass("dropdown-menu").addClass("dropdown-caret");
       var $markupDiv = $("<div>").addClass("btn-group").addClass("dropdown-colorselector");
       var $markupSpan = $("<span>").addClass("btn-colorselector").css("background-color", selectColor);
-      var $markupA = $("<a>").attr("data-toggle", "dropdown").addClass("btn panel-color hide-full btn-default btn-sm dropdown-toggle").attr("href", "#").append($markupSpan);
+      var $markupA = $("<a>").attr("data-toggle", "dropdown").css("border-left",'0').addClass("btn panel-color hide-full btn-default btn-sm dropdown-toggle").attr("href", "#").append($markupSpan);
 
 
       // create an li-tag for every option of the select
