@@ -164,7 +164,7 @@ class AdminUsersController extends AdminController {
         {
 			$list = Activity::whereRaw('user_id = ? AND content_type="activity"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
 
-			if(BaseController::$api){
+			if(Api::Enabled()){
 				$u=$list->get();
 				return $u->toArray();
 			} else return Datatables::of($list)
@@ -178,7 +178,7 @@ class AdminUsersController extends AdminController {
         {
 			$list = Activity::whereRaw('user_id = ? AND content_type="email"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
 
-			if(BaseController::$api){
+			if(Api::Enabled()){
 				$u=$list->get();
 				return $u->toArray();
 			} else return Datatables::of($list)
@@ -515,9 +515,8 @@ class AdminUsersController extends AdminController {
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
                     ->select(array('users.id', 'users.displayname','users.email', 'roles.name as rolename'));
 
-		if(BaseController::$api){
+		if(Api::Enabled()){
 			$u=$users->get();
-				
 			return $u->toArray();
 		} else return Datatables::of($users)
         ->add_column('actions', '<div class="btn-group">
@@ -526,7 +525,7 @@ class AdminUsersController extends AdminController {
 		@if($id == Auth::user()->id)
 			<a href="#" class="disabled btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@else
-			<a data-row="{{{  $id }}}" data-table="users" href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@endif</div>
             ')
 

@@ -1,7 +1,7 @@
 <?php
 
-Route::filter('json', function(){BaseController::$api='json';});
-Route::filter('xml', function(){BaseController::$api='xml';});
+Route::filter('json', function(){Api::$type='json';});
+Route::filter('xml', function(){Api::$type='xml';});
 Route::when('*.json', 'json');
 Route::when('*.xml', 'xml');
 
@@ -58,9 +58,10 @@ Route::filter('checkuser', function()
 
 
 
-Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
+Route::group(array('prefix' => 'admin', 'before' => 'auth.api|checkuser'), function()
 {
-    Route::controller('users.json', 'AdminUsersController');
+
+	Route::controller('users.json', 'AdminUsersController');
     Route::controller('users.xml', 'AdminUsersController');
 
 });
@@ -78,43 +79,44 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     # Comment Management
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
     Route::post('comments/{comment}/edit', 'AdminCommentsController@postEdit');
-    Route::post('comments/{comment}/delete', 'AdminCommentsController@postDelete');
+    Route::delete('comments/{comment}/delete', 'AdminCommentsController@postDelete');
     Route::controller('comments', 'AdminCommentsController');
 
-    # Blog Management
+    # Slug Management
     Route::get('slugs/{post}/show', 'AdminBlogsController@getShow');
     Route::get('slugs/{post}/edit', 'AdminBlogsController@getEdit');
     Route::post('slugs/{post}/edit', 'AdminBlogsController@postEdit');
-    Route::post('slugs/{post}/delete', 'AdminBlogsController@postDelete');
+    Route::delete('slugs/{post}/delete', 'AdminBlogsController@postDelete');
     Route::controller('slugs', 'AdminBlogsController');
 
-    # User Management
+    # User Email Management
     Route::get('users/{user}/email', 'AdminUsersController@getEmail');
     Route::post('users/{user}/email', 'AdminUsersController@postEmail');
     Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
     Route::post('user/mass/email', 'AdminUsersController@postEmail');
 
+    # User Merge Management
     Route::post('user/mass/merge', 'AdminUsersController@postMerge');
 
-	Route::get('users/{user}/profile/{profile}/delete', 'AdminUsersController@postProfileDelete');
 
+    # User Profile Management
+	Route::delete('users/{user}/profile/{profile}/delete', 'AdminUsersController@postProfileDelete');
 
+    # User Management
 	Route::get('users/{user}/show', 'AdminUsersController@getShow');
     Route::get('users/{user}/edit', 'AdminUsersController@getEdit');
     Route::post('users/{user}/edit', 'AdminUsersController@postEdit');
-    Route::post('users/{user}/delete', 'AdminUsersController@postDelete');
-    Route::get('users/{user}/delete', 'AdminUsersController@postDelete');
+    Route::delete('users/{user}/delete', 'AdminUsersController@postDelete');
     Route::get('users/{user}/activity', 'AdminUsersController@getActivity');
     Route::get('users/{user}/emails', 'AdminUsersController@getEmails');
-    Route::post('users/{user}/delete', 'AdminUsersController@postDelete');
-    Route::post('user/mass/delete', 'AdminUsersController@postDeleteMass');
+    Route::delete('user/mass/delete', 'AdminUsersController@postDeleteMass');
     Route::controller('users', 'AdminUsersController');
 
     # User Role Management
     Route::get('roles/{role}/show', 'AdminRolesController@getShow');
     Route::get('roles/{role}/edit', 'AdminRolesController@getEdit');
     Route::post('roles/{role}/edit', 'AdminRolesController@postEdit');
-    Route::post('roles/{role}/delete', 'AdminRolesController@postDelete');
+    Route::delete('roles/{role}/delete', 'AdminRolesController@postDelete');
     Route::controller('roles', 'AdminRolesController');
 
     # Admin Dashboard

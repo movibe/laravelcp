@@ -212,8 +212,10 @@ return array(
 'Activity' => 'Regulus\ActivityLog\Activity',
 'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
 'Anvard'=>'Atticmedia\Anvard\Anvard',
+'Api'          => 'Gcphost\Helpers\Api', // String
+
 ),
 
-    'available_language' => array('en', 'pt', 'es'),
+    'available_language' => array('en'),
 
 );

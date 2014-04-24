@@ -32,6 +32,14 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
+Route::filter('auth.api', function()
+{
+	if (Auth::guest()) {
+        Session::put('loginRedirect', Request::url());
+        return Redirect::to('user/login/');
+    }
+});
+
 
 Route::filter('auth', function()
 {

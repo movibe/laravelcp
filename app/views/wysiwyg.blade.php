@@ -52,5 +52,5 @@
 <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
 </div>
 </div>
-
+<br/>
 <div id="editor" class="form-control">@yield('wysiywg-content')</div>

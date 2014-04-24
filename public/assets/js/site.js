@@ -1,49 +1,4 @@
 
-
-
-/* modalfy @ https://github.com/gcphost/modalfy */
-$(document).on("click", ".modalfy", function(e) {
-	e.preventDefault();   
-	if($(this).attr("data-iframe") == true){
-		modalfyRunIframe($(this).attr("href"));
-	} else modalfyRun($(this).attr("href"));
-	return false;
-});
-
-
-function modalfyRunIframe(src){
-	bootbox.dialog({
-		message:'<iframe border="0" height="100%" width="100%" src="'+src+'">',
-		onEscape: function() {},
-		animate: true,
-		className: "full-modal modal-lg",
-	});
-}
-
-function modalfyRun(src){
-	$.ajax({
-		type: 'GET',
-		url: src
-	}).done(function(msg) {
-		if(msg){
-			$('#site-modal').html(msg).modal();
-			
-
-		}else {
-			console.log(msg);
-			bootbox.alert( "Unable to execute command.");
-		}
-	});
-}
-
-function modalfyIframes(){
-	$('.modal-dialog iframe').each(function(){
-		$(this).css('height',($(this).parents().find('.modal-body').height() + 75) + 'px' );
-	});
-}
-
-$(window).on('resize load',modalfyIframes);
-
 /* security for ajax */
 $.ajaxSetup({
 	data: {
@@ -52,8 +7,6 @@ $.ajaxSetup({
 });
 
 /* datatables helpers */
-
-
 function styledt(table){
 	$(table+'-container .dataTables_filter label').addClass('pull-right'); 
 	$(table+'-container .dataTables_filter input').attr('placeholder', 'Search'); 
@@ -118,19 +71,22 @@ function dtLoad(table, action, hidemd, hidesm){
 		e.preventDefault();    
 		var action=$(this).attr('data-action');
 		var table=$(this).attr('data-table');
+		var method=$(this).attr('data-method');
 		var run=false;
-		if($(this).attr('data-method') == 'modal'){
+		if(method == 'modal'){
 			var _ids='';
 			$.each(aSelected, function(i,value){ _ids+=value+','; });
 			modalfyRun($(this).attr('data-action')+'?ids='+_ids);
 		}else if($(this).attr('data-confirm') == 'true'){
 			bootbox.confirm('Are you sure?', function(result) {
-				if(result) fnRunMass(action, table);
+				if(result) fnRunMass(action, table, method);
 			});
 		} else fnRunMass(action, table);
 	});
 }
 
+
+/* on clicks */
 $(document).on("click", ".ajax-alert", function(e) {
 	e.preventDefault();    
 	bootbox.confirm("Are you sure?", function(result) {    
@@ -143,10 +99,13 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 	var data_table = $(this).attr("data-table"); 
 	var data_row = $(this).attr("data-row"); 
 	var link = $(this).attr("href"); 
+	var data_method=$(this).attr('data-method');
+	if(!data_method) data_method='POST';
+
 	bootbox.confirm("Are you sure?", function(result) {    
 		if (result) {
 			$.ajax({
-				type: 'POST',
+				type: data_method,
 				dataType: 'json',
 				url: link
 			}).done(function(msg) {
@@ -154,12 +113,15 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 					bootbox.hideAll();
 					oTable = $('#'+data_table).dataTable();
 					oTable.fnReloadAjax();
-					var index = jQuery.inArray(data_row, aSelected);
-					aSelected.splice( index, 1 );
+				//	var index = jQuery.inArray(data_row, aSelected);
+				//	aSelected.splice( index, 1 );
 				}else {
 					console.log(msg);
 					bootbox.alert( "Unable to execute command, "+ msg.error);
 				}
+			}).fail(function( jqXHR, textStatus ) {
+ 					console.log(jqXHR);
+					bootbox.alert( "Unable to execute command, "+ textStatus);
 			});
 		}    
 	});
@@ -182,11 +144,31 @@ $(document).on("click", "a", function(e) {
 	if($(this).attr('href')=='#') return false;
 });
 
+$(document).on("click", ".modalfy", function(e) {
+	e.preventDefault();   
+	$.ajax({
+		type: 'GET',
+		url: $(this).attr("href")
+	}).done(function(msg) {
+		if(msg){
+			$('#site-modal').html(msg).modal();
+		} else {
+			console.log(msg);
+			bootbox.alert( "Unable to execute command.");
+		}
+	}).fail(function(jqXHR, textStatus) {
+			console.log(jqXHR);
+			bootbox.alert( "Unable to execute command, "+ textStatus);
+	 });
+});
 
-function fnRunMass(action,data_table){
+
+/* helpers */
+function fnRunMass(action, data_table, data_method){
+	if(!data_method) data_method='POST';;
 	console.log(data_table);
-		$.ajax({
-		  type: "POST",
+	$.ajax({
+		  type: data_method,
 		  url: action,
 			dataType: 'json',
 		  data: { rows: JSON.stringify(aSelected) }
@@ -201,9 +183,9 @@ function fnRunMass(action,data_table){
 				console.log(msg);
 				bootbox.alert( "Unable to execute command, "+ msg.error);
 			}
-	  }).fail(function(msg) {
-		console.log(msg);
-		bootbox.alert( "Unable to execute command");
+	  }).fail(function(jqXHR, textStatus) {
+			console.log(jqXHR);
+			bootbox.alert( "Unable to execute command, "+ textStatus);
 	  });
 }
 
@@ -214,13 +196,13 @@ function loadWeather(location, woeid) {
     woeid: woeid,
     unit: 'f',
     success: function(weather) {
-		 $(".panel-weather").hide();
-      $(".panel-weather").html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
-	  $(".panel-weather").attr('title', weather.city + ', '+ weather.region );
-	   $(".panel-weather").show();
+		$(".panel-weather").hide();
+		$(".panel-weather").html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
+		$(".panel-weather").attr('title', weather.city + ', '+ weather.region );
+		$(".panel-weather").show();
     },
     error: function(error) {
-      $(".panel-weather").html(error);
+      //$(".panel-weather").html(error);
     }
   });
 }
@@ -233,26 +215,23 @@ function _resize_sparkline(){
 }
 
 
+/* navigation, swipe & weather */
 $(document).ready(function() {
-
-
 	$(".main-nav").swipe( {
-	swipe:function(event, direction, distance, duration, fingerCount) {
-		if(direction == "down") $('.main-nav .collapse').collapse('show');
-		if(direction == "right") $('.sidebar').collapse('show');
-		if(direction == "left") $('.sidebar').collapse('hide');
-	},
-	 threshold:0
+		swipe:function(event, direction, distance, duration, fingerCount) {
+			if(direction == "down") $('.main-nav .collapse').collapse('show');
+			if(direction == "right") $('.sidebar').collapse('show');
+			if(direction == "left") $('.sidebar').collapse('hide');
+		},
+		 threshold:0
+		});
+
+		$(".sidebar").swipe( {
+		swipe:function(event, direction, distance, duration, fingerCount) {
+			if(direction == "left") $('.sidebar').collapse('hide');
+		},
+		 threshold:0
 	});
-
-	$(".sidebar").swipe( {
-	swipe:function(event, direction, distance, duration, fingerCount) {
-		if(direction == "left") $('.sidebar').collapse('hide');
-	},
-	 threshold:0
-	});
-
-
 
 	if ("geolocation" in navigator) {
 	  navigator.geolocation.getCurrentPosition(function(position) {
@@ -263,6 +242,7 @@ $(document).ready(function() {
 });
 
 
+/* on/off switcher */
 $(document).on("click", ".btn-toggle", function(e) {
 	e.preventDefault();   
     $(this).find('.btn').toggleClass('active');  
@@ -282,9 +262,4 @@ $(document).on("click", ".btn-toggle", function(e) {
     
    // $(this).find('.btn').toggleClass('btn-default');
        
-});
-
-$('form').submit(function(){
-	alert($(this["options"]).val());
-    return false;
 });
