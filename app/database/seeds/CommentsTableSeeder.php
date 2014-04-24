@@ -19,8 +19,8 @@ class CommentsTableSeeder extends Seeder {
                 'user_id'    => $user_id,
                 'post_id'    => $post_id,
                 'content'    => $this->content1,
-                'created_at' => new DateTime,
-                'updated_at' => new DateTime
+                //'created_at' => new DateTime,
+                //'updated_at' => new DateTime
             ),
             array(
                 'user_id'    => $user_id,
