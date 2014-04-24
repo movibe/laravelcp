@@ -1,12 +1,12 @@
 @extends('site.layouts.default')
 
 @section('title')
-Permission Denied ::
+{{{ Lang::get('site.permission_denied') }}} ::
 @parent
 @stop
 @section('content')
 <div class="page-header">
-	<h3>You do not have permission to access this page.</h3>
-	There was a problem with your security token, please try again.
+	<h3>{{{ Lang::get('site.no_permission') }}}</h3>
+	{{{ Lang::get('site.no_permission_csrf') }}}
 </div>
 @stop

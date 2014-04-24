@@ -1,13 +1,12 @@
 @extends('site.layouts.default')
 
-{{-- Web site Title --}}
 @section('title')
-Permission Denied ::
+{{{ Lang::get('site.permission_denied') }}} ::
 @parent
 @stop
 @section('content')
 <div class="page-header">
-	<h3>Your account is no longer active.</h3>
-	If you think this is an error please contact the sites administrator.
+	<h3>{{{ Lang::get('site.no_longer_active') }}}</h3>
+	{{{ Lang::get('site.no_longer_active_reason') }}}
 </div>
 @stop

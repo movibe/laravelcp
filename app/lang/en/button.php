@@ -13,5 +13,6 @@ return array(
 	'submit' => 'Submit',
 	'close' => 'Close',
 	'merge' => 'Merge',
+	'update' => 'Update',
 	'cleardashsettings' => 'Reset Dashboard'
 );

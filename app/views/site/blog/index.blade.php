@@ -26,7 +26,7 @@
 				<p>
 					{{ String::tidy(Str::limit($post->content, 200)) }}
 				</p>
-				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">Read more</a></p>
+				<p><a class="btn btn-mini btn-default" href="{{{ $post->url() }}}">{{{ Lang::get('site.read_more') }}}</a></p>
 			</div>
 		</div>
 		<!-- ./ post content -->
@@ -38,9 +38,9 @@
 				<p>
 					@if($post->display_author)<span class="glyphicon"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 20) }}"></span>
 					by <span class="muted">{{{ $post->author->displayname }}}</span>
-					|@endif <span class="fa fa-calendar"></span> <!--Sept 16th, 2012-->{{{ $post->date() }}}
+					|@endif <span class="fa fa-calendar"></span>{{{ $post->date() }}}
 					@if($post->allow_comments)
-						| <span class="fa fa-plus-comment"></span> <a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural('Comment', $post->comments()->count()) }}</a>
+						| <span class="fa fa-plus-comment"></span> <a href="{{{ $post->url() }}}#comments">{{$post->comments()->count()}} {{ \Illuminate\Support\Pluralizer::plural(Lang::get('site.comment'), $post->comments()->count()) }}</a>
 					@endif
 				</p>
 			</div>

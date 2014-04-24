@@ -31,28 +31,27 @@
 
 
 <div class="clearfix">
-@if($post->display_author)<div class="pull-left"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 80) }}"></div>@endif
-<div class="pull-left"><h1>{{ $post->title }}</h1>
-
-@if($post->display_author)<div>By {{ $post->author->displayname }}, Posted {{{ $post->date() }}}</div>@endif
-</div>
+	@if($post->display_author)<div class="pull-left"><img alt="{{{ $post->author->email }}}" src="{{ Gravatar::src($post->author->email, 80) }}"></div>@endif
+	<div class="pull-left">
+		<h1>{{ $post->title }}</h1>
+		@if($post->display_author)<div>By {{ $post->author->displayname }}, {{{ Lang::get('site.posted') }}} {{{ $post->date() }}}</div>@endif
+	</div>
 </div>
 
 <hr />
 
 <div class="panel panel-default">
   <div class="panel-body">
-  <p>{{ $post->content() }}</p>
-</div></div>
-
-
+	  <p>{{ $post->content() }}</p>
+	</div>
+</div>
 
 @if($post->allow_comments)
 <hr />
 
 
 <a id="comments"></a>
-<h4>{{{ $comments->count() }}} Comments</h4>
+<h4>{{{ $comments->count() }}} {{{ Lang::get('site.comments') }}}</h4>
 
 @if ($comments->count())
 @foreach ($comments as $comment)
@@ -85,16 +84,29 @@
 @endif
 
 @if ( ! Auth::check())
-<div class="alert alert-danger">
-<p>You need to be logged in to add comments.<br /><br />
-Click <a href="{{{ URL::to('user/login') }}}">here</a> to login into your account. If you don't have an account click <a href="{{{ URL::to('user/create') }}}">here</a> to sign up.
-</div>
-
-
+	<div class="alert alert-danger">
+		<p>{{{ Lang::get('site.login_to_comment') }}}<br /><br />
+		{{ Lang::get('site.comment_login', array('login' => URL::to('user/login'), 'create' => URL::to('user/create'))); }} 
+	</div>
 @elseif ( ! $canComment )
-You don't have the correct permissions to add comments.</p>
+	<p>{{{ Lang::get('site.comment_no_perm') }}}</p>
 @else
+	<h4>{{{ Lang::get('site.add_comment') }}}</h4>
+	<form  method="post" action="{{{ URL::to($post->slug) }}}">
+		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
+		<div class="form-group">
+			<div class="col-md-12">
+				<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
+			</div>
+		</div>
 
+		<div class="form-group">
+			<div class="col-md-12">
+				<input type="submit" class="btn btn-default" id="submit" value="{{{ Lang::get('button.submit') }}}" />
+			</div>
+		</div>
+	</form>
+	<hr/>
 @endif
 
 
@@ -108,17 +120,5 @@ You don't have the correct permissions to add comments.</p>
 </div>
 @endif
 
-<h4>Add a Comment</h4>
-<form  method="post" action="{{{ URL::to($post->slug) }}}">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
-
-	<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>
-
-	<div class="form-group">
-		<div class="col-md-12">
-			<input type="submit" class="btn btn-default" id="submit" value="Submit" />
-		</div>
-	</div>
-</form>
 @endif
 @stop

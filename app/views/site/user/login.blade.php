@@ -9,7 +9,7 @@
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h1>Login into your account</h1>
+	<h1>{{{ Lang::get('user/user.login') }}}</h1>
 </div>
 {{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
     <fieldset>
@@ -48,7 +48,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
 
-				<button tabindex="3" type="submit" class="btn btn-primary">{{ Lang::get('confide::confide.login.submit') }}</button>
+				<button tabindex="3" type="submit" class="btn btn-primary">{{{ Lang::get('user/user.login') }}}</button>
 or
 				<div class="btn-group">
 				@foreach ($providers as $provider)
@@ -60,7 +60,7 @@ or
         </div>
     </fieldset>
 </form>
-
+<hr/>
 @stop
 
 @section('scripts')
