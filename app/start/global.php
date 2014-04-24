@@ -1,4 +1,14 @@
 <?php
+App::error(function(Exception $exception, $code)
+{
+    if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+    {
+        Log::error('NotFoundHttpException Route: ' . Request::url() );
+    }
+
+    Log::error($exception);
+});
+
 
 /*
 |--------------------------------------------------------------------------

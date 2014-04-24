@@ -10,6 +10,7 @@ return array(
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'AdminDashboardController' => $baseDir . '/app/controllers/admin/AdminDashboardController.php',
+    'AdminProfileController' => $baseDir . '/app/controllers/admin/AdminProfileController.php',
     'AdminRolesController' => $baseDir . '/app/controllers/admin/AdminRolesController.php',
     'AdminSettingsController' => $baseDir . '/app/controllers/admin/AdminSettingsController.php',
     'AdminUsersController' => $baseDir . '/app/controllers/admin/AdminUsersController.php',

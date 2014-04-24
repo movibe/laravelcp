@@ -141,16 +141,7 @@ class AdminUsersController extends AdminController {
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param $user
-     * @return Response
-     */
-    public function getShow($user)
-    {
-        // redirect to the frontend
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -288,16 +279,7 @@ class AdminUsersController extends AdminController {
 
    
 
-    public function postProfileDelete($user, $profile)
-    {
-		$error=$profile->delete();
-        if($error == 1) {
-            // Redirect to the new user page
-            return Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
-        } else {
-            return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
-        }
-	}
+
 
 	private function runMerge($_merge_to, $user){
 		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
@@ -352,6 +334,9 @@ class AdminUsersController extends AdminController {
 		return Response::json(array('result'=>'success'));
 	}
 
+function getMass_Email(){
+echo "hi";
+}
 
     /**
      * Remove the specified user from storage.
@@ -359,7 +344,7 @@ class AdminUsersController extends AdminController {
      * @param $user
      * @return Response
      */
-    public function postDelete($user)
+    public function deleteIndex($user)
     {
         // Check if we are not trying to delete ourselves
         if ($user->id === Confide::user()->id)
@@ -384,7 +369,7 @@ class AdminUsersController extends AdminController {
         
     }
 
-	private function getEmailTemplates(){
+	private function emailTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
 		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR."emails");
@@ -406,7 +391,7 @@ class AdminUsersController extends AdminController {
         	$title = $user->email;
         	// mode
         	$mode = 'edit';
-			$templates=$this->getEmailTemplates();
+			$templates=$this->emailTemplates();
         	return View::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
         }
         else
@@ -499,7 +484,7 @@ class AdminUsersController extends AdminController {
 
 		$title = 'Mass Mail';
 		$mode = 'edit';
-		$templates=$this->getEmailTemplates();
+		$templates=$this->emailTemplates();
 		return View::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
 	}
 
@@ -525,7 +510,7 @@ class AdminUsersController extends AdminController {
 		@if($id == Auth::user()->id)
 			<a href="#" class="disabled btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@else
-			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'/delete\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="ajax-alert-confirm btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@endif</div>
             ')
 

@@ -47,9 +47,9 @@
 				<ul class="dropdown-menu pull-right" role="menu">
 					<li><a href="#" data-action="user/mass/email" data-method="modal"  data-table="users" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
 					<li class="divider"></li>
-					<li><a href="#" data-action="user/mass/merge" data-method="default"  data-table="users" data-confirm="true" class="dt-mass">{{{ Lang::get('button.merge') }}}</a></li>
+					<li><a href="#" data-action="user/mass/merge" data-method="post"  data-table="users" data-confirm="true" class="dt-mass">{{{ Lang::get('button.merge') }}}</a></li>
 					<li class="divider"></li>
-					<li><a href="#" data-action="user/mass/delete" data-method="delete"  data-table="users" data-confirm="true"   class="dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
+					<li><a href="#" data-action="user/mass" data-method="delete"  data-table="users" data-confirm="true"   class="dt-mass">{{{ Lang::get('button.delete') }}}</a></li>
 				</ul>
 			</div>
 		</div>

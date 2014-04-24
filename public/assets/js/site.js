@@ -76,12 +76,12 @@ function dtLoad(table, action, hidemd, hidesm){
 		if(method == 'modal'){
 			var _ids='';
 			$.each(aSelected, function(i,value){ _ids+=value+','; });
-			modalfyRun($(this).attr('data-action')+'?ids='+_ids);
+			modalfyRun(this,$(this).attr('data-action')+'?ids='+_ids);
 		}else if($(this).attr('data-confirm') == 'true'){
 			bootbox.confirm('Are you sure?', function(result) {
-				if(result) fnRunMass(action, table, method);
+				if(result) fnRunMass(action, table, method, aSelected);
 			});
-		} else fnRunMass(action, table);
+		} else fnRunMass(action, table, method, aSelected);
 	});
 }
 
@@ -100,24 +100,32 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 	var data_row = $(this).attr("data-row"); 
 	var link = $(this).attr("href"); 
 	var data_method=$(this).attr('data-method');
+	var data_type=$(this).attr('data-type');
+	if(!data_type) data_type='json';
 	if(!data_method) data_method='POST';
 
 	bootbox.confirm("Are you sure?", function(result) {    
 		if (result) {
 			$.ajax({
 				type: data_method,
-				dataType: 'json',
+				dataType: data_type,
 				url: link
 			}).done(function(msg) {
-				if(msg.result == "success"){
-					bootbox.hideAll();
-					oTable = $('#'+data_table).dataTable();
-					oTable.fnReloadAjax();
-				//	var index = jQuery.inArray(data_row, aSelected);
-				//	aSelected.splice( index, 1 );
-				}else {
-					console.log(msg);
-					bootbox.alert( "Unable to execute command, "+ msg.error);
+				if(data_type == "json"){
+					if(msg.result == "success"){
+						if(data_row){
+							$('#site-modal').modal('hide')
+							oTable = $('#'+data_table).dataTable();
+							oTable.fnReloadAjax();
+						//	var index = jQuery.inArray(data_row, aSelected);
+						//	aSelected.splice( index, 1 );
+						} else {
+							$('#site-modal').modal('hide');
+						}
+					}else {
+						console.log(msg);
+						bootbox.alert( "Unable to execute command, "+ msg.error);
+					}
 				}
 			}).fail(function( jqXHR, textStatus ) {
  					console.log(jqXHR);
@@ -146,9 +154,14 @@ $(document).on("click", "a", function(e) {
 
 $(document).on("click", ".modalfy", function(e) {
 	e.preventDefault();   
+	modalfyRun(this,$(this).attr("href"));
+});
+
+
+function modalfyRun(th,url){
 	$.ajax({
 		type: 'GET',
-		url: $(this).attr("href")
+		url: url
 	}).done(function(msg) {
 		if(msg){
 			$('#site-modal').html(msg).modal();
@@ -160,12 +173,12 @@ $(document).on("click", ".modalfy", function(e) {
 			console.log(jqXHR);
 			bootbox.alert( "Unable to execute command, "+ textStatus);
 	 });
-});
 
+}
 
 /* helpers */
-function fnRunMass(action, data_table, data_method){
-	if(!data_method) data_method='POST';;
+function fnRunMass(action, data_table, data_method,aSelected){
+	if(!data_method) data_method='POST';
 	console.log(data_table);
 	$.ajax({
 		  type: data_method,

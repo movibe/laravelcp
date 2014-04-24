@@ -20,6 +20,5 @@
 	{{{ $message }}}
 </div>
 @endif
-{{ Form::reset(Lang::get('button.close'), array('class' => 'btn btn-primary', 'onclick'=>'parent.bootbox.hideAll()')); }} 
-
+{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 @stop

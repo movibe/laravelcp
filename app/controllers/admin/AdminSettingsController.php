@@ -34,7 +34,7 @@ class AdminSettingsController extends AdminController
      * @param $comment
      * @return Response
      */
-	public function postEdit()
+	public function postIndex()
 	{
 
         $rules = array(
