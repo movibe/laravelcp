@@ -111,6 +111,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
  *  ------------------------------------------
  */
 
+Route::get('invalidtoken', 'UserController@invalidtoken');
 Route::get('nopermission', 'UserController@noPermission');
 Route::get('suspended', 'UserController@suspended');
 

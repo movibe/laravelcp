@@ -24,6 +24,10 @@ class UserController extends BaseController {
      *
      * @return View
      */
+    public function invalidtoken()
+    {
+        return View::make('site/invalidtoken');
+    }     
     public function noPermission()
     {
         return View::make('site/nopermission');

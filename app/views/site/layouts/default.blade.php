@@ -12,6 +12,7 @@
 		<meta name="keywords" content="your, awesome, keywords, here" />
 		<meta name="author" content="Jon Doe" />
 		<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
+		<meta name="csrf-token" content="{{{ csrf_token() }}}"/>
 
 		<!-- Mobile Specific Metas
 		================================================== -->
