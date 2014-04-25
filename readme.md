@@ -14,6 +14,9 @@
 **login page**
 - <img src="http://i.imgur.com/UlH6WHi.png" width="80">
 
+**search**
+- <img src="http://i.imgur.com/tuM5znj.png" width="80">
+
 # Preamble 
 I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
 
