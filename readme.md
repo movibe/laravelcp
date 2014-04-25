@@ -42,6 +42,8 @@ Let me know what you think!
 - [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/)
 - [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
 - [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
+- RESTful API, post/get/put/delete using auth.basic and view/redirect wrappers to output xml or json
+	- simply find the page you want, say admin/users/1/edit and prepend json or xml, json/admin/users/1/edit
 
 
 # Roadmap
