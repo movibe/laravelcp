@@ -1,5 +1,3 @@
-
-<br/>
 @foreach($results as $index=>$data)
 <div class="panel panel-default">
 	<div class="panel-heading" style="text-transform: uppercase">{{{ $index }}}</div>

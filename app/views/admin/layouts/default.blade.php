@@ -83,6 +83,7 @@
 						 </button>
 						 </span>
 					</div>	
+					<br/>
 					<div id="site-search-results">
 
 					</div>				
@@ -110,16 +111,16 @@
 			$('#site-search-results').html('');
 			$.ajax({
 				type: 'GET',
-				url: 'search/'+_val
+				url:'{{{ URL::to('admin/search') }}}/'+_val
 			}).done(function(msg) {
 				if(msg){
 					$('#site-search-results').html(msg);
 				} else $('#site-search-results').html('<h3>No results</h3>');
 			}).fail(function(jqXHR, textStatus) {
 					console.log(jqXHR);
-					bootbox.alert( "Unable to execute command, "+ textStatus);
+					$('#site-search-results').html('<h3>Unable to execute command</h3>');
 			});
-		}, 500));
+		}, 700));
 
 	</script>
 
