@@ -14,6 +14,9 @@
 **login page**
 - <img src="http://i.imgur.com/UlH6WHi.png" width="80">
 
+**search**
+- <img src="http://i.imgur.com/tuM5znj.png" width="80">
+
 # Preamble 
 I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
 
@@ -32,6 +35,8 @@ Let me know what you think!
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
 - User profiles
 - User suspending
+- User cancellation, instant, timed and reversal
+- Smart search, search as you type, searches multiple tables, prepend search string with table name (users example) will search that table only
 - User e-mailing, single and multiple w/ attachments
 - oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview)& [HybridAuth](http://hybridauth.sourceforge.net/)
 - Ajax polling w/ [jQuery poller](https://github.com/gcphost/jquery.poller)
