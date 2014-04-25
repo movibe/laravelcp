@@ -59,14 +59,18 @@
 				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-envelope"></span>
+                                </span>
+
+						<input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" /></div>
 						{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
 
 				
 				<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
-					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.passsword') }}}</label>
+					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password" id="password" value="" />
 						{{ $errors->first('password', '<span class="help-inline">:message</span>') }}
@@ -75,7 +79,7 @@
 
 				
 				<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
-					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.passsword') }}} {{{ Lang::get('core.confirm') }}}</label>
+					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
 						{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}

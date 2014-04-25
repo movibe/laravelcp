@@ -25,7 +25,7 @@
                             <label for="email">
                                 Email Address</label>
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                <span class="input-group-addon"><span class="fa fa-envelope"></span>
                                 </span>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="Enter e-mail" required="required" /></div>
                         </div>

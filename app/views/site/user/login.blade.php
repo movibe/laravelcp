@@ -16,7 +16,9 @@
         <div class="form-group">
             <!--<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>-->
             <div class="col-md-10">
-                <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
+               <div class="input-group">
+                                 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-envelope"></span>
+                                </span></div>
             </div>
         </div>
         <div class="form-group">
