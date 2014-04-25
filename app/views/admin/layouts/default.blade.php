@@ -22,14 +22,15 @@
 
 	@include('admin/css')
 
-	<script type="text/javascript">
-		var _base_url='{{{ URL::to('/') }}}';
-	</script>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
+	<script src="{{{ asset('assets/js/jquery.poller.js') }}}"></script>
+	<script type="text/javascript">
+		$.fn.poller({'url':'{{{ URL::to('admin/polling') }}}'});
+	</script>
 
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -107,7 +108,6 @@
 		$("#search-modal").on('shown.bs.modal', function() {
 			$('.search-input').focus();
 		});
-
 		
 		$('.search-input').keyup(throttle(function(e){
 			var _val=$(this).val();
@@ -129,7 +129,6 @@
 	</script>
 
     <script type="text/javascript">
-		fnAddPoll('logs', 'check_logs', '10');
 
 		/* call back from results */
 		function fnUpdateGrowler(id, args){
@@ -138,7 +137,8 @@
 			});
 		}
 
-		fnRunPoll();
+		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '5'});
+		$.fn.poller('run');
 
 		$('.mobile-loading').removeClass('visible-xs').hide();
     </script>

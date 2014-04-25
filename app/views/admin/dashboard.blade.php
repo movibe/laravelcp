@@ -34,7 +34,7 @@
 
 		*/
 
-		fnAddPoll('#widget-usersonline .panel-body', 'users_online', '5');
+		$.fn.poller('add',{'id':'#widget-usersonline .panel-body', 'type':'users_online', 'ratio': '5'});
 
 		/* resize sparklines */
 		$(window).bind('load resize', throttle(_resize_sparkline, 200));

@@ -284,7 +284,4 @@ $(document).on("click", ".btn-toggle", function(e) {
     if ($(this).find('.btn-info').size()>0) {
     	$(this).find('.btn').toggleClass('btn-info');
     }
-    
-   // $(this).find('.btn').toggleClass('btn-default');
-       
 });
