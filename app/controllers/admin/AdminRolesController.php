@@ -160,7 +160,7 @@ class AdminRolesController extends AdminController {
      * @param $role
      * @return Response
      */
-    public function postEdit($role)
+    public function putEdit($role)
     {
         // Declare the rules for the form validation
         $rules = array(

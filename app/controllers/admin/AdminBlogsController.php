@@ -142,7 +142,7 @@ class AdminBlogsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function postEdit($post)
+	public function putEdit($post)
 	{
 
    // Declare the rules for the form validation

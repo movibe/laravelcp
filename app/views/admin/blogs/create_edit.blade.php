@@ -17,7 +17,7 @@
 	@endif
 
 	@if (isset($post))
-		{{ Form::open(array('url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
+		{{ Form::open(array('method' => 'put','url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@else
 		{{ Form::open(array('class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@endif

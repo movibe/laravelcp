@@ -21,7 +21,7 @@
 	@endif
 
 	@if (isset($user))
-		{{ Form::open(array('url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal form-ajax')) }}
+		{{ Form::open(array('method' => 'put','url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal form-ajax')) }}
 	@else
 		{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
 	@endif

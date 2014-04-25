@@ -205,7 +205,7 @@ class AdminUsersController extends AdminController {
      * @param $user
      * @return Response
      */
-    public function postEdit($user)
+    public function putEdit($user)
     {
         // Validate the inputs
 

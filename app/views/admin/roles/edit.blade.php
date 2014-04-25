@@ -15,7 +15,7 @@
 		<li><a href="#tab-permissions" data-toggle="tab">{{{ Lang::get('core.permissions') }}}</a></li>
 	</ul>
 
-	{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
+	{{ Form::open(array('method' => 'put','class' => 'form-horizontal form-ajax')) }}
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">

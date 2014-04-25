@@ -28,7 +28,7 @@ Route::pattern('token', '[0-9a-z]+');
  */
 
 # json api
-Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.api|checkuser'), function()
+Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checkuser'), function()
 {
 
 	Route::controller('users/{user}', 'AdminUsersController');
@@ -37,7 +37,7 @@ Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.api|checkuse
 });
 
 # xml api
-Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.api|checkuser'), function()
+Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuser'), function()
 {
 
 		Route::controller('users/{user}', 'AdminUsersController');

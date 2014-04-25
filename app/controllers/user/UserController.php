@@ -218,10 +218,6 @@ class UserController extends BaseController {
             'remember' => Input::get( 'remember' ),
         );
 
-        // If you wish to only allow login from confirmed users, call logAttempt
-        // with the second parameter as true.
-        // logAttempt will check if the 'email' perhaps is the username.
-        // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
 

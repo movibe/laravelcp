@@ -57,7 +57,7 @@ class AdminCommentsController extends AdminController
      * @param $comment
      * @return Response
      */
-	public function postEdit($comment)
+	public function putEdit($comment)
 	{
         // Declare the rules for the form validation
         $rules = array(
