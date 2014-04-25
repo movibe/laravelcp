@@ -77,7 +77,7 @@
 <div class="form-group">
 	<div class="pull-right">
 	@if(isset($profile))
-		<a data-method="delete" href="{{{ URL::to('user/' . $user->id . '/profile/'.$profile->id .'/delete') }}} " class="ajax-alert-confirm btn btn-danger">Delete {{{ $profile->title }}} </a>
+		<a data-method="delete" href="{{{ URL::to('user/' . $user->id . '/profile/'.$profile->id .'/delete') }}} " class="ajax-alert-confirm btn btn-danger">{{{ Lang::get('site.delete') }}} {{{ $profile->title }}} </a>
 	@endif
 	</div>
 </div>

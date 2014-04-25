@@ -38,4 +38,15 @@ return array(
 		'email_option3'=>'Product Support',
 
 
+
+		'profile'=>'Profile',
+		'your_account'=>'Your Account',
+		'remove_cancel'=>'Remove Cancellation Request',
+		'cancel_acct'=>'Cancel Account',
+		'delete'=>'Delete',
+		'now'=>'Immediatly',
+		'infift'=>'In 15 minutes',
+		'tmr'=>'Tomorrow',
+		'areyousure'=>'Are you sure?',
+
 );

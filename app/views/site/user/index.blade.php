@@ -1,19 +1,18 @@
 @extends('site.layouts.default')
 
 @section('title')
-{{{ Lang::get('user/user.settings') }}} ::
+{{{ Lang::get('site.your_account') }}} {{{ Lang::get('user/user.settings') }}} ::
 @parent
 @stop
 
-
 @section('content')
 <div class="page-header">
-	<h3>Your Account</h3>
+	<h3>{{{ Lang::get('site.your_account') }}} {{{ Lang::get('user/user.settings') }}}</h3>
 </div>
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('user/user.settings') }}}</a></li>
-  <li><a href="#tab-profile" data-toggle="tab">Profile</a></li>
+  <li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('site.profile') }}}</a></li>
 </ul>
 <br/>
 {{ Form::open(array('autocomplete' => 'off','url' => URL::to('user/' . $user->id . '/edit'), 'class' => 'form-horizontal')) }}
@@ -59,14 +58,14 @@
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				@if($user->cancelled)
-					<a href="{{ URL::to('user/' . $user->id . '/cancel/disable') }}" class="btn btn-info">Remove Cancellation Request</a>
+					<a href="{{ URL::to('user/' . $user->id . '/cancel/disable') }}" class="btn btn-info">{{{ Lang::get('site.remove_cancel') }}}</a>
 				@else
 					<div class="input-group-btn">
-						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">{{{ Lang::get('site.cancel_acct') }}} <span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
-							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
-							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">{{{ Lang::get('site.now') }}}</a></li>
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">{{{ Lang::get('site.infift') }}}</a></li>
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">{{{ Lang::get('site.tmr') }}}</a></li>
 						</ul>
 					</div>
 			  @endif
@@ -108,7 +107,7 @@
 		$('.btn-cancel').on('click', function(e){
 			e.preventDefault();    
 			var link=$(this).attr('href');
-			bootbox.confirm('Are you sure?', function(result) {
+			bootbox.confirm('{{{ Lang::get('site.areyousure') }}}', function(result) {
 				if(result) window.location=link;
 			});
 		});
