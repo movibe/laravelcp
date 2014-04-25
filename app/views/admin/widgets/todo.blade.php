@@ -13,9 +13,6 @@
 			<div class="tab-pane active" id="home">
 				<ul class="list-group">
 					<li class="list-group-item"></li>
-					<li class="list-group-item">add api auth login with token, add more api functions</li>
-					<li class="list-group-item">add cancel client feature, button client can click to cancel the account, insert to cancellation db, process later with queue</li>
-					<li class="list-group-item">siwtch forms to use http://anahkiasen.github.io/former/ so they can have frontend validation</li>
 				</ul>
 			</div>
 			<div class="tab-pane" id="profile">...</div>

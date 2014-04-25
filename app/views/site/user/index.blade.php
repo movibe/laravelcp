@@ -10,9 +10,7 @@
 <div class="page-header">
 	<h3>{{{ Lang::get('user/user.settings') }}}</h3>
 </div>
-<form class="form-horizontal" method="post" action="{{ URL::to('user/' . $user->id . '/edit') }}"  autocomplete="off">
-    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-
+{{ Form::open(array('class' => 'form-horizontal')) }}
     <div class="tab-pane active" id="tab-general">
         <div class="form-group {{{ $errors->has('displayname') ? 'error' : '' }}}">
             <label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
@@ -52,6 +50,21 @@
             <button type="submit" class="btn btn-success">{{{ Lang::get('button.update') }}}</button>
         </div>
     </div>
-</form>
+{{ Form::close(); }}
+{{ Form::open(array('class' => 'form-horizontal')) }}
+	<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+		<div class="input-group-btn">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
+          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
+          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
+        </ul>
+      </div>
+							
+		</div>
+    </div>
+{{ Form::close(); }}
 <hr/>
 @stop

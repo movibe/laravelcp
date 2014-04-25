@@ -97,6 +97,8 @@ Route::get('suspended', 'UserController@suspended');
 
 Route::get('user/reset/{token}', 'UserController@getReset');
 Route::post('user/reset/{token}', 'UserController@postReset');
+
+
 Route::controller('user/{user}', 'UserController');
 Route::controller('user', 'UserController');
 

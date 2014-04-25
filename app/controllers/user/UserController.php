@@ -19,11 +19,29 @@ class UserController extends BaseController {
 	
     }
 
-    /**
-     * Users settings page
-     *
-     * @return View
-     */
+
+	public function runCancel($job, $data){
+		DB::table('users')->where('id', $data['id'])->update(array('confirmed' => 0));
+	}
+
+	public function getCancel($user, $token){
+		switch($token){
+			case 'now':
+				$this->runCancel('', $user->id);
+			break;
+			case 'later':
+				$date = Carbon::now()->addMinutes(15);
+				Queue::later($date, 'UserController@runCancel', array('id' => $user->id));
+			break;
+			case 'tomorrow':
+				$date = Carbon::tomorrow();
+				Queue::later($date, 'UserController@runCancel', array('id' => $user->id));
+			break;
+		}
+		return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
+	}
+
+
     public function invalidtoken()
     {
         return View::make('site/invalidtoken');
@@ -169,12 +187,9 @@ class UserController extends BaseController {
         $error = $user->errors()->all();
 
         if(empty($error)) {
-            return Redirect::to('user')
-                ->with( 'success', Lang::get('user/user.user_account_updated') );
+            return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
         } else {
-            return Redirect::to('user')
-                ->withInput(Input::except('password','password_confirmation'))
-                ->with( 'error', $error );
+            return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
         }
     }
 
