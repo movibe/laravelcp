@@ -38,7 +38,7 @@ function fnRunPoll(){
 
 		if(_final_pols.length > 0){
 			$.ajax({ 
-				url: "admin/polling",
+				url: _base_url+"/admin/polling",
 				type: "POST",
 				data: {'polls':JSON.stringify(_final_pols)},
 				complete: function(data){

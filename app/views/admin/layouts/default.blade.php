@@ -22,6 +22,10 @@
 
 	@include('admin/css')
 
+	<script type="text/javascript">
+		var _base_url='{{{ URL::to('/') }}}';
+	</script>
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
@@ -108,18 +112,18 @@
 		$('.search-input').keyup(throttle(function(e){
 			var _val=$(this).val();
 			if(_val.length < 3) return false;
-			$('#site-search-results').html('');
-			$.ajax({
-				type: 'GET',
-				url:'{{{ URL::to('admin/search') }}}/'+_val
-			}).done(function(msg) {
-				if(msg){
-					$('#site-search-results').html(msg);
-				} else $('#site-search-results').html('<h3>No results</h3>');
-			}).fail(function(jqXHR, textStatus) {
-					console.log(jqXHR);
-					$('#site-search-results').html('<h3>Unable to execute command</h3>');
-			});
+				$('#site-search-results').html('');
+				$.ajax({
+					type: 'GET',
+					url:'{{{ URL::to('admin/search') }}}/'+_val
+				}).done(function(msg) {
+					if(msg){
+						$('#site-search-results').html(msg);
+					} else $('#site-search-results').html('<h3>No results</h3>');
+				}).fail(function(jqXHR, textStatus) {
+						console.log(jqXHR);
+						$('#site-search-results').html('<h3>Unable to execute command</h3>');
+				});
 		}, 700));
 
 	</script>
