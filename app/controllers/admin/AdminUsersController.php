@@ -47,7 +47,6 @@ class AdminUsersController extends AdminController {
 		$chart->addRow(array('Active',DB::table('users')->where('confirmed', '=', '1')->count()));
 		$chart->addRow(array('In-active',DB::table('users')->where('confirmed', '!=', '1')->count()));
 
-		
 		Lava::PieChart('activeusers')->addOption(array('chartArea' => array('width'=>'98%', 'height'=>'98%')))->addOption(array('backgroundColor' => 'none'))->addOption(array('is3D' => 'true'))->addOption(array('legend' => 'none'));
 	}
 
@@ -59,11 +58,10 @@ class AdminUsersController extends AdminController {
 
         $users = $this->user;
 
-		if($_r=Api::Display($this->getData())) return $_r;
 
 		$this->userChart();
 
-        return View::make('admin/users/index', compact('users', 'title'));
+       	if(!Api::View($this->getData())) return View::make('admin/users/index', compact('users', 'title'));
     }
 
     /**
@@ -157,7 +155,7 @@ class AdminUsersController extends AdminController {
 
 			if(Api::Enabled()){
 				$u=$list->get();
-				return $u->toArray();
+				return Api::View($u->toArray());
 			} else return Datatables::of($list)
 				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
 				->make();
@@ -171,7 +169,7 @@ class AdminUsersController extends AdminController {
 
 			if(Api::Enabled()){
 				$u=$list->get();
-				return $u->toArray();
+				return Api::View($u->toArray());
 			} else return Datatables::of($list)
 				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
 				->edit_column('details','{{{ strip_tags(substr($details,0,100))}}}')
@@ -263,7 +261,7 @@ class AdminUsersController extends AdminController {
 			}
 
         } else {
-            return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
+            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
         }
 
         // Get validation errors (see Ardent package)
@@ -271,9 +269,9 @@ class AdminUsersController extends AdminController {
 
         if(empty($error)) {
             // Redirect to the new user page
-            return Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
+            if(!Api::Redirect(array('success', Lang::get('admin/users/messages.edit.success')))) return Redirect::doSomething('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
         } else {
-            return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
+           if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error'))))  return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
         }
     }
 
