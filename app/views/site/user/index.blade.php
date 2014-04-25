@@ -61,9 +61,9 @@
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
 				<ul class="dropdown-menu">
-					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
-					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
-					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
+					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
+					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
+					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
 				</ul>
 			</div>
 	  @endif
@@ -72,4 +72,15 @@
     </div>
 {{ Form::close(); }}
 <hr/>
+@stop
+@section('scripts')
+	<script type="text/javascript">
+		$('.btn-cancel').on('click', function(e){
+			e.preventDefault();    
+			var link=$(this).attr('href');
+			bootbox.confirm('Are you sure?', function(result) {
+				if(result) window.location=link;
+			});
+		});
+	</script>
 @stop

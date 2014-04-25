@@ -70,8 +70,6 @@ class UserController extends BaseController {
 				$message->replyTo(Input::get('email', Input::get('name')));
 
 			});
-
-
 		} catch (Exception $e) {
 		 return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
 		}
