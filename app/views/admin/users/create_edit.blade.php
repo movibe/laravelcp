@@ -157,9 +157,6 @@
 					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 					{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
 					{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-					@if(isset($profile))
-						<a data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '/profile/'.$profile->id ) }}} " class="ajax-alert-confirm btn btn-danger">Delete {{{ $profile->title }}} </a>
-					@endif
 				</div>
 			</div>
 

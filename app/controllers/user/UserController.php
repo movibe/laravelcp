@@ -91,9 +91,11 @@ class UserController extends BaseController {
     {
         list($user,$redirect) = $this->user->checkAuthAndRedirect('user');
         if($redirect){return $redirect;}
+		$profiles=$user->profiles;
+
 
         // Show the page
-        return View::make('site/user/index', compact('user'));
+        return View::make('site/user/index', compact('user', 'profiles'));
     }
 
     /**
@@ -159,6 +161,7 @@ class UserController extends BaseController {
         {
             $oldUser = clone $user;
             $user->email = Input::get( 'email' );
+            $user->displayname = Input::get( 'displayname' );
 
             $password = Input::get( 'password' );
             $passwordConfirmation = Input::get( 'password_confirmation' );
@@ -183,6 +186,20 @@ class UserController extends BaseController {
 
             // Save if valid. Password field will be hashed before save
             $user->amend();
+
+			foreach(Input::get('user_profiles') as $id=>$profile){
+				$pro = UserProfile::find($id);
+				if($pro){
+					$pro->fill($profile)->push();
+				} else {
+					$pro = new UserProfile($profile);
+					if($pro->title) $user->profiles()->save($pro);
+				}
+			}
+
+
+        } else {
+            return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', 'Validation failed' );
         }
 
         // Get validation errors (see Ardent package)
@@ -206,6 +223,16 @@ class UserController extends BaseController {
 
 		return View::make('site/user/create', compact('providers'));
     }
+
+    public function getDelete($user, $profile)
+    {
+		$error=$profile->delete();
+        if($error == 1) {
+            return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
+        } else {
+            return Redirect::to('user')->with( 'error', 'Unable to change' );
+        }
+	}
 
 
     /**

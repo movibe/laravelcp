@@ -8,70 +8,100 @@
 
 @section('content')
 <div class="page-header">
-	<h3>{{{ Lang::get('user/user.settings') }}}</h3>
+	<h3>Your Account</h3>
 </div>
-{{ Form::open(array('class' => 'form-horizontal')) }}
-    <div class="tab-pane active" id="tab-general">
-        <div class="form-group {{{ $errors->has('displayname') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" name="displayname" id="username" value="{{{ Input::old('displayname', $user->displayname) }}}" />
-                {{ $errors->first('displayname', '<span class="help-inline">:message</span>') }}
-            </div>
-        </div>
 
-        <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="email">{{{ Lang::get('core.email') }}}</label>
-            <div class="col-md-10">
-                <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
-                {{ $errors->first('email', '<span class="help-inline">:message</span>') }}
-            </div>
-        </div>
-
-        <div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
-            <div class="col-md-10">
-                <input class="form-control" type="password" name="password" id="password" value="" />
-                {{ $errors->first('password', '<span class="help-inline">:message</span>') }}
-            </div>
-        </div>
-
-        <div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
-            <label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
-            <div class="col-md-10">
-                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
-                {{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}
-            </div>
-        </div>
-    </div>
-
-	<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-success">{{{ Lang::get('button.update') }}}</button>
-        </div>
-    </div>
-{{ Form::close(); }}
-		
-{{ Form::open(array('class' => 'form-horizontal')) }}
-	<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-		@if($user->cancelled)
-			<a href="{{ URL::to('user/' . $user->id . '/cancel/disable') }}" class="btn btn-info">Remove Cancellation Request</a>
-		@else
-			<div class="input-group-btn">
-				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
-					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
-					<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
-				</ul>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('user/user.settings') }}}</a></li>
+  <li><a href="#tab-profile" data-toggle="tab">Profile</a></li>
+</ul>
+<br/>
+{{ Form::open(array('autocomplete' => 'off','url' => URL::to('user/' . $user->id . '/edit'), 'class' => 'form-horizontal')) }}
+<div class="tab-content">
+	<div class="tab-pane active" id="tab-general">
+		<div class="form-group {{{ $errors->has('displayname') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
+			<div class="col-md-10">
+				<input class="form-control" type="text" name="displayname" id="username" value="{{{ Input::old('displayname', $user->displayname) }}}" />
+				{{ $errors->first('displayname', '<span class="help-inline">:message</span>') }}
 			</div>
-	  @endif
-							
+		</div>
+
+		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="email">{{{ Lang::get('core.email') }}}</label>
+			<div class="col-md-10">
+				<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
+				{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
+			</div>
+		</div>
+
+		<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
+			<div class="col-md-10">
+				<input class="form-control" type="password" name="password" id="password" value="" />
+				{{ $errors->first('password', '<span class="help-inline">:message</span>') }}
+			</div>
+		</div>
+
+		<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
+			<div class="col-md-10">
+				<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
+				{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<button type="submit" class="btn btn-success">{{{ Lang::get('button.update') }}}</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				@if($user->cancelled)
+					<a href="{{ URL::to('user/' . $user->id . '/cancel/disable') }}" class="btn btn-info">Remove Cancellation Request</a>
+				@else
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
+							<li><a class="btn-cancel" href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
+						</ul>
+					</div>
+			  @endif
+			</div>
 		</div>
     </div>
+    <div class="tab-pane" id="tab-profile">
+		<ul class="nav nav-pills">
+				<li ><a href="#tab-create" data-toggle="tab"><span class="fa fa-plus-square"></span>  {{{ Lang::get('button.create') }}}</a></li>
+				@foreach($profiles as $index=>$pro)
+					<li @if ($index == 0)class="active"@endif><a href="#tab-{{{$pro->id}}}" data-toggle="tab" id="tab-c{{{$pro->id}}}">@if ($pro->title){{$pro->title}}@elseif($index == 0)Default @else#{{{$index}}}@endif</a></li>
+				@endforeach
+		</ul>
+		<br/>
+		<div class="tab-content">
+			<div class="tab-pane" id="tab-create">
+				@include('admin/users/profiles')
+			</div>
+
+			@foreach($profiles as $index=>$profile)
+				<div class="tab-pane @if (isset($index) && $index == 0)active@endif" id="tab-@if(isset($profile)){{{$profile->id}}}@endif">
+					@include('site/user/profiles')
+				</div>
+			@endforeach
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<button type="submit" class="btn btn-success">{{{ Lang::get('button.update') }}}</button>
+			</div>
+		</div>
+	</div>
+</div>
 {{ Form::close(); }}
-<hr/>
+
 @stop
 @section('scripts')
 	<script type="text/javascript">
