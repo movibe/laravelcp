@@ -21,13 +21,14 @@ class UserController extends BaseController {
 
 
 	public function runCancel($job, $data){
-		DB::table('users')->where('id', $data['id'])->update(array('confirmed' => 0));
+		DB::table('users')->where('id', $data['id'])->update(array('confirmed' => false, 'cancelled' => true));
 	}
+
 
 	public function getCancel($user, $token){
 		switch($token){
 			case 'now':
-				$this->runCancel('', $user->id);
+				$this->runCancel('', array('id' => $user->id));
 			break;
 			case 'later':
 				$date = Carbon::now()->addMinutes(15);
@@ -36,6 +37,9 @@ class UserController extends BaseController {
 			case 'tomorrow':
 				$date = Carbon::tomorrow();
 				Queue::later($date, 'UserController@runCancel', array('id' => $user->id));
+			break;
+			case 'disable':
+				if($user->cancelled) DB::table('users')->where('id', $user->id)->update(array('confirmed' => true, 'cancelled' => false));
 			break;
 		}
 		return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );

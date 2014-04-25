@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 255);
             $table->string('confirmation_code', 255);
             $table->boolean('confirmed');
+            $table->boolean('cancelled');
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
             $table->timestamp('last_activity')->default("0000-00-00 00:00:00");

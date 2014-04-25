@@ -51,17 +51,22 @@
         </div>
     </div>
 {{ Form::close(); }}
+		
 {{ Form::open(array('class' => 'form-horizontal')) }}
 	<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-		<div class="input-group-btn">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
-          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
-          <li><a href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
-        </ul>
-      </div>
+		@if($user->cancelled)
+			<a href="{{ URL::to('user/' . $user->id . '/cancel/disable') }}" class="btn btn-info">Remove Cancellation Request</a>
+		@else
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Cancel Account <span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/now') }}">Immediatly</a></li>
+					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/later') }}">In 15 minutes</a></li>
+					<li><a href="{{ URL::to('user/' . $user->id . '/cancel/tomorrow') }}">Tomorrow</a></li>
+				</ul>
+			</div>
+	  @endif
 							
 		</div>
     </div>
