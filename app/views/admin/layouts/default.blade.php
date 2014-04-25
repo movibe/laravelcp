@@ -53,22 +53,70 @@
 
 	<!-- default modal dialog -->
 	<div id="site-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title"></h4>
-		  </div>
-		  <div class="modal-body"></div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
-		  </div>
-	  </div>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- search modal dialog -->
+	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Search</h4>
+				</div>
+				<div class="modal-body">
+					
+					 <div class="input-group">
+						  <input type="text" class="form-control search-input" placeholder="What are you searching for?">
+						  <span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+							<span class="fa fa-search"></span>
+						 </button>
+						 </span>
+					</div>	
+					<div id="site-search-results">
+
+					</div>				
+				</div>
+				<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+			</div>
+		</div>
 	</div>
 
 
+	<script type="text/javascript">
+		$('.nav-search').on('click', function(e){
+			e.preventDefault();    
+			$('#search-modal').modal();
+		});
+		
+		$('.search-input').keyup(throttle(function(e){
+			var _val=$(this).val();
+			if(_val.length < 3) return false;
+			$('#site-search-results').html('');
+			$.ajax({
+				type: 'GET',
+				url: 'search/'+_val
+			}).done(function(msg) {
+				if(msg){
+					$('#site-search-results').html(msg);
+				} else $('#site-search-results').html('<h3>No results</h3>');
+			}).fail(function(jqXHR, textStatus) {
+					console.log(jqXHR);
+					bootbox.alert( "Unable to execute command, "+ textStatus);
+			});
+		}, 500));
 
+	</script>
 
     <script type="text/javascript">
 		fnAddPoll('logs', 'check_logs', '10');

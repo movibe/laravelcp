@@ -211,7 +211,8 @@ return array(
 'Activity' => 'Regulus\ActivityLog\Activity',
 'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
 'Anvard'=>'Atticmedia\Anvard\Anvard',
-'Api'          => 'Gcphost\Helpers\Api', // String
+'Api'          => 'Gcphost\Helpers\Api', 
+'Search'          => 'Gcphost\Helpers\Search', 
 
 ),
 

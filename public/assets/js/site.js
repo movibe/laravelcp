@@ -173,7 +173,6 @@ function modalfyRun(th,url){
 			console.log(jqXHR);
 			bootbox.alert( "Unable to execute command, "+ textStatus);
 	 });
-
 }
 
 /* helpers */
@@ -181,10 +180,10 @@ function fnRunMass(action, data_table, data_method,aSelected){
 	if(!data_method) data_method='POST';
 	console.log(data_table);
 	$.ajax({
-		  type: data_method,
-		  url: action,
+			type: data_method,
+			url: action,
 			dataType: 'json',
-		  data: { rows: JSON.stringify(aSelected) }
+			data: { rows: JSON.stringify(aSelected) }
 		})
 	  .done(function( msg ) {
 			if(msg.result == "success"){
@@ -226,6 +225,19 @@ function _resize_sparkline(){
 	} else 	var _w=(($( window ).width()/2)/10)-10;
 	$('.sparklines').sparkline([4,6,1,4,7,1,5,8,9,2], { enableTagOptions: true , barWidth: _w, barSpacing: '3' });
 }
+
+function throttle(f, delay){
+    var timer = null;
+    return function(){
+        var context = this, args = arguments;
+        clearTimeout(timer);
+        timer = window.setTimeout(function(){
+            f.apply(context, args);
+        },
+        delay || 500);
+    };
+}
+
 
 
 /* navigation, swipe & weather */

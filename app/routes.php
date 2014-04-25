@@ -1,6 +1,7 @@
 <?php
 
 
+
 Route::model('user', 'User');
 Route::model('profile', 'UserProfile');
 Route::model('comment', 'Comment');
@@ -49,6 +50,10 @@ Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuse
 Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
 {
 
+	# Search
+	Search::AddTable('users', array('email'));
+	Search::AddTable('posts', array('title','slug','content','meta_title','meta_description','meta_keywords'));
+    Route::controller('search/{postSlug}', 'AdminSearchController');
 
     # Settings Management
     Route::controller('settings', 'AdminSettingsController');
