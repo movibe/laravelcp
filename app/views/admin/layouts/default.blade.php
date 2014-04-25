@@ -52,7 +52,7 @@
 	@include('admin/js')
 
 	<!-- default modal dialog -->
-	<div id="site-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="site-modal" class="modal fade" tabindex="-2" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -66,7 +66,7 @@
 	</div>
 
 	<!-- search modal dialog -->
-	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true" style="z-index: 1041;">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -98,6 +98,11 @@
 			e.preventDefault();    
 			$('#search-modal').modal();
 		});
+
+		$("#search-modal").on('shown.bs.modal', function() {
+			$('.search-input').focus();
+		});
+
 		
 		$('.search-input').keyup(throttle(function(e){
 			var _val=$(this).val();

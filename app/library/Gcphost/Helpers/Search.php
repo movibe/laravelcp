@@ -3,11 +3,22 @@
 
 class Search {
 	static private $tables=array();
+	static private $actions=array();
 
 	static public function Query($string){
+		$tables=self::$tables;
+		
+		$smart=explode(' ', $string);
+		if(count($smart) > 0){
+			if(array_key_exists($smart[0], $tables)){
+				$tables=array($smart[0]=>$tables[$smart[0]]);
+				$string=ltrim($string, $smart[0].' ');
+			}
+		}
+
 		if(!$string || strlen($string) < 3) return array();
 		$results=array();
-		foreach(self::$tables as $table => $columns){
+		foreach($tables as $table => $columns){
 
 			$query=\DB::table($table);
 			$i=0;
@@ -18,13 +29,21 @@ class Search {
 				$i++;
 			}
 
-			if($query->count() > 0)$results[$table]=$query->get($columns);
+			if($query->count() > 0) $results[$table]=$query->get(array_merge(array('id'),$columns));
 		}
 		return $results;
 	}
 
-	static public function AddTable($table, $columns){
+	static public function AddTable($table, $columns, $actions){
 		self::$tables[$table]=$columns;
+		self::$actions[$table]=$actions;
+	}
+
+	static public function GetAction($table, $column){
+
+		foreach(self::$actions[$table] as $col=>$action){
+			if($col == $column) return $action;
+		}
 	}
 	
 }

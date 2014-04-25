@@ -16,7 +16,21 @@
 			@foreach($data as $column => $value)
 				<tr>
 					@foreach($value as $key => $val)
-						<td>{{{ substr($val,0,40)}}}</td>
+						<td>
+
+
+							@if ($action =  Search::GetAction($index, $key)) @endif
+							@if($action['method'])
+								@if($action['method'] == "modal")
+									<a href="{{ str_replace('?', $val, $action['action']) }}" class="modalfy">{{{ substr($val,0,40)}}}</a>
+								@endif
+							@else
+								{{{ substr($val,0,40)}}}
+							@endif
+
+						
+						
+						</td>
 					@endforeach
 				</tr>
 			@endforeach
