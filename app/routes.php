@@ -21,7 +21,19 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('id', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
+/*
+example for hooking into the navigation among other items
 
+Event::listen('page.admin', function()
+{
+
+});
+
+View::composer('*navigation', function($view)
+{
+    $view->nest('test','admin/test');
+});
+*/
 
 /** ------------------------------------------
  *  Admin Routes
@@ -31,6 +43,7 @@ Route::pattern('token', '[0-9a-z]+');
 # json api
 Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checkuser'), function()
 {
+	Event::fire('json.admin');
 
 	Route::controller('users/{user}', 'AdminUsersController');
 	Route::controller('users', 'AdminUsersController');
@@ -40,15 +53,17 @@ Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checku
 # xml api
 Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuser'), function()
 {
+	Event::fire('xml.admin');
 
-		Route::controller('users/{user}', 'AdminUsersController');
-		Route::controller('users', 'AdminUsersController');
+	Route::controller('users/{user}', 'AdminUsersController');
+	Route::controller('users', 'AdminUsersController');
 });
 
 
 # web 
 Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
 {
+	Event::fire('page.admin');
 
 	# Search
 	Search::AddTable('users', array('email'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
@@ -95,14 +110,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
  *  ------------------------------------------
  */
 
+Event::fire('page.site');
+
 Route::get('invalidtoken', 'UserController@invalidtoken');
 Route::get('nopermission', 'UserController@noPermission');
 Route::get('suspended', 'UserController@suspended');
 
-
 Route::get('user/reset/{token}', 'UserController@getReset');
 Route::post('user/reset/{token}', 'UserController@postReset');
-
 
 Route::controller('user/{user}/profile/{profile}', 'UserController');
 Route::controller('user/{user}', 'UserController');

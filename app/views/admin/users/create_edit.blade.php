@@ -9,6 +9,7 @@
 			<li><a href="#tab-email" data-toggle="tab">{{{ Lang::get('core.emails') }}}</a></li>
 			<li><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
 		@endif
+		@yield('user-edit-tabs')
 	</ul>
 
 	@if ($message = Session::get('success'))
@@ -27,6 +28,8 @@
 	@endif
 
 		<div class="tab-content">
+			@yield('user-edit-tab-content')
+
 			@if ($mode != 'create')
 				<div class="tab-pane" id="tab-details">
 					<div class="list-group">
