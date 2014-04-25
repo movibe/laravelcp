@@ -9,9 +9,9 @@ return array(
 		'comment' => 'Comment',
 		'posted'=>'Posted',
 		'read_more'=>'Read more',
-		'created_with'=>'Create an account with:',
-		'create_with_or'=>'Or create a new account:',
-		'login_with'=>'Log in with:',
+		'created_with'=>'Create an account with',
+		'create_with_or'=>'Or create a new account',
+		'login_with'=>'Log in with',
 		'no_longer_active'=>'Your account is no longer active.',
 		'no_longer_active_reason'=>'If you think this is an error please contact the sites administrator.',
 		'permission_denied'=>'Permission Denied',
@@ -26,5 +26,16 @@ return array(
 		'comment_no_perm' => 'You don\'t have the correct permissions to add comments.',
 		'add_comment' => 'Add a Comment',
 		'contactus' => 'Contact Us',
+
+		'your_name'=>'Your name',
+		'your_email'=>'Your e-mail',
+		'subject'=>'Subject',
+		'send_message'=>'Send Message',
+		'message'=>'Message',
+		'our_location'=>'Our Location',
+		'email_option1'=>'General Customer Service',
+		'email_option2'=>'Suggestions',
+		'email_option3'=>'Product Support',
+
 
 );
