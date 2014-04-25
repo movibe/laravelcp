@@ -38,10 +38,12 @@ return array(
 	'allow_comments'=>'Allow Comments',
 	'toggle_nav' => 'Toggle navigation',
 	'error' => 'Error',
-	'sucess' => 'Success',
+	'success' => 'Success',
 	'warning' => 'Warning',
 	'info' => 'Info',
 	'check_for_errors' => 'Please check the form below for errors',
+	'email_sent' => 'E-mail sent',
+	'email__not_sent' => 'E-mail not sent',
 
 );
 

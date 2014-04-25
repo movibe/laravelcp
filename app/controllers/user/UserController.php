@@ -37,6 +37,31 @@ class UserController extends BaseController {
         return View::make('site/suspended');
     }
 	
+	public function postContactUs(){
+
+		try{
+			$body='From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body');
+
+			$send=Mail::send('emails/default', array('body'=>$body), function($message)
+			{
+				$message->to(Setting::get('site.contact_email'))->subject(Input::get('subject'));
+				$message->replyTo(Input::get('email', Input::get('name')));
+
+			});
+
+
+		} catch (Exception $e) {
+		 return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
+		}
+
+        return Redirect::to('contact-us')->with( 'success', Lang::get('core.email_sent') );
+
+	}
+
+	public function getContactUs(){
+		return View::make('site/contact-us');
+	}
+
 	/**
      * Users settings page
      *

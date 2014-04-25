@@ -26,7 +26,6 @@
 		"anlutro/l4-settings": "dev-master",
 		"j20/php-uuid": "dev-master",
 		"bllim/datatables": "*",
-		"gloudemans/shoppingcart": "dev-master",
 		"thomaswelton/laravel-gravatar": "dev-master",
 		"khill/lavacharts" : "dev-master",
 		"barryvdh/laravel-debugbar": "dev-master",

@@ -493,7 +493,7 @@ class AdminUsersController extends AdminController {
      */
     public function getData()
     {
-        $users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
+        $users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->distinct()
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
                     ->select(array('users.id', 'users.displayname','users.email', 'roles.name as rolename'));
 

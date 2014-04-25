@@ -117,7 +117,6 @@ return array(
 		
         /* Additional Providers */
 		"Khill\Lavacharts\LavachartsServiceProvider",
-		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables

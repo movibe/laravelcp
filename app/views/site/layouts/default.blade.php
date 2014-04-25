@@ -20,7 +20,7 @@
 		<style type="text/css">
 
 
-		body{ padding-top: 54px}
+		body{ padding-top: 60px}
 		@section('styles')
 		@show
 		</style>
@@ -84,6 +84,7 @@
 			@include('notifications')
 
 			@yield('content')
+			<hr/>
 		</div>
 
 		<div id="push"></div>

@@ -84,15 +84,17 @@
 @endif
 
 @if ( ! Auth::check())
-	<div class="alert alert-danger">
+	<div class="alert alert-danger alert-block">
 		<p>{{{ Lang::get('site.login_to_comment') }}}<br /><br />
 		{{ Lang::get('site.comment_login', array('login' => URL::to('user/login'), 'create' => URL::to('user/create'))); }} 
 	</div>
 @elseif ( ! $canComment )
-	<p>{{{ Lang::get('site.comment_no_perm') }}}</p>
+	<div class="alert alert-danger alert-block">
+		<p>{{{ Lang::get('site.comment_no_perm') }}}</p>
+	</div>
 @else
 	<h4>{{{ Lang::get('site.add_comment') }}}</h4>
-	<form  method="post" action="{{{ URL::to($post->slug) }}}">
+	<form method="post" action="{{{ URL::to($post->slug) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
 		<div class="form-group">
 			<div class="col-md-12">
@@ -106,7 +108,6 @@
 			</div>
 		</div>
 	</form>
-	<hr/>
 @endif
 
 

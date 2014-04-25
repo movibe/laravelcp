@@ -51,8 +51,6 @@
 
     </fieldset>
 </form>
-
-<hr/>
 @stop
 
 @section('scripts')

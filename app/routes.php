@@ -134,20 +134,8 @@ Route::controller('user', 'UserController');
 Route::when('contact-us','detectLang');
 
 # Contact Us Static Page
-Route::get('contact-us', function()
-{
-    // Return about us page
-    return View::make('site/contact-us');
-});
-
-
-Route::group(array('prefix' => 'cart'), function()
-{
-    Route::get('delete/{id}', 'CartController@getDelete');
-    Route::post('edit/{id}', 'CartController@postEdit');
-    Route::post('add/{id}', 'CartController@postCreate');
-    Route::controller('', 'CartController');
-});
+Route::post('contact-us', 'UserController@postContactUs');
+Route::get('contact-us', 'UserController@getContactUs');
 
 
 # Posts - Second to last set, match slug
