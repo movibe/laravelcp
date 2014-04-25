@@ -1,9 +1,5 @@
 <?php
 
-Route::filter('json', function(){Api::$type='json';});
-Route::filter('xml', function(){Api::$type='xml';});
-Route::when('*.json', 'json');
-Route::when('*.xml', 'xml');
 
 Route::model('user', 'User');
 Route::model('profile', 'UserProfile');
@@ -24,55 +20,38 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('id', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
+
+
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
  */
 
-
-
-
-Route::filter('checkuser', function()
-{
-	if (Auth::check()){
-		DB::update('UPDATE users SET last_activity = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time()), Auth::user()->id));
-
-		Activity::log(array(
-			'contentID'   => Confide::user()->id,
-			'contentType' => 'activity',
-			'description' => 'Page Loaded',
-			'details'     => '<a href="'.$_SERVER['REQUEST_URI'].'" target="_new" class="btn">link</a>',
-			'updated'     => Confide::user()->id ? true : false,
-		));
-
-
-		if(Auth::user()->confirmed != '1'){
-			Confide::logout();
-			return Redirect::to('suspended');
-		}
-	}
-});
-
-
-
-
-
-
-Route::group(array('prefix' => 'admin', 'before' => 'auth.api|checkuser'), function()
+# json api
+Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.api|checkuser'), function()
 {
 
-	Route::controller('users.json', 'AdminUsersController');
-    Route::controller('users.xml', 'AdminUsersController');
+	Route::controller('users/{user}', 'AdminUsersController');
+	Route::controller('users', 'AdminUsersController');
 
 });
 
+# xml api
+Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.api|checkuser'), function()
+{
+
+		Route::controller('users/{user}', 'AdminUsersController');
+		Route::controller('users', 'AdminUsersController');
+});
+
+
+# web 
 Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
 {
 
 
     # Settings Management
     Route::controller('settings', 'AdminSettingsController');
-
 
     # Comment Management
     Route::controller('comments/{comment}', 'AdminCommentsController');
@@ -115,17 +94,9 @@ Route::get('invalidtoken', 'UserController@invalidtoken');
 Route::get('nopermission', 'UserController@noPermission');
 Route::get('suspended', 'UserController@suspended');
 
-// User reset routes
-Route::get('user/reset/{token}', 'UserController@getReset');
-// User password reset
-Route::post('user/reset/{token}', 'UserController@postReset');
-//:: User Account Routes ::
-Route::post('user/{user}/edit', 'UserController@postEdit');
 
-//:: User Account Routes ::
-Route::post('user/login', 'UserController@postLogin');
-
-# User RESTful Routes (Login, Logout, Register, etc)
+Route::controller('user/reset/{token}', 'UserController');
+Route::controller('user/{user}', 'UserController');
 Route::controller('user', 'UserController');
 
 //:: Application Routes ::
