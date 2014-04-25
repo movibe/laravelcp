@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "fd0b4d594b030d00dbeca2c80d928c10",
+    "hash": "667eda76a74d9389c27f5bc00060d440",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -318,50 +318,6 @@
                 "zf2"
             ],
             "time": "2013-12-04 14:19:30"
-        },
-        {
-            "name": "gloudemans/shoppingcart",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
-                "reference": "62bf2c08594efa6c1ed7523b6f58310f33ac8f10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/62bf2c08594efa6c1ed7523b6f58310f33ac8f10",
-                "reference": "62bf2c08594efa6c1ed7523b6f58310f33ac8f10",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Gloudemans\\Shoppingcart": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Gloudemans",
-                    "email": "Rob_Gloudemans@hotmail.com"
-                }
-            ],
-            "description": "Laravel 4 Shoppingcart",
-            "keywords": [
-                "laravel",
-                "shoppingcart"
-            ],
-            "time": "2014-03-19 14:42:43"
         },
         {
             "name": "hybridauth/hybridauth",
@@ -2898,12 +2854,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "a0777077cbb8f60eaa780cd4a56644ffc5173c55"
+                "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/a0777077cbb8f60eaa780cd4a56644ffc5173c55",
-                "reference": "a0777077cbb8f60eaa780cd4a56644ffc5173c55",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
+                "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
                 "shasum": ""
             },
             "require": {
@@ -2961,7 +2917,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-04-24 15:39:13"
+            "time": "2014-04-24 23:05:50"
         },
         {
             "name": "doctrine/inflector",
@@ -4108,7 +4064,6 @@
         "zizaco/entrust": 20,
         "anlutro/l4-settings": 20,
         "j20/php-uuid": 20,
-        "gloudemans/shoppingcart": 20,
         "thomaswelton/laravel-gravatar": 20,
         "khill/lavacharts": 20,
         "barryvdh/laravel-debugbar": 20,

@@ -25,5 +25,6 @@ return array(
 		'comment_login' => 'Click <a href=":login">here</a> to login into your account. If you don\'t have an account click <a href=":create">here</a> to sign up.',
 		'comment_no_perm' => 'You don\'t have the correct permissions to add comments.',
 		'add_comment' => 'Add a Comment',
+		'contactus' => 'Contact Us',
 
 );

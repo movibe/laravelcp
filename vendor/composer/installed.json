@@ -1260,12 +1260,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "a0777077cbb8f60eaa780cd4a56644ffc5173c55"
+            "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/a0777077cbb8f60eaa780cd4a56644ffc5173c55",
-            "reference": "a0777077cbb8f60eaa780cd4a56644ffc5173c55",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
+            "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
             "shasum": ""
         },
         "require": {
@@ -1279,7 +1279,7 @@
         "suggest": {
             "symfony/console": "Allows use of the command line interface"
         },
-        "time": "2014-04-24 15:39:13",
+        "time": "2014-04-24 23:05:50",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1647,52 +1647,6 @@
             }
         ],
         "description": "Library for minifying JavaScript files using jsmin with assetic and composer"
-    },
-    {
-        "name": "gloudemans/shoppingcart",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
-            "reference": "62bf2c08594efa6c1ed7523b6f58310f33ac8f10"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/62bf2c08594efa6c1ed7523b6f58310f33ac8f10",
-            "reference": "62bf2c08594efa6c1ed7523b6f58310f33ac8f10",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/support": "~4",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "0.9.*"
-        },
-        "time": "2014-03-19 14:42:43",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Gloudemans\\Shoppingcart": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Rob Gloudemans",
-                "email": "Rob_Gloudemans@hotmail.com"
-            }
-        ],
-        "description": "Laravel 4 Shoppingcart",
-        "keywords": [
-            "laravel",
-            "shoppingcart"
-        ]
     },
     {
         "name": "thomaswelton/gravatarlib",
