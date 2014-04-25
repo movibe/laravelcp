@@ -95,7 +95,8 @@ Route::get('nopermission', 'UserController@noPermission');
 Route::get('suspended', 'UserController@suspended');
 
 
-Route::controller('user/reset/{token}', 'UserController');
+Route::get('user/reset/{token}', 'UserController@getReset');
+Route::post('user/reset/{token}', 'UserController@postReset');
 Route::controller('user/{user}', 'UserController');
 Route::controller('user', 'UserController');
 
