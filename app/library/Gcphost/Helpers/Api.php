@@ -13,19 +13,28 @@ class Api {
 
 	static public function View($data) {
 		if(!self::$type || !is_array($data)) return false;
+		$dd=array();
+		foreach($data as $d){
+			if(is_object($d)){
+				$dd[]=$d->toArray();
+			}if(is_array($d)){
+				$dd[]=$d;
+			}else $dd[]=array($d);
+		}
+
 		if(self::$type=='json'){
 			header('Content-Type: application/json');
-			die(json_encode($data));
+			die(json_encode($dd));
 		}
 		if(self::$type=='xml'){
 			header('Content-Type: application/xml; charset=utf-8');
-			die(xmlrpc_encode($data));
+			die(xmlrpc_encode($dd));
 		}
 	}
 
   	static public function Redirect($data) {
-		if(!self::$type) return false;
-		self::Display($data);
+		// wrapper for failure/success
+		return self::View($data);
 	}
 
 }

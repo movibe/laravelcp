@@ -44,7 +44,7 @@ class AdminProfileController extends AdminController {
         if($error == 1) {
            	return Response::json(array('result'=>'success'));
         } else {
-            return Response::json(array('result'=>'failure', 'error' =>   Lang::get('admin/users/messages.edit.error')));
+            return Response::json(array('result'=>'error', 'error' =>   Lang::get('admin/users/messages.edit.error')));
         }
 	}
 

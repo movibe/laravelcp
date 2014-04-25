@@ -105,7 +105,7 @@ class AdminCommentsController extends AdminController
 		$comment = Comment::find($id);
 		if(empty($comment)){
 			return Response::json(array('result'=>'success'));
-		} else return Response::json(array('result'=>'failure', 'error' =>Lang::get('admin/comments/messages.delete.error')));
+		} else return Response::json(array('result'=>'error', 'error' =>Lang::get('admin/comments/messages.delete.error')));
         
 	}
 

@@ -215,7 +215,7 @@ class AdminRolesController extends AdminController {
             }
 
             // There was a problem deleting the role
-			return Response::json(array('result'=>'failure', 'error' =>Lang::get('admin/roles/messages.delete.error')));
+			return Response::json(array('result'=>'error', 'error' =>Lang::get('admin/roles/messages.delete.error')));
     }
 
     /**
