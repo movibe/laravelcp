@@ -57,11 +57,9 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title">Modal title</h4>
+			<h4 class="modal-title"></h4>
 		  </div>
-		  <div class="modal-body">
-			<p>One fine body&hellip;</p>
-		  </div>
+		  <div class="modal-body"></div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			<button type="button" class="btn btn-primary">Save changes</button>
@@ -73,7 +71,17 @@
 
 
     <script type="text/javascript">
+		fnAddPoll('logs', 'check_logs', '10');
+
+		/* call back from results */
+		function fnUpdateGrowler(id, args){
+			$.each(args, function(i,value){
+				$.bootstrapGrowl(value, { type: 'success' });
+			});
+		}
+
 		fnRunPoll();
+
 		$('.mobile-loading').removeClass('visible-xs').hide();
     </script>
 </body>
