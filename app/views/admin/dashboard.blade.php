@@ -19,15 +19,10 @@
 	<script src="{{{ asset('assets/js/jquery.gridster.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
 	<script type="text/javascript">
-		/* dashboard
-		var localdata_position = JSON.parse(localStorage.getItem('dashboard.grid'));
-		var localdata_colors = JSON.parse(localStorage.getItem('dashboard.colors'));
-		var localdata_states = JSON.parse(localStorage.getItem('dashboard.states'));
-		var localdata_titles = JSON.parse(localStorage.getItem('dashboard.titles'));
-		fnCreateGridster('dashboard.grid', 'dashboard.colors', 'dashboard.states', 'dashboard.titles');
- */
+		/* add user online polling */
 		$.fn.poller('add',{'id':'#widget-usersonline .panel-body', 'type':'users_online', 'ratio': '5'});
 	
+		/* run gridster */
 		$.fn.gridster.responsive();
 
 		/* resize sparklines */

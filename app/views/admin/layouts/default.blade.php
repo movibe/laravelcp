@@ -28,6 +28,7 @@
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.poller.js') }}}"></script>
 	<script type="text/javascript">
+		/* setup poller with the url */
 		$.fn.poller({'url':'{{{ URL::to('admin/polling') }}}'});
 	</script>
 
