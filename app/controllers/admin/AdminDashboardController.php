@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Filesystem\Filesystem;
 
 class AdminDashboardController extends AdminController {
 
@@ -6,8 +7,20 @@ class AdminDashboardController extends AdminController {
 	 * Admin dashboard
 	 *
 	 */
+	private function widgets(){
+		$path=Config::get('view.paths');
+		$fileSystem = new Filesystem;
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR."admin".DIRECTORY_SEPARATOR."widgets");
+		return $files;
+	}
+
+
+
 	public function getIndex()
 	{
+		$widgets=$this->widgets();
+		View::share('widgets', $widgets);
+
 
 		$results=DB::select('SELECT email FROM users WHERE last_activity > ?', array(time()-600));
 		View::share('whosonline', $results);

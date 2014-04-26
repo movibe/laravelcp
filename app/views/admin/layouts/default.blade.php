@@ -22,7 +22,6 @@
 
 	@include('admin/css')
 
-
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
@@ -127,6 +126,7 @@
 		}, 700));
 
 	</script>
+	<div id="poller"></div>
 
     <script type="text/javascript">
 

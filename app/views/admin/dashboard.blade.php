@@ -19,22 +19,16 @@
 	<script src="{{{ asset('assets/js/jquery.gridster.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
 	<script type="text/javascript">
-		/* dashboard */
+		/* dashboard
 		var localdata_position = JSON.parse(localStorage.getItem('dashboard.grid'));
 		var localdata_colors = JSON.parse(localStorage.getItem('dashboard.colors'));
 		var localdata_states = JSON.parse(localStorage.getItem('dashboard.states'));
 		var localdata_titles = JSON.parse(localStorage.getItem('dashboard.titles'));
 		fnCreateGridster('dashboard.grid', 'dashboard.colors', 'dashboard.states', 'dashboard.titles');
-
-		/*  polling 
-		
-			- Add new polling results to function postPolling in the AdminDashboardController
-		
-			fnAddPoll(element to update, command for backend, delay[1,2,3,4etc]);
-
-		*/
-
+ */
 		$.fn.poller('add',{'id':'#widget-usersonline .panel-body', 'type':'users_online', 'ratio': '5'});
+	
+		$.fn.gridster.responsive();
 
 		/* resize sparklines */
 		$(window).bind('load resize', throttle(_resize_sparkline, 200));
@@ -43,13 +37,15 @@
 
 @section('content')
 	<br>
+	@yield('dashboard-pre')
 	<div class="gridster">
 		<ul>
-			@include('admin/widgets/minigraph')
-			@include('admin/widgets/features')
-			@include('admin/widgets/usersonline')
-			@include('admin/widgets/graphs')
-			@include('admin/widgets/todo')
+			@yield('dashboard-widgets-pre')
+			@foreach($widgets as $id=>$var)
+				@include('admin/widgets/'.preg_replace('/.blade.php/i', '',$var->getRelativePathname()))
+			@endforeach
+			@yield('dashboard-widgets-post')
 		</ul>
 	</div>
+	@yield('dashboard-post')
 @stop
