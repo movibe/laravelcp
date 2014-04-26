@@ -203,20 +203,23 @@ function fnRunMass(action, data_table, data_method,aSelected){
 
 
 function loadWeather(location, woeid) {
-  $.simpleWeather({
-    location: location,
-    woeid: woeid,
-    unit: 'f',
-    success: function(weather) {
-		$(".panel-weather").hide();
-		$(".panel-weather").html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
-		$(".panel-weather").attr('title', weather.city + ', '+ weather.region );
-		$(".panel-weather").show();
-    },
-    error: function(error) {
-      //$(".panel-weather").html(error);
-    }
-  });
+	if(localStorage.getItem('weather_time') > 0 && ((new Date().getTime() - localStorage.getItem('weather_time'))/1000 < 300)){
+		$(".panel-weather").html(localStorage.getItem('weather_html'));
+	} else {
+	  $.simpleWeather({
+		location: location,
+		woeid: woeid,
+		unit: 'f',
+		success: function(weather) {
+			$(".panel-weather").hide();
+			$(".panel-weather").html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
+			$(".panel-weather").attr('title', weather.city + ', '+ weather.region );
+			$(".panel-weather").show();
+			localStorage.setItem('weather_html',$(".panel-weather").html());
+			localStorage.setItem('weather_time',new Date().getTime());
+		}
+	  });
+	}
 }
 
 function _resize_sparkline(){
