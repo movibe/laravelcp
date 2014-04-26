@@ -103,7 +103,7 @@
 								<li><a href="site.layout.default">Default</a></li>
 								@foreach($templates as $id=>$var)
 									@if($var->getFilename() != 'default.blade.php')
-									<li><a href="site.layout.{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
+									<li><a href="site.layout.{{{ str_replace(DIRECTORY_SEPARATOR, '.',preg_replace('/.blade.php/i', '',$var->getRelativePathname())) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
 									@endif
 								@endforeach
 							</ul>

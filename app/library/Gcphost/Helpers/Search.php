@@ -7,12 +7,13 @@ class Search {
 
 	static public function Query($string){
 		$tables=self::$tables;
-		
+	
 		$smart=explode(' ', $string);
 		if(count($smart) > 0){
+			echo "<i>".$smart[0]."</i>";
 			if(array_key_exists($smart[0], $tables)){
 				$tables=array($smart[0]=>$tables[$smart[0]]);
-				$string=ltrim($string, $smart[0].' ');
+				$string=preg_replace("/".$smart[0]." /i", '', $string, 1);
 			}
 		}
 
