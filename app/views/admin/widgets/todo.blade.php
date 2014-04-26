@@ -13,7 +13,6 @@
 			<div class="tab-pane active" id="home">
 				<ul class="list-group">
 					<li class="list-group-item">update hard-coded (titles) languages, not blades</li>
-					<li class="list-group-item">auto load dash widgets from folder</li>
 				</ul>
 			</div>
 			<div class="tab-pane" id="profile">...</div>
