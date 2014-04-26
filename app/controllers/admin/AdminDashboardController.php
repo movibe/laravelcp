@@ -21,8 +21,7 @@ class AdminDashboardController extends AdminController {
 		$widgets=$this->widgets();
 		View::share('widgets', $widgets);
 
-
-		$results=DB::select('SELECT email FROM users WHERE last_activity > ?', array(time()-600));
+		$results=DB::select('SELECT email FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ?', array(time()-600));
 		View::share('whosonline', $results);
 
 		$stocksTable = Lava::DataTable('Stocks');
@@ -52,19 +51,15 @@ class AdminDashboardController extends AdminController {
 			if(is_array($polls) && count($polls) > 0){
 				foreach($polls as $i => $_poll){
 					switch($_poll->type){
-						/*
-							type: function or html
-								html: results are passed back in the 'args' field and updated to the element defined in fnAddPoll
-								function: results are passed back to the function, func, with whatever results you want, example parses an array				
-						*/
 						case "check_logs":
-							$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>array('Notifaction triggered'));
+							$list = Activity::whereRaw('UNIX_TIMESTAMP(`created_at`) > ? AND content_type="notification"', array(Session::get('usersonline_lastcheck', time())))->select(array('description', 'details'))->orderBy('id', 'DESC')->get()->toArray();
+							Session::put('usersonline_lastcheck', time());
+							$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>$list);
 						break;
 						case "users_online":
 							$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());
 						break;
 					}
-
 				}
 			}
 		return Response::json($_results);

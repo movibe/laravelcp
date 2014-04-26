@@ -39,7 +39,6 @@ Route::filter('checkuser', function()
 			'updated'     => Confide::user()->id ? true : false,
 		));
 
-
 		/* user no longer confirmed, kick em out! */
 		if(Auth::user()->confirmed != '1'){
 			Confide::logout();

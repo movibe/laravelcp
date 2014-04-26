@@ -134,11 +134,11 @@
 		/* call back from results */
 		function fnUpdateGrowler(id, args){
 			$.each(args, function(i,value){
-				$.bootstrapGrowl(value, { type: 'success' });
+				if(value != '') $.bootstrapGrowl(value.details, { type: value.description });
 			});
 		}
 
-		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '5'});
+		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '1'});
 		$.fn.poller('run');
 
 		$('.mobile-loading').removeClass('visible-xs').hide();
