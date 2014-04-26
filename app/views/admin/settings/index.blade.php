@@ -4,7 +4,11 @@
 	{{{ $title }}} :: @parent
 @stop
 
-@section('content')
+@section('left-layout-nav')
+	@include('admin/navigation/settings')
+@stop
+
+@section('left-layout-content')
 	<div class="page-header">
 		<h3>{{{ $title }}}</h3>
 	</div>
@@ -46,3 +50,4 @@
 		</div>
 	{{ Form::close(); }}
 @stop
+@include('admin/left-layout')

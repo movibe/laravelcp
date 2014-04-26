@@ -9,6 +9,7 @@
 		@yield('left-layout-nav')
 
 		 @if (Auth::user()->hasRole('admin'))
+			<br/>
 			 <ul class="list-group">
 			  <li class="list-group-item list-group-item-info">
 				<span class="badge">{{ count(DB::select('SELECT id FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ?', array(time()-150))) }}</span>

@@ -45,6 +45,7 @@
 					{{{ Lang::get('table.actions') }}} <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
+					@yield('users-massmenu')
 					<li><a href="#" data-action="user/mass/email" data-method="modal"  data-table="users" class="dt-mass">{{{ Lang::get('button.email') }}}</a></li>
 					<li class="divider"></li>
 					<li><a href="#" data-action="user/mass/merge" data-method="post"  data-table="users" data-confirm="true" class="dt-mass">{{{ Lang::get('button.merge') }}}</a></li>
