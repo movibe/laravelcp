@@ -532,12 +532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a8297d82813827b6ca72866d334226d6697ea828"
+                "reference": "2210d5d1d07debd2e9b0e67077b7088918ef904f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a8297d82813827b6ca72866d334226d6697ea828",
-                "reference": "a8297d82813827b6ca72866d334226d6697ea828",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2210d5d1d07debd2e9b0e67077b7088918ef904f",
+                "reference": "2210d5d1d07debd2e9b0e67077b7088918ef904f",
                 "shasum": ""
             },
             "require": {
@@ -640,7 +640,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-04-19 18:02:02"
+            "time": "2014-04-26 14:27:01"
         },
         {
             "name": "laravelbook/ardent",
@@ -707,22 +707,21 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "1.9.13",
+            "version": "1.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "f6da2ec2239a764032c197ebfe85c23faf694748"
+                "reference": "ab02c692d2bdad1009639f6ba319576af590620c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/f6da2ec2239a764032c197ebfe85c23faf694748",
-                "reference": "f6da2ec2239a764032c197ebfe85c23faf694748",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/ab02c692d2bdad1009639f6ba319576af590620c",
+                "reference": "ab02c692d2bdad1009639f6ba319576af590620c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "psr/log": "~1.0",
-                "raveren/kint": "0.9"
+                "psr/log": "~1.0"
             },
             "require-dev": {
                 "php": ">=5.3.0"
@@ -754,7 +753,7 @@
             "keywords": [
                 "debug"
             ],
-            "time": "2014-04-05 14:50:54"
+            "time": "2014-04-25 16:30:40"
         },
         {
             "name": "monolog/monolog",
@@ -1222,52 +1221,6 @@
             ],
             "description": "Extract schema information of a database into a program-friendly data structure",
             "time": "2013-06-13 14:24:55"
-        },
-        {
-            "name": "raveren/kint",
-            "version": "v0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/raveren/kint.git",
-                "reference": "ada810111ced4e3a926b4040da9b86442e43b613"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raveren/kint/zipball/ada810111ced4e3a926b4040da9b86442e43b613",
-                "reference": "ada810111ced4e3a926b4040da9b86442e43b613",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Kint.class.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rokas Šleinius",
-                    "homepage": "https://github.com/raveren"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/raveren/kint/contributors"
-                }
-            ],
-            "description": "Kint - debugging helper for PHP developers",
-            "homepage": "https://github.com/raveren/kint",
-            "keywords": [
-                "debug",
-                "kint",
-                "php"
-            ],
-            "time": "2013-08-12 22:46:16"
         },
         {
             "name": "regulus/activity-log",
@@ -2099,12 +2052,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Security.git",
-                "reference": "51da92e1e61e4ab73e5de664e6f8e22c59147deb"
+                "reference": "1f2b6d8dfea39071748becf040c8d8a23288e725"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Security/zipball/51da92e1e61e4ab73e5de664e6f8e22c59147deb",
-                "reference": "51da92e1e61e4ab73e5de664e6f8e22c59147deb",
+                "url": "https://api.github.com/repos/symfony/Security/zipball/1f2b6d8dfea39071748becf040c8d8a23288e725",
+                "reference": "1f2b6d8dfea39071748becf040c8d8a23288e725",
                 "shasum": ""
             },
             "require": {
@@ -2166,7 +2119,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-23 14:04:21"
+            "time": "2014-04-25 07:06:20"
         },
         {
             "name": "symfony/translation",
@@ -2332,12 +2285,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Zizaco/confide.git",
-                "reference": "e0e67e42b7c02ff458963a869da146c8f1809b6d"
+                "reference": "c03d302b008571f417e84c72cb80e295ba5cc2fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Zizaco/confide/zipball/e0e67e42b7c02ff458963a869da146c8f1809b6d",
-                "reference": "e0e67e42b7c02ff458963a869da146c8f1809b6d",
+                "url": "https://api.github.com/repos/Zizaco/confide/zipball/c03d302b008571f417e84c72cb80e295ba5cc2fb",
+                "reference": "c03d302b008571f417e84c72cb80e295ba5cc2fb",
                 "shasum": ""
             },
             "require": {
@@ -2384,7 +2337,7 @@
                 "illuminate",
                 "laravel"
             ],
-            "time": "2014-04-16 10:06:16"
+            "time": "2014-04-25 02:23:52"
         },
         {
             "name": "zizaco/entrust",
@@ -2454,12 +2407,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "82ffa52d7969c8ce55849806cee386810f45a1a3"
+                "reference": "f77f5ae7700936751d39268ec92fbe0a0050981b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/82ffa52d7969c8ce55849806cee386810f45a1a3",
-                "reference": "82ffa52d7969c8ce55849806cee386810f45a1a3",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/f77f5ae7700936751d39268ec92fbe0a0050981b",
+                "reference": "f77f5ae7700936751d39268ec92fbe0a0050981b",
                 "shasum": ""
             },
             "require": {
@@ -2497,7 +2450,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2014-04-22 12:29:06"
+            "time": "2014-04-25 11:47:00"
         },
         {
             "name": "dflydev/markdown",
@@ -2854,12 +2807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1"
+                "reference": "62e530073cba7c479b48c1d517565adfa6ba9d51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
-                "reference": "558a4ffb31640ffbda3e9e905c24bc9a219b7bf1",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/62e530073cba7c479b48c1d517565adfa6ba9d51",
+                "reference": "62e530073cba7c479b48c1d517565adfa6ba9d51",
                 "shasum": ""
             },
             "require": {
@@ -2917,7 +2870,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-04-24 23:05:50"
+            "time": "2014-04-25 21:40:27"
         },
         {
             "name": "doctrine/inflector",
@@ -3105,12 +3058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "1cd0f9516d3c39126b31bf50bcbf873dc65f29bf"
+                "reference": "09cad223615eac9e229837c9d44792f393529328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/1cd0f9516d3c39126b31bf50bcbf873dc65f29bf",
-                "reference": "1cd0f9516d3c39126b31bf50bcbf873dc65f29bf",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/09cad223615eac9e229837c9d44792f393529328",
+                "reference": "09cad223615eac9e229837c9d44792f393529328",
                 "shasum": ""
             },
             "require": {
@@ -3163,7 +3116,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2014-04-21 19:33:11"
+            "time": "2014-04-25 09:53:30"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -3217,12 +3170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "aef655b2481c7ef8c8b73288c383261b2bb7e2a2"
+                "reference": "e3741b4937c32bc3b101e4c670083fe0ee78d225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/aef655b2481c7ef8c8b73288c383261b2bb7e2a2",
-                "reference": "aef655b2481c7ef8c8b73288c383261b2bb7e2a2",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/e3741b4937c32bc3b101e4c670083fe0ee78d225",
+                "reference": "e3741b4937c32bc3b101e4c670083fe0ee78d225",
                 "shasum": ""
             },
             "require": {
@@ -3239,7 +3192,8 @@
             },
             "suggest": {
                 "ext-dom": "*",
-                "ext-xdebug": ">=2.2.1"
+                "ext-xdebug": ">=2.2.1",
+                "ext-xmlwriter": "*"
             },
             "type": "library",
             "extra": {
@@ -3273,7 +3227,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-03 03:26:47"
+            "time": "2014-04-26 09:30:11"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3464,16 +3418,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0281c20b509dfee072905bc2d8f1e7f7d44cae2b"
+                "reference": "fa29ea1b706a6239e10f3ad5ab98de168f37360c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0281c20b509dfee072905bc2d8f1e7f7d44cae2b",
-                "reference": "0281c20b509dfee072905bc2d8f1e7f7d44cae2b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fa29ea1b706a6239e10f3ad5ab98de168f37360c",
+                "reference": "fa29ea1b706a6239e10f3ad5ab98de168f37360c",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
@@ -3491,9 +3446,6 @@
                 "symfony/yaml": "~2.0"
             },
             "suggest": {
-                "ext-json": "*",
-                "ext-simplexml": "*",
-                "ext-tokenizer": "*",
                 "phpunit/php-invoker": "~1.1"
             },
             "bin": [
@@ -3532,7 +3484,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-24 07:56:19"
+            "time": "2014-04-26 06:27:57"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

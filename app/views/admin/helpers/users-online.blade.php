@@ -7,7 +7,6 @@
 				<p class="list-group-item-text">
 					<span class="glyphicon"><img alt="{{{ $row->email }}}" src="{{ Gravatar::src($row->email, 40) }}"></span>  
 					<span class="hidden-sm">{{{ $row->email }}}</span>
-					
 				</p>
 			</a>
 		</li>

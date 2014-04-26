@@ -71,7 +71,6 @@
 							value.size_y=$('#'+ value.id).attr('data-sizey-old')
 							_positions[i]=value;
 						}
-					
 					});
 					_save_positions(JSON.stringify(_positions));
 				}

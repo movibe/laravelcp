@@ -364,6 +364,7 @@ class ConfideUser extends Ardent implements UserInterface {
      * @var array
      */
     protected $updateRules = array(
+        'username' => 'required|alpha_dash',
         'email' => 'required|email',
         'password' => 'min:4|confirmed',
         'password_confirmation' => 'min:4',
