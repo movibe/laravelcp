@@ -31,13 +31,15 @@ Route::filter('checkuser', function()
 	if (Auth::check()){
 		DB::update('UPDATE users SET last_activity = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time()), Auth::user()->id));
 
-		Activity::log(array(
-			'contentID'   => Confide::user()->id,
-			'contentType' => 'activity',
-			'description' => 'Page Loaded',
-			'details'     => '<a href="'.$_SERVER['REQUEST_URI'].'" target="_new" class="btn">link</a>',
-			'updated'     => Confide::user()->id ? true : false,
-		));
+		if (!Request::ajax()){
+			Activity::log(array(
+				'contentID'   => Confide::user()->id,
+				'contentType' => 'activity',
+				'description' => 'Page Loaded',
+				'details'     => '<a href="'.$_SERVER['REQUEST_URI'].'" target="_new" class="btn">link</a>',
+				'updated'     => Confide::user()->id ? true : false,
+			));
+		}
 
 		/* user no longer confirmed, kick em out! */
 		if(Auth::user()->confirmed != '1'){
