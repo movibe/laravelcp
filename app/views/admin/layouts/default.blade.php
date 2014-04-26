@@ -138,7 +138,7 @@
 			});
 		}
 
-		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '1'});
+		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '5'});
 		$.fn.poller('run');
 
 		$('.mobile-loading').removeClass('visible-xs').hide();
