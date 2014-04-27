@@ -48,7 +48,16 @@ Let me know what you think!
 
 - ~~Complete the json/xml api~~
 - ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
-- Find out what users want in a simple user/site manager
+
+
+
+
+# BEFORE YOU BEGIN!
+
+We hope users will extend the application instead of modifying its core components. This will allow the application to grow depending on community support. If you do make changes to the core components consider forking and and making pull requests with your changes.
+[Read more here](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravalCP)
+
+
 
 
 # From the forked repo:
