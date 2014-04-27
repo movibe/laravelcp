@@ -7,15 +7,7 @@
 
 ![ScreenShot](http://i.imgur.com/jXWwr1e.png)
 
-**Mobile**
-- <img src="http://i.imgur.com/PyYwOzL.png" width="80">
-- <img src="http://i.imgur.com/y1XN7MY.png" width="80">
-
-**login page**
-- <img src="http://i.imgur.com/UlH6WHi.png" width="80">
-
-**search**
-- <img src="http://i.imgur.com/tuM5znj.png" width="80">
+[More Screenshots](https://github.com/gcphost/l4-bootstrap-admin/wiki/Screenshots)
 
 # Preamble 
 I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
@@ -25,7 +17,8 @@ I decided to create my own based on his but this time include everything I wante
 Let me know what you think!
 
 
-
+## How you can help!
+If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
 
 
 # Features
@@ -54,9 +47,18 @@ Let me know what you think!
 
 # Roadmap
 
-- Complete the json/xml api
-- Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package
-- Find out what users want in a simple user/site manager
+- ~~Complete the json/xml api~~
+- ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
+
+
+
+
+# BEFORE YOU BEGIN!
+
+We hope users will extend the application instead of modifying its core components. This will allow the application to grow depending on community support. If you do make changes to the core components consider forking and and making pull requests with your changes.
+[Read more here](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravalCP)
+
+
 
 
 # From the forked repo:
