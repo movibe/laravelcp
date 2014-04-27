@@ -17,7 +17,8 @@ I decided to create my own based on his but this time include everything I wante
 Let me know what you think!
 
 
-
+## How you can help!
+If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
 
 
 # Features
