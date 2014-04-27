@@ -483,11 +483,14 @@ class AdminUsersController extends AdminController {
      */
     public function getData()
     {
-        $users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')->distinct()
-                    ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                    ->select(array('users.id', 'users.displayname','users.email', 'roles.name as rolename'));
+        
+		
 
-	 //  $users = User::select(array('users.id', 'users.displayname','users.email'));
+		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
+                    ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
+                    ->select(DB::raw('users.id, users.username,users.email,group_concat(roles.name) as rolename,users.confirmed, users.created_at'))->groupBy(DB::raw('users.id, users.username,users.email,users.confirmed, users.created_at'))->orderBy('users.id');
+
+
 		if(Api::Enabled()){
 			$u=$users->get();
 			return $u->toArray();

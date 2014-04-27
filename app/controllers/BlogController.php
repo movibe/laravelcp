@@ -29,7 +29,12 @@ class BlogController extends BaseController {
     
 
 	public function getJavascript(){
-		return View::make('translations');
+
+$contents = View::make('translations');
+$response = Response::make($contents);
+$response->header('Content-Type', 'application/javascript');
+return $response;
+
 	}
 
 
