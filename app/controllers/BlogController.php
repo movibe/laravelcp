@@ -27,6 +27,12 @@ class BlogController extends BaseController {
         $this->user = $user;
     }
     
+
+	public function getJavascript(){
+		return View::make('translations');
+	}
+
+
 	/**
 	 * Returns all the blog posts.
 	 *

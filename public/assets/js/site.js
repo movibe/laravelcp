@@ -78,7 +78,7 @@ function dtLoad(table, action, hidemd, hidesm){
 			$.each(aSelected, function(i,value){ _ids+=value+','; });
 			modalfyRun(this,$(this).attr('data-action')+'?ids='+_ids);
 		}else if($(this).attr('data-confirm') == 'true'){
-			bootbox.confirm('Are you sure?', function(result) {
+			bootbox.confirm(lang_areyousure, function(result) {
 				if(result) fnRunMass(action, table, method, aSelected);
 			});
 		} else fnRunMass(action, table, method, aSelected);
@@ -89,7 +89,7 @@ function dtLoad(table, action, hidemd, hidesm){
 /* on clicks */
 $(document).on("click", ".ajax-alert", function(e) {
 	e.preventDefault();    
-	bootbox.confirm("Are you sure?", function(result) {    
+	bootbox.confirm(lang_areyousure, function(result) {    
 		if (result) document.location.href = $(this).attr("href");    
 	});
 });
@@ -104,7 +104,7 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 	if(!data_type) data_type='json';
 	if(!data_method) data_method='POST';
 
-	bootbox.confirm("Are you sure?", function(result) {    
+	bootbox.confirm(lang_areyousure, function(result) {    
 		if (result) {
 			$.ajax({
 				type: data_method,
@@ -124,12 +124,12 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 						}
 					}else {
 						console.log(msg);
-						bootbox.alert( "Unable to execute command, "+ msg.error);
+						bootbox.alert( lang_unable_to_exec + msg.error);
 					}
 				}
 			}).fail(function( jqXHR, textStatus ) {
  					console.log(jqXHR);
-					bootbox.alert( "Unable to execute command, "+ textStatus);
+					bootbox.alert( lang_unable_to_exec + textStatus);
 			});
 		}    
 	});
@@ -167,11 +167,11 @@ function modalfyRun(th,url){
 			$('#site-modal').html(msg).modal();
 		} else {
 			console.log(msg);
-			bootbox.alert( "Unable to execute command.");
+			bootbox.alert(lang_unable_to_exec);
 		}
 	}).fail(function(jqXHR, textStatus) {
 			console.log(jqXHR);
-			bootbox.alert( "Unable to execute command, "+ textStatus);
+			bootbox.alert( lang_unable_to_exec + textStatus);
 	 });
 }
 
@@ -193,11 +193,11 @@ function fnRunMass(action, data_table, data_method,aSelected){
 				$(".dt-pop-control").fadeOut();
 			}else {
 				console.log(msg);
-				bootbox.alert( "Unable to execute command, "+ msg.error);
+				bootbox.alert( lang_unable_to_exec + msg.error);
 			}
 	  }).fail(function(jqXHR, textStatus) {
 			console.log(jqXHR);
-			bootbox.alert( "Unable to execute command, "+ textStatus);
+			bootbox.alert( lang_unable_to_exec + textStatus);
 	  });
 }
 

@@ -48,6 +48,7 @@ return array(
 	'email_not_sent' => 'E-mail not sent',
 	'loginwith'=>'Login with',
 	'mergeerror'=>'Merge more then one user',
+	'unable_to_exec' => 'Unable to execute command',
 
 );
 

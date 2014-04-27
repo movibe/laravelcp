@@ -26,6 +26,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
+	<script src="{{{ URL::to('translation.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.poller.js') }}}"></script>
 	<script type="text/javascript">
 		/* setup poller with the url */

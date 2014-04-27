@@ -132,6 +132,9 @@ Route::when('contact-us','detectLang');
 Route::post('contact-us', 'BlogController@postContactUs');
 Route::get('contact-us', 'BlogController@getContactUs');
 
+# Get javascript translations
+Route::get('translation.js', 'BlogController@getJavascript');
+
 
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
