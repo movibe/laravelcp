@@ -17,8 +17,8 @@
             <!--<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>-->
             <div class="col-md-10">
                <div class="input-group">
-                                 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
-                                </span></div>
+				 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
+				</span></div>
             </div>
         </div>
         <div class="form-group">
@@ -51,13 +51,11 @@
             <div class=" col-md-12">
 
 				<button tabindex="3" type="submit" class="btn btn-primary">{{{ Lang::get('user/user.login') }}}</button>
-or
+				{{ Lang::get('core.or') }}
 				<div class="btn-group">
 				@foreach ($providers as $provider)
-						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="Login with {{{ $provider }}}" class="btn btn-default" ><span class="fa fa-lg fa-fw fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
+						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="{{ Lang::get('core.loginwith') }} {{{ $provider }}}" class="btn btn-default" ><span class="fa fa-lg fa-fw fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
 				@endforeach</div>
-
-                
             </div>
         </div>
     </fieldset>

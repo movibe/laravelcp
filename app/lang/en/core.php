@@ -30,6 +30,7 @@ return array(
 	'content' => 'Content',
 	'emails' => 'E-mails',
 	'email' => 'E-mail',
+	'mass_email' => 'Mass e-mail',
 	'all' => 'All',
 	'template'=>'Template',
 	'parent'=>'Parent',
@@ -41,9 +42,11 @@ return array(
 	'success' => 'Success',
 	'warning' => 'Warning',
 	'info' => 'Info',
+	'or' => 'or',
 	'check_for_errors' => 'Please check the form below for errors',
 	'email_sent' => 'E-mail sent',
 	'email_not_sent' => 'E-mail not sent',
+	'loginwith'=>'Login with',
 
 );
 

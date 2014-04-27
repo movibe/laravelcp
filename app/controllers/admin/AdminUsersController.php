@@ -426,7 +426,8 @@ class AdminUsersController extends AdminController {
     public function postEmail($user=false)
     {
 
-		$title = 'E-mail';
+		$title = Lang::get('core.email');
+
 		if(is_array(Input::get('to')) && count(Input::get('to')) >0){
 			$_results=false;
 			foreach (Input::get('to') as $user_id){
@@ -467,7 +468,8 @@ class AdminUsersController extends AdminController {
 		
 		}
 
-		$title = 'Mass Mail';
+		$title = Lang::get('core.mass_email');
+
 		$mode = 'edit';
 		$templates=$this->emailTemplates();
 		if(!Api::View(compact('title', 'mode', 'multi', 'templates')))return View::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));

@@ -11,9 +11,9 @@
 	<h1>{{{ Lang::get('site.sign_up') }}}</h1>
 </div>
 <h4> {{{ Lang::get('site.created_with') }}}</h4><div class="btn-group">
-				@foreach ($providers as $provider)
-						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title=" {{{ Lang::get('site.created_with') }}} {{{ $provider }}}" class="btn btn-default" ><i style="font-size: 18px"  class="fa fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></i></a>
-				@endforeach</div>
+	@foreach ($providers as $provider)
+		<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title=" {{{ Lang::get('site.created_with') }}} {{{ $provider }}}" class="btn btn-default" ><i style="font-size: 18px"  class="fa fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></i></a>
+	@endforeach</div>
 <br/>
 <br/>
 <h4> {{{ Lang::get('site.create_with_or') }}}</h4>
