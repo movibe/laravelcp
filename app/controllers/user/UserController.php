@@ -84,7 +84,7 @@ class UserController extends BaseController {
     {
 		$rules = array(
 			'create_hp'   => 'honeypot',
-			'create_hp_time'   => 'required|honeytime:5'
+			'create_hp_time'   => 'required|honeytime:3'
 		);
 
 		// Validate the inputs
@@ -103,12 +103,8 @@ class UserController extends BaseController {
 			if(!empty($password)) {
 				if($password === $passwordConfirmation) {
 					$this->user->password = $password;
-					// The password confirmation will be removed from model
-					// before saving. This field will be used in Ardent's
-					// auto validation.
 					$this->user->password_confirmation = $passwordConfirmation;
 				} else {
-					// Redirect to the new user page
 					return Redirect::to('user/create')
 						->withInput(Input::except('password','password_confirmation'))
 						->with('error', Lang::get('admin/users/messages.password_does_not_match'));
@@ -118,14 +114,16 @@ class UserController extends BaseController {
 				unset($this->user->password_confirmation);
 			}
 
-			// Save if valid. Password field will be hashed before save
 			$this->user->save();
 
 			if ( $this->user->id )
 			{
+				$user=User::find($this->user->id);
+				$user->saveRoles(array(Setting::get('users.default_role_id')));
+
 				// Redirect with success message, You may replace "Lang::get(..." for your custom message.
 				return Redirect::to('user/login')
-					->with( 'notice', Lang::get('user/user.user_account_created') );
+					->with( 'emailvalidation', Lang::get('user/user.user_account_created') );
 			}
 			else
 			{

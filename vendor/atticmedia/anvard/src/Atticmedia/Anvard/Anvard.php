@@ -194,10 +194,6 @@ class Anvard {
             $rules = $this->config['db']['userrules'];
             $result = $user->save($rules);
 
-			// will bowman
-			$user->saveRoles(array(\Setting::get('users.default_role_id')));
-
-
             if ( !$result ) {
                 $this->logger->error('Anvard: FAILED TO SAVE USER');
                 return NULL;

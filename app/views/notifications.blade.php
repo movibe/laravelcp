@@ -19,6 +19,19 @@
     @endif
 </div>
 @endif
+@if ($message = Session::get('emailvalidation'))
+<div class="alert alert-success alert-block">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<h4>{{{ Lang::get('user/user.user_account_created_email') }}}</h4>
+    @if(is_array($message))
+        @foreach ($message as $m)
+            {{ $m }}
+        @endforeach
+    @else
+        {{ $message }}
+    @endif
+</div>
+@endif
 
 @if ($message = Session::get('error'))
 <div class="alert alert-danger alert-block">

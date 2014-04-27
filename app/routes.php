@@ -21,19 +21,6 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('id', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
-/*
-example for hooking into the navigation among other items
-
-Event::listen('page.admin', function()
-{
-
-});
-
-View::composer('*navigation', function($view)
-{
-    $view->nest('test','admin/test');
-});
-*/
 
 /** ------------------------------------------
  *  Admin Routes

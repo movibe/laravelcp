@@ -39,8 +39,8 @@
 		@endif
 		@endforeach
 
-		<ul class="nav nav-tabs">@yield('tabs')</ul>
-		<div class="tab-content">@yield('tab-content')</div>
+		<ul class="nav settings-tabs">@yield('tabs')</ul>
+		<div class="settings-tab-content">@yield('tab-content')</div>
 
 		<div class="form-group">
 			<div class="col-md-12">

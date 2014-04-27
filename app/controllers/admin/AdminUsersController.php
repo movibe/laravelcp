@@ -391,6 +391,7 @@ class AdminUsersController extends AdminController {
     
 	private function sendEmail($user, $template='emails.default'){
 		if (!View::exists($template))$template='emails.default';
+
 		$this->email=$user->email;
 
 		try{
@@ -484,12 +485,9 @@ class AdminUsersController extends AdminController {
     public function getData()
     {
         
-		
-
 		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                    ->select(DB::raw('users.id, users.username,users.email,group_concat(roles.name) as rolename,users.confirmed, users.created_at'))->groupBy(DB::raw('users.id, users.username,users.email,users.confirmed, users.created_at'))->orderBy('users.id');
-
+                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))->groupBy(DB::raw('users.id , users.displayname , users.email'))->orderBy('users.id');
 
 		if(Api::Enabled()){
 			$u=$users->get();
