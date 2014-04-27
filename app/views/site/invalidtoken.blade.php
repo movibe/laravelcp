@@ -7,6 +7,6 @@
 @section('content')
 <div class="page-header">
 	<h3>{{{ Lang::get('site.no_permission') }}}</h3>
-	{{{ Lang::get('site.no_permission_csrf') }}}
 </div>
+{{{ Lang::get('site.no_permission_csrf') }}}
 @stop

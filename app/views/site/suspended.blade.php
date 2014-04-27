@@ -7,6 +7,6 @@
 @section('content')
 <div class="page-header">
 	<h3>{{{ Lang::get('site.no_longer_active') }}}</h3>
-	{{{ Lang::get('site.no_longer_active_reason') }}}
 </div>
+{{{ Lang::get('site.no_longer_active_reason') }}}
 @stop
