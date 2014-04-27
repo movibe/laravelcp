@@ -96,6 +96,8 @@
 	<h4>{{{ Lang::get('site.add_comment') }}}</h4>
 	<form method="post" action="{{{ URL::to($post->slug) }}}">
 		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}" />
+		{{ Form::honeypot('comment_hp', 'comment_hp_time') }}
+
 		<div class="form-group">
 			<div class="col-md-12">
 				<textarea class="col-md-12 input-block-level" rows="4" name="comment" id="comment">{{{ Request::old('comment') }}}</textarea>

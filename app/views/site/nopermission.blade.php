@@ -6,12 +6,7 @@
 @stop
 @section('content')
 <div class="page-header">
-	@if (!Auth::user())
-		<h3>{{{ Lang::get('site.no_permission') }}}</h3>
-		{{ Lang::get('site.login_link', array('link' => URL::to('user/login'))) }}
-	@else
-		<h3>{{{ Lang::get('site.no_permission') }}}</h3>
-	@endif
-
+	<h3>{{{ Lang::get('site.no_permission') }}}</h3>
 </div>
+{{ Lang::get('site.login_link', array('link' => URL::to('user/login'))) }}
 @stop

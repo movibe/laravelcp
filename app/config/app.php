@@ -126,7 +126,7 @@ return array(
 
 'Raahul\LarryFour\LarryFourServiceProvider',
 'Atticmedia\Anvard\AnvardServiceProvider',
-
+'Msurguy\Honeypot\HoneypotServiceProvider',
 
 
 

@@ -485,6 +485,7 @@ class AdminUsersController extends AdminController {
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
                     ->select(array('users.id', 'users.displayname','users.email', 'roles.name as rolename'));
 
+	 //  $users = User::select(array('users.id', 'users.displayname','users.email'));
 		if(Api::Enabled()){
 			$u=$users->get();
 			return $u->toArray();

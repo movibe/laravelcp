@@ -6,7 +6,6 @@
 @parent
 @stop
 
-{{-- Content --}}
 @section('content')
 <div class="page-header">
 	<h1>{{{ Lang::get('site.sign_up') }}}</h1>
@@ -22,11 +21,17 @@
 
 <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+	{{ Form::honeypot('create_hp', 'create_hp_time') }}
+
     <fieldset>
-        <div class="form-group">
+		<div class="form-group">
+			<input class="form-control" placeholder="{{{ Lang::get('core.fullname') }}}" type="text" name="name">
+		</div>
+       <div class="form-group">
             <div class="input-group">
-                                <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}"><span class="input-group-addon"><span class="fa fa-envelope"></span>
-                                </span></div>
+				<input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
+				<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+			</div>
         </div>
         <div class="form-group">
             <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">

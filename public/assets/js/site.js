@@ -294,5 +294,3 @@ $(document).on("click", ".btn-toggle", function(e) {
     	$(this).find('.btn').toggleClass('btn-info');
     }
 });
-
-

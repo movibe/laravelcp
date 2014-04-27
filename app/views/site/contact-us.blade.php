@@ -14,6 +14,7 @@
         <div class="col-md-8">
             <div class="well well-sm">
 				{{ Form::open() }}
+				{{ Form::honeypot('contact_us', 'contact_us_time') }}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">&nbsp;</label>

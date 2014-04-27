@@ -129,8 +129,8 @@ Route::controller('user', 'UserController');
 Route::when('contact-us','detectLang');
 
 # Contact Us Static Page
-Route::post('contact-us', 'UserController@postContactUs');
-Route::get('contact-us', 'UserController@getContactUs');
+Route::post('contact-us', 'BlogController@postContactUs');
+Route::get('contact-us', 'BlogController@getContactUs');
 
 
 # Posts - Second to last set, match slug

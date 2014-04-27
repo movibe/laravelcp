@@ -32,7 +32,8 @@
 		"regulus/activity-log": "dev-master",
 		"caouecs/laravel4-lang": "dev-master",
 		"raahul/larryfour": "1.*",
-		"hybridauth/hybridauth": "*"
+		"hybridauth/hybridauth": "*",
+		"msurguy/honeypot": "dev-master"
 	},
 	"require-dev": {
         "way/generators": "dev-master",

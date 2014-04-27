@@ -59,28 +59,6 @@ class UserController extends BaseController {
         return View::make('site/suspended');
     }
 	
-	public function postContactUs(){
-
-		try{
-			$body='From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body');
-
-			$send=Mail::send('emails/default', array('body'=>$body), function($message)
-			{
-				$message->to(Setting::get('site.contact_email'))->subject(Input::get('subject'));
-				$message->replyTo(Input::get('email', Input::get('name')));
-
-			});
-		} catch (Exception $e) {
-		 return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
-		}
-
-        return Redirect::to('contact-us')->with( 'success', Lang::get('core.email_sent') );
-
-	}
-
-	public function getContactUs(){
-		return View::make('site/contact-us');
-	}
 
 	/**
      * Users settings page
@@ -104,47 +82,63 @@ class UserController extends BaseController {
      */
     public function postIndex()
     {
-        $this->user->email = Input::get( 'email' );
+		$rules = array(
+			'create_hp'   => 'honeypot',
+			'create_hp_time'   => 'required|honeytime:5'
+		);
 
-        $password = Input::get( 'password' );
-        $passwordConfirmation = Input::get( 'password_confirmation' );
+		// Validate the inputs
+		$validator = Validator::make(Input::all(), $rules);
 
-        if(!empty($password)) {
-            if($password === $passwordConfirmation) {
-                $this->user->password = $password;
-                // The password confirmation will be removed from model
-                // before saving. This field will be used in Ardent's
-                // auto validation.
-                $this->user->password_confirmation = $passwordConfirmation;
-            } else {
-                // Redirect to the new user page
-                return Redirect::to('user/create')
-                    ->withInput(Input::except('password','password_confirmation'))
-                    ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
-            }
-        } else {
-            unset($this->user->password);
-            unset($this->user->password_confirmation);
-        }
+		// Check if the form validates with success
+		if ($validator->passes())
+		{
 
-        // Save if valid. Password field will be hashed before save
-        $this->user->save();
+			$this->user->email = Input::get( 'email' );
+			$this->user->displayname = Input::get( 'name' );
 
-        if ( $this->user->id )
-        {
-            // Redirect with success message, You may replace "Lang::get(..." for your custom message.
-            return Redirect::to('user/login')
-                ->with( 'notice', Lang::get('user/user.user_account_created') );
-        }
-        else
-        {
-            // Get validation errors (see Ardent package)
-            $error = $this->user->errors()->all();
+			$password = Input::get( 'password' );
+			$passwordConfirmation = Input::get( 'password_confirmation' );
 
-            return Redirect::to('user/create')
-                ->withInput(Input::except('password'))
-                ->with( 'error', $error );
-        }
+			if(!empty($password)) {
+				if($password === $passwordConfirmation) {
+					$this->user->password = $password;
+					// The password confirmation will be removed from model
+					// before saving. This field will be used in Ardent's
+					// auto validation.
+					$this->user->password_confirmation = $passwordConfirmation;
+				} else {
+					// Redirect to the new user page
+					return Redirect::to('user/create')
+						->withInput(Input::except('password','password_confirmation'))
+						->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+				}
+			} else {
+				unset($this->user->password);
+				unset($this->user->password_confirmation);
+			}
+
+			// Save if valid. Password field will be hashed before save
+			$this->user->save();
+
+			if ( $this->user->id )
+			{
+				// Redirect with success message, You may replace "Lang::get(..." for your custom message.
+				return Redirect::to('user/login')
+					->with( 'notice', Lang::get('user/user.user_account_created') );
+			}
+			else
+			{
+				// Get validation errors (see Ardent package)
+				$error = $this->user->errors()->all();
+
+				return Redirect::to('user/create')
+					->withInput(Input::except('password'))
+					->with( 'error', $error );
+			}
+		} else return Redirect::to('user/create')
+					->withInput(Input::except('password'))
+					->withErrors($validator);
     }
 
     /**

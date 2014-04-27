@@ -98,7 +98,9 @@ class BlogController extends BaseController {
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'comment' => 'required|min:3'
+			'comment' => 'required|min:3',
+			'comment_hp'   => 'honeypot',
+			'comment_time'   => 'required|honeytime:5'
 		);
 
 		// Validate the inputs
@@ -126,4 +128,39 @@ class BlogController extends BaseController {
 		// Redirect to this blog post page
 		return Redirect::to($slug)->withInput()->withErrors($validator);
 	}
+
+	public function postContactUs(){
+
+			$rules = array(
+				'email'     => "required|email",
+				'conact_us'   => 'honeypot',
+				'contact_us_time'   => 'required|honeytime:5'
+			);
+			 
+			$validator = Validator::make(Input::get(), $rules);
+
+			if ($validator->passes())
+			{
+				try{
+					$body='From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body');
+
+					$send=Mail::send('emails/default', array('body'=>$body), function($message)
+					{
+						$message->to(Setting::get('site.contact_email'))->subject(Input::get('subject'));
+						$message->replyTo(Input::get('email', Input::get('name')));
+
+					});
+				} catch (Exception $e) {
+				 return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
+				}
+			} else return Redirect::to('contact-us')->withInput()->with( 'error', Lang::get('core.email_not_sent') );
+
+        return Redirect::to('contact-us')->with( 'success', Lang::get('core.email_sent') );
+
+	}
+
+	public function getContactUs(){
+		return View::make('site/contact-us');
+	}
+
 }

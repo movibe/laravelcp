@@ -27,5 +27,4 @@
     </tr>
     </tbody>
 </table>
-<hr/>
 @stop
