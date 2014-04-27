@@ -306,22 +306,24 @@ class AdminUsersController extends AdminController {
 		if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
     }
 
+	private function runDeleteMass($r){
+		if ($r != Confide::user()->id){
+			$user = User::find($r);
+			try {
+				$user->delete();
+			} catch (Exception $e) {
+				if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
+			}
+		}
+
+	}
 
     public function postDeleteMass()
     {
 		$rows=json_decode(Input::get('rows'));
 		if(is_array($rows) && count($rows) > 0){
-			foreach($rows as $i=>$r){
-				if ($r != Confide::user()->id){
-					$user = User::find($r);
-					try {
-						$user->delete();
-					} catch (Exception $e) {
-						if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
-					}
-				}
-			}
-		}
+			foreach($rows as $i=>$r) $this->runDeleteMass($r);
+		}elseif(is_integer($rows))$this->runDeleteMass($rows);
 		if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
 	}
 
