@@ -25,19 +25,28 @@
 
     <fieldset>
 		<div class="form-group">
-			<input class="form-control" placeholder="{{{ Lang::get('core.fullname') }}}" type="text" name="name">
+			<div class="input-group">
+			<input class="form-control" placeholder="{{{ Lang::get('core.fullname') }}}" type="text" name="name" value="{{{ Input::old('name') }}}">
+				<span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
+			</div>
 		</div>
        <div class="form-group">
             <div class="input-group">
 				<input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
-				<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+				<span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span></span>
 			</div>
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
+			 <div class="input-group">
+				<input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
+				<span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
+			</div>
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
+			 <div class="input-group">
+	          <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
+				<span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
+			</div>
         </div>
 
         @if ( Session::get('error') )

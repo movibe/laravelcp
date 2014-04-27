@@ -14,7 +14,7 @@
 				@yield('main-nav-pre')
 				<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}" title="{{{ Lang::get('core.users') }}}">
 					<a id="nav_users" class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/users') }}}">
-						<span class="fa fa-users"></span> {{{ Lang::get('core.users') }}} <span class="caret"></span>
+						<span class="fa fa-fw fa-users"></span> {{{ Lang::get('core.users') }}} <span class="caret"></span>
 					</a>
 					<ul aria-labelledby="nav_users" class="dropdown-menu">
 						<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/users') }}}"><span class="fa fa-user fa-fw"></span> &nbsp; {{{ Lang::get('core.users') }}}</a></li>
@@ -28,11 +28,11 @@
 				<li class="hidden-xs" title="{{ date('l, d M Y', time()) }}"><a href="#">{{ date('l, d M Y', time()) }}</a></li>
 				<li class="hidden-xs panel-weather"></li>
 				
-				<li><a href="#" class="nav-search"><span class="fa fa-lg fa-search"></span></a></li>
+				<li><a href="#" class="nav-search"><span class="fa fa-lg fa-search fa-fw"></span></a></li>
 
 				<li class="dropdown{{ (Request::is('admin/settings*') ? ' active' : '') }}" title="{{{ Lang::get('core.settings') }}}">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="fa fa-lg fa-cogs"></span>
+						<span class="fa fa-lg fa-cogs fa-fw"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/settings') }}}"><span class="fa fa-cog fa-fw"></span>  &nbsp; {{{ Lang::get('core.settings') }}}</a></li>

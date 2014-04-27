@@ -17,7 +17,7 @@
             <!--<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>-->
             <div class="col-md-10">
                <div class="input-group">
-                                 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-envelope"></span>
+                                 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
                                 </span></div>
             </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-12">
                 <div class="checkbox">
                     <label for="remember">{{ Lang::get('confide::confide.login.remember') }}
                         <input type="hidden" name="remember" value="0">
@@ -48,13 +48,13 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class=" col-md-12">
 
 				<button tabindex="3" type="submit" class="btn btn-primary">{{{ Lang::get('user/user.login') }}}</button>
 or
 				<div class="btn-group">
 				@foreach ($providers as $provider)
-						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="Login with {{{ $provider }}}" class="btn btn-default" ><i style="font-size: 18px" class="fa fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></i></a>
+						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="Login with {{{ $provider }}}" class="btn btn-default" ><span class="fa fa-lg fa-fw fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
 				@endforeach</div>
 
                 

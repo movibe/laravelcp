@@ -8,7 +8,9 @@
 {{-- Content --}}
 @section('content')
 
-<h3>{{{ Lang::get('site.contact_us') }}}</h3>
+<div class="page-header">
+	<h3>{{{ Lang::get('site.contact_us') }}}</h3>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -19,21 +21,21 @@
                     <div class="col-md-6">
                         <div class="form-group">&nbsp;</label>
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="fa fa-user"></span>
+                                <span class="input-group-addon"><span class="fa fa-fw fa-user"></span>
                                 </span>
                             <input name="name" type="text" class="form-control" id="name" placeholder="{{{ Lang::get('site.your_name') }}}" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="email">&nbsp;</label>
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="fa fa-envelope"></span>
+                                <span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
                                 </span>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="{{{ Lang::get('site.your_email') }}}" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="subject">&nbsp;</label>
                              <div class="input-group">
-                                <span class="input-group-addon"><span class="fa fa-question"></span>
+                                <span class="input-group-addon"><span class="fa fa-fw fa-question"></span>
                                 </span><select id="subject" name="subject" class="form-control" required="required">
                                 <option value="" selected="">{{{ Lang::get('site.subject') }}}</option>
                                 <option value="{{{ Lang::get('site.email_option1') }}}">{{{ Lang::get('site.email_option1') }}}</option>
