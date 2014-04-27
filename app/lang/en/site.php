@@ -49,4 +49,8 @@ return array(
 		'tmr'=>'Tomorrow',
 		'areyousure'=>'Are you sure?',
 
+		'login_to_post' => 'You need to be logged in to post comments!',
+		'comment_added' => 'Your comment was added with success.',
+		'comment_not_added' => 'There was a problem adding your comment, please try again.',
+
 );

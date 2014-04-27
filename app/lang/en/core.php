@@ -47,6 +47,7 @@ return array(
 	'email_sent' => 'E-mail sent',
 	'email_not_sent' => 'E-mail not sent',
 	'loginwith'=>'Login with',
+	'mergeerror'=>'Merge more then one user',
 
 );
 

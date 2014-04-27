@@ -14,7 +14,6 @@ class AuthorizedController extends BaseController
 	{
         parent::__construct();
 		// Check if the user is logged in.
-		//
 		$this->beforeFilter('auth', array('except' => $this->whitelist));
 	}
 }

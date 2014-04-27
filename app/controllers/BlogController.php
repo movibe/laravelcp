@@ -90,7 +90,7 @@ class BlogController extends BaseController {
         $canComment = $user->can('post_comment');
 		if ( ! $canComment)
 		{
-			return Redirect::to($slug . '#comments')->with('error', 'You need to be logged in to post comments!');
+			return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.login_to_post'));
 		}
 
 		// Get this blog post data
@@ -118,11 +118,11 @@ class BlogController extends BaseController {
 			if($post->comments()->save($comment))
 			{
 				// Redirect to this blog post page
-				return Redirect::to($slug . '#comments')->with('success', 'Your comment was added with success.');
+				return Redirect::to($slug . '#comments')->with('success',  Lang::get('site.comment_added'));
 			}
 
 			// Redirect to this blog post page
-			return Redirect::to($slug . '#comments')->with('error', 'There was a problem adding your comment, please try again.');
+			return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.comment_not_Added'));
 		}
 
 		// Redirect to this blog post page

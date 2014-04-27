@@ -286,7 +286,7 @@ class AdminUsersController extends AdminController {
     {
 		$rows=json_decode(Input::get('rows'));
 		if(is_array($rows) && count($rows) > 0){
-			if(count($rows) < 2) if(!Api::Redirect(array('error','Merge more then one user'))) return Response::json(array('result'=>'error', 'error' =>  'Merge more then one user'));
+			if(count($rows) < 2) if(!Api::Redirect(array('error',Lang::get('core.mergeerror')))) return Response::json(array('result'=>'error', 'error' =>  Lang::get('core.mergeerror')));
 			$_merge_to=false;
 			foreach($rows as $i=>$r){
 				if ($r != Confide::user()->id){

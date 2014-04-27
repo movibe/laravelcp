@@ -224,7 +224,7 @@ class UserController extends BaseController {
         if($error == 1) {
             return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
         } else {
-            return Redirect::to('user')->with( 'error', 'Unable to change' );
+            return Redirect::to('user')->with( 'error', Lang::get('user/user.user_account_not_updated') );
         }
 	}
 
