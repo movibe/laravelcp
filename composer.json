@@ -28,7 +28,6 @@
 		"bllim/datatables": "*",
 		"thomaswelton/laravel-gravatar": "dev-master",
 		"khill/lavacharts" : "dev-master",
-		"barryvdh/laravel-debugbar": "dev-master",
 		"regulus/activity-log": "dev-master",
 		"caouecs/laravel4-lang": "dev-master",
 		"raahul/larryfour": "1.*",

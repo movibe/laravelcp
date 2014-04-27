@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "55858ce68f69a36f2e9d2b693a131d41",
+    "hash": "21c178787aabed1d8ff58af4b8c27af3",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -48,53 +48,6 @@
             ],
             "description": "Persistant settings in Laravel 4.",
             "time": "2014-04-13 09:05:34"
-        },
-        {
-            "name": "barryvdh/laravel-debugbar",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "9c0c6de939141f43efdf9c3beed22db50e2a4248"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/9c0c6de939141f43efdf9c3beed22db50e2a4248",
-                "reference": "9c0c6de939141f43efdf9c3beed22db50e2a4248",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/filesystem": "~4.0",
-                "illuminate/support": "~4.0",
-                "maximebf/debugbar": "1.9.x",
-                "php": ">=5.3.0",
-                "symfony/finder": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Barryvdh\\Debugbar": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "PHP Debugbar integration for Laravel",
-            "keywords": [
-                "debug",
-                "debugbar",
-                "laravel",
-                "profiler",
-                "webprofiler"
-            ],
-            "time": "2014-04-08 08:47:14"
         },
         {
             "name": "bllim/datatables",
@@ -704,56 +657,6 @@
                 "source": "https://github.com/Zizaco/ardent/tree/has-session-fix"
             },
             "time": "2014-02-01 17:48:14"
-        },
-        {
-            "name": "maximebf/debugbar",
-            "version": "1.9.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "ab02c692d2bdad1009639f6ba319576af590620c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/ab02c692d2bdad1009639f6ba319576af590620c",
-                "reference": "ab02c692d2bdad1009639f6ba319576af590620c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "php": ">=5.3.0"
-            },
-            "suggest": {
-                "kriswallsmith/assetic": "The best way to manage assets",
-                "monolog/monolog": "Log using Monolog",
-                "predis/predis": "Redis storage"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "DebugBar": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maxime Bouroumeau-Fuseau",
-                    "email": "maxime.bouroumeau@gmail.com",
-                    "homepage": "http://maximebf.com"
-                }
-            ],
-            "description": "Debug bar in the browser for php application",
-            "homepage": "https://github.com/maximebf/php-debugbar",
-            "keywords": [
-                "debug"
-            ],
-            "time": "2014-04-25 16:30:40"
         },
         {
             "name": "monolog/monolog",
@@ -1911,12 +1814,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "0e4410de0f39603d4c44b75fe399470e7de89dc4"
+                "reference": "10c0abfa5bdfba5a099ad4b7ab03750f40397467"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/0e4410de0f39603d4c44b75fe399470e7de89dc4",
-                "reference": "0e4410de0f39603d4c44b75fe399470e7de89dc4",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/10c0abfa5bdfba5a099ad4b7ab03750f40397467",
+                "reference": "10c0abfa5bdfba5a099ad4b7ab03750f40397467",
                 "shasum": ""
             },
             "require": {
@@ -1975,7 +1878,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-27 13:39:18"
+            "time": "2014-04-27 18:41:56"
         },
         {
             "name": "symfony/process",
@@ -3215,29 +3118,29 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "243cdb467c1a41cc37f0d8f1c1decb08e11e9b05"
+                "reference": "f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/243cdb467c1a41cc37f0d8f1c1decb08e11e9b05",
-                "reference": "243cdb467c1a41cc37f0d8f1c1decb08e11e9b05",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9",
+                "reference": "f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-file-iterator": "~1.3.1",
-                "phpunit/php-text-template": "~1.2",
-                "phpunit/php-token-stream": "~1.2.2",
-                "sebastian/environment": "~1.0",
-                "sebastian/version": "~1.0.3"
+                "phpunit/php-file-iterator": ">=1.3.0",
+                "phpunit/php-text-template": ">=1.2.0",
+                "phpunit/php-token-stream": ">=1.1.3",
+                "sebastian/environment": ">=1.0.0",
+                "sebastian/version": ">=1.0.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
-                "phpunit/phpunit": ">=4.0.0,<4.1.0"
+                "phpunit/phpunit": "4.2.*@dev"
             },
             "suggest": {
                 "ext-dom": "*",
@@ -3247,7 +3150,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -3276,7 +3179,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-27 07:23:50"
+            "time": "2014-04-27 16:15:10"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3467,12 +3370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "02ad116fc476eecad8020bc8a1e6e578c62b212b"
+                "reference": "38ccc18e40d093aed238ddab7450fa842876d7f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/02ad116fc476eecad8020bc8a1e6e578c62b212b",
-                "reference": "02ad116fc476eecad8020bc8a1e6e578c62b212b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38ccc18e40d093aed238ddab7450fa842876d7f1",
+                "reference": "38ccc18e40d093aed238ddab7450fa842876d7f1",
                 "shasum": ""
             },
             "require": {
@@ -3482,7 +3385,7 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpunit/php-code-coverage": "2.0.*@dev",
+                "phpunit/php-code-coverage": "3.0.*@dev",
                 "phpunit/php-file-iterator": "~1.3.1",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "~1.0.2",
@@ -3533,7 +3436,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-27 07:22:18"
+            "time": "2014-04-27 14:32:28"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4067,7 +3970,6 @@
         "j20/php-uuid": 20,
         "thomaswelton/laravel-gravatar": 20,
         "khill/lavacharts": 20,
-        "barryvdh/laravel-debugbar": 20,
         "regulus/activity-log": 20,
         "caouecs/laravel4-lang": 20,
         "msurguy/honeypot": 20,

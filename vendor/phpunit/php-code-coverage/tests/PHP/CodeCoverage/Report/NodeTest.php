@@ -36,57 +36,63 @@
  *
  * @category   PHP
  * @package    CodeCoverage
+ * @subpackage Tests
  * @author     Sebastian Bergmann <sebastian@phpunit.de>
  * @copyright  2009-2014 Sebastian Bergmann <sebastian@phpunit.de>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @link       http://github.com/sebastianbergmann/php-code-coverage
- * @since      File available since Release 1.1.0
  */
 
 /**
- * Uses var_export() to write a PHP_CodeCoverage object to a file.
+ * Tests for the PHP_CodeCoverage_Report_Node class.
  *
  * @category   PHP
  * @package    CodeCoverage
+ * @subpackage Tests
  * @author     Sebastian Bergmann <sebastian@phpunit.de>
- * @author     uyga <iamuyga@gmail.com>
  * @copyright  2009-2014 Sebastian Bergmann <sebastian@phpunit.de>
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @link       http://github.com/sebastianbergmann/php-code-coverage
- * @since      Class available since Release 1.1.0
  */
-class PHP_CodeCoverage_Report_PHP
+class PHP_CodeCoverage_Report_NodeTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @param  PHP_CodeCoverage $coverage
-     * @param  string           $target
-     * @return string
-     */
-    public function process(PHP_CodeCoverage $coverage, $target = null)
+    public function testTrimsTailingSlashes()
     {
-        $filter = $coverage->filter();
+        $node = $this->getInstance('/SomeName.php/');
+        $this->assertEquals('/SomeName.php', $node->getPath());
+    }
 
-        $output = sprintf(
-            '<?php
-$coverage = new PHP_CodeCoverage;
-$coverage->setData(%s);
-$coverage->setTests(%s);
+    public function testNodeAcceptsRootScope()
+    {
+        $node = $this->getInstance('/');
+        $this->assertEquals('/', $node->getPath());
+    }
 
-$filter = $coverage->filter();
-$filter->setBlacklistedFiles(%s);
-$filter->setWhitelistedFiles(%s);
+    /**
+     * @param $path
+     * @return PHP_CodeCoverage_Report_Node
+     */
+    private function getInstance($path)
+    {
+        $builder = $this->getMockBuilder('PHP_CodeCoverage_Report_Node')
+            ->setConstructorArgs(array($path));
 
-return $coverage;',
-            var_export($coverage->getData(true), 1),
-            var_export($coverage->getTests(), 1),
-            var_export($filter->getBlacklistedFiles(), 1),
-            var_export($filter->getWhitelistedFiles(), 1)
-        );
+        $this->mockMethods($builder);
+        return $builder->getMock();
+    }
 
-        if ($target !== null) {
-            return file_put_contents($target, $output);
-        } else {
-            return $output;
+    /**
+     * @param $builder
+     */
+    private function mockMethods($builder)
+    {
+        $reflectionClass = new \ReflectionClass('PHP_CodeCoverage_Report_Node');
+        $methods = array();
+        foreach ($reflectionClass->getMethods() as $method) {
+            if ($method->isAbstract()) {
+                $methods[] = $method->getName();
+            }
         }
+        $builder->setMethods($methods);
     }
 }
