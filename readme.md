@@ -54,8 +54,8 @@ Let me know what you think!
 
 # Roadmap
 
-- Complete the json/xml api
-- Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package
+- ~~Complete the json/xml api~~
+- ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
 - Find out what users want in a simple user/site manager
 
 
