@@ -201,12 +201,41 @@ class AdminUsersController extends AdminController {
         }
     }
 
+
+
+
+    public function deleteNotes($user, $note)
+    {
+
+
+	}
+
+    public function getNotes($user)
+    {
+
+        if ( $user->id )
+        {
+			$list = UserNotes::leftjoin('users', 'users.id', '=', 'user_notes.admin_id')
+					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->orderBy('users.id');
+			if(Api::Enabled()){
+				$u=$list->get();
+				return Api::View($u->toArray());
+			} else return Datatables::of($list)
+				 ->edit_column('note','<textarea name="user_notes[{{{$id}}}]" class="form-control" style="width: 100%">{{{ $note }}}</textarea>')
+				 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
+				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
+				->make();
+		}
+
+	}
+
     /**
      * Update the specified resource in storage.
      *
      * @param $user
      * @return Response
      */
+	
     public function putEdit($user)
     {
 
@@ -246,8 +275,6 @@ class AdminUsersController extends AdminController {
             // Save roles. Handles updating.
             $user->saveRoles(Input::get( 'roles' ));
 
-
-
 			foreach(Input::get('user_profiles') as $id=>$profile){
 				$pro = UserProfile::find($id);
 				if($pro){
@@ -255,6 +282,18 @@ class AdminUsersController extends AdminController {
 				} else {
 					$pro = new UserProfile($profile);
 					if($pro->title) $user->profiles()->save($pro);
+				}
+			}
+
+			foreach(Input::get('user_notes') as $id=>$note){
+				$not = UserNotes::find($id);
+				if($not){
+					if($note){
+						$not->fill(array('id'=>$id,'note'=>$note))->push();
+					} else $not->delete();
+				} else {
+					$not = new UserNotes(array('id'=>$id,'note'=>$note, 'admin_id' =>Confide::user()->id));
+					if($not->note) $user->notes()->save($not);
 				}
 			}
 

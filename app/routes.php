@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::model('user', 'User');
 Route::model('profile', 'UserProfile');
 Route::model('comment', 'Comment');

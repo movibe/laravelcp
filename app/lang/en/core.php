@@ -51,6 +51,8 @@ return array(
 	'email_sent' => 'E-mail sent',
 	'email_not_sent' => 'E-mail not sent',
 	'loginwith'=>'Login with',
+	'notes'=>'Notes',
+	'new_note'=>'Add a new note here',
 	'mergeerror'=>'Merge more then one user',
 	'unable_to_exec' => 'Unable to execute command',
 

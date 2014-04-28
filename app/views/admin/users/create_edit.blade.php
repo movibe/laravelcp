@@ -8,6 +8,7 @@
 			<li><a href="#tab-logs" data-toggle="tab">{{{ Lang::get('core.activity') }}}</a></li>
 			<li><a href="#tab-email" data-toggle="tab">{{{ Lang::get('core.emails') }}}</a></li>
 			<li><a href="#tab-details" data-toggle="tab">{{{ Lang::get('core.details') }}}</a></li>
+			<li><a href="#tab-notes" data-toggle="tab">{{{ Lang::get('core.notes') }}}</a></li>
 		@endif
 		@yield('user-edit-tabs')
 	</ul>
@@ -31,6 +32,37 @@
 			@yield('user-edit-tab-content')
 
 			@if ($mode != 'create')
+				<div class="tab-pane" id="tab-notes">
+					@include('admin/dt-loading')
+
+					<div id="usernotes-container" class="dt-wrapper">
+						<table id="usernotes" class=" table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th></th>
+									<th class="col-md-6">{{{ Lang::get('admin/users/table.details') }}}</th>
+									<th class="col-md-2">{{{ Lang::get('admin/users/table.created_at') }}}</th>
+									<th class="col-md-2">{{{ Lang::get('admin/users/table.updated_at') }}}</th>
+									<th class="col-md-2">{{{ Lang::get('admin/users/table.created_by') }}}</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<hr/>
+
+					<textarea class="form-control" name="user_notes[]" placeholder="{{{Lang::get('core.new_note')}}}"></textarea>
+
+					<div class="modal-footer">
+						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+					</div>
+				</div>
+
+
+
 				<div class="tab-pane" id="tab-details">
 					<div class="list-group">
 					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->created_at }}}">
@@ -51,6 +83,46 @@
 					  </a>
 					</div>
 				</div>
+
+				<div class="tab-pane" id="tab-logs">
+					@include('admin/dt-loading')
+
+					<div id="activitylog-container" class="dt-wrapper">
+						<table id="activitylog" class="table-responsive table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th></th>
+									<th>{{{ Lang::get('admin/users/table.description') }}}</th>
+									<th>{{{ Lang::get('admin/users/table.details') }}}</th>
+									<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
+									<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane" id="tab-email">
+					@include('admin/dt-loading')
+
+					<div id="emaillog-container" class="dt-wrapper">
+						<table id="emaillog" class="table-responsive table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th></th>
+									<th>{{{ Lang::get('core.subject') }}}</th>
+									<th>{{{ Lang::get('core.body') }}}</th>
+									<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
+									<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
 			@endif
 
 			<div class="tab-pane active" id="tab-general">
@@ -174,44 +246,6 @@
 				</div>
 			</div>
 
-			<div class="tab-pane" id="tab-logs">
-				@include('admin/dt-loading')
-
-				<div  id="activitylog-container" class="dt-wrapper">
-					<table id="activitylog" class="table-responsive table table-striped table-hover table-bordered">
-						<thead>
-							<tr>
-								<th></th>
-								<th>{{{ Lang::get('admin/users/table.description') }}}</th>
-								<th>{{{ Lang::get('admin/users/table.details') }}}</th>
-								<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
-								<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="tab-pane" id="tab-email">
-				@include('admin/dt-loading')
-
-				<div id="emaillog-container" class="dt-wrapper">
-					<table id="emaillog" class="table-responsive table table-striped table-hover table-bordered">
-						<thead>
-							<tr>
-								<th></th>
-								<th>{{{ Lang::get('core.subject') }}}</th>
-								<th>{{{ Lang::get('core.body') }}}</th>
-								<th>{{{ Lang::get('admin/users/table.ip_address') }}}</th>
-								<th>{{{ Lang::get('admin/users/table.updated_at') }}}</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-			</div>
 	{{ Form::close(); }}
 @stop
 
@@ -222,6 +256,7 @@
 	$('a').tooltip();
 	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
+	dtLoad('#usernotes', "{{URL::to('admin/users/' . $user->id . '/notes') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 </script>
 @endif
 @stop

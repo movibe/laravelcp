@@ -11,6 +11,7 @@ return array(
 	'roles'     => 'Roles',
 	'activated'  => 'Activated',
 	'created_at' => 'Created',
+	'created_by' => 'Created By',
 	'updated_at' => 'Updated',
 	'description' => 'Description',
 	'details' => 'Details',

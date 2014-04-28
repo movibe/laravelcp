@@ -29,6 +29,11 @@ class User extends ConfideUser {
         return $this->hasMany('UserProfile');
     }
 
+	public function notes()
+    {
+        return $this->hasMany('UserNotes');
+    }
+
 	public function assignedroles()
     {
         return $this->hasMany('AssignedRole');
