@@ -27,7 +27,7 @@
 
 				<div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
-						<input placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
+						<input required placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
 						{{ $errors->first('title', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>

@@ -21,7 +21,7 @@
 		<div class="form-group {{{ $errors->has('displayname') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
 			<div class="col-md-10">
-				<input class="form-control" type="text" name="displayname" id="username" value="{{{ Input::old('displayname', $user->displayname) }}}" />
+				<input required class="form-control" type="text" name="displayname" id="displayname" value="{{{ Input::old('displayname', $user->displayname) }}}" />
 				{{ $errors->first('displayname', '<span class="help-block">:message</span>') }}
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 		<div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">{{{ Lang::get('core.email') }}}</label>
 			<div class="col-md-10">
-				<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
+				<input required validate class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
 				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 			</div>
 		</div>

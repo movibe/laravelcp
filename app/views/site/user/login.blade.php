@@ -17,7 +17,7 @@
             <!--<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>-->
             <div class="col-md-10">
                <div class="input-group">
-				 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
+				 <input required validate class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="email" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
 				</span></div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="col-md-10">
 
 			<div class="input-group">
-				<input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">
+				<input required class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">
 				  <span class="input-group-btn">
 					 <a class="btn btn-default" href="forgot">{{ Lang::get('button.reset') }}</a>
 				  </span>

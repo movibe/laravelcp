@@ -20,7 +20,7 @@
 				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="name">{{{ Lang::get('core.name') }}}</label>
                     <div class="col-md-10">
-    					<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
+    					<input  required class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
     					{{ $errors->first('name', '<span class="help-block">:message</span>') }}
                     </div>
 				</div>

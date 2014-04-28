@@ -103,7 +103,7 @@ class AdminUsersController extends AdminController {
   		$rules = array(
 			'displayname'      => 'required',
 			'email'      => 'required|email',
-			'password'   => 'required|confirmed|min:3'
+			'password'   => 'required|confirmed|min:4'
 		);
 
         $validator = Validator::make(Input::all(), $rules);
@@ -236,27 +236,45 @@ class AdminUsersController extends AdminController {
 	
     public function putEdit($user)
     {
-		$rules = array(
-			'email'      => 'required|email',
-			'password'   => 'required|confirmed|min:3'
-		);
+		
+		if(!empty(Input::get( 'password' ))) {
+			$rules = array(
+				'displayname' => 'required',
+				'email' => 'required|email',
+				'password' => 'min:4|confirmed',
+				'password_confirmation' => 'min:4',
+			);
+		} else {
+			$rules = array(
+				'displayname' => 'required',
+				'email' => 'required|email',
+			);
+		}
 
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->passes())
         {
 
-
             $oldUser = clone $user;
             $user->displayname = Input::get( 'displayname' );
             $user->email = Input::get( 'email' );
             $user->confirmed = Input::get( 'confirm' );
             
-            if($user->confirmed == null) {
-                $user->confirmed = $oldUser->confirmed;
+            $user->prepareRules($oldUser, $user);
+
+			if($user->confirmed == null) $user->confirmed = $oldUser->confirmed;
+            
+
+            if(!empty(Input::get( 'password' ))) {
+				$user->password = Input::get( 'password' );
+				$user->password_confirmation = Input::get( 'password_confirmation' );
+            } else {
+                unset($user->password);
+                unset($user->password_confirmation);
             }
 
-            $user->save();
+            $user->amend();
 
             $user->saveRoles(Input::get( 'roles' ));
 
@@ -283,7 +301,7 @@ class AdminUsersController extends AdminController {
 			}
 
         } else {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
+            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
         }
 
         // Get validation errors (see Ardent package)
