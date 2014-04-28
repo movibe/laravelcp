@@ -118,6 +118,8 @@ class AdminUsersController extends AdminController {
 			$this->user->confirmed = Input::get( 'confirm' );
 			$this->user->save();
 
+			Event::fire('controller.user.create', array($this->user));
+
 			if ( $this->user->id )
 			{
 				$this->user->saveRoles(Input::get( 'roles' ));
@@ -300,6 +302,8 @@ class AdminUsersController extends AdminController {
 				}
 			}
 
+			Event::fire('controller.user.edit', array($user));
+
         } else {
             if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
         }
@@ -325,6 +329,9 @@ class AdminUsersController extends AdminController {
 		DB::update('UPDATE comments set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
 		DB::update('UPDATE activity_log set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
 		DB::table('assigned_roles')->where('user_id', '=', $user->id)->delete();
+
+		Event::fire('controller.user.merge', array($user));
+
 		$user->delete();
 	}
 
@@ -357,6 +364,7 @@ class AdminUsersController extends AdminController {
 		if ($r != Confide::user()->id){
 			$user = User::find($r);
 			try {
+				Event::fire('controller.user.delete', array($user));
 				$user->delete();
 			} catch (Exception $e) {
 				if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
@@ -413,6 +421,7 @@ class AdminUsersController extends AdminController {
 		$id=$user->id;
 
 		try {
+			Event::fire('controller.user.delete', array($user));
 			$user->delete();
 		} catch (Exception $e) {
 			if(!Api::Redirect(array('error',  $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
@@ -460,6 +469,8 @@ class AdminUsersController extends AdminController {
     
 	private function sendEmail($user, $template='emails.default'){
 		if (!View::exists($template))$template='emails.default';
+		
+		Event::fire('controller.user.email', array($user));
 
 		$this->email=$user->email;
 

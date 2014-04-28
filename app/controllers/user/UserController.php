@@ -21,6 +21,7 @@ class UserController extends BaseController {
 
 
 	public function runCancel($job, $data){
+		Event::fire('user.cancel', array($data));
 		DB::table('users')->where('id', $data['id'])->update(array('confirmed' => false, 'cancelled' => true));
 	}
 
@@ -99,6 +100,8 @@ class UserController extends BaseController {
 			$this->user->email = Input::get( 'email' );
 			$this->user->displayname = Input::get( 'name' );
 			$this->user->save();
+			
+			Event::fire('user.create', array($user));
 
 			if ( $this->user->id )
 			{
@@ -171,6 +174,9 @@ class UserController extends BaseController {
 					if($pro->title) $user->profiles()->save($pro);
 				}
 			}
+
+			Event::fire('user.edit', array($user));
+
         } else {
             return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($validator);
         }
@@ -245,6 +251,8 @@ class UserController extends BaseController {
 				'details'     => gethostbyaddr($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] .' ('.gethostbyaddr($_SERVER['REMOTE_ADDR']).')' : $_SERVER['REMOTE_ADDR'],
 				'updated'     => Confide::user()->id ? true : false,
 			));
+
+			Event::fire('user.login', array($user));
 
             $r = Session::get('loginRedirect');
             if (!empty($r))
@@ -362,7 +370,9 @@ class UserController extends BaseController {
      */
     public function getLogout()
     {
-        Confide::logout();
+		Event::fire('user.logout', array($user));
+       
+		Confide::logout();
 
         return Redirect::to('/');
     }
