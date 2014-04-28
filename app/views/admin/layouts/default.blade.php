@@ -45,7 +45,6 @@
 
 	@yield('breadcrumb')
 
-	@include('notifications')
 	
 	<div class="container-fluid">
 		@yield('content')
