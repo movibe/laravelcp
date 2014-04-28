@@ -253,6 +253,18 @@
 @section('scripts')
 @if (isset($user))
 <script type="text/javascript">
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		localStorage.setItem('edit_user_tab', $(e.target).attr("href"));
+	});
+
+	if(localStorage.getItem('edit_user_tab')){
+		$('.nav-tabs a[href='+localStorage.getItem('edit_user_tab')+']').tab('show');
+	}
+
+	$('#site-modal').on('hidden.bs.modal', function () {
+		localStorage.removeItem('edit_user_tab');
+	})
+
 	$('a').tooltip();
 	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
 	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)');
