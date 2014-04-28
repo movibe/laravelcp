@@ -241,7 +241,7 @@ class UserController extends BaseController {
 			Activity::log(array(
 				'contentID'   => Confide::user()->id,
 				'contentType' => 'login',
-				'description' => 'User logged in',
+				'description' => 'info',
 				'details'     => gethostbyaddr($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] .' ('.gethostbyaddr($_SERVER['REMOTE_ADDR']).')' : $_SERVER['REMOTE_ADDR'],
 				'updated'     => Confide::user()->id ? true : false,
 			));

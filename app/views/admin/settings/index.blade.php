@@ -35,7 +35,7 @@
 										<textarea class="col-lg-12 form-control" name="settings[{{ $a }}.{{ $c }}]">{{ $d }}</textarea>
 									@elseif($c == "bootswatch")
 										<select class="form-control" name="settings[{{ $a }}.{{ $c }}]">
-											<option value="default" {{ $d=='default' ? 'selected' : false }}>Default</option>
+											<option value="" {{ $d=='' ? 'selected' : false }}>Default</option>
 											<option value="amelia" {{ $d=='amelia' ? 'selected' : false }}>Amelia</option>
 											<option value="cerulean" {{ $d=='cerulean' ? 'selected' : false }}>Cerulean</option>
 											<option value="cosmo" {{ $d=='cosmo' ? 'selected' : false }}>Cosmo</option>
