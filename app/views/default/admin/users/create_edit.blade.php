@@ -202,6 +202,7 @@
 				</div>
 
 				<div class="modal-footer">
+					@if ($mode != 'create')
 					<div class="pull-left">
 						<a href="{{{ URL::to('admin/users/' . $user->id . '/email' ) }}}" class="modalfy btn btn-default">{{{ Lang::get('button.email') }}}</a>
 						@if($user->id == Auth::user()->id)
@@ -211,11 +212,10 @@
 						@endif
 
 					</div>
-					<div class="pull-right">
+					@endif
 						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
 						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
-					</div>
 				</div>
 			</div>
 

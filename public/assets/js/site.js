@@ -70,8 +70,9 @@ function dtLoad(table, action, hidemd, hidesm){
 		$(this).toggleClass('highlight');
 	} );
 
-	$(document).on("click", ".dt-mass", function(e) {
-		e.preventDefault();    
+	$(document).on("click",  table+"-container .dt-mass", function(e) {
+		e.preventDefault();  
+
 		var action=$(this).attr('data-action');
 		var table=$(this).attr('data-table');
 		var method=$(this).attr('data-method');
@@ -105,6 +106,7 @@ function dtLoad(table, action, hidemd, hidesm){
 					});
 				}
 		} else fnRunMass(action, table, method, aSelected);
+		return false;
 	});
 }
 
