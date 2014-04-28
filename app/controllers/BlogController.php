@@ -30,10 +30,10 @@ class BlogController extends BaseController {
 
 	public function getJavascript(){
 
-$contents = View::make('translations');
-$response = Response::make($contents);
-$response->header('Content-Type', 'application/javascript');
-return $response;
+		$contents = View::make('translations');
+		$response = Response::make($contents);
+		$response->header('Content-Type', 'application/javascript');
+		return $response;
 
 	}
 

@@ -12,6 +12,8 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="home">
 				<ul class="list-group">
+					<li class="list-group-item">check new user redirect, maybe ca use im admin but it redirects to admin, should redirect to profile or last page</li>
+					<li class="list-group-item">add tos agreement of some sort</li>
 					<li class="list-group-item">add option to login as user</li>
 				</ul>
 			</div>

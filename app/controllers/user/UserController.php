@@ -83,6 +83,8 @@ class UserController extends BaseController {
     public function postIndex()
     {
 		$rules = array(
+			'terms'     => "required|accepted",
+			'email'     => "required|email",
 			'create_hp'   => 'honeypot',
 			'create_hp_time'   => 'required|honeytime:3'
 		);
@@ -107,7 +109,7 @@ class UserController extends BaseController {
 				} else {
 					return Redirect::to('user/create')
 						->withInput(Input::except('password','password_confirmation'))
-						->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+						->with('error', Lang::get('admin/users/messages.password_does_not_match'))->withErrors($validator);
 				}
 			} else {
 				unset($this->user->password);
@@ -121,18 +123,15 @@ class UserController extends BaseController {
 				$user=User::find($this->user->id);
 				$user->saveRoles(array(Setting::get('users.default_role_id')));
 
-				// Redirect with success message, You may replace "Lang::get(..." for your custom message.
-				return Redirect::to('user/login')
-					->with( 'emailvalidation', Lang::get('user/user.user_account_created') );
+				return Redirect::to('user/login')->with( 'emailvalidation', Lang::get('user/user.user_account_created') );
 			}
 			else
 			{
-				// Get validation errors (see Ardent package)
 				$error = $this->user->errors()->all();
 
 				return Redirect::to('user/create')
 					->withInput(Input::except('password'))
-					->with( 'error', $error );
+					->with( 'error', $error )->withErrors($validator);
 			}
 		} else return Redirect::to('user/create')
 					->withInput(Input::except('password'))
