@@ -25,7 +25,7 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 - jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
 - [BootSwatch Themed](http://bootswatch.com/)
-- [BootBox Dialogs](https://github.com/makeusabrew/bootbox) w/ [Bootstrap Modalfy](https://github.com/gcphost/modalfy)
+- [BootBox Dialogs](https://github.com/makeusabrew/bootbox))
 - User profiles
 - User suspending
 - User cancellation, instant, timed and reversal
@@ -49,7 +49,8 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 
 - ~~Complete the json/xml api~~
 - ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
-
+- theme support that supports using default files if theme files dont exist, similar to smarty
+- plugin example, most likely trouble tickets, to show how to inject a new module/plugin to the core w/o changing the core
 
 
 
