@@ -33,7 +33,7 @@ class AdminCommentsController extends AdminController
         $comments = $this->comment;
 
         // Show the page
-        return View::make('admin/comments/index', compact('comments', 'title'));
+        return Theme::make('admin/comments/index', compact('comments', 'title'));
     }
 
     /**
@@ -48,7 +48,7 @@ class AdminCommentsController extends AdminController
         $title = Lang::get('admin/comments/title.comment_update');
 
         // Show the page
-        return View::make('admin/comments/edit', compact('comment', 'title'));
+        return Theme::make('admin/comments/edit', compact('comment', 'title'));
 	}
 
     /**

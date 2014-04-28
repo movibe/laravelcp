@@ -23,7 +23,7 @@ class AdminSettingsController extends AdminController
         $title = Lang::get('admin/settings/title.title');
 
         // Show the page
-        return View::make('admin/settings/index', compact('comments', 'title'));
+        return Theme::make('admin/settings/index', compact('comments', 'title'));
     }
 
    

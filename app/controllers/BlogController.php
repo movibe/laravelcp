@@ -49,7 +49,7 @@ class BlogController extends BaseController {
 		$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
 
 		// Show the page
-		return View::make('site/blog/index', compact('posts'));
+		return Theme::make('site/blog/index', compact('posts'));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class BlogController extends BaseController {
         }
 
 		// Show the page
-		return View::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
+		return Theme::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
 	}
 
 	/**
@@ -171,7 +171,7 @@ class BlogController extends BaseController {
 	}
 
 	public function getContactUs(){
-		return View::make('site/contact-us');
+		return Theme::make('site/contact-us');
 	}
 
 }

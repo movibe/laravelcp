@@ -60,7 +60,7 @@ class AdminUsersController extends AdminController {
 
 		$this->userChart();
 
-       	if(!Api::View(compact('users', 'title'))) return View::make('admin/users/index', compact('users', 'title'));
+       	if(!Api::View(compact('users', 'title'))) return Theme::make('admin/users/index', compact('users', 'title'));
     }
 
     /**
@@ -89,7 +89,7 @@ class AdminUsersController extends AdminController {
 		$mode = 'create';
 
 		// Show the page
-		if(!Api::View(compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'))) return View::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
+		if(!Api::View(compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'))) return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
     }
 
     /**
@@ -193,7 +193,7 @@ class AdminUsersController extends AdminController {
 
 			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
-			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return View::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
+			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
         }
         else
         {
@@ -390,7 +390,7 @@ class AdminUsersController extends AdminController {
 		
 		}
 
-        if(!Api::View(compact('mergelist', 'mergefrom'))) return View::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
+        if(!Api::View(compact('mergelist', 'mergefrom'))) return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
     }
 
     public function postDeleteMass()
@@ -438,7 +438,7 @@ class AdminUsersController extends AdminController {
 	private function emailTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
-		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR."emails");
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::path("emails"));
 		return $files;
 	}
 
@@ -458,7 +458,7 @@ class AdminUsersController extends AdminController {
         	// mode
         	$mode = 'edit';
 			$templates=$this->emailTemplates();
-        	if(!Api::View(compact('user', 'title', 'mode', 'templates'))) return View::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
+        	if(!Api::View(compact('user', 'title', 'mode', 'templates'))) return Theme::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
         }
         else
         {
@@ -517,10 +517,10 @@ class AdminUsersController extends AdminController {
 			}
 			if($_results == true){
 				$message=Lang::get('admin/users/messages.email.success');
-				if(!Api::View(compact('title', 'message', '_results'))) return View::make('admin/users/email_results', compact('title', 'message', '_results'));
+				if(!Api::View(compact('title', 'message', '_results'))) return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
 			} else {
 				$message=Lang::get('admin/users/messages.email.error');
-				if(!Api::View(compact('title', 'message', '_results'))) return View::make('admin/users/email_results', compact('title', 'message', '_results'));
+				if(!Api::View(compact('title', 'message', '_results'))) return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
 			}
 		} elseif (isset($user))
         {
@@ -529,7 +529,7 @@ class AdminUsersController extends AdminController {
 			} else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.email.error')))) return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
 		} else {
 			$message=Lang::get('admin/users/messages.email.error');
-			if(!Api::View(compact('title', 'message'))) return View::make('admin/users/email_results', compact('title', 'message'));
+			if(!Api::View(compact('title', 'message'))) return Theme::make('admin/users/email_results', compact('title', 'message'));
 		}
     }
 
@@ -553,7 +553,7 @@ class AdminUsersController extends AdminController {
 
 		$mode = 'edit';
 		$templates=$this->emailTemplates();
-		if(!Api::View(compact('title', 'mode', 'multi', 'templates')))return View::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
+		if(!Api::View(compact('title', 'mode', 'multi', 'templates')))return Theme::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
 	}
 
 

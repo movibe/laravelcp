@@ -47,7 +47,7 @@ class AdminBlogsController extends AdminController {
         $posts = $this->post;
 
         // Show the page
-        return View::make('admin/blogs/index', compact('posts', 'title'));
+        return Theme::make('admin/blogs/index', compact('posts', 'title'));
     }
 
 	/**
@@ -63,7 +63,7 @@ class AdminBlogsController extends AdminController {
 		$parents=$this->getPostParents();
 
         // Show the page
-        return View::make('admin/blogs/create_edit', compact('title', 'templates', 'parents'));
+        return Theme::make('admin/blogs/create_edit', compact('title', 'templates', 'parents'));
 	}
 
 	/**
@@ -133,7 +133,7 @@ class AdminBlogsController extends AdminController {
 		$parents=$this->getPostParents();
 
 		// Show the page
-        return View::make('admin/blogs/create_edit', compact('post', 'title', 'templates', 'parents'));
+        return Theme::make('admin/blogs/create_edit', compact('post', 'title', 'templates', 'parents'));
 	}
 
     /**

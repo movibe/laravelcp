@@ -10,7 +10,8 @@ class AdminDashboardController extends AdminController {
 	private function widgets(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
-		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR."admin".DIRECTORY_SEPARATOR."widgets");
+		$theme=Theme::getTheme();
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.$theme.DIRECTORY_SEPARATOR."admin".DIRECTORY_SEPARATOR."widgets");
 		return $files;
 	}
 
@@ -42,7 +43,7 @@ class AdminDashboardController extends AdminController {
 		Lava::LineChart('Stocks')->setConfig($config);
 
 
-		return View::make('admin/dashboard');
+		return Theme::make('admin/dashboard');
 	}
 
 	public function postPolling(){
@@ -61,7 +62,7 @@ class AdminDashboardController extends AdminController {
 						$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>$list);
 					break;
 					case "users_online":
-						$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());
+						$_results[$_poll->id]=array('type'=>'html', 'args'=>Theme::make('admin/helpers/users-online')->render());
 					break;
 				}
 			}

@@ -49,15 +49,15 @@ class UserController extends BaseController {
 
     public function invalidtoken()
     {
-        return View::make('site/invalidtoken');
+        return Theme::make('site/invalidtoken');
     }     
     public function noPermission()
     {
-        return View::make('site/nopermission');
+        return Theme::make('site/nopermission');
     }
     public function suspended()
     {
-        return View::make('site/suspended');
+        return Theme::make('site/suspended');
     }
 	
 
@@ -74,7 +74,7 @@ class UserController extends BaseController {
 
 
         // Show the page
-        return View::make('site/user/index', compact('user', 'profiles'));
+        return Theme::make('site/user/index', compact('user', 'profiles'));
     }
 
     /**
@@ -199,7 +199,7 @@ class UserController extends BaseController {
  		$anvard = App::make('anvard');
 		$providers = $anvard->getProviders();
 
-		return View::make('site/user/create', compact('providers'));
+		return Theme::make('site/user/create', compact('providers'));
     }
 
     public function getDelete($user, $profile)
@@ -225,7 +225,7 @@ class UserController extends BaseController {
 		$anvard = App::make('anvard');
 		$providers = $anvard->getProviders();
 
-		return View::make('site/user/login', compact('providers'));
+		return Theme::make('site/user/login', compact('providers'));
     }
 
     /**
@@ -304,7 +304,7 @@ class UserController extends BaseController {
      */
     public function getForgot()
     {
-        return View::make('site/user/forgot');
+        return Theme::make('site/user/forgot');
     }
 
     /**
@@ -333,7 +333,7 @@ class UserController extends BaseController {
     public function getReset( $token )
     {
 
-        return View::make('site/user/reset')
+        return Theme::make('site/user/reset')
             ->with('token',$token);
     }
 
@@ -384,7 +384,7 @@ class UserController extends BaseController {
         list($user,$redirect) = User::checkAuthAndRedirect('user/settings');
         if($redirect){return $redirect;}
 
-        return View::make('site/user/profile', compact('user'));
+        return Theme::make('site/user/profile', compact('user'));
     }
 
     /**

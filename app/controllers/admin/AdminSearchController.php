@@ -12,6 +12,6 @@ class AdminSearchController extends AdminController
     public function getIndex($search)
     {
 		$results=Search::Query($search);
-		if(!Api::View(compact('results'))) return View::make('admin/search', compact('results'));
+		if(!Api::View(compact('results'))) return Theme::make('admin/search', compact('results'));
     }
 }
