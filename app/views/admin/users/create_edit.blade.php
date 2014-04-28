@@ -41,9 +41,9 @@
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_login)->diffForHumans() }}}</p>
 					  </a>
-					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $last_login->details }}}">
+					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $last_login ? $last_login->details :null }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.last_ip') }}}</h4>
-						<p class="list-group-item-text">{{{ $last_login->details }}}</p>
+						<p class="list-group-item-text">{{{ $last_login ? $last_login->details :null }}}</p>
 					  </a>
 					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->last_activity }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
