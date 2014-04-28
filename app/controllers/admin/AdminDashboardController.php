@@ -47,22 +47,25 @@ class AdminDashboardController extends AdminController {
 
 	public function postPolling(){
 
-			$polls = json_decode(Input::get('polls'));
-			$_results=array();
-			if(is_array($polls) && count($polls) > 0){
-				foreach($polls as $i => $_poll){
-					switch($_poll->type){
-						case "check_logs":
-							$list = Activity::whereRaw('UNIX_TIMESTAMP(`created_at`) > ? AND (content_type="notification" OR content_type="login")', array(Session::get('usersonline_lastcheck', time())))->select(array('description', 'details'))->orderBy('id', 'DESC')->get()->toArray();
-							Session::put('usersonline_lastcheck', time());
-							$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>$list);
-						break;
-						case "users_online":
-							$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());
-						break;
-					}
+		$polls = json_decode(Input::get('polls'));
+		$_results=array();
+		if(is_array($polls) && count($polls) > 0){
+			foreach($polls as $i => $_poll){
+				switch($_poll->type){
+					case "check_logs":
+						$list = Activity::
+							whereRaw('UNIX_TIMESTAMP(`activity_log`.`created_at`) > ? AND (activity_log.content_type="notification" OR activity_log.content_type="login")',array(Session::get('usersonline_lastcheck', time())))->select(array('description', 'details', 'users.displayname', 'content_type'))->groupBy(DB::raw('description, details, users.displayname, content_type'))->orderBy('activity_log.id', 'DESC')
+							->leftJoin('users', 'users.id', '=', 'activity_log.user_id')
+							->get()->toArray();
+						Session::put('usersonline_lastcheck', time());
+						$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>$list);
+					break;
+					case "users_online":
+						$_results[$_poll->id]=array('type'=>'html', 'args'=>View::make('admin/helpers/users-online')->render());
+					break;
 				}
 			}
+		}
 		return Response::json($_results);
 	}
 }

@@ -60,6 +60,7 @@ return array(
 	'search_placeholder'=>'What are you searching for?',
 	'agree_tos' => 'I agree with the <a href="#" class="site_tos">Terms and Conditions</a>.',
 	'must_agree_tos' => 'You must agree with the Terms and Conditions.',
+	'user_logged_in'=> 'User Logged In',
 
 );
 

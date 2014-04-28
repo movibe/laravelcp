@@ -20,6 +20,7 @@
 		@endif
 	</div>
 	<div class="col-sm-9 col-md-9 col-md-offset-3 col-sm-offset-3 main">
+		<br/>
 		@include('notifications')
 		@yield('left-layout-content')
 	</div>

@@ -126,11 +126,14 @@
 		/* call back from results */
 		function fnUpdateGrowler(id, args){
 			$.each(args, function(i,value){
-				if(value != '') $.bootstrapGrowl(value.details, { type: value.description });
+				if(value != ''){
+					if(value.content_type == 'login') value.details=lang_user_logged_in + '<br/>' + value.displayname + ' @ ' + value.details;
+					$.bootstrapGrowl(value.details, { type: value.description });
+				}
 			});
 		}
 
-		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '5'});
+		$.fn.poller('add',{'id':'logs', 'type':'check_logs', 'ratio': '2'});
 		$.fn.poller('run');
 
 		$('.mobile-loading').removeClass('visible-xs').hide();
