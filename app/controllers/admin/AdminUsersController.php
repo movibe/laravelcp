@@ -101,6 +101,7 @@ class AdminUsersController extends AdminController {
     {
 
   		$rules = array(
+			'displayname'      => 'required',
 			'email'      => 'required|email',
 			'password'   => 'required|confirmed|min:3'
 		);

@@ -84,6 +84,7 @@ class UserController extends BaseController {
     {
 		$rules = array(
 			'terms'     => "required|accepted",
+			'displayname'      => 'required',
 			'email'     => "required|email",
 			'password'   => 'required|confirmed|min:3',
 			'create_hp'   => 'honeypot',
