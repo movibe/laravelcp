@@ -12,7 +12,8 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="home">
 				<ul class="list-group">
-					<li class="list-group-item">nada</li>
+					<li class="list-group-item">add option to login as user</li>
+					<li class="list-group-item">add notes user, an actual table of notes that belong to the user</li>
 				</ul>
 			</div>
 			<div class="tab-pane" id="profile">...</div>

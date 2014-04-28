@@ -257,8 +257,14 @@ class UserController extends BaseController {
         if ( Confide::logAttempt( $input, true ) )
         {
 
-			// added login activity
 			DB::update('UPDATE users SET last_login = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time() ), Auth::user()->id));
+			Activity::log(array(
+				'contentID'   => Confide::user()->id,
+				'contentType' => 'login',
+				'description' => 'User logged in',
+				'details'     => gethostbyaddr($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] .' ('.gethostbyaddr($_SERVER['REMOTE_ADDR']).')' : $_SERVER['REMOTE_ADDR'],
+				'updated'     => Confide::user()->id ? true : false,
+			));
 
             $r = Session::get('loginRedirect');
             if (!empty($r))

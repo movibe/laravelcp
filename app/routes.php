@@ -71,7 +71,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     # User Mass Management
     Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
     Route::post('user/mass/email', 'AdminUsersController@postEmail');
-    Route::post('user/mass/merge', 'AdminUsersController@postMerge');
+    Route::get('user/mass/merge', 'AdminUsersController@getMassMergeConfirm');
+	Route::post('user/mass/merge', 'AdminUsersController@postMerge');
     Route::delete('user/mass', 'AdminUsersController@postDeleteMass');
 
 

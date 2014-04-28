@@ -188,7 +188,12 @@ class AdminUsersController extends AdminController {
         	$title = Lang::get('admin/users/title.user_update');
         	$mode = 'edit';
 
-			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles'))) return View::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles'));
+			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
+
+
+
+
+			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return View::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
         }
         else
         {
@@ -317,6 +322,26 @@ class AdminUsersController extends AdminController {
 		}
 
 	}
+
+
+    public function getMassMergeConfirm()
+    {
+		$ids=explode(',',rtrim(Input::get('ids'),','));
+		$mergefrom='';
+		$mergelist=array();
+
+		if(is_array($ids) && count($ids) > 0){
+			foreach($ids as $id){
+				$user=User::find($id);
+				if($mergefrom){
+					$mergelist[$id]=$user->email;
+				}else $mergefrom=$user->email;
+			}
+		
+		}
+
+        if(!Api::View(compact('mergelist', 'mergefrom'))) return View::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
+    }
 
     public function postDeleteMass()
     {

@@ -51,15 +51,18 @@ function dtLoad(table, action, hidemd, hidesm){
 		}
 	});
 
+
 	$(document).on("click", table+' tbody tr', function(e) {
-		e.preventDefault();    
+		e.preventDefault();
+		
 		var aData = oTable.fnGetData( this );
 		var id = aData[0];
+
 		var index = $.inArray(id, aSelected);
 		if ( index === -1 ) {
 			aSelected.push( id );
 		} else aSelected.splice( index, 1 );
-		
+	
 		 if(aSelected.length > 0){
 			 $(table+'-container .dt-pop-control').fadeIn();
 		 } else $(table+'-container .dt-pop-control').fadeOut();
@@ -73,14 +76,34 @@ function dtLoad(table, action, hidemd, hidesm){
 		var table=$(this).attr('data-table');
 		var method=$(this).attr('data-method');
 		var run=false;
+		var _ids='';
+		$.each(aSelected, function(i,value){ _ids+=value+','; });
+
 		if(method == 'modal'){
-			var _ids='';
-			$.each(aSelected, function(i,value){ _ids+=value+','; });
 			modalfyRun(this,$(this).attr('data-action')+'?ids='+_ids);
 		}else if($(this).attr('data-confirm') == 'true'){
-			bootbox.confirm(lang_areyousure, function(result) {
-				if(result) fnRunMass(action, table, method, aSelected);
-			});
+			if(action == 'user/mass/merge'){
+				$.ajax({
+					type: 'GET',
+					url: 'user/mass/merge?ids='+_ids
+				}).done(function(msg) {
+					if(msg){
+						bootbox.confirm(msg, function(result) {
+							if(result) fnRunMass(action, table, method, aSelected);
+						});
+					} else {
+						console.log(msg);
+						bootbox.alert(lang_unable_to_exec);
+					}
+				}).fail(function(jqXHR, textStatus) {
+						console.log(jqXHR);
+						bootbox.alert( lang_unable_to_exec + textStatus);
+				 });
+				} else {
+					bootbox.confirm(lang_areyousure, function(result) {
+						if(result) fnRunMass(action, table, method, aSelected);
+					});
+				}
 		} else fnRunMass(action, table, method, aSelected);
 	});
 }

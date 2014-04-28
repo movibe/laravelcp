@@ -131,3 +131,4 @@ height: 39px;
 .list-users-online a{ text-decoration: none}
 
 .panel-heading .nav-tabs { border-bottom: 0}
+.dataTable tr{ cursor: pointer}

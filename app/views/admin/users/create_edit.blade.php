@@ -41,6 +41,10 @@
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastlogin') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_login)->diffForHumans() }}}</p>
 					  </a>
+					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $last_login->details }}}">
+						<h4 class="list-group-item-heading">{{{ Lang::get('core.last_ip') }}}</h4>
+						<p class="list-group-item-text">{{{ $last_login->details }}}</p>
+					  </a>
 					  <a href="#" class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="{{{ $user->last_activity }}}">
 						<h4 class="list-group-item-heading">{{{ Lang::get('core.lastactivity') }}}</h4>
 						<p class="list-group-item-text">{{{ Carbon::parse($user->last_activity)->diffForHumans() }}}</p>
@@ -62,11 +66,7 @@
 				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
 					<div class="col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><span class="fa fa-envelope"></span>
-                                </span>
-
-						<input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" /></div>
+						<input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
 						{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 					</div>
 				</div>
@@ -128,9 +128,20 @@
 				</div>
 
 				<div class="modal-footer">
-					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-					{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-					{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+					<div class="pull-left">
+						<a href="{{{ URL::to('admin/users/' . $user->id . '/email' ) }}}" class="modalfy btn btn-default">{{{ Lang::get('button.email') }}}</a>
+						@if($user->id == Auth::user()->id)
+							<a href="#" class="disabled btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
+						@else
+							<a data-row="[{ $user->id }}" data-table="users" data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '' ) }}}" class="ajax-alert-confirm btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
+						@endif
+
+					</div>
+					<div class="pull-right">
+						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+					</div>
 				</div>
 			</div>
 
