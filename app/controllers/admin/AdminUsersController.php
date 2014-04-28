@@ -216,7 +216,7 @@ class AdminUsersController extends AdminController {
         if ( $user->id )
         {
 			$list = UserNotes::leftjoin('users', 'users.id', '=', 'user_notes.admin_id')
-					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->orderBy('users.id');
+					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->where('user_notes.user_id','=',$user->id)->orderBy('users.id');
 			if(Api::Enabled()){
 				$u=$list->get();
 				return Api::View($u->toArray());
