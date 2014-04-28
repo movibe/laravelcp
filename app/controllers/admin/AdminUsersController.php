@@ -99,42 +99,42 @@ class AdminUsersController extends AdminController {
      */
     public function postCreate()
     {
-        $this->user->displayname = Input::get( 'displayname' );
-        $this->user->email = Input::get( 'email' );
-        $this->user->password = Input::get( 'password' );
 
-        // The password confirmation will be removed from model
-        // before saving. This field will be used in Ardent's
-        // auto validation.
-        $this->user->password_confirmation = Input::get( 'password_confirmation' );
-        $this->user->confirmed = Input::get( 'confirm' );
+  		$rules = array(
+			'email'      => 'required|email',
+			'password'   => 'required|confirmed|min:3'
+		);
 
+        $validator = Validator::make(Input::all(), $rules);
 
-        // Save if valid. Password field will be hashed before save
-        $this->user->save();
-
-        if ( $this->user->id )
+        if ($validator->passes())
         {
-            // Save roles. Handles updating.
-            $this->user->saveRoles(Input::get( 'roles' ));
 
-			$pro=Input::get('user_profiles');
-			$profile = new UserProfile($pro['new']);
-			$user = User::find($this->user->id);
-			$user->profiles()->save($profile);
+			$this->user->displayname = Input::get( 'displayname' );
+			$this->user->email = Input::get( 'email' );
+			$this->user->password = Input::get( 'password' );
+			$this->user->password_confirmation = Input::get( 'password_confirmation' );
+			$this->user->confirmed = Input::get( 'confirm' );
+			$this->user->save();
 
+			if ( $this->user->id )
+			{
+				$this->user->saveRoles(Input::get( 'roles' ));
 
-            // Redirect to the new user page
-            if(!Api::Redirect(array('success', Lang::get('admin/users/messages.create.success')))) return Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
-        }
-        else
-        {
-            // Get validation errors (see Ardent package)
-            $error = $this->user->errors()->all();
+				$pro=Input::get('user_profiles');
+				$profile = new UserProfile($pro['new']);
+				$user = User::find($this->user->id);
+				$user->profiles()->save($profile);
 
-            if(!Api::Redirect(array( 'error', $error ))) return Redirect::to('admin/users/create')
-                ->withInput(Input::except('password'))
-                ->with( 'error', $error );
+				if(!Api::Redirect(array('success', Lang::get('admin/users/messages.create.success')))) return Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
+			}
+			else
+			{
+				$error = $this->user->errors()->all();
+				if(!Api::Redirect(array( 'error', $error ))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $error );
+			}
+        } else {
+            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
         }
     }
 
@@ -190,9 +190,6 @@ class AdminUsersController extends AdminController {
 
 			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
-
-
-
 			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return View::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
         }
         else
@@ -238,8 +235,12 @@ class AdminUsersController extends AdminController {
 	
     public function putEdit($user)
     {
+		$rules = array(
+			'email'      => 'required|email',
+			'password'   => 'required|confirmed|min:3'
+		);
 
-        $validator = Validator::make(Input::all(), User::$rules);
+        $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->passes())
         {
@@ -249,22 +250,6 @@ class AdminUsersController extends AdminController {
             $user->displayname = Input::get( 'displayname' );
             $user->email = Input::get( 'email' );
             $user->confirmed = Input::get( 'confirm' );
-
-            $password = Input::get( 'password' );
-            $passwordConfirmation = Input::get( 'password_confirmation' );
-
-            if(!empty($password)) {
-                if($password === $passwordConfirmation) {
-                    $user->password = $password;
-                    $user->password_confirmation = $passwordConfirmation;
-                } else {
-                    // Redirect to the new user page
-                    if(!Api::Redirect(array('error', Lang::get('admin/users/messages.password_does_not_match')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'))->withErrors($validator);
-                }
-            } else {
-                unset($user->password);
-                unset($user->password_confirmation);
-            }
             
             if($user->confirmed == null) {
                 $user->confirmed = $oldUser->confirmed;
@@ -272,7 +257,6 @@ class AdminUsersController extends AdminController {
 
             $user->save();
 
-            // Save roles. Handles updating.
             $user->saveRoles(Input::get( 'roles' ));
 
 			foreach(Input::get('user_profiles') as $id=>$profile){

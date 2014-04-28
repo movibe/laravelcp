@@ -85,6 +85,7 @@ class UserController extends BaseController {
 		$rules = array(
 			'terms'     => "required|accepted",
 			'email'     => "required|email",
+			'password'   => 'required|confirmed|min:3',
 			'create_hp'   => 'honeypot',
 			'create_hp_time'   => 'required|honeytime:3'
 		);
@@ -98,24 +99,6 @@ class UserController extends BaseController {
 
 			$this->user->email = Input::get( 'email' );
 			$this->user->displayname = Input::get( 'name' );
-
-			$password = Input::get( 'password' );
-			$passwordConfirmation = Input::get( 'password_confirmation' );
-
-			if(!empty($password)) {
-				if($password === $passwordConfirmation) {
-					$this->user->password = $password;
-					$this->user->password_confirmation = $passwordConfirmation;
-				} else {
-					return Redirect::to('user/create')
-						->withInput(Input::except('password','password_confirmation'))
-						->with('error', Lang::get('admin/users/messages.password_does_not_match'))->withErrors($validator);
-				}
-			} else {
-				unset($this->user->password);
-				unset($this->user->password_confirmation);
-			}
-
 			$this->user->save();
 
 			if ( $this->user->id )
