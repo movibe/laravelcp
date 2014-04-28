@@ -256,6 +256,9 @@
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		localStorage.setItem('edit_user_tab', $(e.target).attr("href"));
 	});
+	$('a[data-toggle="tab"]').on('click', function (e) {
+		$('.alert').hide();
+	});
 
 	if(localStorage.getItem('edit_user_tab')){
 		$('.nav-tabs a[href='+localStorage.getItem('edit_user_tab')+']').tab('show');

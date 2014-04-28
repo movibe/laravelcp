@@ -160,15 +160,18 @@ $(document).on("click", ".ajax-alert-confirm", function(e) {
 });
 
 $(document).on("submit", ".form-ajax", function(e) {
-  $.post(
-   $(this).attr('action'),
-	$(this).serialize(),
-	function(data){
-	  $("#site-modal").html(data);
-	  //console.log(data);
-	}
-  );
-  return false;   
+	$('input[type=button], input[type=submit]').attr('disabled', true).addClass('disabled');
+	$.post(
+		$(this).attr('action'),
+		$(this).serialize(),
+		function(data){
+			$("#site-modal").html(data);
+			$('html, body, #site-modal').animate({ scrollTop: 0 }, 0);
+			$('input[type=button], input[type=submit]').attr('disabled', false).removeClass('disabled');
+			//console.log(data);
+		}
+	);
+	return false;   
 }); 
 
 $(document).on("click", "a", function(e) {
