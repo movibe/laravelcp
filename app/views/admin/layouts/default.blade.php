@@ -77,12 +77,11 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Search</h4>
+					<h4 class="modal-title">{{{Lang::get('core.search')}}}</h4>
 				</div>
 				<div class="modal-body">
-					
 					 <div class="input-group">
-						  <input type="text" class="form-control search-input" placeholder="What are you searching for?">
+						  <input type="text" class="form-control search-input" placeholder="{{{Lang::get('core.search_placeholder')}}}">
 						  <span class="input-group-btn">
 							<button class="btn btn-default" type="button">
 							<span class="fa fa-search"></span>
@@ -90,11 +89,9 @@
 						 </span>
 					</div>	
 					<br/>
-					<div id="site-search-results">
-
-					</div>				
+					<div id="site-search-results"></div>				
 				</div>
-				<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+				<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">{{{Lang::get('button.close')}}}</button></div>
 			</div>
 		</div>
 	</div>
@@ -120,17 +117,12 @@
 				}).done(function(msg) {
 					if(msg){
 						$('#site-search-results').html(msg);
-					} else $('#site-search-results').html('<h3>No results</h3>');
+					} else $('#site-search-results').html('<h3>{{{Lang::get('core.no_results')}}}</h3>');
 				}).fail(function(jqXHR, textStatus) {
 						console.log(jqXHR);
-						$('#site-search-results').html('<h3>Unable to execute command</h3>');
+						$('#site-search-results').html('<h3>{{{Lang::get('core.unable_to_exec')}}}</h3>');
 				});
 		}, 700));
-
-	</script>
-	<div id="poller"></div>
-
-    <script type="text/javascript">
 
 		/* call back from results */
 		function fnUpdateGrowler(id, args){
