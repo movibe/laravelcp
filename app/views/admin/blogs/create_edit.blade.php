@@ -25,14 +25,14 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">
 
-				<div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
 						<input placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
-						{{ $errors->first('title', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('title', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
 						@section('wysiywg-content')
 							{{ Input::old('content', isset($post) ? $post->content : null) }}
@@ -40,58 +40,58 @@
 						<p>@include('wysiwyg')</p>
 
 						<textarea id="wysiwyg-body" class="hide" name="content" value="content" rows="10"></textarea>
-						{{ $errors->first('content', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('content', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 			</div>
 
 			<div class="tab-pane" id="tab-meta-data">
-				<div class="form-group {{{ $errors->has('meta-title') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('meta-title') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="meta-title">{{{ Lang::get('admin/slugs.meta_title') }}}</label>
 						<input class="form-control" type="text" name="meta-title" id="meta-title" value="{{{ Input::old('meta-title', isset($post) ? $post->meta_title : null) }}}" />
-						{{ $errors->first('meta-title', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('meta-title', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('meta-description') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('meta-description') ? 'has-error' : '' }}}">
 					<div class="col-md-12 controls">
                         <label class="control-label" for="meta-description">{{{ Lang::get('admin/slugs.meta_description') }}}</label>
 						<input class="form-control" type="text" name="meta-description" id="meta-description" value="{{{ Input::old('meta-description', isset($post) ? $post->meta_description : null) }}}" />
-						{{{ $errors->first('meta-description', '<span class="help-inline">:message</span>') }}}
+						{{{ $errors->first('meta-description', '<span class="help-block">:message</span>') }}}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('meta-keywords') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('meta-keywords') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="meta-keywords">{{{ Lang::get('admin/slugs.meta_keywords') }}}</label>
 						<input class="form-control" type="text" name="meta-keywords" id="meta-keywords" value="{{{ Input::old('meta-keywords', isset($post) ? $post->meta_keywords : null) }}}" />
-						{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('meta-keywords', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 			</div>
 
 			<div class="tab-pane" id="tab-settings">
-				<div class="form-group {{{ $errors->has('banner') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('banner') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="banner">{{{ Lang::get('admin/slugs.banner') }}}</label>
 						<input class="form-control" type="text" name="banner" id="banner" value="{{{ Input::old('banner', isset($post) ? $post->banner : null) }}}" />
-						{{ $errors->first('banner', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('banner', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 
-				<div class="form-group {{{ $errors->has('parent') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('parent') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="parent">{{{ Lang::get('core.parent') }}}</label>
 						{{ Form::select('parent', $parents, Input::old('parent', isset($post) ? $post->parent : null),array('class' => 'form-control')); }}
-						{{ $errors->first('parent', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('parent', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('template') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('template') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label">{{{ Lang::get('core.template') }}}</label>
 						<div class="btn-group">
@@ -109,10 +109,10 @@
 							</ul>
 							<input type="hidden" id="template" name="template" value="site.layout.default"/>
 						</div>
-						{{ $errors->first('template', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('template', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
-				<div class="form-group {{{ $errors->has('display_navigation') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('display_navigation') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label" for="display_navigation">{{{ Lang::get('core.display_navigation') }}}</label>
 						<div class="btn-group btn-toggle" data-toggle="buttons">
@@ -123,12 +123,12 @@
 								{{ Form::radio('display_navigation', '0', (Input::old('display_navigation', isset($post) ? $post->display_navigation : null) ? null : true)) }} No
 							</label>
 						 </div>
-						{{ $errors->first('display_navigation', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('display_navigation', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 
-				<div class="form-group {{{ $errors->has('display_author') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('display_author') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label" for="display_author">{{{ Lang::get('core.display_author') }}}</label>
 						<div class="btn-group btn-toggle" data-toggle="buttons">
@@ -139,11 +139,11 @@
 								{{ Form::radio('display_author', '0', (Input::old('display_author', isset($post) ? $post->display_author : null) ? null : true)) }} No
 							</label>
 						 </div>
-						{{ $errors->first('display_author', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('display_author', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('allow_comments') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('allow_comments') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label" for="allow_comments">{{{ Lang::get('core.allow_comments') }}}</label>
 						<div class="btn-group btn-toggle" data-toggle="buttons">
@@ -154,7 +154,7 @@
 								{{ Form::radio('allow_comments', '0', (Input::old('allow_comments', isset($post) ? $post->allow_comments : null) ? null : true)) }} No
 							</label>
 						 </div>
-						{{ $errors->first('allow_comments', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('allow_comments', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 

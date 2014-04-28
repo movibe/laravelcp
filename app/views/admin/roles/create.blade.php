@@ -17,11 +17,11 @@
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">
-				<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="name">{{{ Lang::get('core.name') }}}</label>
                     <div class="col-md-10">
     					<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
-    					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
+    					{{ $errors->first('name', '<span class="help-block">:message</span>') }}
                     </div>
 				</div>
 			</div>

@@ -135,34 +135,34 @@
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
-						{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 				
-				<div class="form-group {{{ $errors->has('password') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password" id="password" value="" />
-						{{ $errors->first('password', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('password', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 				
-				<div class="form-group {{{ $errors->has('password_confirmation') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('password_confirmation') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
-						{{ $errors->first('password_confirmation', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('password_confirmation', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
 				
-				<div class="form-group {{{ $errors->has('activated') || $errors->has('confirm') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('activated') || $errors->has('confirm') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="confirm">{{{ Lang::get('core.active') }}}</label>
 					<div class="col-md-6">
 						@if ($mode == 'create')
@@ -176,11 +176,11 @@
 								<option value="0"{{{ ( ! $user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
 							</select>
 						@endif
-						{{ $errors->first('confirm', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('confirm', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 
-				<div class="form-group {{{ $errors->has('roles') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('roles') ? 'has-error' : '' }}}">
 	                <label class="col-md-2 control-label" for="roles">{{{ Lang::get('core.roles') }}}</label>
 	                <div class="col-md-6">
 		                <select class="form-control" name="roles[]" id="roles[]" multiple>

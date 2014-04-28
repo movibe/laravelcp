@@ -17,11 +17,11 @@
 	{{ Form::open(array('method' => 'put','class' => 'form-horizontal form-ajax')) }}
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">
-				<div class="form-group {{{ $errors->has('content') ? 'error' : '' }}}">
+				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="control-label" for="content">{{{ Lang::get('core.content') }}}</label>
 						<textarea class="form-control full-width wysihtml5" name="content" value="content" rows="10">{{{ Input::old('content', $comment->content) }}}</textarea>
-						{{ $errors->first('content', '<span class="help-inline">:message</span>') }}
+						{{ $errors->first('content', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 			</div>

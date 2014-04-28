@@ -259,7 +259,7 @@ class AdminUsersController extends AdminController {
                     $user->password_confirmation = $passwordConfirmation;
                 } else {
                     // Redirect to the new user page
-                    if(!Api::Redirect(array('error', Lang::get('admin/users/messages.password_does_not_match')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+                    if(!Api::Redirect(array('error', Lang::get('admin/users/messages.password_does_not_match')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'))->withErrors($validator);
                 }
             } else {
                 unset($user->password);
@@ -298,7 +298,7 @@ class AdminUsersController extends AdminController {
 			}
 
         } else {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
+            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
         }
 
         // Get validation errors (see Ardent package)
