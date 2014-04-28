@@ -45,7 +45,8 @@
 		<div class="navbar navbar-default  navbar-fixed-top">
 			 <div class="container">
                 <div class="navbar-header">
-                    <a href="{{{ URL::to('/') }}}" class="navbar-brand">{{{ Setting::get('site.name') }}}</a>
+                    <div id="logo"></div>
+					<a href="{{{ URL::to('/') }}}" class="navbar-brand">{{{ Setting::get('site.name') }}}</a>
                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">{{{ Lang::get('core.toggle_nav') }}}</span>
                         <span class="icon-bar"></span>

@@ -7,9 +7,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			<div id="logo"></div>
 			<a href="{{{ URL::to('admin') }}}" class="navbar-brand" title="{{{ Setting::get('site.name') }}}">{{{ Setting::get('site.name') }}} </a>
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			
 			<ul class="nav navbar-nav">
 				@yield('main-nav-pre')
 				<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}" title="{{{ Lang::get('core.users') }}}">

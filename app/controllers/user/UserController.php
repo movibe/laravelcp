@@ -252,7 +252,7 @@ class UserController extends BaseController {
 				'updated'     => Confide::user()->id ? true : false,
 			));
 
-			Event::fire('user.login', array($user));
+			Event::fire('user.login', array($input));
 
             $r = Session::get('loginRedirect');
             if (!empty($r))
