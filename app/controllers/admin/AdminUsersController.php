@@ -438,7 +438,7 @@ class AdminUsersController extends AdminController {
 	private function emailTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
-		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::path("emails"));
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::getTheme().DIRECTORY_SEPARATOR."emails");
 		return $files;
 	}
 
