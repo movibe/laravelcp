@@ -54,6 +54,7 @@
 
 					<textarea class="form-control" name="user_notes[]" placeholder="{{{Lang::get('core.new_note')}}}"></textarea>
 
+
 					<div class="modal-footer">
 						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
@@ -128,10 +129,11 @@
 			<div class="tab-pane active" id="tab-general">
 
 
-				<div class="form-group">
+				<div class="form-group {{{ $errors->has('displayname') ? 'has-error' : '' }}}">
 					<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="text" name="displayname" id="displayname" value="{{{ Input::old('displayname', isset($user) ? $user->displayname : null) }}}" />
+						{{ $errors->first('displayname', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>
 

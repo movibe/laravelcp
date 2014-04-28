@@ -167,7 +167,7 @@ class UserController extends BaseController {
 
 			foreach(Input::get('user_profiles') as $id=>$profile){
 				$pro = UserProfile::find($id);
-				if($pro){
+				if(!empty($pro)){
 					$pro->fill($profile)->push();
 				} else {
 					$pro = new UserProfile($profile);

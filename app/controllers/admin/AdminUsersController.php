@@ -282,7 +282,7 @@ class AdminUsersController extends AdminController {
 
 			foreach(Input::get('user_profiles') as $id=>$profile){
 				$pro = UserProfile::find($id);
-				if($pro){
+				if(!empty($pro)){
 					$pro->fill($profile)->push();
 				} else {
 					$pro = new UserProfile($profile);
@@ -292,7 +292,7 @@ class AdminUsersController extends AdminController {
 
 			foreach(Input::get('user_notes') as $id=>$note){
 				$not = UserNotes::find($id);
-				if($not){
+				if(!empty($not)){
 					if($note){
 						$not->fill(array('id'=>$id,'note'=>$note))->push();
 					} else $not->delete();
@@ -345,15 +345,13 @@ class AdminUsersController extends AdminController {
 			foreach($rows as $i=>$r){
 				if ($r != Confide::user()->id){
 					$user = User::find($r);
-					try {
+					if(!empty($user)){
 						if(!$_merge_to){
 							$_merge_to=$user;
 							continue;
 						}
 						$this->runMerge($_merge_to, $user);
-					} catch (Exception $e) {
-						if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
-					}
+					} else  if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
 				}
 			}
 		}
@@ -363,12 +361,10 @@ class AdminUsersController extends AdminController {
 	private function runDeleteMass($r){
 		if ($r != Confide::user()->id){
 			$user = User::find($r);
-			try {
+			if(!empty($user)){
 				Event::fire('controller.user.delete', array($user));
 				$user->delete();
-			} catch (Exception $e) {
-				if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
-			}
+			} else if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
 		}
 
 	}
@@ -383,9 +379,11 @@ class AdminUsersController extends AdminController {
 		if(is_array($ids) && count($ids) > 0){
 			foreach($ids as $id){
 				$user=User::find($id);
-				if($mergefrom){
-					$mergelist[$id]=$user->email;
-				}else $mergefrom=$user->email;
+				if(!empty($user)){
+					if($mergefrom){
+						$mergelist[$id]=$user->email;
+					}else $mergefrom=$user->email;
+				}
 			}
 		
 		}
@@ -513,7 +511,9 @@ class AdminUsersController extends AdminController {
 			$_results=false;
 			foreach (Input::get('to') as $user_id){
 				$user=User::find($user_id);
-				$_results=$this->sendEmail($user, Input::get('template'));
+				if(!empty($user)) {
+					$_results=$this->sendEmail($user, Input::get('template'));
+				} else $_results=false;
 			}
 			if($_results == true){
 				$message=Lang::get('admin/users/messages.email.success');
@@ -544,7 +544,7 @@ class AdminUsersController extends AdminController {
 		if(is_array($ids) && count($ids) > 0){
 			foreach($ids as $id){
 				$user=User::find($id);
-				$multi[$id]=$user->email;
+				if(!empty($user)) $multi[$id]=$user->email;
 			}
 		
 		}
