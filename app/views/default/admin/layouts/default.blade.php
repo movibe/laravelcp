@@ -33,6 +33,19 @@
 		$.fn.poller({'url':'{{{ URL::to('admin/polling') }}}'});
 	</script>
 
+	<script src="{{{ asset('assets/js/site.js') }}}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+	<script src="{{{ asset('assets/js/datatables.fnReloadAjax.js') }}}"></script>
+	<script src="{{{ asset('assets/js/datatables-bootstrap.js') }}}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"/>
+	@yield('head-scripts')
+
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -54,7 +67,6 @@
 		@yield('footer')
 	</footer>
 
-	@include(Theme::path('admin/js'))
 
 	<!-- default modal dialog -->
 	<div id="site-modal" class="modal fade" tabindex="-2" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -95,6 +107,7 @@
 		</div>
 	</div>
 
+	@include(Theme::path('admin/js'))
 
 	<script type="text/javascript">
 		$('.nav-search').on('click', function(e){

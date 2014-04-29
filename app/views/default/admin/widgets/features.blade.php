@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 	  <div class="panel-heading clearfix">
 		  <span class="panel-title pull-left"><span class="fa fa-lg fa-asterisk"></span> <span class="panel-title-text">Featuring</span></span>
-		  @include(Theme::path('admin/widget-controls', array('id' => 'widget-features')))
+		  @include(Theme::path('admin/widget-controls'), array('id' => 'widget-features'))
 	  </div>
 	  <div class="panel-body ">
 			<ul class="list-group">

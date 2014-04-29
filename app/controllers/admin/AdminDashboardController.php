@@ -7,6 +7,7 @@ class AdminDashboardController extends AdminController {
 	 * Admin dashboard
 	 *
 	 */
+
 	private function widgets(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;

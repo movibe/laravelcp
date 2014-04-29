@@ -2,6 +2,10 @@
 
 return array(
 
-	'actions' => 'Actions'
+	'actions' => 'Actions',
+	'created_at' => 'Created',
+	'title' => 'Title',
+	'description' => 'Description',
+	'status' => 'Status',
 
 );

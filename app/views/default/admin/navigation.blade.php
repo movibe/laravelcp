@@ -44,11 +44,13 @@
 						@yield('sub-nav-settings')
 					</ul>
 				</li>
-				<li class="dropdown" title="{{{ Auth::user()->email }}}">
+				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<span class="glyphicon"><img alt="{{{ Auth::user()->email }}}" src="{{ Gravatar::src(Auth::user()->email, 20) }}"></span>  &nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li><a href="{{{ URL::to('admin/todos') }}}"><span class="fa fa-list-alt fa-fw"></span>  &nbsp; {{{ Lang::get('core.todos') }}}</a></li>
+						<li class="divider"></li>
 						<li><a href="{{{ URL::to('user') }}}"><span class="fa fa-wrench fa-fw"></span>  &nbsp; {{{ Lang::get('core.profile') }}}</a></li>
 						<li class="divider"></li>
 						<li><a href="{{{ URL::to('user/logout') }}}"><span class="fa fa-sign-out fa-fw"></span>  &nbsp; {{{ Lang::get('core.logout') }}}</a></li>

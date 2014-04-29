@@ -4,6 +4,7 @@ return array(
 
 	'administration' => 'Administration',
 	'name' => 'Name',
+	'todos' => 'To-do List',
 	'users' => 'Users',
 	'users_online' => 'Users Online',
 	'roles' => 'Roles',
@@ -61,6 +62,7 @@ return array(
 	'agree_tos' => 'I agree with the <a href="#" class="site_tos">Terms and Conditions</a>.',
 	'must_agree_tos' => 'You must agree with the Terms and Conditions.',
 	'user_logged_in'=> 'User Logged In',
-
+	'assigned_to'=> 'Assigned to',
+	'due_at' => 'Due',
 );
 

@@ -229,7 +229,8 @@ class AdminUsersController extends AdminController {
 
 	}
 
-    /**
+
+	/**
      * Update the specified resource in storage.
      *
      * @param $user
@@ -351,7 +352,7 @@ class AdminUsersController extends AdminController {
 							continue;
 						}
 						$this->runMerge($_merge_to, $user);
-					} else  if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
+					} else  if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
 				}
 			}
 		}
@@ -364,7 +365,7 @@ class AdminUsersController extends AdminController {
 			if(!empty($user)){
 				Event::fire('controller.user.delete', array($user));
 				$user->delete();
-			} else if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
+			} else if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
 		}
 
 	}
@@ -422,14 +423,14 @@ class AdminUsersController extends AdminController {
 			Event::fire('controller.user.delete', array($user));
 			$user->delete();
 		} catch (Exception $e) {
-			if(!Api::Redirect(array('error',  $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
+			if(!Api::Redirect(array('error',  ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
 		}
 
         // Was the comment post deleted?
         $user = User::find($id);
         if (empty($user)){
 			if(!Api::Redirect(array('success'))) return Response::json(array('result'=>'success'));
-        } else  if(!Api::Redirect(array('error', $e->getMessage()))) return Response::json(array('result'=>'error', 'error' =>  $e->getMessage()));
+        } else  if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
         
     }
 

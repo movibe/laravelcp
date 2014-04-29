@@ -5,6 +5,7 @@ Route::model('profile', 'UserProfile');
 Route::model('comment', 'Comment');
 Route::model('id', 'id');
 Route::model('post', 'Post');
+Route::model('todo', 'Todos');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -14,6 +15,7 @@ Route::model('role', 'Role');
 Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
 Route::pattern('user', '[0-9]+');
+Route::pattern('todo', '[0-9]+');
 Route::pattern('profile', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('id', '[0-9]+');
@@ -86,8 +88,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
     Route::controller('roles/{role}', 'AdminRolesController');
     Route::controller('roles', 'AdminRolesController');
 
+    # Todos
+	Route::controller('todos/{todo}', 'AdminTodosController');
+	Route::controller('todos', 'AdminTodosController');
+   
     # Admin Dashboard
-    Route::controller('/', 'AdminDashboardController');
+	Route::controller('/', 'AdminDashboardController');
 });
 
 

@@ -16,7 +16,7 @@ function styledt(table){
 	$(table+'-container .dataTables_paginate').addClass('pull-right');
 }
 
-function dtLoad(table, action, hidemd, hidesm){
+function dtLoad(table, action, hidemd, hidesm, hide){
 	var aSelected = [];
 	var oTable=$(table).dataTable( {
 		"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -45,12 +45,17 @@ function dtLoad(table, action, hidemd, hidesm){
 
 			$(table+' tr').find(hidemd).addClass('hidden-sm hidden-xs'); 
 			$(table+' tr').find(hidesm).addClass('hidden-xs'); 
+			$(table+' tr').find(hide).addClass('hidden'); 
 
 			$('.datatable-loading').fadeOut();
 			$(table+'-container').fadeIn();
 		}
 	});
 
+	$('#site-modal').on('hidden.bs.modal', function () {
+		$(document).off("click", table+' tbody tr');
+		$(document).off("click",  table+"-container .dt-mass");
+	})
 
 	$(document).on("click", table+' tbody tr', function(e) {
 		e.preventDefault();

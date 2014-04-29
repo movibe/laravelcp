@@ -14,5 +14,6 @@ return array(
 	'close' => 'Close',
 	'merge' => 'Merge',
 	'update' => 'Update',
-	'cleardashsettings' => 'Reset Dashboard'
+	'cleardashsettings' => 'Reset Dashboard',
+	'assign_to_me' => 'Assign to me',
 );
