@@ -121,7 +121,7 @@ class AdminTodosController extends AdminController {
      public function getData()
     {
 		$list = Todos::leftjoin('users', 'users.id', '=', 'todos.admin_id')
-				->select(array('todos.id', 'todos.title', 'todos.status', 'todos.description', 'todos.created_at', 'todos.due_at', 'users.displayname'))->orderBy('todos.id');
+				->select(array('todos.id', 'todos.title', 'todos.status', 'todos.description', 'todos.created_at', 'todos.due_at', 'users.displayname'))->orderBy('todos.id','desc');
 		if(Api::Enabled()){
 			$u=$list->get();
 			return Api::View($u->toArray());

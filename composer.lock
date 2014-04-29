@@ -485,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2210d5d1d07debd2e9b0e67077b7088918ef904f"
+                "reference": "dde53a39385435649ab42626d21cde9a4c1e85fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2210d5d1d07debd2e9b0e67077b7088918ef904f",
-                "reference": "2210d5d1d07debd2e9b0e67077b7088918ef904f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/dde53a39385435649ab42626d21cde9a4c1e85fd",
+                "reference": "dde53a39385435649ab42626d21cde9a4c1e85fd",
                 "shasum": ""
             },
             "require": {
@@ -593,7 +593,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-04-26 14:27:01"
+            "time": "2014-04-29 23:26:59"
         },
         {
             "name": "laravelbook/ardent",
@@ -2759,12 +2759,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "62e530073cba7c479b48c1d517565adfa6ba9d51"
+                "reference": "d2f081de8384f7b1a2031efd82fe7256bbb6d465"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/62e530073cba7c479b48c1d517565adfa6ba9d51",
-                "reference": "62e530073cba7c479b48c1d517565adfa6ba9d51",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d2f081de8384f7b1a2031efd82fe7256bbb6d465",
+                "reference": "d2f081de8384f7b1a2031efd82fe7256bbb6d465",
                 "shasum": ""
             },
             "require": {
@@ -2822,7 +2822,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-04-25 21:40:27"
+            "time": "2014-04-29 22:45:42"
         },
         {
             "name": "doctrine/inflector",
@@ -3370,12 +3370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "38ccc18e40d093aed238ddab7450fa842876d7f1"
+                "reference": "b8a22bec42d81df579f164da09480af82a7576bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/38ccc18e40d093aed238ddab7450fa842876d7f1",
-                "reference": "38ccc18e40d093aed238ddab7450fa842876d7f1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b8a22bec42d81df579f164da09480af82a7576bb",
+                "reference": "b8a22bec42d81df579f164da09480af82a7576bb",
                 "shasum": ""
             },
             "require": {
@@ -3436,7 +3436,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-27 14:32:28"
+            "time": "2014-04-29 23:29:13"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

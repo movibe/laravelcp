@@ -240,7 +240,6 @@ class AdminUsersController extends AdminController {
 				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
 				->make();
 		}
-
 	}
 
 
