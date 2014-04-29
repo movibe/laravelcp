@@ -203,19 +203,25 @@
 
 				<div class="modal-footer">
 					@if ($mode != 'create')
-					<div class="pull-left">
-						<a href="{{{ URL::to('admin/users/' . $user->id . '/email' ) }}}" class="modalfy btn btn-default">{{{ Lang::get('button.email') }}}</a>
+					<div class="col-md-6 col-sm-12">
 						@if($user->id == Auth::user()->id)
 							<a href="#" class="disabled btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@else
 							<a data-row="[{ $user->id }}" data-table="users" data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '' ) }}}" class="ajax-alert-confirm btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@endif
 
+						<a href="{{{ URL::to('admin/users/' . $user->id . '/email' ) }}}" class="modalfy btn btn-default">{{{ Lang::get('button.email') }}}</a>
+						<a data-row="[{ $user->id }}" data-table="users" href="{{{ URL::to('admin/users/' . $user->id . '/resetpassword' ) }}}" class="ajax-alert-confirm btn btn-info">{{{ Lang::get('button.reset_password') }}}</a>
+
 					</div>
+					<div class="col-md-6 col-sm-12">
+					@else
+					<div class="col-md-12 col-sm-12">
 					@endif
 						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
 						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+					</div>
 				</div>
 			</div>
 

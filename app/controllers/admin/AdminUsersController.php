@@ -187,6 +187,12 @@ class AdminUsersController extends AdminController {
 		}
 	 }
 
+	public function postResetpassword($user){
+		if(!Confide::forgotPassword( $user->email)){
+					if(!Api::View(array('error'))) return Response::json(array('result'=>'error'));
+		} else if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
+	}
+
     public function getEdit($user)
     {
         if ( $user->id )
