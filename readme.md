@@ -29,6 +29,7 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 - User profiles
 - User suspending
 - User cancellation, instant, timed and reversal
+- To-do list
 - Smart search, search as you type, searches multiple tables, prepend search string with table name (users example) will search that table only
 - User e-mailing, single and multiple w/ attachments
 - oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview)& [HybridAuth](http://hybridauth.sourceforge.net/)
