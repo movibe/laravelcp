@@ -388,14 +388,14 @@ class UserController extends BaseController {
      */
     public function getLogout()
     {
-		Event::fire('user.logout', array($user));
+		Event::fire('user.logout', array(Confide::user()));
  
 		Activity::log(array(
-			'contentID'   => $user->id,
+			'contentID'   => Confide::user()->id,
 			'contentType' => 'logout',
-			'description' => $user->id,
+			'description' => Confide::user()->id,
 			'details'     => '',
-			'updated'     => $user->id,
+			'updated'     => Confide::user()->id,
 		));
 	   
 		Confide::logout();
