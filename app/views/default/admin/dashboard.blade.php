@@ -26,7 +26,9 @@
 		$.fn.gridster.responsive();
 
 		/* resize sparklines */
-		$(window).bind('load resize', throttle(_resize_sparkline, 200));
+		$(window).bind('load resize', function(){
+			throttle(_resize_sparkline({{ $minigraph_json }}), 200)
+		});
 	</script>
 @stop
 

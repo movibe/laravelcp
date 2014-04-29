@@ -129,6 +129,14 @@ class AdminUsersController extends AdminController {
 				$user = User::find($this->user->id);
 				$user->profiles()->save($profile);
 
+				Activity::log(array(
+					'contentID'   => $this->user->id,
+					'contentType' => 'account_created',
+					'description' => $this->user->id,
+					'details'     => 'account_created',
+					'updated'     => Confide::user()->id ? true : false,
+				));
+
 				if(!Api::Redirect(array('success', Lang::get('admin/users/messages.create.success')))) return Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
 			}
 			else
@@ -418,6 +426,15 @@ class AdminUsersController extends AdminController {
         }
 
 		$id=$user->id;
+
+		Activity::log(array(
+			'contentID'   => $user->id,
+			'contentType' => 'account_deleted',
+			'description' => $user->id,
+			'details'     => '',
+			'updated'     => Confide::user()->id ? true : false,
+		));
+
 
 		try {
 			Event::fire('controller.user.delete', array($user));

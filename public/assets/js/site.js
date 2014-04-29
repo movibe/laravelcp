@@ -255,11 +255,14 @@ function loadWeather(location, woeid) {
 	}
 }
 
-function _resize_sparkline(){
+function _resize_sparkline(data){
 	if( $( window ).width() > 760){
-		var _w=(($( window ).width()/4)/10)-9;
-	} else 	var _w=(($( window ).width()/2)/10)-10;
-	$('.sparklines').sparkline([4,6,1,4,7,1,5,8,9,2], { enableTagOptions: true , barWidth: _w, barSpacing: '3' });
+		var _w=(($( window ).width()/4)/6)-9;
+	} else 	var _w=(($( window ).width()/2)/6)-10;
+
+	$.each(data, function(i,value){ 
+		$('#spark_'+ i).sparkline(value.data.reverse(), { enableTagOptions: true , barWidth: _w, barSpacing: '6' });
+	});
 }
 
 function throttle(f, delay){

@@ -43,6 +43,15 @@ class UserController extends BaseController {
 				if($user->cancelled) DB::table('users')->where('id', $user->id)->update(array('confirmed' => true, 'cancelled' => false));
 			break;
 		}
+
+		Activity::log(array(
+			'contentID'   => $user->id,
+			'contentType' => 'account_cancelled',
+			'description' => $user->id,
+			'details'     => '',
+			'updated'     => $user->id,
+		));
+
 		return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
 	}
 
@@ -101,6 +110,15 @@ class UserController extends BaseController {
 			$this->user->displayname = Input::get( 'name' );
 			$this->user->save();
 			
+			Activity::log(array(
+				'contentID'   => $this->user->id,
+				'contentType' => 'account_created',
+				'description' => $this->user->id,
+				'details'     => 'Created from site',
+				'updated'     => false,
+			));
+
+
 			Event::fire('user.create', array($user));
 
 			if ( $this->user->id )
@@ -371,7 +389,15 @@ class UserController extends BaseController {
     public function getLogout()
     {
 		Event::fire('user.logout', array($user));
-       
+ 
+		Activity::log(array(
+			'contentID'   => $user->id,
+			'contentType' => 'logout',
+			'description' => $user->id,
+			'details'     => '',
+			'updated'     => $user->id,
+		));
+	   
 		Confide::logout();
 
         return Redirect::to('/');

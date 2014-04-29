@@ -17,9 +17,43 @@ class AdminDashboardController extends AdminController {
 	}
 
 
+	private function graphData($type, $from, $to, $distinct=false){
+		if($distinct){
+			$q=Activity::select(DB::raw('distinct `ip_address` '))->whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->get();
+		} else $q=Activity::whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->get();
+
+		return count($q);
+	}
+
+	private function graphDataBuild($type='activity', $time=5, $distinct=false){
+		$results=array();
+		$total=0;
+		for($a = 0; $a < $time; $a++){
+			$results['data'][$a]=$this->graphData($type, Carbon::now()->subWeeks($a+1), Carbon::now()->subWeeks($a), $distinct);
+			$total=$total+$results['data'][$a];
+		}
+		$results['data']=$results['data'];
+		$results['medium']=round($total/$time);
+		return $results;
+	}
+
 
 	public function getIndex()
 	{
+
+
+
+
+		$minigraph_data=array();
+		$minigraph_data['account_created']=$this->graphDataBuild('account_created');
+		$minigraph_data['login']=$this->graphDataBuild('login');
+		$minigraph_data['activity']=$this->graphDataBuild('activity');
+		$minigraph_data['activity_unique']=$this->graphDataBuild('activity','5', true);
+
+
+		View::share('minigraph_data', $minigraph_data);
+		View::share('minigraph_json', json_encode($minigraph_data));
+
 		$widgets=$this->widgets();
 		View::share('widgets', $widgets);
 
@@ -27,25 +61,26 @@ class AdminDashboardController extends AdminController {
 		View::share('whosonline', $results);
 
 		$stocksTable = Lava::DataTable('Stocks');
-		$stocksTable->addColumn('number', 'Count', 'count');
-		$stocksTable->addColumn('number', 'Projected', 'projected');
-		$stocksTable->addColumn('number', 'Official', 'official');
-		for($a = 1; $a < 25; $a++)
-		{
-			$data[0] = $a;              //Count
-			$data[1] = rand(800,1000);  //Projected Data
-			$data[2] = rand(800,1000);  //Official Data
+		$stocksTable->addColumn('string', 'Week', 'count');
+		$stocksTable->addColumn('number', 'Hits', 'projected');
+		$stocksTable->addColumn('number', 'Unique', 'projected');
+		
+		foreach(array_reverse($minigraph_data['activity']['data'],true) as $i=>$d){
+			
+			$data[0]=$i==0 ? "This week" : Carbon::now()->subWeeks($i)->diffForHumans(); 
+			$data[1] = $d;  //Projected Data
+			$data[2] = $minigraph_data['activity_unique']['data'][$i];  //Projected Data
 
 			$stocksTable->addRow($data);
+
 		}
-		$config = array(
-			'title' => 'My Stocks'
-		);
-		Lava::LineChart('Stocks')->setConfig($config);
+		Lava::LineChart('Stocks')->setConfig();
 
 
 		return Theme::make('admin/dashboard');
 	}
+
+
 
 	public function postPolling(){
 
