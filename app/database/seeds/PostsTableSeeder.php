@@ -31,9 +31,9 @@ Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei s
         DB::table('posts')->insert( array(
             array(
                 'user_id'    => $user_id,
-                'title'      => 'Lorem ipsum dolor sit amet',
-                'slug'       => 'lorem-ipsum-dolor-sit-amet',
-                'content'    => $this->content,
+                'title'      => 'Home',
+                'slug'       => 'home',
+                'content'    => '',
                 'meta_title' => 'meta_title1',
                 'meta_description' => 'meta_description1',
                 'meta_keywords' => 'meta_keywords1',
@@ -42,12 +42,13 @@ Te his dolorem adversarium? Pri eu rebum viris, tation molestie id pri. Mel ei s
             ),
             array(
                 'user_id'    => $user_id,
-                'title'      => 'Vivendo suscipiantur vim te vix',
-                'slug'       => 'vivendo-suscipiantur-vim-te-vix',
+                'title'      => 'About Us',
+                'slug'       => 'about-us',
                 'content'    => $this->content,
                 'meta_title' => 'meta_title2',
                 'meta_description' => 'meta_description2',
                 'meta_keywords' => 'meta_keywords2',
+                'display_navigation' => '1',
                 //'created_at' => new DateTime,
                 //'updated_at' => new DateTime,
             ),

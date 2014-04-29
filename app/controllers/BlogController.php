@@ -45,11 +45,14 @@ class BlogController extends BaseController {
 	 */
 	public function getIndex()
 	{
-		// Get all the blog posts
-		$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
+		$home = $this->post->where('slug', '=', 'home')->first();
+		if(count($home) == 1){
+			return Theme::make('site/blog/home', compact('home'));
 
-		// Show the page
-		return Theme::make('site/blog/index', compact('posts'));
+		} else {
+			$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
+			return Theme::make('site/blog/index', compact('posts'));
+		}
 	}
 
 	/**

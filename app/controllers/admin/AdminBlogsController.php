@@ -96,12 +96,12 @@ class AdminBlogsController extends AdminController {
             $this->post->meta_keywords    = Input::get('meta-keywords');
             $this->post->user_id          = $user->id;
 
- 			$this->banner			 = Input::get('banner');
-            $this->display_author    = (int)Input::get('display_author');
-            $this->allow_comments    = (int)Input::get('allow_comments');
-            $this->template    = Input::get('template');
-            $this->parent    = (int)Input::get('parent');
-            $this->display_navigation    = (int)Input::get('display_navigation');
+ 			$this->post->banner			 = Input::get('banner');
+            $this->post->display_author    = (int)Input::get('display_author');
+            $this->post->allow_comments    = (int)Input::get('allow_comments');
+            $this->post->template    = Input::get('template');
+            $this->post->parent    = (int)Input::get('parent');
+            $this->post->display_navigation    = (int)Input::get('display_navigation');
 
 		   // Was the blog post created?
             if($this->post->save())
