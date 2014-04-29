@@ -1,4 +1,4 @@
-@extends('admin/layouts/modal')
+@extends(Theme::path('admin/layouts/modal'))
 
 @section('content')
 	<ul class="nav nav-tabs">
@@ -19,8 +19,7 @@
 			<div class="tab-pane active" id="tab-general">
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
-                        <label class="control-label" for="content">{{{ Lang::get('core.content') }}}</label>
-						<textarea class="form-control full-width wysihtml5" name="content" value="content" rows="10">{{{ Input::old('content', $comment->content) }}}</textarea>
+						<textarea class="form-control full-width" placeholder="{{{ Lang::get('core.content') }}}" name="content" value="content" rows="10">{{{ Input::old('content', $comment->content) }}}</textarea>
 						{{ $errors->first('content', '<span class="help-block">:message</span>') }}
 					</div>
 				</div>

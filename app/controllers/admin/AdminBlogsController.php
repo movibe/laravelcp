@@ -25,7 +25,7 @@ class AdminBlogsController extends AdminController {
 	private function getPostTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
-		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'layouts');
+		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::getTheme().DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'layouts');
 		return $files;
 	}
 	private function getPostParents(){
