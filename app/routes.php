@@ -55,6 +55,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
 	# Search
 	Search::AddTable('users', array('email'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
 	Search::AddTable('posts', array('title','slug','content','meta_title','meta_description','meta_keywords'), array('id' => array('method'=>'modal', 'action'=>'admin/slugs/?/edit')));
+	Search::AddTable('todos', array('title','description'), array('id' => array('method'=>'modal', 'action'=>'admin/todos/?/edit')));
     Route::controller('search/{postSlug}', 'AdminSearchController');
 
     # Settings Management
