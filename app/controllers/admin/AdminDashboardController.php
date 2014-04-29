@@ -19,10 +19,8 @@ class AdminDashboardController extends AdminController {
 
 	private function graphData($type, $from, $to, $distinct=false){
 		if($distinct){
-			$q=Activity::select(DB::raw('distinct `ip_address` '))->whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->get();
-		} else $q=Activity::whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->get();
-
-		return count($q);
+			return Activity::select(DB::raw('distinct `ip_address` '))->whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->count();
+		} else return Activity::whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->count();
 	}
 
 	private function graphDataBuild($type='activity', $time=5, $distinct=false){
@@ -41,16 +39,11 @@ class AdminDashboardController extends AdminController {
 	public function getIndex()
 	{
 
-
-
-
 		$minigraph_data=array();
 		$minigraph_data['account_created']=$this->graphDataBuild('account_created');
 		$minigraph_data['login']=$this->graphDataBuild('login');
 		$minigraph_data['activity']=$this->graphDataBuild('activity');
 		$minigraph_data['activity_unique']=$this->graphDataBuild('activity','5', true);
-
-
 		View::share('minigraph_data', $minigraph_data);
 		View::share('minigraph_json', json_encode($minigraph_data));
 
@@ -68,8 +61,8 @@ class AdminDashboardController extends AdminController {
 		foreach(array_reverse($minigraph_data['activity']['data'],true) as $i=>$d){
 			
 			$data[0]=$i==0 ? "This week" : Carbon::now()->subWeeks($i)->diffForHumans(); 
-			$data[1] = $d;  //Projected Data
-			$data[2] = $minigraph_data['activity_unique']['data'][$i];  //Projected Data
+			$data[1] = $d; 
+			$data[2] = $minigraph_data['activity_unique']['data'][$i];
 
 			$stocksTable->addRow($data);
 
