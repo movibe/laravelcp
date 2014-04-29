@@ -5,7 +5,7 @@
 
 
 
-![ScreenShot](http://i.imgur.com/jXWwr1e.png)
+![ScreenShot](http://i.imgur.com/6CYpo3y.png)
 
 [More Screenshots](https://github.com/gcphost/l4-bootstrap-admin/wiki/Screenshots)
 
