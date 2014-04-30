@@ -23,28 +23,31 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 
 # Features
 - jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
-- Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
+- Drag & Drop dashboard
 - [Extendable](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravelCP), make it how you want without editing the core!
 - [BootSwatch Themed](http://bootswatch.com/)
-- [BootBox Dialogs](https://github.com/makeusabrew/bootbox))
-- User profiles
-- User suspending
-- User cancellation, instant, timed and reversal
+- User notes,profiles, suspending, cancellation ( instant, timed and reversal )
 - To-do list
 - Smart search, search as you type, searches multiple tables, prepend search string with table name (users example) will search that table only
-- User e-mailing, single and multiple w/ attachments
-- oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview)& [HybridAuth](http://hybridauth.sourceforge.net/)
-- Ajax polling w/ [jQuery poller](https://github.com/gcphost/jquery.poller)
-- [L4-Settings](https://github.com/anlutro/laravel-settings)
-- [L4-DataTables](https://github.com/bllim/laravel4-datatables-package)
-- [LavaCharts](http://kevinkhill.github.io/LavaCharts/)
-- [ActivityLog](https://github.com/Regulus343/ActivityLog)
-- [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/)
-- [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
-- [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
-- [L4-honeypot](https://github.com/msurguy/Honeypot)
-- [RESTful API](https://github.com/gcphost/l4-bootstrap-admin/wiki/API), post/get/put/delete using auth.basic and view/redirect wrappers to output xml or json
-	- simply find the page you want, say admin/users/1/edit and prepend json or xml, json/admin/users/1/edit
+- User e-mailing, single and mass w/ attachments
+- [RESTful API](https://github.com/gcphost/l4-bootstrap-admin/wiki/API), extreamly easy to use!
+
+## Including jQuery/Bootstrap packages:
+- [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/), all those bootstrap themes had em
+- [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/), made right here in Austin, TX
+- [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg), sexy, light weight
+- [BootBox Dialogs](https://github.com/makeusabrew/bootbox), nice modal wrapper
+- [jQuery poller](https://github.com/gcphost/jquery.poller), my own work to reduce ajax querys
+- [Gridster Responsive](https://github.com/gcphost/gridster-responsive), used with gridster for the dashboard (buggie)
+
+## Including L4 packages:
+- oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview) & [HybridAuth](http://hybridauth.sourceforge.net/), every site should have 0Auth
+- [L4-Settings](https://github.com/anlutro/laravel-settings), settings? of course
+- [L4-DataTables](https://github.com/bllim/laravel4-datatables-package), jquery datatables, the best
+- [LavaCharts](http://kevinkhill.github.io/LavaCharts/), google charts, gotta have em
+- [ActivityLog](https://github.com/Regulus343/ActivityLog), gotta know whats goin on!
+- [L4-honeypot](https://github.com/msurguy/Honeypot), stop spammers!
+
 
 
 # Roadmap
