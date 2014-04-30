@@ -24,6 +24,7 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 # Features
 - jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard w/ [Gridster Responsive](https://github.com/gcphost/gridster-responsive)
+- [Extendable](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravelCP), make it how you want without editing the core!
 - [BootSwatch Themed](http://bootswatch.com/)
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox))
 - User profiles
@@ -58,7 +59,7 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 # BEFORE YOU BEGIN!
 
 We hope users will extend the application instead of modifying its core components. This will allow the application to grow depending on community support. If you do make changes to the core components consider forking and and making pull requests with your changes.
-[Read more here](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravalCP)
+[Read more here](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravelCP)
 
 
 
