@@ -80,7 +80,8 @@ class AdminCommentsController extends AdminController
 	{
 		$id = $comment->id;
 		if(!$comment->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-        return empty(Comment::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
+		$comment=Comment::find($id);
+        return empty($comment) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
 	}
 
     /**

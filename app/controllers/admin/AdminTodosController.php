@@ -106,7 +106,8 @@ class AdminTodosController extends AdminController {
     {
 		$id = $todo->id;
 		if(!$todo->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-        return empty(Todos::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		$todos=Todos::find($id);
+        return empty($todos) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
     /**

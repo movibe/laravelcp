@@ -271,7 +271,6 @@ class AdminUsersController extends AdminController {
 
 			if($user->confirmed == null) $user->confirmed = $oldUser->confirmed;
             
-
             if(!Input::get( 'password' )) {
 				$user->password = Input::get( 'password' );
 				$user->password_confirmation = Input::get( 'password_confirmation' );
@@ -491,7 +490,7 @@ class AdminUsersController extends AdminController {
      * @return Response
      */
 	private function sendEmail($user, $template='emails.default'){
-		if (!View::exists($template))$template='emails.default';
+		//if (!View::exists($template))$template='emails.default';
 		
 		Event::fire('controller.user.email', array($user));
 

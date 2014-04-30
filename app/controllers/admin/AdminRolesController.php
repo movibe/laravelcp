@@ -172,7 +172,8 @@ class AdminRolesController extends AdminController {
     {
 		$id=$role->id;
 		if(!$role->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-        return empty(Roles::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		$roles=Roles::find($id);
+        return empty($roles) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
     /**

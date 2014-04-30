@@ -173,7 +173,8 @@ class AdminBlogsController extends AdminController {
 		$id = $post->id;
 		$id = $post->id;
 		if(!$post->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-        return empty(Post::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
+		$post=Post::find($id);
+        return empty($post) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
     }
 
     /**
