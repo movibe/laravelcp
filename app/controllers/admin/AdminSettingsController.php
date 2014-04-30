@@ -16,9 +16,9 @@ class AdminSettingsController extends AdminController
      */
     public function getIndex()
     {
-		View::share('settings',  Setting::all());
+		$settings=Setting::all();
         $title = Lang::get('admin/settings/title.title');
-        return Theme::make('admin/settings/index', compact('comments', 'title'));
+        return Theme::make('admin/settings/index', compact('comments', 'title', 'settings'));
     }
 
    

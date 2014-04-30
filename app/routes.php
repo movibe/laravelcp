@@ -31,19 +31,14 @@ Route::pattern('token', '[0-9a-z]+');
 Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checkuser'), function()
 {
 	Event::fire('json.admin');
-
-	Route::controller('users/{user}', 'AdminUsersController');
-	Route::controller('users', 'AdminUsersController');
-
+	AdminGroup();
 });
 
 # xml api
 Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuser'), function()
 {
 	Event::fire('xml.admin');
-
-	Route::controller('users/{user}', 'AdminUsersController');
-	Route::controller('users', 'AdminUsersController');
+	AdminGroup();
 });
 
 
@@ -51,6 +46,11 @@ Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuse
 Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
 {
 	Event::fire('page.admin');
+	AdminGroup();
+});
+
+
+function AdminGroup(){
 
 	# Search
 	Search::AddTable('users', array('email'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
@@ -95,7 +95,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
    
     # Admin Dashboard
 	Route::controller('/', 'AdminDashboardController');
-});
+}
 
 
 /** ------------------------------------------
