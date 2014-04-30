@@ -48,13 +48,8 @@ class AdminRolesController extends AdminController {
      */
     public function getIndex()
     {
-        // Title
-        $title = Lang::get('admin/roles/title.role_management');
-
-        // Grab all the groups
         $roles = $this->role;
-
-        // Show the page
+        $title = Lang::get('admin/roles/title.role_management');
         return Theme::make('admin/roles/index', compact('roles', 'title'));
     }
 
@@ -65,16 +60,9 @@ class AdminRolesController extends AdminController {
      */
     public function getCreate()
     {
-        // Get all the available permissions
         $permissions = $this->permission->all();
-
-        // Selected permissions
         $selectedPermissions = Input::old('permissions', array());
-
-        // Title
         $title = Lang::get('admin/roles/title.create_a_new_role');
-
-        // Show the page
         return Theme::make('admin/roles/create', compact('permissions', 'selectedPermissions', 'title'));
     }
 
@@ -86,14 +74,12 @@ class AdminRolesController extends AdminController {
     public function postCreate()
     {
 
-        // Declare the rules for the form validation
         $rules = array(
             'name' => 'required'
         );
 
-        // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
-        // Check if the form validates with success
+
+		$validator = Validator::make(Input::all(), $rules);
         if ($validator->passes())
         {
 
@@ -112,19 +98,9 @@ class AdminRolesController extends AdminController {
             // Was the role created?
             if ($this->role->id)
             {
-                // Redirect to the new role page
                 return Redirect::to('admin/roles/' . $this->role->id . '/edit')->with('success', Lang::get('admin/roles/messages.create.success'));
-            }
-
-            // Redirect to the new role page
-            return Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
-
-            // Redirect to the role create page
-            return Redirect::to('admin/roles/create')->withInput()->with('error', Lang::get('admin/roles/messages.' . $error));
-        }
-
-        // Form validation failed
-        return Redirect::to('admin/roles/create')->withInput()->withErrors($validator);
+            } else return Redirect::to('admin/roles/create')->withInput()->with('error', Lang::get('admin/roles/messages.' . $error));
+        } else return Redirect::to('admin/roles/create')->withInput()->withErrors($validator);
     }
 
 
@@ -208,14 +184,9 @@ class AdminRolesController extends AdminController {
      */
     public function deleteIndex($role)
     {
-            // Was the role deleted?
-            if($role->delete()) {
-                // Redirect to the role management page
-				return Response::json(array('result'=>'success'));
-            }
-
-            // There was a problem deleting the role
-			return Response::json(array('result'=>'error', 'error' =>Lang::get('admin/roles/messages.delete.error')));
+		$id=$role->id;
+		if(!$role->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return empty(Roles::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
     /**

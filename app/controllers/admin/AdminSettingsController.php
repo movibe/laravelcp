@@ -16,13 +16,8 @@ class AdminSettingsController extends AdminController
      */
     public function getIndex()
     {
-
 		View::share('settings',  Setting::all());
-
-        // Title
         $title = Lang::get('admin/settings/title.title');
-
-        // Show the page
         return Theme::make('admin/settings/index', compact('comments', 'title'));
     }
 
@@ -40,10 +35,8 @@ class AdminSettingsController extends AdminController
         $rules = array(
         );
 
-        // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
 
-        // Check if the form validates with success
         if ($validator->passes())
         {
 
@@ -54,16 +47,7 @@ class AdminSettingsController extends AdminController
 				Setting::save();
 			}
 
-			
-			
-			// Redirect to the comments post management page
             return Redirect::to('admin/settings')->with('success', Lang::get('admin/settings/messages.update.success'));
-        }
-
-        // Form validation failed
-        return Redirect::to('admin/settings')->withInput()->withErrors($validator);
-
+        } else return Redirect::to('admin/settings')->withInput()->withErrors($validator);
 	}
-
-
 }

@@ -21,15 +21,24 @@ class AdminBlogsController extends AdminController {
     }
 
 
-
+    /**
+     * fetch template files
+     *
+     * @return Response
+     */
 	private function getPostTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
 		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::getTheme().DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'layouts');
 		return $files;
 	}
+
+    /**
+     * get posts parents
+     *
+     * @return Response
+     */
 	private function getPostParents(){
-		// return Post::select(array('posts.id', 'posts.title'))->get();
 		return array_merge(array('0'=>''),DB::table('posts')->orderBy('title', 'asc')->lists('title','id'));
 	}
 
@@ -40,13 +49,8 @@ class AdminBlogsController extends AdminController {
      */
     public function getIndex()
     {
-        // Title
-        $title = Lang::get('admin/blogs/title.blog_management');
-
-        // Grab all the blog posts
         $posts = $this->post;
-
-        // Show the page
+        $title = Lang::get('admin/blogs/title.blog_management');
         return Theme::make('admin/blogs/index', compact('posts', 'title'));
     }
 
@@ -57,12 +61,9 @@ class AdminBlogsController extends AdminController {
 	 */
 	public function getCreate()
 	{
-        // Title
-        $title = Lang::get('admin/blogs/title.create_a_new_blog');
 		$templates=$this->getPostTemplates();
 		$parents=$this->getPostParents();
-
-        // Show the page
+        $title = Lang::get('admin/blogs/title.create_a_new_blog');
         return Theme::make('admin/blogs/create_edit', compact('title', 'templates', 'parents'));
 	}
 
@@ -73,13 +74,12 @@ class AdminBlogsController extends AdminController {
 	 */
 	public function postCreate()
 	{
-        // Declare the rules for the form validation
         $rules = array(
             'title'   => 'required|min:3',
             'content' => 'required|min:3'
         );
-        // Validate the inputs
-        $validator = Validator::make(Input::all(), $rules);
+
+		$validator = Validator::make(Input::all(), $rules);
 
         // Check if the form validates with success
         if ($validator->passes())
@@ -108,14 +108,8 @@ class AdminBlogsController extends AdminController {
             {
                 // Redirect to the new blog post page
                 return Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
-            }
-
-            // Redirect to the blog post create page
-            return Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
-        }
-
-        // Form validation failed
-        return Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
+            } else return Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+        } else return Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
 
@@ -127,12 +121,9 @@ class AdminBlogsController extends AdminController {
      */
 	public function getEdit($post)
 	{
-        // Title
         $title = Lang::get('admin/blogs/title.blog_update');
 		$templates=$this->getPostTemplates();
 		$parents=$this->getPostParents();
-
-		// Show the page
         return Theme::make('admin/blogs/create_edit', compact('post', 'title', 'templates', 'parents'));
 	}
 
@@ -145,13 +136,11 @@ class AdminBlogsController extends AdminController {
 	public function putEdit($post)
 	{
 
-   // Declare the rules for the form validation
         $rules = array(
             'title'   => 'required|min:3',
             'content' => 'required|min:3'
         );
 
-        // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
 
         // Check if the form validates with success
@@ -177,14 +166,8 @@ class AdminBlogsController extends AdminController {
             {
                 // Redirect to the new blog post page
                 return Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
-            }
-
-            // Redirect to the blogs post management page
-            return Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
-        }
-
-        // Form validation failed
-        return Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
+            } else return Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
+        } else return Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
 	}
 
 
@@ -197,13 +180,9 @@ class AdminBlogsController extends AdminController {
     public function deleteIndex($post)
     {
 		$id = $post->id;
-		$post->delete();
-
-		$post = Post::find($id);
-		if(empty($post)){
-		  return Response::json(array('result'=>'success'));
-		} else return Response::json(array('result'=>'error', 'error' =>Lang::get('admin/blogs/messages.delete.error')));
-
+		$id = $post->id;
+		if(!$post->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return empty(Post::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
     }
 
     /**

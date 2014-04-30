@@ -148,7 +148,7 @@ class UserController extends BaseController {
     public function postEdit($user)
     {
 
-		if(!empty(Input::get( 'password' ))) {
+		if(!Input::get( 'password' )) {
 			$rules = array(
 				'displayname' => 'required',
 				'email' => 'required|email',
@@ -173,7 +173,7 @@ class UserController extends BaseController {
 
             $user->prepareRules($oldUser, $user);
 
-            if(!empty(Input::get( 'password' ))) {
+            if(!Input::get( 'password' )) {
 				$user->password = Input::get( 'password' );
 				$user->password_confirmation = Input::get( 'password_confirmation' );
             } else {

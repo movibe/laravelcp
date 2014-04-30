@@ -38,6 +38,11 @@ class AdminUsersController extends AdminController {
     }
 
 
+    /**
+     * User  charts
+     *
+     * @return Response
+     */
 	private function userChart(){
 		$chart = Lava::DataTable('activeusers');
 		$chart->addColumn('string', 'Active', 'active');
@@ -51,15 +56,16 @@ class AdminUsersController extends AdminController {
 
 
 
+    /**
+     * Get index.
+     *
+     * @return Response
+     */
     public function getIndex()
     {
-        $title = Lang::get('admin/users/title.user_management');
-
         $users = $this->user;
-
-
 		$this->userChart();
-
+        $title = Lang::get('admin/users/title.user_management');
        	if(!Api::View(compact('users', 'title'))) return Theme::make('admin/users/index', compact('users', 'title'));
     }
 
@@ -70,25 +76,12 @@ class AdminUsersController extends AdminController {
      */
     public function getCreate()
     {
-        // All roles
         $roles = $this->role->all();
-
-        // Get all the available permissions
         $permissions = $this->permission->all();
-
-        // Selected groups
         $selectedRoles = Input::old('roles', array());
-
-        // Selected permissions
         $selectedPermissions = Input::old('permissions', array());
-
-		// Title
-		$title = Lang::get('admin/users/title.create_a_new_user');
-
-		// Mode
 		$mode = 'create';
-
-		// Show the page
+		$title = Lang::get('admin/users/title.create_a_new_user');
 		if(!Api::View(compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'))) return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
     }
 
@@ -144,9 +137,8 @@ class AdminUsersController extends AdminController {
 				$error = $this->user->errors()->all();
 				if(!Api::Redirect(array( 'error', $error ))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $error );
 			}
-        } else {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
-        }
+        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
+        
     }
 
 
@@ -157,7 +149,6 @@ class AdminUsersController extends AdminController {
      * @param $user
      * @return Response
      */
-
 	 public function getActivity($user){
         if ( $user->id )
         {
@@ -172,6 +163,11 @@ class AdminUsersController extends AdminController {
 		}
 	 }
 
+    /**
+     * Get emails
+     *
+     * @return Response
+     */
 	 public function getEmails($user){
         if ( $user->id )
         {
@@ -187,17 +183,26 @@ class AdminUsersController extends AdminController {
 		}
 	 }
 
+    /**
+     * reset password
+     *
+     * @return Response
+     */
 	public function postResetpassword($user){
 		if(!Confide::forgotPassword( $user->email)){
-					if(!Api::View(array('error'))) return Response::json(array('result'=>'error'));
+			if(!Api::View(array('error'))) return Response::json(array('result'=>'error'));
 		} else if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
 	}
 
+    /**
+     * edit user
+     *
+     * @return Response
+     */
     public function getEdit($user)
     {
         if ( $user->id )
         {
-
             $roles = $this->role->all();
 			$profiles=$user->profiles;
 
@@ -208,22 +213,14 @@ class AdminUsersController extends AdminController {
 			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
 			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
-        }
-        else
-        {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.does_not_exist')))) return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
-        }
+        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.does_not_exist')))) return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
 
-
-
-
-    public function deleteNotes($user, $note)
-    {
-
-
-	}
-
+    /**
+     * get user notes
+     *
+     * @return Response
+     */
     public function getNotes($user)
     {
 
@@ -253,7 +250,7 @@ class AdminUsersController extends AdminController {
     public function putEdit($user)
     {
 		
-		if(!empty(Input::get( 'password' ))) {
+		if(!Input::get( 'password' )) {
 			$rules = array(
 				'displayname' => 'required',
 				'email' => 'required|email',
@@ -318,25 +315,23 @@ class AdminUsersController extends AdminController {
 
 			Event::fire('controller.user.edit', array($user));
 
-        } else {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
-        }
+        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
+        
 
         // Get validation errors (see Ardent package)
         $error = $user->errors()->all();
 
         if(empty($error)) {
-            // Redirect to the new user page
             if(!Api::Redirect(array('success', Lang::get('admin/users/messages.edit.success')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
-        } else {
-           if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error'))))  return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
-        }
+        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error'))))  return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
+        
     }
 
-   
-
-
-
+    /**
+     * merge users
+     *
+     * @return Response
+     */
 	private function runMerge($_merge_to, $user){
 		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
 		DB::update('UPDATE posts set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
@@ -346,10 +341,15 @@ class AdminUsersController extends AdminController {
 
 		Event::fire('controller.user.merge', array($user));
 
-		$user->delete();
+		return $user->delete();
 	}
 
 
+    /**
+     * post merge users
+     *
+     * @return Response
+     */
     public function postMerge()
     {
 		$rows=json_decode(Input::get('rows'));
@@ -372,6 +372,11 @@ class AdminUsersController extends AdminController {
 		if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
     }
 
+    /**
+     * delete mass
+     *
+     * @return Response
+     */
 	private function runDeleteMass($r){
 		if ($r != Confide::user()->id){
 			$user = User::find($r);
@@ -380,10 +385,14 @@ class AdminUsersController extends AdminController {
 				$user->delete();
 			} else if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
 		}
-
 	}
 
 
+    /**
+     * confirm mass 
+     *
+     * @return Response
+     */
     public function getMassMergeConfirm()
     {
 		$ids=explode(',',rtrim(Input::get('ids'),','));
@@ -399,12 +408,16 @@ class AdminUsersController extends AdminController {
 					}else $mergefrom=$user->email;
 				}
 			}
-		
 		}
 
         if(!Api::View(compact('mergelist', 'mergefrom'))) return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
     }
 
+    /**
+     * post delete mass
+     *
+     * @return Response
+     */
     public function postDeleteMass()
     {
 		$rows=json_decode(Input::get('rows'));
@@ -441,21 +454,18 @@ class AdminUsersController extends AdminController {
 		));
 
 
-		try {
-			Event::fire('controller.user.delete', array($user));
-			$user->delete();
-		} catch (Exception $e) {
-			if(!Api::Redirect(array('error',  ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
-		}
+		Event::fire('controller.user.delete', array($user));
 
-        // Was the comment post deleted?
-        $user = User::find($id);
-        if (empty($user)){
-			if(!Api::Redirect(array('success'))) return Response::json(array('result'=>'success'));
-        } else  if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
+		if(!$user->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return empty(User::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
         
     }
 
+    /**
+     * fetch email templates
+     *
+     * @return Response
+     */
 	private function emailTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
@@ -487,7 +497,11 @@ class AdminUsersController extends AdminController {
         }
     }
 
-    
+     /**
+     * send a mail
+     *
+     * @return Response
+     */
 	private function sendEmail($user, $template='emails.default'){
 		if (!View::exists($template))$template='emails.default';
 		
@@ -524,7 +538,11 @@ class AdminUsersController extends AdminController {
 	}
 
 
-
+    /**
+     * post mail
+     *
+     * @return Response
+     */
     public function postEmail($user=false)
     {
 
@@ -557,8 +575,11 @@ class AdminUsersController extends AdminController {
     }
 
 
-
-
+    /**
+     * get mass mail
+     *
+     * @return Response
+     */
 	public function getEmailMass($a=false){
 		$ids=explode(',',rtrim(Input::get('ids'),','));
 		$multi=array();

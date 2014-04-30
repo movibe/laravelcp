@@ -40,12 +40,8 @@ class AdminProfileController extends AdminController {
 
     public function deleteIndex($user, $profile)
     {
-		$error=$profile->delete();
-        if($error == 1) {
-           	return Response::json(array('result'=>'success'));
-        } else {
-            return Response::json(array('result'=>'error', 'error' =>   Lang::get('admin/users/messages.edit.error')));
-        }
+		$id=$profile->id;
+		if(!$profile->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return empty(UserProfiles::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
 	}
-
 }

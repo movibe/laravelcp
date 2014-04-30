@@ -64,5 +64,6 @@ return array(
 	'user_logged_in'=> 'User Logged In',
 	'assigned_to'=> 'Assigned to',
 	'due_at' => 'Due',
+	'delete_error' => 'Unable to delete',
 );
 

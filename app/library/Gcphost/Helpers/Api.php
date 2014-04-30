@@ -37,4 +37,8 @@ class Api {
 		return self::View($data);
 	}
 
+  	static public function json($data) {
+		return !self::$type ? json_encode($data) : self::View($data);
+	}
+
 }
