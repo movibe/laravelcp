@@ -11,7 +11,7 @@ class Api {
 		} else return false;
 	}
 
-	static public function View($data) {
+	static public function make($data) {
 		if(!self::$type || !is_array($data)) return false;
 		$dd=array();
 		foreach($data as $d){
@@ -30,11 +30,12 @@ class Api {
 			header('Content-Type: application/xml; charset=utf-8');
 			die(xmlrpc_encode($dd));
 		}
+		return false;
 	}
 
-  	static public function Redirect($data) {
+  	static public function to($data) {
 		// wrapper for failure/success
-		return self::View($data);
+		return self::make($data);
 	}
 
   	static public function json($data) {

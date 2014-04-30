@@ -60,16 +60,13 @@ class AdminCommentsController extends AdminController
         // Check if the form validates with success
         if ($validator->passes())
         {
-            // Update the comment post data
             $comment->content = Input::get('content');
 
-            // Was the comment post updated?
             if($comment->save())
             {
-                // Redirect to the new comment post page
-                return Redirect::to('admin/comments/' . $comment->id . '/edit')->with('success', Lang::get('admin/comments/messages.update.success'));
-            } else return Redirect::to('admin/comments/' . $comment->id . '/edit')->with('error', Lang::get('admin/comments/messages.update.error'));
-        } else return Redirect::to('admin/comments/' . $comment->id . '/edit')->withInput()->withErrors($validator);
+                return Api::to(array('success', Lang::get('admin/comments/messages.update.success'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('success', Lang::get('admin/comments/messages.update.success'));
+            } else return Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('error', Lang::get('admin/comments/messages.update.error'));
+        } else return Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->withInput()->withErrors($validator);
 	}
 
 
@@ -97,7 +94,10 @@ class AdminCommentsController extends AdminController
                         ->leftjoin('users', 'users.id', '=','comments.user_id' )
                         ->select(array('comments.id as id', 'posts.id as postid','users.id as userid', 'comments.content', 'posts.title as post_name', 'users.displayname as poster_name', 'comments.created_at'));
 
-        return Datatables::of($comments)
+        if(Api::Enabled()){
+			$u=$comments->get();
+			return Api::make($u->toArray());
+		} else return Datatables::of($comments)
 
         ->edit_column('content', '<a href="{{{ URL::to(\'admin/comments/\'. $id .\'/edit\') }}}" class="modalfy cboxElement">{{{ Str::limit($content, 40, \'...\') }}}</a>')
 

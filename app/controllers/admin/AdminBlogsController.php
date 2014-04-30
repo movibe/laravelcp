@@ -103,13 +103,11 @@ class AdminBlogsController extends AdminController {
             $this->post->parent    = (int)Input::get('parent');
             $this->post->display_navigation    = (int)Input::get('display_navigation');
 
-		   // Was the blog post created?
             if($this->post->save())
             {
-                // Redirect to the new blog post page
-                return Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
-            } else return Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
-        } else return Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
+                return Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+            } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+        } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
 
@@ -146,14 +144,12 @@ class AdminBlogsController extends AdminController {
         // Check if the form validates with success
         if ($validator->passes())
         {
-            // Update the blog post data
             $post->title            = Input::get('title');
             $post->slug             = Str::slug(Input::get('title'));
             $post->content          = Input::get('content');
             $post->meta_title       = Input::get('meta-title');
             $post->meta_description = Input::get('meta-description');
             $post->meta_keywords    = Input::get('meta-keywords');
-        
  			$post->banner			 = Input::get('banner');
             $post->display_author    = (int)Input::get('display_author');
             $post->allow_comments    = (int)Input::get('allow_comments');
@@ -161,13 +157,8 @@ class AdminBlogsController extends AdminController {
             $post->parent    = (int)Input::get('parent');
             $post->display_navigation    = (int)Input::get('display_navigation');
 
-			// Was the blog post updated?
-            if($post->save())
-            {
-                // Redirect to the new blog post page
-                return Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'));
-            } else return Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
-        } else return Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
+            return $post->save() ? Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success')) : Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
+        } else return Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
 	}
 
 
@@ -194,7 +185,10 @@ class AdminBlogsController extends AdminController {
     {
         $posts = Post::select(array('posts.id', 'posts.title', 'posts.id as comments', 'posts.created_at'));
 
-        return Datatables::of($posts)
+        if(Api::Enabled()){
+			$u=$posts->get();
+			return Api::make($u->toArray());
+		} else return Datatables::of($posts)
 
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
 

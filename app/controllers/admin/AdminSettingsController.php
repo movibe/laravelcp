@@ -47,7 +47,7 @@ class AdminSettingsController extends AdminController
 				Setting::save();
 			}
 
-            return Redirect::to('admin/settings')->with('success', Lang::get('admin/settings/messages.update.success'));
-        } else return Redirect::to('admin/settings')->withInput()->withErrors($validator);
+            return Api::to(array('success', Lang::get('admin/settings/messages.update.success'))) ? : Redirect::to('admin/settings')->with('success', Lang::get('admin/settings/messages.update.success'));
+        } else return Api::to(array('error', Lang::get('admin/settings/messages.update.error'))) ? : Redirect::to('admin/settings')->withInput()->withErrors($validator);
 	}
 }

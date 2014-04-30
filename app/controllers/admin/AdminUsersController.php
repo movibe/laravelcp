@@ -66,7 +66,7 @@ class AdminUsersController extends AdminController {
         $users = $this->user;
 		$this->userChart();
         $title = Lang::get('admin/users/title.user_management');
-       	if(!Api::View(compact('users', 'title'))) return Theme::make('admin/users/index', compact('users', 'title'));
+       	return Theme::make('admin/users/index', compact('users', 'title'));
     }
 
     /**
@@ -82,7 +82,7 @@ class AdminUsersController extends AdminController {
         $selectedPermissions = Input::old('permissions', array());
 		$mode = 'create';
 		$title = Lang::get('admin/users/title.create_a_new_user');
-		if(!Api::View(compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'))) return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
+		return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
     }
 
     /**
@@ -103,7 +103,6 @@ class AdminUsersController extends AdminController {
 
         if ($validator->passes())
         {
-
 			$this->user->displayname = Input::get( 'displayname' );
 			$this->user->email = Input::get( 'email' );
 			$this->user->password = Input::get( 'password' );
@@ -130,17 +129,11 @@ class AdminUsersController extends AdminController {
 					'updated'     => Confide::user()->id ? true : false,
 				));
 
-				if(!Api::Redirect(array('success', Lang::get('admin/users/messages.create.success')))) return Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
+				return Api::to(array('success', Lang::get('admin/users/messages.create.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
 			}
-			else
-			{
-				$error = $this->user->errors()->all();
-				if(!Api::Redirect(array( 'error', $error ))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $error );
-			}
-        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
-        
+			else return Api::to(array('error', $this->user->errors()->all() )) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $this->user->errors()->all() );
+        } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
     }
-
 
 
     /**
@@ -156,7 +149,7 @@ class AdminUsersController extends AdminController {
 
 			if(Api::Enabled()){
 				$u=$list->get();
-				return Api::View($u->toArray());
+				return Api::make($u->toArray());
 			} else return Datatables::of($list)
 				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
 				->make();
@@ -175,7 +168,7 @@ class AdminUsersController extends AdminController {
 
 			if(Api::Enabled()){
 				$u=$list->get();
-				return Api::View($u->toArray());
+				return Api::make($u->toArray());
 			} else return Datatables::of($list)
 				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
 				->edit_column('details','{{{ strip_tags(substr($details,0,100))}}}')
@@ -190,8 +183,8 @@ class AdminUsersController extends AdminController {
      */
 	public function postResetpassword($user){
 		if(!Confide::forgotPassword( $user->email)){
-			if(!Api::View(array('error'))) return Response::json(array('result'=>'error'));
-		} else if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
+			if(!Api::make(array('error'))) return Response::json(array('result'=>'error'));
+		} else if(!Api::make(array('success'))) return Response::json(array('result'=>'success'));
 	}
 
     /**
@@ -212,8 +205,8 @@ class AdminUsersController extends AdminController {
 
 			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
-			if(!Api::View(compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'))) return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
-        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.does_not_exist')))) return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
+			return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
+        } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
 
     /**
@@ -230,7 +223,7 @@ class AdminUsersController extends AdminController {
 					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->where('user_notes.user_id','=',$user->id)->orderBy('users.id');
 			if(Api::Enabled()){
 				$u=$list->get();
-				return Api::View($u->toArray());
+				return Api::make($u->toArray());
 			} else return Datatables::of($list)
 				 ->edit_column('note','<textarea name="user_notes[{{{$id}}}]" class="form-control" style="width: 100%">{{{ $note }}}</textarea>')
 				 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
@@ -315,16 +308,15 @@ class AdminUsersController extends AdminController {
 
 			Event::fire('controller.user.edit', array($user));
 
-        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error')))) return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
+        } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
         
 
         // Get validation errors (see Ardent package)
         $error = $user->errors()->all();
 
         if(empty($error)) {
-            if(!Api::Redirect(array('success', Lang::get('admin/users/messages.edit.success')))) return Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
-        } else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.edit.error'))))  return Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
-        
+           return Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
+        } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
     }
 
     /**
@@ -354,7 +346,7 @@ class AdminUsersController extends AdminController {
     {
 		$rows=json_decode(Input::get('rows'));
 		if(is_array($rows) && count($rows) > 0){
-			if(count($rows) < 2) if(!Api::Redirect(array('error',Lang::get('core.mergeerror')))) return Response::json(array('result'=>'error', 'error' =>  Lang::get('core.mergeerror')));
+			if(count($rows) < 2) return Api::to(array('error',Lang::get('core.mergeerror'))) ? : Response::json(array('result'=>'error', 'error' =>  Lang::get('core.mergeerror')));
 			$_merge_to=false;
 			foreach($rows as $i=>$r){
 				if ($r != Confide::user()->id){
@@ -365,11 +357,11 @@ class AdminUsersController extends AdminController {
 							continue;
 						}
 						$this->runMerge($_merge_to, $user);
-					} else  if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
+					} else  return Api::to(array('error', '')) ? : Response::json(array('result'=>'error', 'error' =>  ''));
 				}
 			}
 		}
-		if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
+		if(!Api::make(array('success'))) return Response::json(array('result'=>'success'));
     }
 
     /**
@@ -383,7 +375,7 @@ class AdminUsersController extends AdminController {
 			if(!empty($user)){
 				Event::fire('controller.user.delete', array($user));
 				$user->delete();
-			} else if(!Api::Redirect(array('error', ''))) return Response::json(array('result'=>'error', 'error' =>  ''));
+			} else return Api::to(array('error', '')) ? : Response::json(array('result'=>'error', 'error' =>  ''));
 		}
 	}
 
@@ -410,7 +402,7 @@ class AdminUsersController extends AdminController {
 			}
 		}
 
-        if(!Api::View(compact('mergelist', 'mergefrom'))) return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
+        return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
     }
 
     /**
@@ -424,7 +416,7 @@ class AdminUsersController extends AdminController {
 		if(is_array($rows) && count($rows) > 0){
 			foreach($rows as $i=>$r) $this->runDeleteMass($r);
 		}elseif(is_integer($rows))$this->runDeleteMass($rows);
-		if(!Api::View(array('success'))) return Response::json(array('result'=>'success'));
+		if(!Api::make(array('success'))) return Response::json(array('result'=>'success'));
 	}
 
 
@@ -440,7 +432,7 @@ class AdminUsersController extends AdminController {
         if ($user->id === Confide::user()->id)
         {
             // Redirect to the user management page
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.delete.impossible')))) return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.delete.impossible'));
+            return Api::to(array('error', Lang::get('admin/users/messages.delete.impossible'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.delete.impossible'));
         }
 
 		$id=$user->id;
@@ -489,12 +481,8 @@ class AdminUsersController extends AdminController {
         	// mode
         	$mode = 'edit';
 			$templates=$this->emailTemplates();
-        	if(!Api::View(compact('user', 'title', 'mode', 'templates'))) return Theme::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
-        }
-        else
-        {
-            if(!Api::Redirect(array('error', Lang::get('admin/users/messages.does_not_exist')))) return Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
-        }
+        	return Theme::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
+        } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
 
      /**
@@ -558,19 +546,19 @@ class AdminUsersController extends AdminController {
 			}
 			if($_results == true){
 				$message=Lang::get('admin/users/messages.email.success');
-				if(!Api::View(compact('title', 'message', '_results'))) return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
+				return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
 			} else {
 				$message=Lang::get('admin/users/messages.email.error');
-				if(!Api::View(compact('title', 'message', '_results'))) return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
+				return Theme::make('admin/users/email_results', compact('title', 'message', '_results'));
 			}
 		} elseif (isset($user))
         {
 			if($this->sendEmail($user, Input::get('template'))) {
-				if(!Api::Redirect(array('success', Lang::get('admin/users/messages.email.success')))) return Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.email.success'));
-			} else if(!Api::Redirect(array('error', Lang::get('admin/users/messages.email.error')))) return Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
+				return Api::to(array('success', Lang::get('admin/users/messages.email.success'))) ? : Redirect::to('admin/users/' . $user->id . '/email')->with('success', Lang::get('admin/users/messages.email.success'));
+			} else return Api::to(array('error', Lang::get('admin/users/messages.email.error'))) ? : Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
 		} else {
 			$message=Lang::get('admin/users/messages.email.error');
-			if(!Api::View(compact('title', 'message'))) return Theme::make('admin/users/email_results', compact('title', 'message'));
+			Theme::make('admin/users/email_results', compact('title', 'message'));
 		}
     }
 
@@ -597,7 +585,7 @@ class AdminUsersController extends AdminController {
 
 		$mode = 'edit';
 		$templates=$this->emailTemplates();
-		if(!Api::View(compact('title', 'mode', 'multi', 'templates')))return Theme::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
+		return Theme::make('admin/users/send_email', compact('title', 'mode', 'multi', 'templates'));
 	}
 
 
@@ -615,7 +603,7 @@ class AdminUsersController extends AdminController {
 
 		if(Api::Enabled()){
 			$u=$users->get();
-			return $u->toArray();
+			return Api::make($u->toArray());
 		} else return Datatables::of($users)
         ->add_column('actions', '<div class="btn-group">
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 

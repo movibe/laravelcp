@@ -32,7 +32,7 @@ class Theme {
 
 
 	static public function make($file, $data=array()){
-		return \View::make(self::path($file), $data);
+		return Api::make($data) ? : \View::make(self::path($file), $data);
 	}
 
 	static public function getTheme(){

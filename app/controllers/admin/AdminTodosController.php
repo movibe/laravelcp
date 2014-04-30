@@ -55,9 +55,9 @@ class AdminTodosController extends AdminController {
             $this->todo->due_at		  = Carbon::parse(Input::get('due_at'));
 
             return $this->todo->save() ?
-				Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
-				Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error'));
-        } else return Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
+				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
+				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error'));
+        } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
 	}
 
     /**
@@ -92,9 +92,9 @@ class AdminTodosController extends AdminController {
             $todo->due_at		  = Carbon::parse(Input::get('due_at'));
 
              return $todo->save() ?
-				Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
-				Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error'));
-        } else return Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($validator);
+				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
+				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error'));
+        } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($validator);
 	}
 
     /**
@@ -130,7 +130,7 @@ class AdminTodosController extends AdminController {
 				->select(array('todos.id', 'todos.title', 'todos.status', 'todos.description', 'todos.created_at', 'todos.due_at', 'users.displayname'))->orderBy('todos.id','desc');
 		if(Api::Enabled()){
 			$u=$list->get();
-			return Api::View($u->toArray());
+			return Api::make($u->toArray());
 		} else return Datatables::of($list)
 			 ->edit_column('status','{{{ Lang::get(\'admin/todos/todos.status_\'.$status) }}}')
 			 ->edit_column('due_at','{{{ Carbon::parse($due_at)->diffForHumans() }}}')
