@@ -272,7 +272,7 @@ class AdminUsersController extends AdminController {
 			if($user->confirmed == null) $user->confirmed = $oldUser->confirmed;
             
 
-            if(!empty(Input::get( 'password' ))) {
+            if(!Input::get( 'password' )) {
 				$user->password = Input::get( 'password' );
 				$user->password_confirmation = Input::get( 'password_confirmation' );
             } else {
