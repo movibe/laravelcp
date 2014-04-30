@@ -448,7 +448,8 @@ class AdminUsersController extends AdminController {
 		Event::fire('controller.user.delete', array($user));
 
 		if(!$user->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-        return empty(User::find($id)) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		$user=User::find($id);
+        return empty($user) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
         
     }
 
