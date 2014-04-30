@@ -28,10 +28,10 @@ class PostsTableSeeder extends Seeder {
                 'meta_title' => 'meta_title2',
                 'meta_description' => 'meta_description2',
                 'meta_keywords' => 'meta_keywords2',
-                'display_navigation' => '1'
                 //'created_at' => new DateTime,
                 //'updated_at' => new DateTime,
             )
+		)
         );
     }
 

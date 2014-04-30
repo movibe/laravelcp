@@ -211,7 +211,7 @@ function modalfyRun(th,url){
 /* helpers */
 function fnRunMass(action, data_table, data_method,aSelected){
 	if(!data_method) data_method='POST';
-	console.log(data_table);
+	//console.log(data_table);
 	$.ajax({
 			type: data_method,
 			url: action,

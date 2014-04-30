@@ -164,8 +164,8 @@
 
 		function _save_positions(positions){
 			localStorage.setItem(settings.page+'.grid', positions);
-			console.log(positions);
-			console.log(JSON.parse(localStorage.getItem(settings.page+'.grid')));
+			//console.log(positions);
+			//console.log(JSON.parse(localStorage.getItem(settings.page+'.grid')));
 		}
 
 		function _state_update(panel, _state){
