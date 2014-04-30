@@ -42,7 +42,7 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 - [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/)
 - [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg)
 - [L4-honeypot](https://github.com/msurguy/Honeypot)
-- RESTful API, post/get/put/delete using auth.basic and view/redirect wrappers to output xml or json
+- [RESTful API](https://github.com/gcphost/l4-bootstrap-admin/wiki/API), post/get/put/delete using auth.basic and view/redirect wrappers to output xml or json
 	- simply find the page you want, say admin/users/1/edit and prepend json or xml, json/admin/users/1/edit
 
 
