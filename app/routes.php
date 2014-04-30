@@ -31,14 +31,14 @@ Route::pattern('token', '[0-9a-z]+');
 Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checkuser'), function()
 {
 	Event::fire('json.admin');
-	AdminGroup();
+	Theme::AdminGroup();
 });
 
 # xml api
 Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuser'), function()
 {
 	Event::fire('xml.admin');
-	AdminGroup();
+	Theme::AdminGroup();
 });
 
 
@@ -46,56 +46,10 @@ Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuse
 Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
 {
 	Event::fire('page.admin');
-	AdminGroup();
+	Theme::AdminGroup();
 });
 
 
-function AdminGroup(){
-
-	# Search
-	Search::AddTable('users', array('email'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
-	Search::AddTable('posts', array('title','slug','content','meta_title','meta_description','meta_keywords'), array('id' => array('method'=>'modal', 'action'=>'admin/slugs/?/edit')));
-	Search::AddTable('todos', array('title','description'), array('id' => array('method'=>'modal', 'action'=>'admin/todos/?/edit')));
-    Route::controller('search/{postSlug}', 'AdminSearchController');
-
-    # Settings Management
-    Route::controller('settings', 'AdminSettingsController');
-
-    # Comment Management
-    Route::controller('comments/{comment}', 'AdminCommentsController');
-    Route::controller('comments', 'AdminCommentsController');
-
-    # Slug Management
-    Route::controller('slugs/{post}', 'AdminBlogsController');
-    Route::controller('slugs', 'AdminBlogsController');
-
-    # User Mass Management
-    Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
-    Route::post('user/mass/email', 'AdminUsersController@postEmail');
-    Route::get('user/mass/merge', 'AdminUsersController@getMassMergeConfirm');
-	Route::post('user/mass/merge', 'AdminUsersController@postMerge');
-    Route::delete('user/mass', 'AdminUsersController@postDeleteMass');
-
-
-    # User Profile Management
-	Route::controller('users/{user}/profile/{profile}', 'AdminProfileController');
-
-    # User Management
-	Route::controller('users/{user}', 'AdminUsersController');
-	Route::controller('users', 'AdminUsersController');
-    
-
-    # User Role Management
-    Route::controller('roles/{role}', 'AdminRolesController');
-    Route::controller('roles', 'AdminRolesController');
-
-    # Todos
-	Route::controller('todos/{todo}', 'AdminTodosController');
-	Route::controller('todos', 'AdminTodosController');
-   
-    # Admin Dashboard
-	Route::controller('/', 'AdminDashboardController');
-}
 
 
 /** ------------------------------------------
