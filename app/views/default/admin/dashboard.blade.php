@@ -1,7 +1,6 @@
 @extends(Theme::path('admin/layouts/default'))
 
 @section('styles')
-	<link rel="stylesheet" href="{{{ asset('assets/css/simpleweather.css') }}}"/>
 	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-colorselector.css') }}}"/>
 	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.css') }}}"/>
 	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.responsive.css') }}}"/>

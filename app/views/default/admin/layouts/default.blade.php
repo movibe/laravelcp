@@ -32,6 +32,7 @@
 		/* setup poller with the url */
 		$.fn.poller({'url':'{{{ URL::to("admin/polling") }}}'});
 	</script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
 
 	<script src="{{{ asset('assets/js/site.js') }}}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
@@ -40,7 +41,6 @@
 	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"/>

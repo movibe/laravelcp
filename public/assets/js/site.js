@@ -46,6 +46,7 @@ $(document).on('click', '.ajax-alert-confirm', function(e) {
 	return false;
 });
 
+
 $(document).on('submit', '.form-ajax', function(e) {
 	$('input[type=button], input[type=submit]').attr('disabled', true).addClass('disabled');
 	$.post(
@@ -80,27 +81,25 @@ function modalfyRun(th,url){
 }
 
 /* helpers */
-
-
-function loadWeather(location, woeid) {
+$(function() {
 	if(localStorage.getItem('weather_time') > 0 && ((new Date().getTime() - localStorage.getItem('weather_time'))/1000 < 300)){
-		$('.panel-weather').html(localStorage.getItem('weather_html'));
-	} else {
-	  $.simpleWeather({
-		location: location,
-		woeid: woeid,
-		unit: 'f',
-		success: function(weather) {
-			$('.panel-weather').hide();
-			$('.panel-weather').html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
-			$('.panel-weather').attr('title', weather.city + ', '+ weather.region );
-			$('.panel-weather').show();
-			localStorage.setItem('weather_html',$(".panel-weather").html());
-			localStorage.setItem('weather_time',new Date().getTime());
-		}
-	  });
+	console.log(localStorage.getItem('weather_html'));
+	$('.panel-weather').html(localStorage.getItem('weather_html'));
+} else {
+  $.simpleWeather({
+	location: location,
+	unit: 'f',
+	success: function(weather) {
+		$('.panel-weather').hide();
+		$('.panel-weather').html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
+		$('.panel-weather').attr('title', weather.city + ', '+ weather.region );
+		$('.panel-weather').show();
+		localStorage.setItem('weather_html',$(".panel-weather").html());
+		localStorage.setItem('weather_time',new Date().getTime());
 	}
+  });
 }
+ });
 
 function _resize_sparkline(data){
 	if( $( window ).width() > 760){
