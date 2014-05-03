@@ -21,6 +21,11 @@ Let me know what you think!
 If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
 
 
+## Plugins!
+The first plugin is underway and shows how easy it is to extend the core to add your own..
+
+[l4cp-support](https://github.com/gcphost/l4cp-support)
+
 # Features
 - jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard
