@@ -33,6 +33,7 @@
 @include(Theme::path('admin/left-layout'))
 
 @section('scripts')
+
 <script type="text/javascript">
 	dtLoad('#comments', 'comments/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2),td:eq(3), th:eq(3)', '', 'false');
 </script>

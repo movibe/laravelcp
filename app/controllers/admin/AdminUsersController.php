@@ -599,7 +599,7 @@ class AdminUsersController extends AdminController {
         
 		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))->groupBy(DB::raw('users.id , users.displayname , users.email'))->orderBy('users.id');
+                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))->groupBy(DB::raw('users.id , users.displayname , users.email'));
 
 		if(Api::Enabled()){
 			$u=$users->get();

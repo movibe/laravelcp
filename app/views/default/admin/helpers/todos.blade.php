@@ -18,6 +18,7 @@
 			</tbody>
 		</table>
 	</div>
+
 <script type="text/javascript">
 	@if(isset($type) && $type == "widget")
 		dtLoad('#todos', "{{URL::to('admin/todos/data') }}", '','', 'td:eq(2), th:eq(2),td:eq(4), th:eq(4),td:eq(6), th:eq(6),td:eq(7), th:eq(7), td:eq(5), th:eq(5)', 'false');

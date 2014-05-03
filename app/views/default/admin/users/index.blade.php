@@ -59,6 +59,7 @@
 @include(Theme::path('admin/left-layout'))
 
 @section('scripts')
+
 <script type="text/javascript">
 	dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
 </script>

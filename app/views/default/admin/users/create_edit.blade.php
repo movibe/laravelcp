@@ -258,6 +258,7 @@
 
 @section('scripts')
 @if (isset($user))
+
 <script type="text/javascript">
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		localStorage.setItem('edit_user_tab', $(e.target).attr("href"));

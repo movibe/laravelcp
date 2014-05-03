@@ -53,8 +53,6 @@
 	<div class="modal-footer">
 			<div class="pull-left">
 				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} &nbsp;
-			</div>
-			<div class="pull-left">
 				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
 			</div>
 
