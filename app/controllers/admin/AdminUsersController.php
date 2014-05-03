@@ -301,7 +301,7 @@ class AdminUsersController extends AdminController {
 					} else $not->delete();
 				} else {
 					$not = new UserNotes(array('id'=>$id,'note'=>$note, 'admin_id' =>Confide::user()->id));
-					if($not->note) $user->notes()->save($not);
+					$user->notes()->save($not);
 				}
 			}
 

@@ -4,7 +4,7 @@
 	<div class="panel-heading">
 		<h4 class="panel-title">
 			<a data-toggle="collapse" data-parent="#accordion" href="#accord-{{{ $index }}}" style="text-transform: uppercase">
-				{{{ $index }}}
+				{{{ str_replace('_',' ',$index) }}}
 			</a>
 		</h4>
 	</div>
@@ -26,10 +26,12 @@
 								@if ($action =  Search::GetAction($index, $key)) @endif
 								@if($action['method'])
 									@if($action['method'] == "modal")
-										<a href="{{ URL::to(str_replace('?', $val, $action['action'])) }}" class="modalfy">{{{ substr($val,0,40)}}}</a>
+										<a href="{{ URL::to(str_replace('?', $val, $action['action'])) }}" class="modalfy">{{{ Str::limit(strip_tags($val), 42, "...") }}}</a>
+									@elseif($action['method'] == "link")
+										<a href="{{ URL::to(str_replace('?', $val, $action['action'])) }}">{{{ Str::limit(strip_tags($val), 42, "...") }}}</a>
 									@endif
 								@else
-									{{{ substr($val,0,40)}}}
+									{{{ Str::limit(strip_tags($val), 42, "...") }}} 
 								@endif
 							</td>
 						@endforeach

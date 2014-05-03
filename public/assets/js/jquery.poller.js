@@ -39,7 +39,7 @@
 	};
 
     Plugin.prototype.add = function (_c) {
-		settings.pols.push({'id':_c.id, 'type':_c.type, 'ratio':_c.ratio});
+		settings.pols.push({'id':_c.id, 'type':_c.type, 'ratio':_c.ratio, 'func':_c.func, 'value':_c.value});
     };
 
     Plugin.prototype.run = function () {

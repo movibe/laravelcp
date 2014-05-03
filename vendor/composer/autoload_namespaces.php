@@ -33,6 +33,7 @@ return array(
     'Symfony\\Component\\ClassLoader\\' => array($vendorDir . '/symfony/class-loader'),
     'Symfony\\Component\\BrowserKit\\' => array($vendorDir . '/symfony/browser-kit'),
     'Stack' => array($vendorDir . '/stack/builder/src'),
+    'Rtablada\\Profane' => array($vendorDir . '/rtablada/profane/src'),
     'Regulus\\ActivityLog' => array($vendorDir . '/regulus/activity-log/src'),
     'Raahul\\SchemaExtractor' => array($vendorDir . '/raahul/schema-extractor/src'),
     'Raahul\\LarryFour' => array($vendorDir . '/raahul/larryfour/src'),

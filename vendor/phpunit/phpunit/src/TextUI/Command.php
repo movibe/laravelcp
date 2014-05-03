@@ -262,6 +262,7 @@ class PHPUnit_TextUI_Command
     protected function handleArguments(array $argv)
     {
         if (defined('__PHPUNIT_PHAR__')) {
+            $this->longOptions['selfupdate']  = null;
             $this->longOptions['self-update'] = null;
         }
 
@@ -539,6 +540,7 @@ class PHPUnit_TextUI_Command
                 }
                 break;
 
+                case '--selfupdate':
                 case '--self-update': {
                     $this->handleSelfUpdate();
                 }
@@ -840,21 +842,25 @@ class PHPUnit_TextUI_Command
 
         print 'Updating the PHPUnit PHAR ... ';
 
+        $options = array(
+            'ssl' => array(
+                'allow_self_signed' => false,
+                'cafile' => $caFile,
+                'verify_peer' => true
+            )
+        );
+
+        if (PHP_VERSION_ID < 50600) {
+            $options['ssl']['CN_match']        = 'phar.phpunit.de';
+            $options['ssl']['SNI_server_name'] = 'phar.phpunit.de';
+        }
+
         file_put_contents(
           $tempFilename,
           file_get_contents(
             $remoteFilename,
             false,
-            stream_context_create(
-              array(
-                'ssl' => array(
-                  'CN_match' => 'phar.phpunit.de',
-                  'allow_self_signed' => false,
-                  'cafile' => $caFile,
-                  'verify_peer' => true
-                )
-              )
-            )
+            stream_context_create($options)
           )
         );
 

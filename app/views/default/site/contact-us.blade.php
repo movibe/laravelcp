@@ -26,13 +26,15 @@
                             <input name="name" type="text" class="form-control" id="name" placeholder="{{{ Lang::get('site.your_name') }}}" required="required" /></div>
                         </div>
                         <div class="form-group">
-                            <div class="input-group">
+                             <label>&nbsp;</label>
+                           <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
                                 </span>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="{{{ Lang::get('site.your_email') }}}" required="required" /></div>
                         </div>
                         <div class="form-group">
-                             <div class="input-group">
+                            <label>&nbsp;</label>
+                           <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-fw fa-question"></span>
                                 </span><select id="subject" name="subject" class="form-control" required="required">
                                 <option value="" selected="">{{{ Lang::get('site.subject') }}}</option>
@@ -44,7 +46,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">&nbsp;</label>
                             <textarea name="body" id="message" class="form-control" rows="9" cols="25" required="required"
                                 placeholder="{{{ Lang::get('site.message') }}}"></textarea>
                         </div>

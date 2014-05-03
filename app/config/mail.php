@@ -8,13 +8,13 @@ return array(
  
     'port' => 587,
  
-    'from' => array('address' => '', 'name' => 'Awesome Laravel 4 Auth App'),
+    'from' => array('address' => 'test@gamecp.com', 'name' => 'Awesome Laravel 4 Auth App'),
  
     'encryption' => 'tls',
  
-    'username' => '',
+    'username' => 'test@gamecp.com',
  
-    'password' => '',
+    'password' => 'password',
  
     'sendmail' => '/usr/sbin/sendmail -bs',
  

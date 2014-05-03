@@ -6,6 +6,7 @@ return array(
 	'name' => 'Name',
 	'todos' => 'To-do List',
 	'users' => 'Users',
+	'user' => 'User',
 	'users_online' => 'Users Online',
 	'roles' => 'Roles',
 	'active' => 'Active',

@@ -19,8 +19,8 @@
 <div class="btn-group">
 <a class="btn btn-default" data-edit="bold" title="Bold"><i class="fa fa-bold"></i></a>
 <a class="btn btn-default" data-edit="italic" title="Italic"><i class="fa fa-italic"></i></a>
-<a class="btn btn-default" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
-<a class="btn btn-default" data-edit="underline" title="Underline"><i class="fa fa-underline"></i></a>
+<a class="hidden-sm hidden-xs btn btn-default" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+<a class="hidden-sm hidden-xs btn btn-default" data-edit="underline" title="Underline"><i class="fa fa-underline"></i></a>
 </div>
 
 <div class="hidden-sm hidden-xs btn-group">
@@ -38,19 +38,16 @@
 </div>
 
 <div class="btn-group">
-	  <a class="btn  btn-default dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+	<a class="btn hidden-xs btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+	  <a class="btn  btn-default dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link">&nbsp;</i></a>
 	    <div class="dropdown-menu input-append">
 		    <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
 		    <button class="btn  btn-default" type="button">Add</button>
-</div>
-<a class="btn hidden-xs btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
-
+	</div>
 </div>
 
-<div class="btn-group">
 <a class="btn  btn-default" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
 <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-</div>
 </div>
 <br/>
 <div id="editor" class="form-control">@yield('wysiywg-content')</div>

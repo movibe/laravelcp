@@ -16,7 +16,7 @@ function styledt(table){
 	$(table+'-container .dataTables_paginate').addClass('pull-right');
 }
 
-function dtLoad(table, action, hidemd, hidesm, hide){
+function dtLoad(table, action, hidemd, hidesm, hide, hascontrols){
 	var aSelected = [];
 	var oTable=$(table).dataTable( {
 		"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -28,6 +28,7 @@ function dtLoad(table, action, hidemd, hidesm, hide){
 		"fnInitComplete": function ( oSettings ) {
 			styledt(table);
 		},
+		aaSorting: [[0, 'desc']],
 		"oLanguage": {
 				"sLengthMenu": "Limit _MENU_",
 				"sSearch": "",
@@ -37,7 +38,7 @@ function dtLoad(table, action, hidemd, hidesm, hide){
 			  }
 		  },
 		"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-			if ( $.inArray(aData[0], aSelected) !== -1 )  $(nRow).addClass('highlight');
+			if ( $.inArray(aData[0], aSelected) !== -1 )  $(nRow).find('td').not(':last-child').toggleClass('highlight');
 		 },
 		"fnDrawCallback": function ( oSettings ) {
 			
@@ -52,28 +53,29 @@ function dtLoad(table, action, hidemd, hidesm, hide){
 		}
 	});
 
-	$('#site-modal').on('hidden.bs.modal', function () {
-		$(document).off("click", table+' tbody tr');
-		$(document).off("click",  table+"-container .dt-mass");
-	})
+	if(hascontrols != 'false'){
+		$(document).on("click", table+' tbody tr td:last-child', function(e) {
+			return false;
+		});
 
-	$(document).on("click", table+' tbody tr', function(e) {
-		e.preventDefault();
+		$(document).on("click", table+' tbody tr ', function(e) {
+			e.preventDefault();
+			
+			var aData = oTable.fnGetData( this );
+			var id = aData[0];
+
+			var index = $.inArray(id, aSelected);
+			if ( index === -1 ) {
+				aSelected.push( id );
+			} else aSelected.splice( index, 1 );
 		
-		var aData = oTable.fnGetData( this );
-		var id = aData[0];
+			 if(aSelected.length > 0){
+				 $(table+'-container .dt-pop-control').fadeIn();
+			 } else $(table+'-container .dt-pop-control').fadeOut();
 
-		var index = $.inArray(id, aSelected);
-		if ( index === -1 ) {
-			aSelected.push( id );
-		} else aSelected.splice( index, 1 );
-	
-		 if(aSelected.length > 0){
-			 $(table+'-container .dt-pop-control').fadeIn();
-		 } else $(table+'-container .dt-pop-control').fadeOut();
-
-		$(this).toggleClass('highlight');
-	} );
+			$(this).find('td').not(':last-child').toggleClass('highlight');
+		});
+	}
 
 	$(document).on("click",  table+"-container .dt-mass", function(e) {
 		e.preventDefault();  
@@ -188,6 +190,10 @@ $(document).on("click", "a", function(e) {
 $(document).on("click", ".modalfy", function(e) {
 	e.preventDefault();   
 	modalfyRun(this,$(this).attr("href"));
+});
+
+$(document).on("click", ".link-threw", function(e) {
+	window.location=$(this).attr('href');
 });
 
 
@@ -330,3 +336,16 @@ $(document).on("click", ".btn-toggle", function(e) {
     	$(this).find('.btn').toggleClass('btn-info');
     }
 });
+
+function nextTab(elem) {
+  $(elem + ' li.active')
+    .next()
+    .find('a[data-toggle="tab"]')
+    .click();
+}
+function prevTab(elem) {
+  $(elem + ' li.active')
+    .prev()
+    .find('a[data-toggle="tab"]')
+    .click();
+}

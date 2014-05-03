@@ -34,9 +34,9 @@
 
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
-						@section('wysiywg-content')
-							{{ Input::old('content', isset($post) ? $post->content : null) }}
-						@stop
+@section('wysiywg-content')
+{{ Input::old('content', isset($post) ? $post->content : null) }}
+@stop
 						<p>@include(Theme::path('wysiwyg'))</p>
 
 						<textarea id="wysiwyg-body" class="hide" name="content" value="content" rows="10"></textarea>

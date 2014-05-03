@@ -143,3 +143,4 @@ display: none;
 	margin-left: 5px;
 }
 
+.table-indicator{display:table-cell; width: 100%; height: inherit;border:1px solid blue}

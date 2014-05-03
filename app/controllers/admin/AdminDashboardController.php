@@ -82,6 +82,9 @@ class AdminDashboardController extends AdminController {
 		if(is_array($polls) && count($polls) > 0){
 			foreach($polls as $i => $_poll){
 				switch($_poll->type){
+					case "plugin":	
+						if($_poll->func) $_results[$_poll->id]=call_user_func($_poll->func, $_poll->value);						
+					break;
 					case "check_logs":
 						$list = Activity::
 							whereRaw('UNIX_TIMESTAMP(`activity_log`.`created_at`) > ? AND (activity_log.content_type="notification" OR activity_log.content_type="login")',array(Session::get('usersonline_lastcheck', time())))->select(array('description', 'details', 'users.displayname', 'content_type'))->groupBy(DB::raw('description, details, users.displayname, content_type'))->orderBy('activity_log.id', 'DESC')

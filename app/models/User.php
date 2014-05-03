@@ -73,6 +73,18 @@ class User extends ConfideUser {
     }
 
     /**
+     * Save profiles inputted from multiselect
+     * @param $inputRoles
+     */
+    public function saveProfiles($inputProfile)
+    {
+        if(! empty($inputProfile)) {
+            $this->profiles()->sync($inputProfile);
+        } else {
+            $this->profiles()->detach();
+        }
+    }
+    /**
      * Returns user's current role ids only.
      * @return array|bool
      */

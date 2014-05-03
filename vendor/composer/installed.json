@@ -52,12 +52,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/EventDispatcher.git",
-            "reference": "133627e57441b50128807702bea0d395129809ad"
+            "reference": "cb62ec8dd05893fc8e4f0e6e21e326e1fc731fe8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/133627e57441b50128807702bea0d395129809ad",
-            "reference": "133627e57441b50128807702bea0d395129809ad",
+            "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/cb62ec8dd05893fc8e4f0e6e21e326e1fc731fe8",
+            "reference": "cb62ec8dd05893fc8e4f0e6e21e326e1fc731fe8",
             "shasum": ""
         },
         "require": {
@@ -65,6 +65,7 @@
         },
         "require-dev": {
             "psr/log": "~1.0",
+            "symfony/config": "~2.0",
             "symfony/dependency-injection": "~2.0",
             "symfony/stopwatch": "~2.2"
         },
@@ -72,7 +73,7 @@
             "symfony/dependency-injection": "",
             "symfony/http-kernel": ""
         },
-        "time": "2014-04-16 10:36:21",
+        "time": "2014-04-29 10:13:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1210,12 +1211,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "d2f081de8384f7b1a2031efd82fe7256bbb6d465"
+            "reference": "d33225508d885660a3a36eb046a3efafabf53e7f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/d2f081de8384f7b1a2031efd82fe7256bbb6d465",
-            "reference": "d2f081de8384f7b1a2031efd82fe7256bbb6d465",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/d33225508d885660a3a36eb046a3efafabf53e7f",
+            "reference": "d33225508d885660a3a36eb046a3efafabf53e7f",
             "shasum": ""
         },
         "require": {
@@ -1223,13 +1224,13 @@
             "php": ">=5.3.2"
         },
         "require-dev": {
-            "phpunit/phpunit": "3.7.*",
+            "phpunit/phpunit": "4.0.*",
             "symfony/console": "2.*"
         },
         "suggest": {
             "symfony/console": "Allows use of the command line interface"
         },
-        "time": "2014-04-29 22:45:42",
+        "time": "2014-05-02 17:17:39",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1248,7 +1249,7 @@
         ],
         "authors": [
             {
-                "name": "Jonathan Wage",
+                "name": "Jonathan H. Wage",
                 "email": "jonwage@gmail.com",
                 "homepage": "http://www.jwage.com/",
                 "role": "Creator"
@@ -2082,12 +2083,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "65026b610f8c19e61d7242f600530677b0466aac"
+            "reference": "467e30a9c9fa22395608cc515cd45a60ecc84c4e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/65026b610f8c19e61d7242f600530677b0466aac",
-            "reference": "65026b610f8c19e61d7242f600530677b0466aac",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/467e30a9c9fa22395608cc515cd45a60ecc84c4e",
+            "reference": "467e30a9c9fa22395608cc515cd45a60ecc84c4e",
             "shasum": ""
         },
         "require": {
@@ -2112,7 +2113,7 @@
             "rollbar/rollbar": "Allow sending log messages to Rollbar",
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
         },
-        "time": "2014-04-24 13:29:03",
+        "time": "2014-05-01 15:55:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2152,21 +2153,21 @@
         "source": {
             "type": "git",
             "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "19a15a44b21d13f6c19beefc8e4b6c849558ec50"
+            "reference": "3f9388048e92cc110a6f4b5f6ef7c1f4ca60e84a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/19a15a44b21d13f6c19beefc8e4b6c849558ec50",
-            "reference": "19a15a44b21d13f6c19beefc8e4b6c849558ec50",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/3f9388048e92cc110a6f4b5f6ef7c1f4ca60e84a",
+            "reference": "3f9388048e92cc110a6f4b5f6ef7c1f4ca60e84a",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2.4"
         },
         "require-dev": {
-            "mockery/mockery": "~0.9@dev"
+            "mockery/mockery": "~0.9"
         },
-        "time": "2014-04-22 07:28:24",
+        "time": "2014-05-03 16:23:29",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3079,74 +3080,6 @@
         ]
     },
     {
-        "name": "mockery/mockery",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/padraic/mockery.git",
-            "reference": "09cad223615eac9e229837c9d44792f393529328"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/padraic/mockery/zipball/09cad223615eac9e229837c9d44792f393529328",
-            "reference": "09cad223615eac9e229837c9d44792f393529328",
-            "shasum": ""
-        },
-        "require": {
-            "lib-pcre": ">=7.0",
-            "php": ">=5.3.2"
-        },
-        "require-dev": {
-            "hamcrest/hamcrest-php": "~1.1",
-            "phpunit/phpunit": "~4.0",
-            "satooshi/php-coveralls": "~0.7@dev"
-        },
-        "time": "2014-04-25 09:53:30",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.9.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Mockery": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Pádraic Brady",
-                "email": "padraic.brady@gmail.com",
-                "homepage": "http://blog.astrumfutura.com"
-            },
-            {
-                "name": "Dave Marshall",
-                "email": "dave.marshall@atstsolutions.co.uk",
-                "homepage": "http://davedevelopment.co.uk"
-            }
-        ],
-        "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
-        "homepage": "http://github.com/padraic/mockery",
-        "keywords": [
-            "BDD",
-            "TDD",
-            "library",
-            "mock",
-            "mock objects",
-            "mockery",
-            "stub",
-            "test",
-            "test double",
-            "testing"
-        ]
-    },
-    {
         "name": "barryvdh/laravel-ide-helper",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -3198,84 +3131,6 @@
             "phpstorm",
             "sublime"
         ]
-    },
-    {
-        "name": "symfony/security",
-        "version": "2.4.x-dev",
-        "version_normalized": "2.4.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Security",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Security.git",
-            "reference": "1f2b6d8dfea39071748becf040c8d8a23288e725"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Security/zipball/1f2b6d8dfea39071748becf040c8d8a23288e725",
-            "reference": "1f2b6d8dfea39071748becf040c8d8a23288e725",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "symfony/event-dispatcher": "~2.1",
-            "symfony/http-foundation": "~2.1",
-            "symfony/http-kernel": "~2.4"
-        },
-        "replace": {
-            "symfony/security-acl": "self.version",
-            "symfony/security-core": "self.version",
-            "symfony/security-csrf": "self.version",
-            "symfony/security-http": "self.version"
-        },
-        "require-dev": {
-            "doctrine/common": "~2.2",
-            "doctrine/dbal": "~2.2",
-            "ircmaxell/password-compat": "1.0.*",
-            "psr/log": "~1.0",
-            "symfony/expression-language": "~2.4",
-            "symfony/routing": "~2.2",
-            "symfony/validator": "~2.2"
-        },
-        "suggest": {
-            "doctrine/dbal": "For using the built-in ACL implementation",
-            "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
-            "symfony/class-loader": "For using the ACL generateSql script",
-            "symfony/expression-language": "For using the expression voter",
-            "symfony/finder": "For using the ACL generateSql script",
-            "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
-            "symfony/validator": "For using the user password constraint"
-        },
-        "time": "2014-04-25 07:06:20",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Security\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Security Component",
-        "homepage": "http://symfony.com"
     },
     {
         "name": "msurguy/honeypot",
@@ -3526,85 +3381,18 @@
         "homepage": "http://symfony.com"
     },
     {
-        "name": "sebastian/comparator",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/comparator.git",
-            "reference": "e4f1b2e03bf3af65b7b3e8f437a4255657df577d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/e4f1b2e03bf3af65b7b3e8f437a4255657df577d",
-            "reference": "e4f1b2e03bf3af65b7b3e8f437a4255657df577d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "sebastian/diff": "~1.1",
-            "sebastian/exporter": "~1.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2014-04-27 07:18:17",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de",
-                "role": "lead"
-            },
-            {
-                "name": "Jeff Welch",
-                "email": "whatthejeff@gmail.com"
-            },
-            {
-                "name": "Volker Dusch",
-                "email": "github@wallbash.com"
-            },
-            {
-                "name": "Bernhard Schussek",
-                "email": "bschussek@2bepublished.at"
-            }
-        ],
-        "description": "Provides the functionality to compare PHP values for equality",
-        "homepage": "http://www.github.com/sebastianbergmann/comparator",
-        "keywords": [
-            "comparator",
-            "compare",
-            "equality"
-        ]
-    },
-    {
         "name": "phpunit/php-code-coverage",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-            "reference": "f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9"
+            "reference": "a995604307026ed8693ffba8848765532030371b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9",
-            "reference": "f0565e24d9ac4c34f855d8ee4dc314545c7c4fd9",
+            "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/a995604307026ed8693ffba8848765532030371b",
+            "reference": "a995604307026ed8693ffba8848765532030371b",
             "shasum": ""
         },
         "require": {
@@ -3624,7 +3412,7 @@
             "ext-xdebug": ">=2.2.1",
             "ext-xmlwriter": "*"
         },
-        "time": "2014-04-27 16:15:10",
+        "time": "2014-04-30 08:57:33",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3785,65 +3573,6 @@
         "description": "Rapidly generate resources, migrations, models, and much more."
     },
     {
-        "name": "symfony/debug",
-        "version": "2.4.x-dev",
-        "version_normalized": "2.4.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Debug",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Debug.git",
-            "reference": "ec8b67232edb5f7b9490ce8dab685a72290fede4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Debug/zipball/ec8b67232edb5f7b9490ce8dab685a72290fede4",
-            "reference": "ec8b67232edb5f7b9490ce8dab685a72290fede4",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/http-foundation": "~2.1",
-            "symfony/http-kernel": "~2.1"
-        },
-        "suggest": {
-            "symfony/http-foundation": "",
-            "symfony/http-kernel": ""
-        },
-        "time": "2014-04-29 06:55:57",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Debug\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com",
-                "homepage": "http://fabien.potencier.org",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Debug Component",
-        "homepage": "http://symfony.com"
-    },
-    {
         "name": "symfony/http-foundation",
         "version": "2.4.x-dev",
         "version_normalized": "2.4.9999999.9999999-dev",
@@ -3901,18 +3630,271 @@
         "homepage": "http://symfony.com"
     },
     {
+        "name": "symfony/debug",
+        "version": "2.4.x-dev",
+        "version_normalized": "2.4.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/Debug",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Debug.git",
+            "reference": "6e721ae2cd7bde0f8dfa9c3186808a6c4140469c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Debug/zipball/6e721ae2cd7bde0f8dfa9c3186808a6c4140469c",
+            "reference": "6e721ae2cd7bde0f8dfa9c3186808a6c4140469c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "symfony/http-foundation": "~2.1",
+            "symfony/http-kernel": "~2.1"
+        },
+        "suggest": {
+            "symfony/http-foundation": "",
+            "symfony/http-kernel": ""
+        },
+        "time": "2014-04-30 06:22:28",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Debug\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Debug Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "rtablada/profane",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/rtablada/profane.git",
+            "reference": "7d4bf053b795a5710b02a89cf1a7ca7b9494ebff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/rtablada/profane/zipball/7d4bf053b795a5710b02a89cf1a7ca7b9494ebff",
+            "reference": "7d4bf053b795a5710b02a89cf1a7ca7b9494ebff",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "~4",
+            "illuminate/support": "~4",
+            "php": ">=5.3.0"
+        },
+        "time": "2014-02-17 15:29:10",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Rtablada\\Profane": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ryan Tablada",
+                "email": "ryan.tablada@gmail.com",
+                "homepage": "http://lucidbridge.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Profanity filtering package for Laravel 4",
+        "keywords": [
+            "laravel",
+            "lpm",
+            "profane",
+            "profanity"
+        ]
+    },
+    {
+        "name": "mockery/mockery",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/padraic/mockery.git",
+            "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/padraic/mockery/zipball/715721895260a951d9cb9c2b9269d5333fb37a5e",
+            "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e",
+            "shasum": ""
+        },
+        "require": {
+            "lib-pcre": ">=7.0",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "hamcrest/hamcrest-php": "~1.1",
+            "phpunit/phpunit": "~4.0",
+            "satooshi/php-coveralls": "~0.7@dev"
+        },
+        "time": "2014-05-02 12:25:43",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.9.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Mockery": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Pádraic Brady",
+                "email": "padraic.brady@gmail.com",
+                "homepage": "http://blog.astrumfutura.com"
+            },
+            {
+                "name": "Dave Marshall",
+                "email": "dave.marshall@atstsolutions.co.uk",
+                "homepage": "http://davedevelopment.co.uk"
+            }
+        ],
+        "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+        "homepage": "http://github.com/padraic/mockery",
+        "keywords": [
+            "BDD",
+            "TDD",
+            "library",
+            "mock",
+            "mock objects",
+            "mockery",
+            "stub",
+            "test",
+            "test double",
+            "testing"
+        ]
+    },
+    {
+        "name": "symfony/security",
+        "version": "2.4.x-dev",
+        "version_normalized": "2.4.9999999.9999999-dev",
+        "target-dir": "Symfony/Component/Security",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Security.git",
+            "reference": "cfe0fa933ce71c14fa0675af131a3797e4a88045"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Security/zipball/cfe0fa933ce71c14fa0675af131a3797e4a88045",
+            "reference": "cfe0fa933ce71c14fa0675af131a3797e4a88045",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "symfony/event-dispatcher": "~2.1",
+            "symfony/http-foundation": "~2.1",
+            "symfony/http-kernel": "~2.4"
+        },
+        "replace": {
+            "symfony/security-acl": "self.version",
+            "symfony/security-core": "self.version",
+            "symfony/security-csrf": "self.version",
+            "symfony/security-http": "self.version"
+        },
+        "require-dev": {
+            "doctrine/common": "~2.2",
+            "doctrine/dbal": "~2.2",
+            "ircmaxell/password-compat": "1.0.*",
+            "psr/log": "~1.0",
+            "symfony/expression-language": "~2.4",
+            "symfony/routing": "~2.2",
+            "symfony/validator": "~2.2"
+        },
+        "suggest": {
+            "doctrine/dbal": "For using the built-in ACL implementation",
+            "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
+            "symfony/class-loader": "For using the ACL generateSql script",
+            "symfony/expression-language": "For using the expression voter",
+            "symfony/finder": "For using the ACL generateSql script",
+            "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+            "symfony/validator": "For using the user password constraint"
+        },
+        "time": "2014-05-02 13:46:37",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Security\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Security Component",
+        "homepage": "http://symfony.com"
+    },
+    {
         "name": "laravel/framework",
         "version": "4.1.x-dev",
         "version_normalized": "4.1.9999999.9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "dde53a39385435649ab42626d21cde9a4c1e85fd"
+            "reference": "5531e482382510c0ee27782a6e9de3308b82c778"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/dde53a39385435649ab42626d21cde9a4c1e85fd",
-            "reference": "dde53a39385435649ab42626d21cde9a4c1e85fd",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/5531e482382510c0ee27782a6e9de3308b82c778",
+            "reference": "5531e482382510c0ee27782a6e9de3308b82c778",
             "shasum": ""
         },
         "require": {
@@ -3939,7 +3921,7 @@
             "symfony/http-kernel": "2.4.*",
             "symfony/process": "2.4.*",
             "symfony/routing": "2.4.*",
-            "symfony/security": "2.4.*",
+            "symfony/security-core": "2.4.*",
             "symfony/translation": "2.4.*"
         },
         "replace": {
@@ -3981,7 +3963,7 @@
         "suggest": {
             "doctrine/dbal": "Allow renaming columns and dropping SQLite columns."
         },
-        "time": "2014-04-29 23:26:59",
+        "time": "2014-05-02 21:27:59",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4009,7 +3991,7 @@
                 "name": "Taylor Otwell",
                 "email": "taylorotwell@gmail.com",
                 "homepage": "https://github.com/taylorotwell",
-                "role": "Developer"
+                "role": "Creator of Laravel"
             }
         ],
         "description": "The Laravel Framework.",
@@ -4019,18 +4001,85 @@
         ]
     },
     {
+        "name": "sebastian/comparator",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/comparator.git",
+            "reference": "f7069ee51fa9fb6c038e16a9d0e3439f5449dcf2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/f7069ee51fa9fb6c038e16a9d0e3439f5449dcf2",
+            "reference": "f7069ee51fa9fb6c038e16a9d0e3439f5449dcf2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "sebastian/diff": "~1.1",
+            "sebastian/exporter": "~1.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.1"
+        },
+        "time": "2014-05-02 07:05:58",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de",
+                "role": "lead"
+            },
+            {
+                "name": "Jeff Welch",
+                "email": "whatthejeff@gmail.com"
+            },
+            {
+                "name": "Volker Dusch",
+                "email": "github@wallbash.com"
+            },
+            {
+                "name": "Bernhard Schussek",
+                "email": "bschussek@2bepublished.at"
+            }
+        ],
+        "description": "Provides the functionality to compare PHP values for equality",
+        "homepage": "http://www.github.com/sebastianbergmann/comparator",
+        "keywords": [
+            "comparator",
+            "compare",
+            "equality"
+        ]
+    },
+    {
         "name": "phpunit/phpunit",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "b8a22bec42d81df579f164da09480af82a7576bb"
+            "reference": "ef7809a99a1c7debb244c7f49bc43e0de8116428"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b8a22bec42d81df579f164da09480af82a7576bb",
-            "reference": "b8a22bec42d81df579f164da09480af82a7576bb",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ef7809a99a1c7debb244c7f49bc43e0de8116428",
+            "reference": "ef7809a99a1c7debb244c7f49bc43e0de8116428",
             "shasum": ""
         },
         "require": {
@@ -4055,7 +4104,7 @@
         "suggest": {
             "phpunit/php-invoker": "~1.1"
         },
-        "time": "2014-04-29 23:29:13",
+        "time": "2014-05-02 13:42:32",
         "bin": [
             "phpunit"
         ],

@@ -1,0 +1,28 @@
+{
+    "name": "rtablada/profane",
+    "description": "Profanity filtering package for Laravel 4",
+    "keywords": [
+        "laravel",
+        "profane",
+        "profanity",
+        "lpm"
+    ],
+    "authors": [
+        {
+            "name": "Ryan Tablada",
+            "email": "ryan.tablada@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~4",
+        "illuminate/database": "~4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Rtablada\\Profane": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "license": "MIT"
+}
