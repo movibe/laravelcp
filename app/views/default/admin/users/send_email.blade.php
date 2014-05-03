@@ -51,34 +51,37 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-			<div class="btn-group">
-				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
+			<div class="pull-left">
+				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} &nbsp;
+			</div>
+			<div class="pull-left">
+				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
 			</div>
 
-			<div class="btn-group">
-				<span class="btn btn-default btn-file">
-				   <span class="fa fa-lg fa-paperclip"> </span> <input type="file" name="email_attachment" multiple>
-				</span>
-				<div class="btn-group dropup">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						<span class="email-template-tag">Template</span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu template-dropdown">
-						<li><a href="emails.default">Default</a></li>
-						@foreach($templates as $id=>$var)
-							@if($var->getFilename() != 'default.blade.php')
-							<li><a href="emails.{{{ str_replace(DIRECTORY_SEPARATOR, '.',preg_replace('/.blade.php/i', '',$var->getRelativePathname())) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
-							@endif
-						@endforeach
-					</ul>
-				</div>
+			<div class="pull-right">
+					<div class="btn btn-responsive btn-default btn-file">
+					   <span class="fa fa-lg fa-paperclip"> </span> <input type="file" name="email_attachment" multiple>
+					</div>
+					<div class="btn-group dropup">
+						<button type="button" class="btn-responsive btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="email-template-tag">Template</span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu template-dropdown">
+							<li><a href="emails.default">Default</a></li>
+							@foreach($templates as $id=>$var)
+								@if($var->getFilename() != 'default.blade.php')
+								<li><a href="emails.{{{ str_replace(DIRECTORY_SEPARATOR, '.',preg_replace('/.blade.php/i', '',$var->getRelativePathname())) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
+								@endif
+							@endforeach
+						</ul>
+					</div>
+				{{ Form::submit(Lang::get('button.send'), array('class' => 'btn-responsive btn btn-success')); }} 
 			</div>
+
 			<input type="hidden" id="email-template" name="template" value="emails.default"/>
 			<textarea class="hide" id="wysiwyg-body" name="body"></textarea>
 
-			{{ Form::submit(Lang::get('button.send'), array('class' => 'btn btn-success')); }} 
 	</div>
 	<script type="text/javascript">
 		initToolbarBootstrapBindings();  
