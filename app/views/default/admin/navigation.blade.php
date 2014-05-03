@@ -1,16 +1,14 @@
 <div class="navbar navbar-default navbar-fixed-top main-nav">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			@yield('navbar-header')
+			<button type="button" class="fa fa-lg fa-bars hidden-sm hidden-md hidden-lg navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">{{{ Lang::get('core.toggle_nav') }}}</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
 			</button>
 			<div id="logo"></div>
 			<a href="{{{ URL::to('admin') }}}" class="navbar-brand" title="{{{ Setting::get('site.name') }}}">{{{ Setting::get('site.name') }}} </a>
 		</div>
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<div class="collapse navbar-collapse">
 			
 			<ul class="nav navbar-nav">
 				@yield('main-nav-pre')
@@ -62,4 +60,3 @@
 		</div>
 	</div>
 </div>
-

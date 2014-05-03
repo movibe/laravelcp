@@ -38,6 +38,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-	dtLoad('#blogs', 'slugs/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
+	dtLoad('#blogs', 'slugs/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', '', 'false');
 </script>
 @stop

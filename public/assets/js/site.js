@@ -285,39 +285,6 @@ function throttle(f, delay){
 
 
 
-/* navigation, swipe & weather */
-$(document).ready(function() {
-	$(".main-nav").swipe( {
-		swipe:function(event, direction, distance, duration, fingerCount) {
-			if(direction == "down") $('.main-nav .collapse').collapse('show');
-			if(direction == "right") $('.sidebar').collapse('show');
-			if(direction == "left") $('.sidebar').collapse('hide');
-		},
-		 threshold:0
-		});
-
-		$(".sidebar").swipe( {
-		swipe:function(event, direction, distance, duration, fingerCount) {
-			if(direction == "left") $('.sidebar').collapse('hide');
-		},
-		 threshold:0
-	});
-
-	localdata_weather = JSON.parse(localStorage.getItem('weather_location'));
-	if(localdata_weather){
-		loadWeather(localdata_weather.lat+','+localdata_weather.lon); //load weather using your lat/lng coordinates
-	} else {
-		if ("geolocation" in navigator) {
-		  navigator.geolocation.getCurrentPosition(function(position) {
-			localStorage.setItem('weather_location', JSON.stringify({'lat':position.coords.latitude, 'lon':position.coords.longitude}));
-			loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
-		  });
-		} else loadWeather('Seattle',''); 
-	}
-
-});
-
-
 /* on/off switcher */
 $(document).on("click", ".btn-toggle", function(e) {
 	e.preventDefault();   

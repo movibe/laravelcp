@@ -55,14 +55,11 @@
                 <div class="navbar-header">
                     <div id="logo"></div>
 					<a href="{{{ URL::to('/') }}}" class="navbar-brand">{{{ Setting::get('site.name') }}}</a>
-                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">{{{ Lang::get('core.toggle_nav') }}}</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+					<button type="button" class="fa fa-lg fa-bars hidden-sm hidden-md hidden-lg navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">{{{ Lang::get('core.toggle_nav') }}}</span>
+					</button>
                 </div>
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
 						<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">{{{ Lang::get('site.home') }}}</a></li>
 						<li {{ (Request::is('contact-us') ? ' class="active"' : '') }}><a href="{{{ URL::to('contact-us') }}}">{{{ Lang::get('site.contactus') }}}</a></li>
@@ -77,14 +74,23 @@
 
                     <ul class="nav navbar-nav pull-right">
                         @if (Auth::check())
-                        @if (Auth::user()->hasRole('admin'))
-                        <li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
-                        @endif
-                        <li><a href="{{{ URL::to('user') }}}">{{{ Lang::get('site.loggedinas') }}} {{{ Auth::user()->email }}}</a></li>
-                        <li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+							@if (Auth::user()->hasRole('admin'))
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<span class="glyphicon"><img alt="{{{ Auth::user()->email }}}" src="{{ Gravatar::src(Auth::user()->email, 20) }}"></span>  &nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
+									<li class="divider"></li>
+									<li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+								</ul>
+							</li>
+							@else
+								<li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+							@endif
                         @else
-                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">{{{ Lang::get('user/user.login') }}}</a></li>
-                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
+							<li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">{{{ Lang::get('user/user.login') }}}</a></li>
+							<li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
                         @endif
                     </ul>
 				</div>

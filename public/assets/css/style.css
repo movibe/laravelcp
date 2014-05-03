@@ -50,7 +50,7 @@ iframe, img{ border: 0px}
 	}
 }
 @media (max-width:768px){
-	.dropdown-menu li{ padding:10px}
+
 }
 
 @media (min-width: 768px) { 
@@ -144,3 +144,8 @@ display: none;
 }
 
 .table-indicator{display:table-cell; width: 100%; height: inherit;border:1px solid blue}
+
+.subnav-toggle{
+border: 0px;
+margin-left:-14px;
+}
