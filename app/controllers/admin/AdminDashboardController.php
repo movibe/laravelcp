@@ -19,7 +19,7 @@ class AdminDashboardController extends AdminController {
 
 	private function graphData($type, $from, $to, $distinct=false){
 		if($distinct){
-			return Activity::select(DB::raw('distinct `ip_address` '))->whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->count();
+			 return Activity::whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->count(DB::raw('distinct `ip_address` '));		
 		} else return Activity::whereBetween('created_at', array($from, $to))->where('content_type', '=', $type)->count();
 	}
 
@@ -44,6 +44,7 @@ class AdminDashboardController extends AdminController {
 		$minigraph_data['login']=$this->graphDataBuild('login');
 		$minigraph_data['activity']=$this->graphDataBuild('activity');
 		$minigraph_data['activity_unique']=$this->graphDataBuild('activity','5', true);
+
 		View::share('minigraph_data', $minigraph_data);
 		View::share('minigraph_json', json_encode($minigraph_data));
 

@@ -21,29 +21,8 @@
 	<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}"/>
 
 	@include(Theme::path('admin/css'))
+	@include(Theme::path('admin/js'))
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
-	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
-	<script src="{{{ URL::to('translation.js') }}}"></script>
-	<script src="{{{ asset('assets/js/jquery.poller.js') }}}"></script>
-	<script type="text/javascript">
-		/* setup poller with the url */
-		$.fn.poller({'url':'{{{ URL::to("admin/polling") }}}'});
-	</script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
-
-	<script src="{{{ asset('assets/js/site.js') }}}"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
-	<script src="{{{ asset('assets/js/datatables.fnReloadAjax.js') }}}"></script>
-	<script src="{{{ asset('assets/js/datatables-bootstrap.js') }}}"></script>
-	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"/>
 	@yield('head-scripts')
 
 	<!--[if lt IE 9]>
@@ -107,7 +86,7 @@
 		</div>
 	</div>
 
-	@include(Theme::path('admin/js'))
+	@yield('scripts')
 
 	<script type="text/javascript">
 		$('.nav-search').on('click', function(e){

@@ -6,13 +6,13 @@
 
 @section('left-layout-nav')
 	@include(Theme::path('admin/navigation/users'))
-
 	<div class="panel panel-info">
 	<div class="panel-heading">{{{ Lang::get('core.active') }}} {{{ Lang::get('core.users') }}} <span class="badge pull-right">{{ DB::table('users')->where('confirmed', '=', '1')->count() }} </span></div>
 	<div class="panel-body">
 	{{ Lava::PieChart('activeusers')->outputInto('activeusers') }}
 	{{ Lava::div('100%', '') }}
 	</div></div>
+	<br/>
 @stop
 
 @section('left-layout-content')

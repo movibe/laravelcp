@@ -1,3 +1,4 @@
-<ul class="nav nav-sidebar nav-pills nav-stacked">
-	<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/settings') }}}"><span class="fa fa-cog fa-fw"></span>  &nbsp; {{{ Lang::get('core.settings') }}}</a></li>
-</ul>
+<div class="list-group" style="margin: 5px">
+	<a href="{{{ URL::to('admin/settings') }}}" class="list-group-item {{ (Request::is('admin/settings*') ? ' active' : '') }}">{{{ Lang::get('core.settings') }}}</a>
+</div>
+<br/>

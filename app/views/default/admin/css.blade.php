@@ -8,4 +8,6 @@
 <link rel="stylesheet" href="{{{ asset('assets/css/simpleweather.css') }}}"/>
 <link rel="stylesheet" href="{{{ asset('assets/css/style.css') }}}"/>
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"/>
+
 @yield('styles')

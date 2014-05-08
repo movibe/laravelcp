@@ -5,7 +5,7 @@
 			@include(Theme::path('admin/widget-controls'), array('id' => 'widget-usersonline'))
 		</div>
 		<div class="panel-body">
-			@include(Theme::path('admin/helpers/users-online'))
+			@include(Theme::path('admin/helpers/users-online'), array('limit' => '10'))
 		</div>
 	</div>	
 </li>
