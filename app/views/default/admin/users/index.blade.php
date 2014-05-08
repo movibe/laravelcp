@@ -29,11 +29,11 @@
 		<table id="users" class="table-responsive table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
-					<th></th>
-					<th class="col-md-3">{{{ Lang::get('admin/users/table.username') }}}</th>
-					<th class="col-md-3">{{{ Lang::get('admin/users/table.email') }}}</th>
-					<th class="col-md-3">{{{ Lang::get('admin/users/table.roles') }}}</th>
-					<th class="col-md-3">{{{ Lang::get('table.actions') }}}</th>
+					<th>{{{ Lang::get('core.id') }}}</th>
+					<th>{{{ Lang::get('admin/users/table.username') }}}</th>
+					<th>{{{ Lang::get('admin/users/table.email') }}}</th>
+					<th>{{{ Lang::get('admin/users/table.roles') }}}</th>
+					<th style="min-width:160px">{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>

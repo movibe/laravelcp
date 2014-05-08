@@ -8,7 +8,7 @@ function styledt(table){
 	$(table+'-container .dataTables_paginate').addClass('pull-right');
 }
 
-function dtLoad(table, action, hidemd, hidesm, hide, hascontrols){
+function dtLoad(table, action, hidemd, hidesm, hide, hascontrols, hidecol1){
 	var aSelected = [];
 	var oTable=$(table).dataTable( {
 		"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
@@ -34,7 +34,7 @@ function dtLoad(table, action, hidemd, hidesm, hide, hascontrols){
 		 },
 		"fnDrawCallback": function ( oSettings ) {
 			
-			oTable.fnSetColumnVis( 0, false,false );
+			if(hidecol1) oTable.fnSetColumnVis( 0, false,false );
 
 			$(table+' tr').find(hidemd).addClass('hidden-sm hidden-xs'); 
 			$(table+' tr').find(hidesm).addClass('hidden-xs'); 

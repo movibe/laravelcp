@@ -3,6 +3,7 @@
 return array(
 
 	'administration' => 'Administration',
+	'id' => 'ID',
 	'name' => 'Name',
 	'todos' => 'To-do List',
 	'users' => 'Users',

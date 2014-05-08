@@ -1,5 +1,7 @@
 <?php
 
+
+
 return array(
 
 	/*
@@ -45,6 +47,7 @@ return array(
 	*/
 
 	'connections' => array(
+
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
