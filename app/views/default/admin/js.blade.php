@@ -1,4 +1,4 @@
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//cdn.jsdelivr.net/bootstrap.wysiwyg/0.1/bootstrap-wysiwyg.min.js"></script>
 	<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
@@ -8,6 +8,7 @@
 		/* setup poller with the url */
 		$.fn.poller({'url':'{{{ URL::to("admin/polling") }}}'});
 	</script>
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
 
 	<script src="{{{ asset('assets/js/site.js') }}}"></script>
