@@ -1,142 +1,16 @@
-
-/* security for ajax */
 $.ajaxSetup({data:{csrf_token:$('meta[name="csrf-token"]').attr("content")}});
 
-$(document).on('click', '.ajax-alert-confirm', function(e) {
-	e.preventDefault();    
-	var data_table = $(this).attr('data-table'); 
-	var data_row = $(this).attr('data-row'); 
-	var link = $(this).attr('href'); 
-	var data_method=$(this).attr('data-method');
-	var data_type=$(this).attr('data-type');
-	if(!data_type) data_type='json';
-	if(!data_method) data_method='POST';
-
-	bootbox.confirm(lang_areyousure, function(result) {    
-		if (result) {
-			$.ajax({
-				type: data_method,
-				dataType: data_type,
-				url: link
-			}).done(function(msg) {
-				if(data_type == 'json'){
-					if(msg.result == 'success'){
-						if(data_row){
-							$('#site-modal').modal('hide')
-							oTable = $('#'+data_table).dataTable();
-							oTable.fnReloadAjax();
-						//	var index = jQuery.inArray(data_row, aSelected);
-						//	aSelected.splice( index, 1 );
-						} else {
-							$('#site-modal').modal('hide');
-						}
-					}else {
-						console.log(msg);
-						bootbox.alert( lang_unable_to_exec + msg.error);
-					}
-				}
-			}).fail(function( jqXHR, textStatus ) {
- 					console.log(jqXHR);
-					bootbox.alert( lang_unable_to_exec + textStatus);
-			});
-		}    
-	});
-	return false;
-});
-
-$(document).on('click', '.basic-confirm', function(e) {
-	e.preventDefault();    
-	var link = $(this).attr('href'); 
-	var data_method=$(this).attr('data-method');
-	var data_type=$(this).attr('data-type');
-	if(!data_type) data_type='json';
-	if(!data_method) data_method='POST';
-
-	bootbox.confirm(lang_areyousure, function(result) {    
-		if (result) {
-			$.ajax({
-				type: data_method,
-				dataType: data_type,
-				url: link
-			}).done(function(msg) {
-				if(data_type == 'json'){
-					if(msg.result == 'success'){
-						bootbox.alert( lang_success);
-					}else {
-						console.log(msg);
-						bootbox.alert( lang_unable_to_exec + msg.error);
-					}
-				}
-			}).fail(function( jqXHR, textStatus ) {
- 					console.log(jqXHR);
-					bootbox.alert( lang_unable_to_exec + textStatus);
-			});
-		}    
-	});
-	return false;
-});
-
-$(document).on('submit', '.form-ajax', function(e) {
-	$('input[type=button], input[type=submit]').attr('disabled', true).addClass('disabled');
-	$.post(
-		$(this).attr('action'),
-		$(this).serialize(),
-		function(data){
-			$('#site-modal').html(data);
-			$('html, body, #site-modal').animate({ scrollTop: 0 }, 0);
-			$('input[type=button], input[type=submit]').attr('disabled', false).removeClass('disabled');
-			console.log(data);
-		}
-	);
-	return false;   
-}); 
-
-
-function modalfyRun(th,url){
-	$.ajax({
-		type: 'GET',
-		url: url
-	}).done(function(msg) {
-		if(msg){
-			$('#site-modal').html(msg).modal();
-		} else {
-			console.log(msg);
-			bootbox.alert(lang_unable_to_exec);
-		}
-	}).fail(function(jqXHR, textStatus) {
-			console.log(jqXHR);
-			bootbox.alert( lang_unable_to_exec + textStatus);
-	 });
-}
-
-/* helpers */
-$(function() {
-	if(localStorage.getItem('weather_time') > 0 && ((new Date().getTime() - localStorage.getItem('weather_time'))/1000 < 300)){
-		$('.panel-weather').html(localStorage.getItem('weather_html'));
-	} else {
-	  $.simpleWeather({
-		location: location,
-		unit: 'f',
-		success: function(weather) {
-			$('.panel-weather').hide();
-			$('.panel-weather').html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
-			$('.panel-weather').attr('title', weather.city + ', '+ weather.region );
-			$('.panel-weather').show();
-			localStorage.setItem('weather_html',$(".panel-weather").html());
-			localStorage.setItem('weather_time',new Date().getTime());
-		}
-	  });
-	}
-});
-
-
-$(document).on('click','.btn-toggle',function(a){a.preventDefault();$(this).find('.btn').toggleClass('active');if($(this).find('.btn-primary').size()>0){$(this).find('.btn').toggleClass('btn-primary')}if($(this).find('.btn-danger').size()>0){$(this).find('.btn').toggleClass('btn-danger')}if($(this).find('.btn-success').size()>0){$(this).find('.btn').toggleClass('btn-success')}if($(this).find('.btn-info').size()>0){$(this).find('.btn').toggleClass('btn-info')}});
-$(document).on('click','.ajax-alert',function(a){a.preventDefault();bootbox.confirm(lang_areyousure,function(b){if(b){document.location.href=$(this).attr('href')}})});
 $(document).on('click','a',function(a){if($(this).attr('href')=='#'){return false}});
+$(document).on("click",".confirm-ajax-update",function(e){e.preventDefault();var t=$(this).attr("data-table");var n=$(this).attr("data-row");var r=$(this).attr("href");var i=$(this).attr("data-method");var s=$(this).attr("data-type");if(!s)s="json";if(!i)i="POST";bootbox.confirm(lang_areyousure,function(e){if(e){$.ajax({type:i,dataType:s,url:r}).done(function(e){if(s=="json"){if(e.result=="success"){if(n){$("#site-modal").modal("hide");oTable=$("#"+t).dataTable();oTable.fnReloadAjax()}else{$("#site-modal").modal("hide")}}else{console.log(e);bootbox.alert(lang_unable_to_exec+e.error)}}}).fail(function(e,t){console.log(e);bootbox.alert(lang_unable_to_exec+t)})}});return false})
+$(document).on('click','.confirm-redirect',function(a){a.preventDefault();bootbox.confirm(lang_areyousure,function(b){if(b){document.location.href=$(this).attr('href')}})});
+$(document).on("click",".confirm-ajax-noupdate",function(e){e.preventDefault();var t=$(this).attr("href");var n=$(this).attr("data-method");var r=$(this).attr("data-type");if(!r)r="json";if(!n)n="POST";bootbox.confirm(lang_areyousure,function(e){if(e){$.ajax({type:n,dataType:r,url:t}).done(function(e){if(r=="json"){if(e.result=="success"){bootbox.alert(lang_success)}else{console.log(e);bootbox.alert(lang_unable_to_exec+e.error)}}}).fail(function(e,t){console.log(e);bootbox.alert(lang_unable_to_exec+t)})}});return false})
 $(document).on('click','.modalfy',function(a){a.preventDefault();modalfyRun(this,$(this).attr('href'))});
 $(document).on('click','.link-through',function(a){window.location=$(this).attr('href')});
+$(document).on("submit",".form-ajax",function(e){$("input[type=button], input[type=submit]").attr("disabled",true).addClass("disabled");$.post($(this).attr("action"),$(this).serialize(),function(e){$("#site-modal").html(e);$("html, body, #site-modal").animate({scrollTop:0},0);$("input[type=button], input[type=submit]").attr("disabled",false).removeClass("disabled");console.log(e)});return false})
+$(document).on('click','.btn-toggle',function(a){a.preventDefault();$(this).find('.btn').toggleClass('active');if($(this).find('.btn-primary').size()>0){$(this).find('.btn').toggleClass('btn-primary')}if($(this).find('.btn-danger').size()>0){$(this).find('.btn').toggleClass('btn-danger')}if($(this).find('.btn-success').size()>0){$(this).find('.btn').toggleClass('btn-success')}if($(this).find('.btn-info').size()>0){$(this).find('.btn').toggleClass('btn-info')}});
 
-
+$(function(){if(localStorage.getItem("weather_time")>0&&((new Date).getTime()-localStorage.getItem("weather_time"))/1e3<300){$(".panel-weather").html(localStorage.getItem("weather_html"))}else{$.simpleWeather({location:location,unit:"f",success:function(e){$(".panel-weather").hide();$(".panel-weather").html('<a href="#"><span class=" icon-'+e.code+'"></span> '+e.temp+"&deg; "+e.currently+"</a>");$(".panel-weather").attr("title",e.city+", "+e.region);$(".panel-weather").show();localStorage.setItem("weather_html",$(".panel-weather").html());localStorage.setItem("weather_time",(new Date).getTime())}})}})
+function modalfyRun(e,t){$.ajax({type:"GET",url:t}).done(function(e){if(e){$("#site-modal").html(e).modal()}else{console.log(e);bootbox.alert(lang_unable_to_exec)}}).fail(function(e,t){console.log(e);bootbox.alert(lang_unable_to_exec+t)})}
 function throttle(b,a){var c=null;return function(){var e=this,d=arguments;clearTimeout(c);c=window.setTimeout(function(){b.apply(e,d)},a||500)}};
 function nextTab(a){$(a+' li.active').next().find('a[data-toggle="tab"]').click()}
 function prevTab(a){$(a+' li.active').prev().find('a[data-toggle="tab"]').click()};

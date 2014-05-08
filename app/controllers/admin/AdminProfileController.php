@@ -42,7 +42,7 @@ class AdminProfileController extends AdminController {
     {
 		$id=$profile->id;
 		if(!$profile->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-		$profile=UserProfiles::find($id);
+		$profile=UserProfile::find($id);
         return empty($profile) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
 	}
 }

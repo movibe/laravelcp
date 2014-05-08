@@ -207,11 +207,11 @@
 						@if($user->id == Auth::user()->id)
 							 <a href="#" class="disabled btn-responsive btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@else
-							<a data-row="[{ $user->id }}" data-table="users" data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '' ) }}}" class="ajax-alert-confirm btn-responsive btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
+							<a data-row="[{ $user->id }}" data-table="users" data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '' ) }}}" class="confirm-ajax-update btn-responsive btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@endif
 
 						<a href="{{{ URL::to('admin/users/' . $user->id . '/email' ) }}}" class="modalfy btn-responsive btn btn-default">{{{ Lang::get('button.email') }}}</a>
-						<a data-row="[{ $user->id }}" data-table="users" href="{{{ URL::to('admin/users/' . $user->id . '/resetpassword' ) }}}" class="ajax-alert-confirm btn-responsive btn btn-info">{{{ Lang::get('button.reset_password') }}}</a>
+						<a data-row="[{ $user->id }}" data-table="users" href="{{{ URL::to('admin/users/' . $user->id . '/resetpassword' ) }}}" class="confirm-ajax-update btn-responsive btn btn-info">{{{ Lang::get('button.reset_password') }}}</a>
 
 					</div>
 					@endif
