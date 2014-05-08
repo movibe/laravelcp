@@ -54,13 +54,15 @@ The first plugin is underway and shows how easy it is to extend the core to add 
 - [L4-honeypot](https://github.com/msurguy/Honeypot), stop spammers!
 
 
+## Available Plugins
+- [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
 
 # Roadmap
 
 - ~~Complete the json/xml api~~
 - ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
 - ~~theme support that supports using default files if theme files dont exist, similar to smarty~~
-- plugin example, most likely trouble tickets, to show how to inject a new module/plugin to the core w/o changing the core
+- [l4cp-support plugin](https://github.com/gcphost/l4cp-support) ~~plugin example, most likely trouble tickets, to show how to inject a new module/plugin to the core w/o changing the core
 
 
 
