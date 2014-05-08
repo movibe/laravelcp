@@ -2,8 +2,6 @@
 /* security for ajax */
 $.ajaxSetup({data:{csrf_token:$('meta[name="csrf-token"]').attr("content")}});
 
-
-
 $(document).on('click', '.ajax-alert-confirm', function(e) {
 	e.preventDefault();    
 	var data_table = $(this).attr('data-table'); 
@@ -46,6 +44,37 @@ $(document).on('click', '.ajax-alert-confirm', function(e) {
 	return false;
 });
 
+$(document).on('click', '.basic-confirm', function(e) {
+	e.preventDefault();    
+	var link = $(this).attr('href'); 
+	var data_method=$(this).attr('data-method');
+	var data_type=$(this).attr('data-type');
+	if(!data_type) data_type='json';
+	if(!data_method) data_method='POST';
+
+	bootbox.confirm(lang_areyousure, function(result) {    
+		if (result) {
+			$.ajax({
+				type: data_method,
+				dataType: data_type,
+				url: link
+			}).done(function(msg) {
+				if(data_type == 'json'){
+					if(msg.result == 'success'){
+						bootbox.alert( lang_success);
+					}else {
+						console.log(msg);
+						bootbox.alert( lang_unable_to_exec + msg.error);
+					}
+				}
+			}).fail(function( jqXHR, textStatus ) {
+ 					console.log(jqXHR);
+					bootbox.alert( lang_unable_to_exec + textStatus);
+			});
+		}    
+	});
+	return false;
+});
 
 $(document).on('submit', '.form-ajax', function(e) {
 	$('input[type=button], input[type=submit]').attr('disabled', true).addClass('disabled');
@@ -56,7 +85,7 @@ $(document).on('submit', '.form-ajax', function(e) {
 			$('#site-modal').html(data);
 			$('html, body, #site-modal').animate({ scrollTop: 0 }, 0);
 			$('input[type=button], input[type=submit]').attr('disabled', false).removeClass('disabled');
-			//console.log(data);
+			console.log(data);
 		}
 	);
 	return false;   
@@ -83,33 +112,22 @@ function modalfyRun(th,url){
 /* helpers */
 $(function() {
 	if(localStorage.getItem('weather_time') > 0 && ((new Date().getTime() - localStorage.getItem('weather_time'))/1000 < 300)){
-	console.log(localStorage.getItem('weather_html'));
-	$('.panel-weather').html(localStorage.getItem('weather_html'));
-} else {
-  $.simpleWeather({
-	location: location,
-	unit: 'f',
-	success: function(weather) {
-		$('.panel-weather').hide();
-		$('.panel-weather').html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
-		$('.panel-weather').attr('title', weather.city + ', '+ weather.region );
-		$('.panel-weather').show();
-		localStorage.setItem('weather_html',$(".panel-weather").html());
-		localStorage.setItem('weather_time',new Date().getTime());
+		$('.panel-weather').html(localStorage.getItem('weather_html'));
+	} else {
+	  $.simpleWeather({
+		location: location,
+		unit: 'f',
+		success: function(weather) {
+			$('.panel-weather').hide();
+			$('.panel-weather').html('<a href="#"><span class=" icon-'+weather.code+'"></span> '+weather.temp+'&deg; '+ weather.currently+'</a>');
+			$('.panel-weather').attr('title', weather.city + ', '+ weather.region );
+			$('.panel-weather').show();
+			localStorage.setItem('weather_html',$(".panel-weather").html());
+			localStorage.setItem('weather_time',new Date().getTime());
+		}
+	  });
 	}
-  });
-}
- });
-
-function _resize_sparkline(data){
-	if( $( window ).width() > 760){
-		var _w=(($( window ).width()/4)/6)-9;
-	} else 	var _w=(($( window ).width()/2)/6)-11;
-
-	$.each(data, function(i,value){ 
-		$('#spark_'+ i).sparkline(value.data.reverse(), { enableTagOptions: true , barWidth: _w, barSpacing: '6' });
-	});
-}
+});
 
 
 $(document).on('click','.btn-toggle',function(a){a.preventDefault();$(this).find('.btn').toggleClass('active');if($(this).find('.btn-primary').size()>0){$(this).find('.btn').toggleClass('btn-primary')}if($(this).find('.btn-danger').size()>0){$(this).find('.btn').toggleClass('btn-danger')}if($(this).find('.btn-success').size()>0){$(this).find('.btn').toggleClass('btn-success')}if($(this).find('.btn-info').size()>0){$(this).find('.btn').toggleClass('btn-info')}});

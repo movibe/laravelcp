@@ -8,7 +8,7 @@
 @stop
 @section('sub-nav-settings')
 	<li class="divider"></li>
-	<li><a href="" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
+	<li><a href="#" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
 @stop
 
 @section('scripts')
@@ -25,6 +25,16 @@
 		$.fn.gridster.responsive();
 
 		/* resize sparklines */
+		function _resize_sparkline(data){
+			if( $( window ).width() > 760){
+				var _w=(($( window ).width()/4)/6)-9;
+			} else 	var _w=(($( window ).width()/2)/6)-11;
+
+			$.each(data, function(i,value){ 
+				$('#spark_'+ i).sparkline(value.data.reverse(), { enableTagOptions: true , barWidth: _w, barSpacing: '6' });
+			});
+		}
+
 		$(window).bind('load resize', function(){
 			throttle(_resize_sparkline({{ $minigraph_json }}), 200)
 		});

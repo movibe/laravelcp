@@ -124,11 +124,13 @@ return array(
 		'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
 		'Regulus\ActivityLog\ActivityLogServiceProvider',
 
+
 'Raahul\LarryFour\LarryFourServiceProvider',
 'Atticmedia\Anvard\AnvardServiceProvider',
 'Msurguy\Honeypot\HoneypotServiceProvider',
 //'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
 'Rtablada\Profane\FilterServiceProvider',
+'Liebig\Cron\CronServiceProvider',
 
 
         /* Uncomment for use in development */

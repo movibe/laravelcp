@@ -69,7 +69,7 @@
 
 
 	<!-- default modal dialog -->
-	<div id="site-modal" class="modal fade" tabindex="-2" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="site-modal" class="modal fade" tabindex="-2" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -83,7 +83,7 @@
 	</div>
 
 	<!-- search modal dialog -->
-	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true" style="z-index: 1041;">
+	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: 1041;">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">

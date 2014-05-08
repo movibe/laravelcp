@@ -51,7 +51,6 @@ function dtLoad(table, action, hidemd, hidesm, hide, hascontrols){
 		});
 
 		$(document).on("click", table+' tbody tr ', function(e) {
-			e.preventDefault();
 			
 			var aData = oTable.fnGetData( this );
 			var id = aData[0];

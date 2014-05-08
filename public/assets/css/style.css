@@ -32,8 +32,8 @@ iframe,img{border:0}
 .datas-text{font-size:11px;padding:7px 0 0 0;font-weight:normal;text-align:center}
 .list-users-online a{text-decoration:none}
 
-@media(max-width:992px){.dataTables_length{
-	display:none;padding:0;margin:0}
+@media(max-width:992px){
+	.dataTables_length{display:none;padding:0;margin:0}
 }
 @media(max-width:480px){
 	.modal-footer .pull-left,.modal-footer .pull-right{float:left;clear:both;display:inline-block;width:100%;margin:0;padding:0}
