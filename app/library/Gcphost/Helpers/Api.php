@@ -34,7 +34,6 @@ class Api {
 	}
 
   	static public function to($data) {
-		// wrapper for failure/success
 		return self::make($data);
 	}
 

@@ -428,6 +428,7 @@ return array(
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/File/Iterator/Factory.php',
     'File_X509' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/X509.php',
     'Gcphost\\Helpers\\Api' => $baseDir . '/app/library/Gcphost/Helpers/Api.php',
+    'Gcphost\\Helpers\\CronWrapper' => $baseDir . '/app/library/Gcphost/Helpers/CronWrapper.php',
     'Gcphost\\Helpers\\Search' => $baseDir . '/app/library/Gcphost/Helpers/Search.php',
     'Gcphost\\Helpers\\Theme' => $baseDir . '/app/library/Gcphost/Helpers/Theme.php',
     'Hybrid_Auth' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Auth.php',

@@ -216,6 +216,7 @@ return array(
 'Anvard'=>'Atticmedia\Anvard\Anvard',
 'Api'          => 'Gcphost\Helpers\Api', 
 'Search'          => 'Gcphost\Helpers\Search', 
+'CronWrapper'          => 'Gcphost\Helpers\CronWrapper', 
 'Theme'          => 'Gcphost\Helpers\Theme', 
 //'Support'	=>	'Gcphost\L4cpSupport\Helpers\Support',
 

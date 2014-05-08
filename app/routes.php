@@ -50,6 +50,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
 });
 
 
+Route::get('private/cron',  function()
+{
+			header('Content-Type: application/json');
+			die(json_encode(CronWrapper::Run()));
+});
+
+
 
 
 /** ------------------------------------------

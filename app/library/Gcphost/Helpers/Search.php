@@ -1,5 +1,6 @@
 <?php namespace Gcphost\Helpers;
 
+use DB;
 
 class Search {
 	static private $tables=array();
@@ -19,13 +20,12 @@ class Search {
 		if(!$string || strlen($string) < 3) return array();
 		$results=array();
 		foreach($tables as $table => $columns){
-
-			$query=\DB::table($table);
+			$query=DB::table($table);
 			$i=0;
 			foreach($columns as $column){
 				if($i==0){
                    $query->where($column, 'LIKE', '%'.$string.'%');
-				}else $query->orWhere($column, 'LIKE', '%'.$string.'%');
+				} else $query->orWhere($column, 'LIKE', '%'.$string.'%');
 				$i++;
 			}
 
@@ -40,10 +40,8 @@ class Search {
 	}
 
 	static public function GetAction($table, $column){
-
 		foreach(self::$actions[$table] as $col=>$action){
 			if($col == $column) return $action;
 		}
 	}
-	
 }
