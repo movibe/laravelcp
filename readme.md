@@ -44,6 +44,7 @@ The first plugin is underway and shows how easy it is to extend the core to add 
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox), nice modal wrapper
 - [jQuery poller](https://github.com/gcphost/jquery.poller), my own work to reduce ajax querys
 - [Gridster Responsive](https://github.com/gcphost/gridster-responsive), used with gridster for the dashboard (buggie)
+- [Select2](https://github.com/ivaynberg/select2), used for user lists (or any select you need with 100+ of rows)
 
 ## Including L4 packages:
 - oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview) & [HybridAuth](http://hybridauth.sourceforge.net/), every site should have 0Auth
