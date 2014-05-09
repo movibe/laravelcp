@@ -1,4 +1,5 @@
-#Laravel 4 Bootstrap Admin Starter Site a.k.a LaravelCP
+#LaravelCP
+### A Laravel 4 Bootstrap Admin Starter Site
 [![ProjectStatus](http://stillmaintained.com/gcphost/l4-bootstrapper.png)](http://stillmaintained.com/gcphost/l4-bootstrapper)
 [![Build Status](https://travis-ci.org/gcphost/l4-bootstrap-admin.png)](https://travis-ci.org/gcphost/l4-bootstrap-admin)
 
