@@ -83,6 +83,9 @@ class AdminDashboardController extends AdminController {
 		if(is_array($polls) && count($polls) > 0){
 			foreach($polls as $i => $_poll){
 				switch($_poll->type){
+					case "template":	
+						$_results[$_poll->id]=array('type'=>'html', 'args'=>Theme::make($_poll->func, array('value'=>$_poll->value))->render());
+					break;
 					case "plugin":	
 						if($_poll->func) $_results[$_poll->id]=call_user_func($_poll->func, $_poll->value);						
 					break;

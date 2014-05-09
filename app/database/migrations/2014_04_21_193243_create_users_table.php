@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration {
             $table->timestamp('last_login')->default("0000-00-00 00:00:00");
             $table->string('displayname', 256)->nullable();
             $table->string('username', 255)->nullable();
+            $table->string('remember_token')->nullable();
         });
     }
 

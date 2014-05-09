@@ -10,6 +10,7 @@
 	</script>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/2.7.0/jquery.simpleWeather.min.js"></script>
+	<script src="//cdn.jsdelivr.net/select2/3.4.8/select2.min.js"></script>
 
 	<script src="{{{ asset('assets/js/site.js') }}}"></script>
 	

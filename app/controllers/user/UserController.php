@@ -94,7 +94,7 @@ class UserController extends BaseController {
     {
 		$rules = array(
 			'terms'     => "required|accepted",
-			'displayname'      => 'required',
+			'name'      => 'required',
 			'email'     => "required|email",
 			'password'   => 'required|confirmed|min:4',
 			'create_hp'   => 'honeypot',
@@ -105,6 +105,10 @@ class UserController extends BaseController {
 
 		if ($validator->passes())
 		{
+
+
+			$this->user->password = Input::get( 'password');
+			$this->user->password_confirmation =  Input::get( 'password_confirmation' );
 
 			$this->user->email = Input::get( 'email' );
 			$this->user->displayname = Input::get( 'name' );
@@ -119,7 +123,7 @@ class UserController extends BaseController {
 			));
 
 
-			Event::fire('user.create', array($user));
+			Event::fire('user.create', array($this->user));
 
 			if ( $this->user->id )
 			{

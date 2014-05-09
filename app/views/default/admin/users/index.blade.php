@@ -19,7 +19,7 @@
 	<div class="page-header clearfix">
 		<h3 class="pull-left">{{{ $title }}}</h3>
 		<div class="pull-right">
-			<a href="{{{ URL::to('admin/users/create') }}}" class="btn btn-small btn-info modalfy"><span class="fa fa-lg fa-plus-square"></span> {{{ Lang::get('button.create') }}}</a>
+			<a href="{{{ URL::to('admin/users/create') }}}" class="btn  btn-info modalfy"><span class="fa fa-plus"></span> {{{ Lang::get('button.create') }}}</a>
 		</div>
 	</div>
 

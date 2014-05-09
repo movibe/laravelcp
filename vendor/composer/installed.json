@@ -1158,12 +1158,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "321e496350c55b326940ffde86f4c9efb87f8736"
+            "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/321e496350c55b326940ffde86f4c9efb87f8736",
-            "reference": "321e496350c55b326940ffde86f4c9efb87f8736",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
+            "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
             "shasum": ""
         },
         "require": {
@@ -1177,7 +1177,7 @@
         "suggest": {
             "symfony/console": "Allows use of the command line interface"
         },
-        "time": "2014-05-05 19:57:41",
+        "time": "2014-05-09 11:38:31",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2645,12 +2645,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-            "reference": "bbc1aa16d02273790a2106e3385cc0efeb6a18cb"
+            "reference": "4dada9d8762055e292d79142adbdde56c113b21a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/bbc1aa16d02273790a2106e3385cc0efeb6a18cb",
-            "reference": "bbc1aa16d02273790a2106e3385cc0efeb6a18cb",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4dada9d8762055e292d79142adbdde56c113b21a",
+            "reference": "4dada9d8762055e292d79142adbdde56c113b21a",
             "shasum": ""
         },
         "require": {
@@ -2663,7 +2663,7 @@
         "suggest": {
             "ext-soap": "*"
         },
-        "time": "2014-05-04 09:39:30",
+        "time": "2014-05-09 09:09:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4127,12 +4127,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "f3d1441e26670d1cc19f8a817af687ae8a42d081"
+            "reference": "1ae7be20bc5416fe7056979e0ec05f3f88e3d040"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/f3d1441e26670d1cc19f8a817af687ae8a42d081",
-            "reference": "f3d1441e26670d1cc19f8a817af687ae8a42d081",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/1ae7be20bc5416fe7056979e0ec05f3f88e3d040",
+            "reference": "1ae7be20bc5416fe7056979e0ec05f3f88e3d040",
             "shasum": ""
         },
         "require": {
@@ -4201,7 +4201,7 @@
         "suggest": {
             "doctrine/dbal": "Allow renaming columns and dropping SQLite columns."
         },
-        "time": "2014-05-08 12:48:19",
+        "time": "2014-05-09 12:04:41",
         "type": "library",
         "extra": {
             "branch-alias": {

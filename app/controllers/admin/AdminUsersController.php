@@ -56,6 +56,37 @@ class AdminUsersController extends AdminController {
 
 
 
+	static public function getClients($query=false, $limit='10', $page='0', $id=false, $admins=false){
+		$users=User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
+                    ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
+                    ->select(DB::raw('users.displayname as text,users.id'))
+					->where('roles.name', $admins ? '=' : '!=', 'admin') 
+					->groupBy(DB::raw('users.displayname,users.id'));
+		if($query) $users->where('displayname', 'LIKE', '%'.$query.'%');
+		if($id){
+			if(preg_match('/,/s', $id)) return $users->whereIn('users.id', explode(',',$id))->get();
+			return $users->where('users.id', '=', $id)->first();
+		}
+		return $users->paginate($limit);
+	}
+
+
+    /**
+     * Get index.
+     *
+     * @return Response
+     */
+    public function getList()
+    {
+		return Api::json(self::getClients(Input::get('q'),Input::get('page_limit'), Input::get('page'), Input::get('id'))->toArray());
+	}
+
+    public function getListadmin()
+    {
+		return Api::json(self::getClients(Input::get('q'),Input::get('page_limit'), Input::get('page'), Input::get('id'), true)->toArray());
+	}
+
+
     /**
      * Get index.
      *
@@ -599,7 +630,8 @@ class AdminUsersController extends AdminController {
         
 		$users = User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))->groupBy(DB::raw('users.id , users.displayname , users.email'));
+                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))
+					->groupBy(DB::raw('users.id , users.displayname , users.email'));
 
 		if(Api::Enabled()){
 			$u=$users->get();

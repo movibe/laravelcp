@@ -21,6 +21,7 @@ namespace Doctrine\DBAL\Platforms;
 
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\ColumnDiff;
+use Doctrine\DBAL\Schema\Identifier;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Sequence;
 use Doctrine\DBAL\Schema\TableDiff;
@@ -301,6 +302,9 @@ class PostgreSqlPlatform extends AbstractPlatform
      */
     public function getListTableConstraintsSQL($table)
     {
+        $table = new Identifier($table);
+        $table = $table->getName();
+
         return "SELECT
                     quote_ident(relname) as relname
                 FROM
@@ -348,7 +352,9 @@ class PostgreSqlPlatform extends AbstractPlatform
         } else {
             $schema = "ANY(string_to_array((select replace(replace(setting,'\"\$user\"',user),' ','') from pg_catalog.pg_settings where name = 'search_path'),','))";
         }
-        $whereClause .= "$classAlias.relname = '" . $table . "' AND $namespaceAlias.nspname = $schema";
+
+        $table = new Identifier($table);
+        $whereClause .= "$classAlias.relname = '" . $table->getName() . "' AND $namespaceAlias.nspname = $schema";
 
         return $whereClause;
     }
@@ -373,7 +379,7 @@ class PostgreSqlPlatform extends AbstractPlatform
                         AND pg_index.indkey[0] = a.attnum
                         AND pg_index.indisprimary = 't'
                     ) AS pri,
-                    (SELECT pg_attrdef.adsrc
+                    (SELECT pg_get_expr(adbin, adrelid)
                      FROM pg_attrdef
                      WHERE c.oid = pg_attrdef.adrelid
                         AND pg_attrdef.adnum=a.attnum
@@ -479,7 +485,7 @@ class PostgreSqlPlatform extends AbstractPlatform
                 $sql[] = 'ALTER TABLE ' . $diff->getName()->getQuotedName($this) . ' ' . $query;
             }
 
-            if ($columnDiff->hasChanged('default')) {
+            if ($columnDiff->hasChanged('default') || $columnDiff->hasChanged('type')) {
                 $defaultClause = null === $column->getDefault()
                     ? ' DROP DEFAULT'
                     : ' SET' . $this->getDefaultValueDeclarationSQL($column->toArray());
