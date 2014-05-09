@@ -1,7 +1,7 @@
 #LaravelCP
 ### A Laravel 4 Bootstrap Admin Starter Site
-[![ProjectStatus](http://stillmaintained.com/gcphost/l4-bootstrapper.png)](http://stillmaintained.com/gcphost/l4-bootstrapper)
-[![Build Status](https://travis-ci.org/gcphost/l4-bootstrap-admin.png)](https://travis-ci.org/gcphost/l4-bootstrap-admin)
+[![ProjectStatus](http://stillmaintained.com/gcphost/laravelcp.png)](http://stillmaintained.com/gcphost/laravelcp)
+[![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
 
 
 
