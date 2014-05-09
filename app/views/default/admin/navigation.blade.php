@@ -25,7 +25,6 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				@yield('sub-nav-pre')
-				<li class="hidden-xs hidden-sm" title="{{ date('l, d M Y', time()) }}"><a href="#">{{ date('l, d M Y', time()) }}</a></li>
 				<li class="hidden-xs hidden-sm panel-weather"></li>
 				
 				<li><a href="#" class="nav-search"><span class="fa fa-lg fa-search fa-fw"></span></a></li>

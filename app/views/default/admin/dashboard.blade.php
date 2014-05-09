@@ -8,7 +8,7 @@
 @stop
 @section('sub-nav-settings')
 	<li class="divider"></li>
-	<li><a href="#" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
+	<li><a href="{{{ URL::to('admin') }}}" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
 @stop
 
 @section('scripts')
