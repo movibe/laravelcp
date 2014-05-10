@@ -43,8 +43,11 @@
 
 namespace SebastianBergmann\Comparator;
 
+use DOMNode;
+use DOMDocument;
+
 /**
- * @coversDefaultClass SebastianBergmann\Comparator\ScalarComparator
+ * @coversDefaultClass SebastianBergmann\Comparator\DOMNodeComparator
  *
  * @package    Comparator
  * @author     Jeff Welch <whatthejeff@gmail.com>
@@ -52,94 +55,94 @@ namespace SebastianBergmann\Comparator;
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @link       http://www.github.com/sebastianbergmann/comparator
  */
-class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
+class DOMNodeComparatorTest extends \PHPUnit_Framework_TestCase
 {
     private $comparator;
 
     protected function setUp()
     {
-        $this->comparator = new ScalarComparator;
+        $this->comparator = new DOMNodeComparator;
     }
 
     public function acceptsSucceedsProvider()
     {
+        $document = new DOMDocument;
+        $node = new DOMNode;
+
         return array(
-          array("string", "string"),
-          array(new ClassWithToString, "string"),
-          array("string", new ClassWithToString),
-          array("string", null),
-          array(false, "string"),
-          array(false, true),
-          array(null, false),
-          array(null, null),
-          array("10", 10),
-          array("", false),
-          array("1", true),
-          array(1, true),
-          array(0, false),
-          array(0.1, "0.1")
+          array($document, $document),
+          array($node, $node),
+          array($document, $node),
+          array($node, $document)
         );
     }
 
     public function acceptsFailsProvider()
     {
+        $document = new DOMDocument;
+
         return array(
-          array(array(), array()),
-          array("string", array()),
-          array(new ClassWithToString, new ClassWithToString),
-          array(false, new ClassWithToString),
-          array(tmpfile(), tmpfile())
+          array($document, null),
+          array(null, $document),
+          array(null, null)
         );
     }
 
     public function assertEqualsSucceedsProvider()
     {
         return array(
-          array("string", "string"),
-          array(new ClassWithToString, new ClassWithToString),
-          array("string representation", new ClassWithToString),
-          array(new ClassWithToString, "string representation"),
-          array("string", "STRING", true),
-          array("STRING", "string", true),
-          array("String Representation", new ClassWithToString, true),
-          array(new ClassWithToString, "String Representation", true),
-          array("10", 10),
-          array("", false),
-          array("1", true),
-          array(1, true),
-          array(0, false),
-          array(0.1, "0.1"),
-          array(false, null),
-          array(false, false),
-          array(true, true),
-          array(null, null)
+          array(
+            $this->createDOMDocument('<root></root>'),
+            $this->createDOMDocument('<root/>')
+          ),
+          array(
+            $this->createDOMDocument('<root attr="bar"></root>'),
+            $this->createDOMDocument('<root attr="bar"/>')
+          ),
+          array(
+            $this->createDOMDocument('<root><foo attr="bar"></foo></root>'),
+            $this->createDOMDocument('<root><foo attr="bar"/></root>')
+          ),
+          array(
+            $this->createDOMDocument("<root>\n  <child/>\n</root>"),
+            $this->createDOMDocument('<root><child/></root>')
+          ),
         );
     }
 
     public function assertEqualsFailsProvider()
     {
-        $stringException = 'Failed asserting that two strings are equal.';
-        $otherException = 'matches expected';
-
         return array(
-          array("string", "other string", $stringException),
-          array("string", "STRING", $stringException),
-          array("STRING", "string", $stringException),
-          array("string", "other string", $stringException),
-          // https://github.com/sebastianbergmann/phpunit/issues/1023
-          array('9E6666666','9E7777777', $stringException),
-          array(new ClassWithToString, "does not match", $otherException),
-          array("does not match", new ClassWithToString, $otherException),
-          array(0, 'Foobar', $otherException),
-          array('Foobar', 0, $otherException),
-          array("10", 25, $otherException),
-          array("1", false, $otherException),
-          array("", true, $otherException),
-          array(false, true, $otherException),
-          array(true, false, $otherException),
-          array(null, true, $otherException),
-          array(0, true, $otherException)
+          array(
+            $this->createDOMDocument('<root></root>'),
+            $this->createDOMDocument('<bar/>')
+          ),
+          array(
+            $this->createDOMDocument('<foo attr1="bar"/>'),
+            $this->createDOMDocument('<foo attr1="foobar"/>')
+          ),
+          array(
+            $this->createDOMDocument('<foo> bar </foo>'),
+            $this->createDOMDocument('<foo />')
+          ),
+          array(
+            $this->createDOMDocument('<foo xmlns="urn:myns:bar"/>'),
+            $this->createDOMDocument('<foo xmlns="urn:notmyns:bar"/>')
+          ),
+          array(
+            $this->createDOMDocument('<foo> bar </foo>'),
+            $this->createDOMDocument('<foo> bir </foo>')
+          )
         );
+    }
+
+    private function createDOMDocument($content)
+    {
+        $document = new DOMDocument;
+        $document->preserveWhiteSpace = false;
+        $document->loadXML($content);
+
+        return $document;
     }
 
     /**
@@ -168,12 +171,12 @@ class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
      * @covers       ::assertEquals
      * @dataProvider assertEqualsSucceedsProvider
      */
-    public function testAssertEqualsSucceeds($expected, $actual, $ignoreCase = false)
+    public function testAssertEqualsSucceeds($expected, $actual)
     {
         $exception = null;
 
         try {
-            $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
+            $this->comparator->assertEquals($expected, $actual);
         }
 
         catch (ComparisonFailure $exception) {
@@ -186,10 +189,11 @@ class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
      * @covers       ::assertEquals
      * @dataProvider assertEqualsFailsProvider
      */
-    public function testAssertEqualsFails($expected, $actual, $message)
+    public function testAssertEqualsFails($expected, $actual)
     {
         $this->setExpectedException(
-          'SebastianBergmann\\Comparator\\ComparisonFailure', $message
+          'SebastianBergmann\\Comparator\\ComparisonFailure',
+          'Failed asserting that two DOM'
         );
         $this->comparator->assertEquals($expected, $actual);
     }

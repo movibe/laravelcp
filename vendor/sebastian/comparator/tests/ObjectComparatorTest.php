@@ -43,8 +43,10 @@
 
 namespace SebastianBergmann\Comparator;
 
+use stdClass;
+
 /**
- * @coversDefaultClass SebastianBergmann\Comparator\ScalarComparator
+ * @coversDefaultClass SebastianBergmann\Comparator\ObjectComparator
  *
  * @package    Comparator
  * @author     Jeff Welch <whatthejeff@gmail.com>
@@ -52,93 +54,83 @@ namespace SebastianBergmann\Comparator;
  * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
  * @link       http://www.github.com/sebastianbergmann/comparator
  */
-class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
+class ObjectComparatorTest extends \PHPUnit_Framework_TestCase
 {
     private $comparator;
 
     protected function setUp()
     {
-        $this->comparator = new ScalarComparator;
+        $this->comparator = new ObjectComparator;
+        $this->comparator->setFactory(new Factory);
     }
 
     public function acceptsSucceedsProvider()
     {
         return array(
-          array("string", "string"),
-          array(new ClassWithToString, "string"),
-          array("string", new ClassWithToString),
-          array("string", null),
-          array(false, "string"),
-          array(false, true),
-          array(null, false),
-          array(null, null),
-          array("10", 10),
-          array("", false),
-          array("1", true),
-          array(1, true),
-          array(0, false),
-          array(0.1, "0.1")
+          array(new TestClass, new TestClass),
+          array(new stdClass, new stdClass),
+          array(new stdClass, new TestClass)
         );
     }
 
     public function acceptsFailsProvider()
     {
         return array(
-          array(array(), array()),
-          array("string", array()),
-          array(new ClassWithToString, new ClassWithToString),
-          array(false, new ClassWithToString),
-          array(tmpfile(), tmpfile())
+          array(new stdClass, null),
+          array(null, new stdClass),
+          array(null, null)
         );
     }
 
     public function assertEqualsSucceedsProvider()
     {
+        // cyclic dependencies
+        $book1 = new Book;
+        $book1->author = new Author('Terry Pratchett');
+        $book1->author->books[] = $book1;
+        $book2 = new Book;
+        $book2->author = new Author('Terry Pratchett');
+        $book2->author->books[] = $book2;
+
+        $object1 = new SampleClass(4, 8, 15);
+        $object2 = new SampleClass(4, 8, 15);
+
         return array(
-          array("string", "string"),
-          array(new ClassWithToString, new ClassWithToString),
-          array("string representation", new ClassWithToString),
-          array(new ClassWithToString, "string representation"),
-          array("string", "STRING", true),
-          array("STRING", "string", true),
-          array("String Representation", new ClassWithToString, true),
-          array(new ClassWithToString, "String Representation", true),
-          array("10", 10),
-          array("", false),
-          array("1", true),
-          array(1, true),
-          array(0, false),
-          array(0.1, "0.1"),
-          array(false, null),
-          array(false, false),
-          array(true, true),
-          array(null, null)
+          array($object1, $object1),
+          array($object1, $object2),
+          array($book1, $book1),
+          array($book1, $book2),
+          array(new Struct(2.3), new Struct(2.5), 0.5)
         );
     }
 
     public function assertEqualsFailsProvider()
     {
-        $stringException = 'Failed asserting that two strings are equal.';
-        $otherException = 'matches expected';
+        $typeMessage = 'is not instance of expected class';
+        $equalMessage = 'Failed asserting that two objects are equal.';
+
+        // cyclic dependencies
+        $book1 = new Book;
+        $book1->author = new Author('Terry Pratchett');
+        $book1->author->books[] = $book1;
+        $book2 = new Book;
+        $book2->author = new Author('Terry Pratch');
+        $book2->author->books[] = $book2;
+
+        $book3 = new Book;
+        $book3->author = 'Terry Pratchett';
+        $book4 = new stdClass;
+        $book4->author = 'Terry Pratchett';
+
+        $object1 = new SampleClass( 4,  8, 15);
+        $object2 = new SampleClass(16, 23, 42);
 
         return array(
-          array("string", "other string", $stringException),
-          array("string", "STRING", $stringException),
-          array("STRING", "string", $stringException),
-          array("string", "other string", $stringException),
-          // https://github.com/sebastianbergmann/phpunit/issues/1023
-          array('9E6666666','9E7777777', $stringException),
-          array(new ClassWithToString, "does not match", $otherException),
-          array("does not match", new ClassWithToString, $otherException),
-          array(0, 'Foobar', $otherException),
-          array('Foobar', 0, $otherException),
-          array("10", 25, $otherException),
-          array("1", false, $otherException),
-          array("", true, $otherException),
-          array(false, true, $otherException),
-          array(true, false, $otherException),
-          array(null, true, $otherException),
-          array(0, true, $otherException)
+          array(new SampleClass(4, 8, 15), new SampleClass(16, 23, 42), $equalMessage),
+          array($object1, $object2, $equalMessage),
+          array($book1, $book2, $equalMessage),
+          array($book3, $book4, $typeMessage),
+          array(new Struct(2.3), new Struct(4.2), $equalMessage, 0.5)
         );
     }
 
@@ -168,12 +160,12 @@ class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
      * @covers       ::assertEquals
      * @dataProvider assertEqualsSucceedsProvider
      */
-    public function testAssertEqualsSucceeds($expected, $actual, $ignoreCase = false)
+    public function testAssertEqualsSucceeds($expected, $actual, $delta = 0.0)
     {
         $exception = null;
 
         try {
-            $this->comparator->assertEquals($expected, $actual, 0.0, false, $ignoreCase);
+            $this->comparator->assertEquals($expected, $actual, $delta);
         }
 
         catch (ComparisonFailure $exception) {
@@ -186,11 +178,11 @@ class ScalarComparatorTest extends \PHPUnit_Framework_TestCase
      * @covers       ::assertEquals
      * @dataProvider assertEqualsFailsProvider
      */
-    public function testAssertEqualsFails($expected, $actual, $message)
+    public function testAssertEqualsFails($expected, $actual, $message, $delta = 0.0)
     {
         $this->setExpectedException(
           'SebastianBergmann\\Comparator\\ComparisonFailure', $message
         );
-        $this->comparator->assertEquals($expected, $actual);
+        $this->comparator->assertEquals($expected, $actual, $delta);
     }
 }

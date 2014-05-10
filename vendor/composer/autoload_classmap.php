@@ -804,7 +804,6 @@ return array(
     'Illuminate\\Workbench\\PackageCreator' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/PackageCreator.php',
     'Illuminate\\Workbench\\Starter' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/Starter.php',
     'Illuminate\\Workbench\\WorkbenchServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Workbench/WorkbenchServiceProvider.php',
-    'J20\\Uuid\\Uuid' => $vendorDir . '/j20/php-uuid/src/J20/Uuid/Uuid.php',
     'JSMin' => $vendorDir . '/lmammino/jsmin4assetic/src/JSMin.php',
     'JSMinUnterminatedCommentException' => $vendorDir . '/lmammino/jsmin4assetic/src/JSMinUnterminatedCommentException.php',
     'JSMinUnterminatedRegExpException' => $vendorDir . '/lmammino/jsmin4assetic/src/JSMinUnterminatedRegExpException.php',

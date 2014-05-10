@@ -50,7 +50,6 @@ return array(
     'LaravelBook\\Ardent' => array($vendorDir . '/laravelbook/ardent/src'),
     'Khill\\Lavacharts' => array($vendorDir . '/khill/lavacharts/src'),
     'Jeremeamia\\SuperClosure' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
-    'J20\\Uuid' => array($vendorDir . '/j20/php-uuid/src'),
     'Illuminate' => array($vendorDir . '/laravel/framework/src'),
     'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),

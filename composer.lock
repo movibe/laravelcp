@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "fe7b95a04b19a2aa031afb6d1d1601df",
+    "hash": "5b554280c889d85b13cb16b26d473e0e",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -359,41 +359,6 @@
                 "password"
             ],
             "time": "2013-04-30 19:58:08"
-        },
-        {
-            "name": "j20/php-uuid",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/j20/php-uuid.git",
-                "reference": "c686320f8c6104a5ded60b622a89bfd4eb9f4021"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/j20/php-uuid/zipball/c686320f8c6104a5ded60b622a89bfd4eb9f4021",
-                "reference": "c686320f8c6104a5ded60b622a89bfd4eb9f4021",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "J20\\Uuid": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Generate a UUID v4 with PHP.",
-            "keywords": [
-                "guid",
-                "token",
-                "uuid"
-            ],
-            "time": "2013-04-03 18:44:02"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -3639,12 +3604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "9acfeaa92132325252efd9e973cd47e157d4c773"
+                "reference": "eea7fe41dbd338163c27c02dcfecc701578375d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/9acfeaa92132325252efd9e973cd47e157d4c773",
-                "reference": "9acfeaa92132325252efd9e973cd47e157d4c773",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/eea7fe41dbd338163c27c02dcfecc701578375d9",
+                "reference": "eea7fe41dbd338163c27c02dcfecc701578375d9",
                 "shasum": ""
             },
             "require": {
@@ -3696,7 +3661,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2014-05-04 09:14:18"
+            "time": "2014-05-10 11:16:49"
         },
         {
             "name": "sebastian/diff",
@@ -4105,7 +4070,6 @@
         "zizaco/confide": 20,
         "zizaco/entrust": 20,
         "anlutro/l4-settings": 20,
-        "j20/php-uuid": 20,
         "thomaswelton/laravel-gravatar": 20,
         "khill/lavacharts": 20,
         "regulus/activity-log": 20,
