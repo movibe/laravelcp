@@ -2,6 +2,7 @@
 ### A Laravel 4 Bootstrap Admin Starter Site
 [![ProjectStatus](http://stillmaintained.com/gcphost/laravelcp.png)](http://stillmaintained.com/gcphost/laravelcp)
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
+forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 Follow on [twitter](https://twitter.com/laravelcp)
 
@@ -10,22 +11,6 @@ Follow on [twitter](https://twitter.com/laravelcp)
 
 [More Screenshots](https://github.com/gcphost/l4-bootstrap-admin/wiki/Screenshots)
 
-# Preamble 
-I recently switched over to Laravel and fell in love with the [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site). I thought it was a great place to start.
-
-I decided to create my own based on his but this time include everything I wanted for a simple starter site, more user control, better design (responsive!), graphs, etc. 
-
-Let me know what you think!
-
-
-## How you can help!
-If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
-
-
-## Plugins!
-The first plugin is underway and shows how easy it is to extend the core to add your own..
-
-[l4cp-support](https://github.com/gcphost/l4cp-support)
 
 # Features
 - jQuery 2.1.1, Bootstrap 3.1.1, FontAwesome 4.0.3
@@ -61,6 +46,7 @@ The first plugin is underway and shows how easy it is to extend the core to add 
 
 
 
+
 # BEFORE YOU BEGIN!
 
 We hope users will extend the application instead of modifying its core components. This will allow the application to grow depending on community support. If you do make changes to the core components consider forking and and making pull requests with your changes.
@@ -86,6 +72,11 @@ Install, migrate and seed
 ### You're done!
 Browse to your folder, /public/ and click login!
 Default login is admin@example.org with the password admin
+
+
+
+## How you can help!
+If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
 
 
 
