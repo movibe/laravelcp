@@ -77,16 +77,17 @@ We hope users will extend the application instead of modifying its core componen
 # Short install
 '''Want more detail? Review the original directions at the bottom'''
 
-- Download the latest release
-- Extract the archive in your web-based folder (that is ready to host a laravel app)
--- LaravelCP comes with .htaccess and a web.config to route your urls properly
-- Edit app/config - database.php, mail.php - add your settings
-- Install, migrate and seed
+Download the latest release
+Extract the archive in your web-based folder (that is ready to host a laravel app)
+LaravelCP comes with .htaccess and a web.config to route your urls properly
+Edit app/config - database.php, mail.php - add your settings
+Install, migrate and seed
 
-
+```
     composer install --dev
     php artisan migrate
     php artisan db:seed
+```
 
 
 ### You're done!-- Browse to your folder, /public/ and click login!
@@ -271,7 +272,7 @@ Should work, if not try
 ### User login with commenting permission
 Navigate to your Laravel 4 website and login at /user/login:
 
-    username : user
+    username : user@example.org
     password : user
 
 Create a new user at /user/create
@@ -279,7 +280,7 @@ Create a new user at /user/create
 ### Admin login
 Navigate to /admin
 
-    username: admin
+    username: admin@example.org
     password: admin
 
 -----
