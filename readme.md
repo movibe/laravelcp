@@ -28,7 +28,7 @@ The first plugin is underway and shows how easy it is to extend the core to add 
 [l4cp-support](https://github.com/gcphost/l4cp-support)
 
 # Features
-- jQuery 2.1.0, Bootstrap 3.1.1, FontAwesome 4.0.3
+- jQuery 2.1.1, Bootstrap 3.1.1, FontAwesome 4.0.3
 - Drag & Drop dashboard
 - [Extendable](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravelCP), make it how you want without editing the core!
 - [BootSwatch Themed](http://bootswatch.com/)
@@ -59,13 +59,6 @@ The first plugin is underway and shows how easy it is to extend the core to add 
 ## Available Plugins
 - [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
 
-# Roadmap
-
-- ~~Complete the json/xml api~~
-- ~~Make everything more "plug-in able", ideally you wont edit the core package at all but instead make your own vendor that links into this package~~
-- ~~theme support that supports using default files if theme files dont exist, similar to smarty~~
-- [l4cp-support plugin](https://github.com/gcphost/l4cp-support) ~~plugin example, most likely trouble tickets, to show how to inject a new module/plugin to the core w/o changing the core
-
 
 
 # BEFORE YOU BEGIN!
@@ -75,7 +68,7 @@ We hope users will extend the application instead of modifying its core componen
 
 
 # Short install
-'''Want more detail? Review the original directions at the bottom'''
+###Want more detail? Review the original directions at the bottom
 
 Download the latest release
 Extract the archive in your web-based folder (that is ready to host a laravel app)
@@ -90,8 +83,9 @@ Install, migrate and seed
 ```
 
 
-### You're done!-- Browse to your folder, /public/ and click login!
-- Default login is admin@example.org with the password admin
+### You're done!
+Browse to your folder, /public/ and click login!
+Default login is admin@example.org with the password admin
 
 
 
