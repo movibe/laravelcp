@@ -1,7 +1,7 @@
 #LaravelCP
 ### A Laravel 4 Bootstrap Admin Starter Site
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
-forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site), Follow us  [@laravelcp](https://twitter.com/laravelcp)
+Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
 ![ScreenShot](http://i.imgur.com/6CYpo3y.png)
