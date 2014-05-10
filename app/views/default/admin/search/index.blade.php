@@ -1,4 +1,7 @@
 <div class="panel-group" id="accordion">
+@if(count($results) == 0)
+<h3>{{{Lang::get('core.no_results')}}}</h3>
+@endif
 @foreach($results as $index=>$data)
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -8,6 +11,7 @@
 			</a>
 		</h4>
 	</div>
+
 	<div id="accord-{{{ $index }}}" class="panel-collapse collapse">
 		<div class="panel-body">
 			<table class="table">
@@ -19,6 +23,7 @@
 						{{ ''; break }}
 					@endforeach
 				</thead>
+			
 				@foreach($data as $column => $value)
 					<tr>
 						@foreach($value as $key => $val)

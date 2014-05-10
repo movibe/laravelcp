@@ -20,7 +20,7 @@ class Search {
 		if(!$string || strlen($string) < 3) return array();
 		$results=array();
 		foreach($tables as $table => $columns){
-			$query=DB::table($table);
+			$query=DB::table($table)->limit('100');
 			$i=0;
 			foreach($columns as $column){
 				if($i==0){
