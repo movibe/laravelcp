@@ -76,6 +76,7 @@ Default login is admin@example.org with the password admin
 ## How you can help!
 If you like the project I really need help with the phpunit testing stuff, so feel free to contribute there first :D
 
+Have a suggestion? Post it in the 'issues'.
 
 
 # From the forked repo:
