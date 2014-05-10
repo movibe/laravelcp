@@ -13,7 +13,7 @@ class PostsTableSeeder extends Seeder {
                 'user_id'    => $user_id,
                 'title'      => 'Home',
                 'slug'       => 'home',
-                'content'    => '',
+                'content'    => '&nbsp;',
                 'meta_title' => 'meta_title1',
                 'meta_description' => 'meta_description1',
                 'meta_keywords' => 'meta_keywords1'

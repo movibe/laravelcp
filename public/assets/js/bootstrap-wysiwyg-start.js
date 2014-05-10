@@ -112,22 +112,7 @@
 
 				updateToolbar();
 			},
-			bindHotkeys = function (hotKeys) {
-				$.each(hotKeys, function (hotkey, command) {
-					editor.keydown(hotkey, function (e) {
-						if (editor.attr('contenteditable') && editor.is(':visible')) {
-							e.preventDefault();
-							e.stopPropagation();
-							execCommand(command);
-						}
-					}).keyup(hotkey, function (e) {
-						if (editor.attr('contenteditable') && editor.is(':visible')) {
-							e.preventDefault();
-							e.stopPropagation();
-						}
-					});
-				});
-			},
+			
 			getCurrentRange = function () {
                 var sel, range;
                 if (window.getSelection) {
@@ -263,7 +248,6 @@
 			};
 		options = $.extend(true, {}, $.fn.wysiwyg.defaults, userOptions);
 		toolbarBtnSelector = 'a[data-' + options.commandRole + '],button[data-' + options.commandRole + '],input[type=button][data-' + options.commandRole + ']';
-		bindHotkeys(options.hotKeys);
 		
 		// Support placeholder attribute on the DIV
 		if ($(this).attr('placeholder') != '') {
@@ -304,19 +288,6 @@
 		return this;
 	};
 	$.fn.wysiwyg.defaults = {
-		hotKeys: {
-			'Ctrl+b meta+b': 'bold',
-			'Ctrl+i meta+i': 'italic',
-			'Ctrl+u meta+u': 'underline',
-			'Ctrl+z': 'undo',
-			'Ctrl+y meta+y meta+shift+z': 'redo',
-			'Ctrl+l meta+l': 'justifyleft',
-			'Ctrl+r meta+r': 'justifyright',
-			'Ctrl+e meta+e': 'justifycenter',
-			'Ctrl+j meta+j': 'justifyfull',
-			'Shift+tab': 'outdent',
-			'tab': 'indent'
-		},
 		toolbarSelector: '[data-role=editor-toolbar]',
 		commandRole: 'edit',
 		activeToolbarClass: 'btn-info',

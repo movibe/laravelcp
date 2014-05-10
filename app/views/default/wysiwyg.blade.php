@@ -1,4 +1,3 @@
-<script src="{{{ asset('assets/js/bootstrap-wysiwyg-start.js') }}}"></script>
 <div id="alerts"></div>
 <div class="hidden-md hidden-lg">
 	<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
@@ -72,16 +71,13 @@
 		</div>
 
 		<div class="btn-group">
-			<a class="btn hidden-xs btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
-			<a class="btn  btn-default dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link">&nbsp;</i></a>
-			<div class="dropdown-menu input-prepend" style="width: 220px">
-				<div class="input-group">
-					<input class="form-control" placeholder="URL" type="text" data-edit="createLink"/>
+				<div class="input-group" style="width: 70px">
+					<input class="form-control" placeholder="URL" type="text" data-edit="createLink" style="width: 70px"/>
 					<span class="input-group-btn">
 						<button class="btn  btn-default" type="button">Add</button>
+			<a class="btn hidden-xs btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
 					</span>
 				</div>
-			</div>
 		</div>
 
 		<span class="btn btn-default btn-file">
