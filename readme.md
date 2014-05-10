@@ -46,9 +46,6 @@ Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [lara
 - [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
 
 
-# Roadmap
-- Fix wysiwyg, doesnt like modals on the phone, doesnt like links - their demo does.. so its just me :(
-
 
 # BEFORE YOU BEGIN!
 
