@@ -59,7 +59,7 @@ return array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
 			'database'  => 'laravelbootstrapstarter',
-			'username'  => 'root',
+			'username'  => 'admin',
 			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

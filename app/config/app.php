@@ -123,19 +123,13 @@ return array(
 		'anlutro\LaravelSettings\ServiceProvider',
 		'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
 		'Regulus\ActivityLog\ActivityLogServiceProvider',
+		'Raahul\LarryFour\LarryFourServiceProvider',
+		'Atticmedia\Anvard\AnvardServiceProvider',
+		'Msurguy\Honeypot\HoneypotServiceProvider',
+		'Rtablada\Profane\FilterServiceProvider',
+		'Liebig\Cron\CronServiceProvider',
 
-
-'Raahul\LarryFour\LarryFourServiceProvider',
-'Atticmedia\Anvard\AnvardServiceProvider',
-'Msurguy\Honeypot\HoneypotServiceProvider',
-//'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
-'Rtablada\Profane\FilterServiceProvider',
-'Liebig\Cron\CronServiceProvider',
-
-
-        /* Uncomment for use in development */
-//        'Way\Generators\GeneratorsServiceProvider', // Generators
-//        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
+		//'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
 
     ),
 
@@ -211,17 +205,16 @@ return array(
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 		'Setting' => 'anlutro\LaravelSettings\Facade',
-'Activity' => 'Regulus\ActivityLog\Activity',
-'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
-'Anvard'=>'Atticmedia\Anvard\Anvard',
-'Api'          => 'Gcphost\Helpers\Api', 
-'Search'          => 'Gcphost\Helpers\Search', 
-'CronWrapper'          => 'Gcphost\Helpers\CronWrapper', 
-'Theme'          => 'Gcphost\Helpers\Theme', 
-//'Support'	=>	'Gcphost\L4cpSupport\Helpers\Support',
-
-'Filter' => 'Rtablada\Profane\Facades\Filter',
-'Eloquent' => 'Rtablada\Profane\Model',
+		'Activity' => 'Regulus\ActivityLog\Activity',
+		'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
+		'Anvard'=>'Atticmedia\Anvard\Anvard',
+		'Api'          => 'Gcphost\Helpers\Api', 
+		'Search'          => 'Gcphost\Helpers\Search', 
+		'CronWrapper'          => 'Gcphost\Helpers\CronWrapper', 
+		'Theme'          => 'Gcphost\Helpers\Theme', 
+		'Filter' => 'Rtablada\Profane\Facades\Filter',
+		'Eloquent' => 'Rtablada\Profane\Model',
+		//'Support'	=>	'Gcphost\L4cpSupport\Helpers\Support',
 ),
 
     'available_language' => array('en'),
