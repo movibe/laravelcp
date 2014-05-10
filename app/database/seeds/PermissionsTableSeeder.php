@@ -76,6 +76,14 @@ class PermissionsTableSeeder extends Seeder {
                 'permission_id' => 6
             ),
             array(
+                'role_id'      => 1,
+                'permission_id' => 7
+            ),
+            array(
+                'role_id'      => 1,
+                'permission_id' => 8
+            ),
+            array(
                 'role_id'      => 2,
                 'permission_id' => 6
             ),
