@@ -1,32 +1,7 @@
-.gridster ul, .gridster ol {
-    list-style: none;
-}
-.gridster .panel-heading{ height: 44px}
-.gridster .panel-body{
-	height:inherit;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	width:calc(100% - 2px);
-}
-.gridster .panel{
-	height:100%;
-	padding-bottom: 60px;
-}
-.gridster .panel-heading {
-    cursor: pointer;
-}
-.gridster .preview-holder {
-    position: absolute;
-    background-color: #FFFFCC;
-    border-color: #000;
-	border: 1px dashed #000;
-    opacity: 0.3;
-}
-
-.gridster .panel-body-full{
-	overflow: hidden;
-	height:110px;
-	
-}
-
-.panel-default-sm{ height: 115px}
+.gridster ul,.gridster ol{list-style:none}
+.gridster .panel-heading{height:44px;cursor:pointer}
+.gridster .panel-body{height:inherit;overflow-y:scroll;overflow-x:hidden;width:calc(100%-2px)}
+.gridster .panel{height:100%;padding-bottom:60px}
+.gridster .preview-holder{position:absolute;background-color:#FFC;border:1px dashed #000;opacity:0.3;border-color:#000}
+.gridster .panel-body-full{overflow:hidden;height:110px}
+.panel-default-sm{height:115px}
