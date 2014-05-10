@@ -43,7 +43,9 @@ forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Boo
 - [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
 
 
-
+# Roadmap
+- Fix wysiwyg, doesnt like modals on the phone, doesnt like links - their demo does.. so its just me :(
+- Move everything into a vendor package, the starter site makes you have this as the 'core' but I see little reason for that, a vendor package would make installation that much easier.
 
 # BEFORE YOU BEGIN!
 
