@@ -2,9 +2,7 @@
 ### A Laravel 4 Bootstrap Admin Starter Site
 [![ProjectStatus](http://stillmaintained.com/gcphost/laravelcp.png)](http://stillmaintained.com/gcphost/laravelcp)
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
-forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
-
-Follow on [twitter](https://twitter.com/laravelcp)
+forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site), Follow laravelcp on [twitter](https://twitter.com/laravelcp)
 
 
 ![ScreenShot](http://i.imgur.com/6CYpo3y.png)
