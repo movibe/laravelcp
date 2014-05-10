@@ -31,7 +31,7 @@
     <![endif]-->
 </head>
 <body>
-	@include(Theme::path('admin/navigation'))
+	@include(Theme::path('admin/navigation/main'))
 
 	<div class="visible-xs modal-content mobile-loading"><div class="">@include(Theme::path('admin/dt-loading'))</div></div>
 

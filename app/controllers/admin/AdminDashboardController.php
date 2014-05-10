@@ -71,7 +71,7 @@ class AdminDashboardController extends AdminController {
 		Lava::LineChart('Stocks')->setConfig();
 
 
-		return Theme::make('admin/dashboard');
+		return Theme::make('admin/dashboard/index');
 	}
 
 

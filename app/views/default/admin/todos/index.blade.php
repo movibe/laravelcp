@@ -21,5 +21,5 @@
 
 
 @stop
-@include(Theme::path('admin/left-layout'))
+@include(Theme::path('admin/layouts/sidebar-left'))
 
