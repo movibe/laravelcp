@@ -1,8 +1,7 @@
 #LaravelCP
 ### A Laravel 4 Bootstrap Admin Starter Site
-[![ProjectStatus](http://stillmaintained.com/gcphost/laravelcp.png)](http://stillmaintained.com/gcphost/laravelcp)
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
-forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site), Follow laravelcp on [twitter](https://twitter.com/laravelcp)
+Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
 ![ScreenShot](http://i.imgur.com/6CYpo3y.png)
@@ -49,7 +48,7 @@ forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Boo
 
 # Roadmap
 - Fix wysiwyg, doesnt like modals on the phone, doesnt like links - their demo does.. so its just me :(
-- Move everything into a vendor package, the starter site makes you have this as the 'core' but I see little reason for that, a vendor package would make installation that much easier.
+
 
 # BEFORE YOU BEGIN!
 
