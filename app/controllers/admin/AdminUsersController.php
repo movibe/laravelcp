@@ -341,7 +341,6 @@ class AdminUsersController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
         
 
-        // Get validation errors (see Ardent package)
         $error = $user->errors()->all();
 
         if(empty($error)) {

@@ -232,6 +232,13 @@ abstract class Ardent extends Model {
         }
     }
 
+	public function getObservableEvents() {
+		return array_merge(
+			parent::getObservableEvents(),
+			array('validating', 'validated')
+		);
+	}
+
 	/**
 	 * Register a validating model event with the dispatcher.
 	 *
@@ -373,9 +380,9 @@ abstract class Ardent extends Model {
 		// for the related models and returns the relationship instance which will
 		// actually be responsible for retrieving and hydrating every relations.
 		$instance = new $related;
-
+		
 		$otherKey = $otherKey ?: $instance->getKeyName();
-
+		
 		$query = $instance->newQuery();
 
 		return new BelongsTo($query, $this, $foreignKey, $otherKey, $relation);
@@ -449,7 +456,7 @@ abstract class Ardent extends Model {
 
         // Make this Capsule instance available globally via static methods
         $db->setAsGlobal();
-
+        
         $db->bootEloquent();
 
         $translator = new Translator('en');
@@ -460,7 +467,7 @@ abstract class Ardent extends Model {
 
         self::$externalValidator = true;
         self::$validationFactory = new ValidationFactory($translator);
-        self::$validationFactory->setPresenceVerifier(new DatabasePresenceVerifier($db->manager));
+        self::$validationFactory->setPresenceVerifier(new DatabasePresenceVerifier($db->getDatabaseManager()));
     }
 
     /**
@@ -762,7 +769,7 @@ abstract class Ardent extends Model {
      * @return array Rules with exclusions applied
      */
     protected function buildUniqueExclusionRules(array $rules = array()) {
-
+      
         if (!count($rules))
           $rules = static::$rules;
 
@@ -775,14 +782,14 @@ abstract class Ardent extends Model {
                 $params = explode(',', $rule);
 
                 $uniqueRules = array();
-
+                
                 // Append table name if needed
                 $table = explode(':', $params[0]);
                 if (count($table) == 1)
                   $uniqueRules[1] = $this->table;
                 else
                   $uniqueRules[1] = $table[1];
-
+               
                 // Append field name if needed
                 if (count($params) == 1)
                   $uniqueRules[2] = $field;
@@ -796,13 +803,13 @@ abstract class Ardent extends Model {
                 else {
                   $uniqueRules[3] = $this->id;
                 }
-
-                $rule = 'unique:' . implode(',', $uniqueRules);
+       
+                $rule = 'unique:' . implode(',', $uniqueRules);  
               } // end if strpos unique
-
+              
             } // end foreach ruleset
         }
-
+        
         return $rules;
     }
 
@@ -824,7 +831,7 @@ abstract class Ardent extends Model {
         Closure $afterSave = null
     ) {
         $rules = $this->buildUniqueExclusionRules($rules);
-
+        
         return $this->save($rules, $customMessages, $options, $beforeSave, $afterSave);
     }
 
