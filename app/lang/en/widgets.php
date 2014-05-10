@@ -2,7 +2,6 @@
 
 return array(
 
-	'weather' => 'Weather',
 
 );
 
