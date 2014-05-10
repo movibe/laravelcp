@@ -53,7 +53,6 @@ return array(
     'J20\\Uuid' => array($vendorDir . '/j20/php-uuid/src'),
     'Illuminate' => array($vendorDir . '/laravel/framework/src'),
     'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
-    'Gcphost\\L4cpSupport' => array($baseDir . '/workbench/gcphost/l4cp-support/src'),
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),

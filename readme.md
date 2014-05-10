@@ -3,7 +3,7 @@
 [![ProjectStatus](http://stillmaintained.com/gcphost/laravelcp.png)](http://stillmaintained.com/gcphost/laravelcp)
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
 
-Follow on [twitter](https://twitter.com/laravelcp)
+
 
 
 ![ScreenShot](http://i.imgur.com/6CYpo3y.png)

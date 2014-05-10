@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2d8350cddc3e3a04d445153a92bd776f",
+    "hash": "fe7b95a04b19a2aa031afb6d1d1601df",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -2897,12 +2897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a"
+                "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
-                "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9d6300fd862478f58a526fbcad0a8f630daa60aa",
+                "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa",
                 "shasum": ""
             },
             "require": {
@@ -2960,7 +2960,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-05-09 11:38:31"
+            "time": "2014-05-09 13:52:56"
         },
         {
             "name": "doctrine/inflector",

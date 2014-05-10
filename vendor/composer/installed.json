@@ -1158,12 +1158,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a"
+            "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
-            "reference": "2f34a3cf98f9370fd456dba640fdc7933f2ccf8a",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/9d6300fd862478f58a526fbcad0a8f630daa60aa",
+            "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa",
             "shasum": ""
         },
         "require": {
@@ -1177,7 +1177,7 @@
         "suggest": {
             "symfony/console": "Allows use of the command line interface"
         },
-        "time": "2014-05-09 11:38:31",
+        "time": "2014-05-09 13:52:56",
         "type": "library",
         "extra": {
             "branch-alias": {

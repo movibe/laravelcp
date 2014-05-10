@@ -16,10 +16,10 @@ class CreatePostsTable extends Migration {
             $table->integer('user_id')->unsigned()->index();
             $table->string('title', 255);
             $table->string('slug', 255);
-            $table->text('content');
-            $table->string('meta_title', 255);
-            $table->string('meta_description', 255);
-            $table->string('meta_keywords', 255);
+            $table->text('content')->nullable();
+            $table->string('meta_title', 255)->nullable();
+            $table->string('meta_description', 255)->nullable();
+            $table->string('meta_keywords', 255)->nullable();
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
             $table->string('banner', 255)->nullable();

@@ -431,8 +431,6 @@ return array(
     'Gcphost\\Helpers\\CronWrapper' => $baseDir . '/app/library/Gcphost/Helpers/CronWrapper.php',
     'Gcphost\\Helpers\\Search' => $baseDir . '/app/library/Gcphost/Helpers/Search.php',
     'Gcphost\\Helpers\\Theme' => $baseDir . '/app/library/Gcphost/Helpers/Theme.php',
-    'Gcphost\\L4cpSupport\\Helpers\\Support' => $baseDir . '/workbench/gcphost/l4cp-support/src/Gcphost/L4cpSupport/Helpers/Support.php',
-    'Gcphost\\L4cpSupport\\L4cpSupportServiceProvider' => $baseDir . '/workbench/gcphost/l4cp-support/src/Gcphost/L4cpSupport/L4cpSupportServiceProvider.php',
     'Hybrid_Auth' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Auth.php',
     'Hybrid_Endpoint' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Endpoint.php',
     'Hybrid_Error' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Error.php',
