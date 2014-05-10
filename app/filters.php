@@ -110,6 +110,10 @@ Entrust::routeNeedsPermission( 'admin/users*', 'manage_users', Redirect::to('/ad
 Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/settings*', 'manage_settings', Redirect::to('/admin') );
 
+Entrust::routeNeedsPermission( 'admin/search*', 'site_search', Redirect::to('/admin') );
+Entrust::routeNeedsPermission( 'admin/todos*', 'manage_todos', Redirect::to('/admin') );
+
+
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
