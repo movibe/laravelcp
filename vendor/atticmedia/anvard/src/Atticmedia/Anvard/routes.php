@@ -29,14 +29,25 @@ if (Config::get('anvard::routes.login')) {
                     Log::debug('Anvard: login failure');
                     Session::flash('anvard', 'Failed to log in!');
                 }
-				$r = Session::get('loginRedirect');
-				if (!empty($r))
-				{
-					Session::forget('loginRedirect');
-					return Redirect::to($r);
-				}
-				return Redirect::to('/admin');
-				}
+
+                /**
+                 * added the detection / redirection script for easier customization
+                 */
+                if(Session::has('login_redirect_url')) {
+                    $redirect_url = Session::get('login_redirect_url');
+                    Session::forget('login_redirect_url');
+                    return Redirect::to($redirect_url);
+                }
+
+                /**
+                 * Added default redirect location if needed.
+                 */
+                if(Config::get('anvard::routes.loginredirect')){
+                    return Redirect::to(Config::get('anvard::routes.loginredirect'));
+                }
+
+                return Redirect::back();
+            }
         )
     );
 }
@@ -47,6 +58,31 @@ if (Config::get('anvard::routes.endpoint')) {
             'as' => 'anvard.routes.endpoint',
             function() {
                 Hybrid_Endpoint::process();
+            }
+        )
+    );
+}
+if (Config::get('anvard::routes.logout')) {
+    Route::get(
+        Config::get('anvard::routes.logout'),
+        array(
+            'as' => 'anvard.routes.logout',
+            function() {
+                $hybridAuth = App::make('hybridauth');
+
+                // logout all providers
+                $hybridAuth->logoutAllProviders();
+
+                // logout of laravel
+                Auth::logout();
+
+                // redirect someplace or back.
+                if (Config::get('anvard::routes.logoutredirect')) {
+                    return Redirect::to(Config::get('anvard::routes.logoutredirect'));
+                }
+                else {
+                    return Redirect::back();
+                }
             }
         )
     );

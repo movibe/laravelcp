@@ -87,20 +87,20 @@ class Hybrid_Provider_Model_OpenID extends Hybrid_Provider_Model
 	*/
 	function loginFinish()
 	{
-		# if user don't grant access of their data to your site, halt with an Exception
+		# if user don't garant acess of their data to your site, halt with an Exception
 		if( $this->api->mode == 'cancel'){
 			throw new Exception( "Authentication failed! User has canceled authentication!", 5 );
 		}
 
 		# if something goes wrong
 		if( ! $this->api->validate() ){
-			throw new Exception( "Authentication failed. Invalid request received!", 5 );
+			throw new Exception( "Authentication failed. Invalid request recived!", 5 );
 		}
 
-		# fetch received user data
+		# fetch recived user data
 		$response = $this->api->getAttributes();
 
-		# store the user profile
+		# sotre the user profile
 		$this->user->profile->identifier  = $this->api->identity;
 
 		$this->user->profile->firstName   = (array_key_exists("namePerson/first",$response))?$response["namePerson/first"]:"";

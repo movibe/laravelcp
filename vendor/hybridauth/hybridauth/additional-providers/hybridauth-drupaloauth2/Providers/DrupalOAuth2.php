@@ -89,7 +89,7 @@ class Hybrid_Providers_DrupalOAuth2 extends Hybrid_Provider_Model_OAuth2
   }
 
   /**
-   * set proper headers before posting
+   * set propper headers before posting
    */
   function post($url) {
     $this->api->curl_header =

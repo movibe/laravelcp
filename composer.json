@@ -34,7 +34,9 @@
 		"hybridauth/hybridauth": "*",
 		"msurguy/honeypot": "dev-master",
 		"rtablada/profane": "dev-master",
-		"liebig/cron": "dev-master"
+		"liebig/cron": "dev-master",
+		"atticmedia/anvard": "dev-master"
+
 	},
 	"require-dev": {
         "way/generators": "dev-master",
@@ -55,10 +57,7 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/library"
-		],
-		"psr-0": {
-		    "Atticmedia\\Anvard": "vendor/atticmedia/anvard/src"
-		}
+		]
 
 	},
 	"scripts": {

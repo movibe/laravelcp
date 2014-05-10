@@ -45,7 +45,7 @@ class WeiboOAuth {
      */ 
     public $ssl_verifypeer = FALSE; 
     /** 
-     *  Response format.
+     * Respons format. 
      * 
      * @ignore 
      */ 
@@ -168,7 +168,7 @@ class WeiboOAuth {
     } 
 
     /** 
-     * GET wrapper for oAuthRequest.
+     * GET wrappwer for oAuthRequest. 
      * 
      * @return mixed 
      */ 
@@ -181,7 +181,7 @@ class WeiboOAuth {
     } 
 
     /** 
-     * POST wrapper for oAuthRequest.
+     * POST wreapper for oAuthRequest. 
      * 
      * @return mixed 
      */ 

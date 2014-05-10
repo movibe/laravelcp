@@ -40,6 +40,8 @@ class SetupAnvard extends Migration {
             $t->string('region')->nullable();
             $t->string('city')->nullable();
             $t->string('zip')->nullable();
+            $t->string('username')->nullable();
+            $t->string('coverInfoURL')->nullable();
             $t->timestamps();
         });
     }

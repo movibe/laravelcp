@@ -66,7 +66,7 @@ class authentications extends controller {
 			$this->redirect( "users/profile" );
 		}
 		catch( Exception $e ){
-			// Display the received error
+			// Display the recived error
 			switch( $e->getCode() ){ 
 				case 0 : $error = "Unspecified error."; break;
 				case 1 : $error = "Hybriauth configuration error."; break;

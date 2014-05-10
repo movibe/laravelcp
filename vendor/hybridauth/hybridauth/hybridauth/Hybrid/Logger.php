@@ -62,7 +62,7 @@ class Hybrid_Logger
 
 			file_put_contents( 
 				Hybrid_Auth::$config["debug_file"], 
-				"ERROR -- " . $_SERVER['REMOTE_ADDR'] . " -- " . $datetime . " -- " . $message . " -- \n", 
+				"ERROR -- " . $_SERVER['REMOTE_ADDR'] . " -- " . $datetime . " -- " . $message . " -- " . print_r($object, true) . "\n", 
 				FILE_APPEND
 			);
 		}

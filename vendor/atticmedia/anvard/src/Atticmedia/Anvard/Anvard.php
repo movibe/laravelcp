@@ -117,10 +117,9 @@ class Anvard {
     public function attemptAuthentication($provider, Hybrid_Auth $hybridauth) {
         try {
             $this->provider = $provider;
-           $adapter = $hybridauth->authenticate($provider);
+            $adapter = $hybridauth->authenticate($provider);
             $this->setAdapter($adapter);
-
-			 $this->setAdapterProfile($adapter->getUserProfile());
+            $this->setAdapterProfile($adapter->getUserProfile());
             $profile = $this->findProfile();
             return $profile;
         } catch (Exception $e) {
@@ -184,16 +183,14 @@ class Anvard {
                     $user->$key = $value;
                 }
             }
-            // @todo this is all very custom ... how to fix?
-
+            // @todo why did anvard have this in here.
+            //$user->role_id = 3;
             $user->username = $adapter_profile->email;
-            $user->displayname = $adapter_profile->firstName . " " . $adapter_profile->lastName;
             $user->email = $adapter_profile->email;
             $user->password = uniqid();
             $user->password_confirmation = $user->password;
             $rules = $this->config['db']['userrules'];
             $result = $user->save($rules);
-
             if ( !$result ) {
                 $this->logger->error('Anvard: FAILED TO SAVE USER');
                 return NULL;

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5b554280c889d85b13cb16b26d473e0e",
+    "hash": "e00febc7ac8a2119a9865f67effefa79",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -48,6 +48,64 @@
             ],
             "description": "Persistant settings in Laravel 4.",
             "time": "2014-04-13 09:05:34"
+        },
+        {
+            "name": "atticmedia/anvard",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/atticmedia/anvard.git",
+                "reference": "0305969990bb879f15547e79f56d72a82e98e785"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/atticmedia/anvard/get/0305969990bb879f15547e79f56d72a82e98e785.zip",
+                "reference": "0305969990bb879f15547e79f56d72a82e98e785",
+                "shasum": ""
+            },
+            "require": {
+                "hybridauth/hybridauth": "2.*@dev",
+                "illuminate/support": "4.1.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Atticmedia\\Anvard": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pete Otaqui",
+                    "email": "pete.otaqui@atticmedia.com"
+                },
+                {
+                    "name": "Alaa Badran",
+                    "email": "me@alaabadran.com"
+                }
+            ],
+            "description": "HybridAuth social sign in package for Laravel 4",
+            "homepage": "https://bitbucket.org/atticmedia/anvard",
+            "keywords": [
+                "OpenId",
+                "facebook",
+                "google",
+                "hybridauth",
+                "laravel",
+                "login",
+                "oauth",
+                "social",
+                "twitter",
+                "yahoo"
+            ],
+            "time": "2014-05-08 16:16:01"
         },
         {
             "name": "bllim/datatables",
@@ -274,16 +332,16 @@
         },
         {
             "name": "hybridauth/hybridauth",
-            "version": "dev-master",
+            "version": "2.2.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "fd51fb6d260ef48fe85494b55d9931374230074b"
+                "reference": "57746000e5b2f96469b229b366e56eb70ab7bf20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/fd51fb6d260ef48fe85494b55d9931374230074b",
-                "reference": "fd51fb6d260ef48fe85494b55d9931374230074b",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/57746000e5b2f96469b229b366e56eb70ab7bf20",
+                "reference": "57746000e5b2f96469b229b366e56eb70ab7bf20",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +377,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-04-17 12:12:22"
+            "time": "2014-03-20 16:53:17"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -4077,6 +4135,7 @@
         "msurguy/honeypot": 20,
         "rtablada/profane": 20,
         "liebig/cron": 20,
+        "atticmedia/anvard": 20,
         "way/generators": 20,
         "mockery/mockery": 20,
         "barryvdh/laravel-ide-helper": 20,

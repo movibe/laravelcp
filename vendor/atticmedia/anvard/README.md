@@ -1,54 +1,61 @@
 Anvard - HybridAuth package for Laravel 4
 =========================================
 
-## Requirements
+# Requirements
 
-* Laravel 4
+* Laravel 4.1.x
 * Database setup for migrations
 * A "User" model (you can set a different name in configuration)
 * You have read the notes on configuration before you dive in :)
 
 
-## Installation
+# Installation
 
-1. Add the dependency to your composer.json file: `"atticmedia-anvard": "*"`
-2. Run `php composer.phar install`
+1. Add the dependency to your composer.json file: `"atticmedia/anvard": "dev-master"`
+2. Run `php composer.phar install` or `composer update`
 3. Add `'Atticmedia\Anvard\AnvardServiceProvider',` to your `config/app.php` file
 3. Publish the package config `php artisan config:publish atticmedia/anvard`
 4. Add your service credentials to `app/config/packages/atticmedia/anvard/hybridauth.php`
 5. Check the `app/config/packages/atticmedia/anvard/db.php` file to see if you need to customise anything (see [Configuration](#configuration) below for help)
-6. Run the migration `php artisan migrate --package='atticmedia/anvard'`
+6. Run the migration `php artisan migrate --package=atticmedia/anvard`
 7. Create the `Profile` model (using a different name if you changed the config)
 8. Set the User to have many Profiles:
 
-    ```
         public function profiles() {
             return $this->hasMany('Profile');
         }
-    ```
+
 
 9. Set the Profile to belong to a User and to have certain fields fillable:
 
-    ```
         class Profile extends Eloquent  {
 
             protected $fillable = array('provider', 'user_id');
-    
+
             public function user() {
                 return $this->belongsTo('User');
             }
         }
-    ```
+
     
-## Configuration
+    
+###If you get composer errors talking about hybridauth.  You probably need to do one of the below:
+
+*Option 1:* You may need to add the below to composer:
+
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
+
+*Option 2:* Instead of the above step, you could add `"hybridauth/hybridauth": "2.*@dev"` to composer.json if you don't want to change your full projects minimum-stability **(this is what I do)**.
+
+# Configuration
 
 Anvard comes with several configuration files, and you *must* edit at least one of them.
 
 Before you can run Anvard, you need to publish out the packages config files to your own app - which you can easily do using artisan:
 
-```php
-artisan config:publish atticmedia/anvard
-```
+    php artisan config:publish atticmedia/anvard
 
 You will then find the configuration files in your app/config/packages directory.
 
@@ -91,10 +98,6 @@ Keys are attribute names from the Profile (which mirrors the original HybridAuth
 
 Anvard provides it's own extremely simple views.  Change this setting to specify your own views instead.
 
-## Routes
+# Routes
 
-Anvard consumes the following routes:
-
-* anvard
-* anvard/login{provider}
-* anvard/endpoint
+See the routes.php config file to alter the default routes

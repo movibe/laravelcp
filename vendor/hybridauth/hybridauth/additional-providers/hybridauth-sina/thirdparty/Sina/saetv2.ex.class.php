@@ -76,7 +76,7 @@ class SaeTOAuthV2 {
 	 */
 	public $ssl_verifypeer = FALSE;
 	/**
-	 * Response format.
+	 * Respons format.
 	 *
 	 * @ignore
 	 */
@@ -94,7 +94,7 @@ class SaeTOAuthV2 {
 	 */
 	public $http_info;
 	/**
-	 * Set the useragent.
+	 * Set the useragnet.
 	 *
 	 * @ignore
 	 */
@@ -271,7 +271,7 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * GET wrapper for oAuthRequest.
+	 * GET wrappwer for oAuthRequest.
 	 *
 	 * @return mixed
 	 */
@@ -284,7 +284,7 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * POST wrapper for oAuthRequest.
+	 * POST wreapper for oAuthRequest.
 	 *
 	 * @return mixed
 	 */
