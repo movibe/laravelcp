@@ -57,7 +57,7 @@ We hope users will extend the application instead of modifying its core componen
 - Download the latest release
 - Extract the archive in your web-based folder (that is ready to host a laravel app)
 -- LaravelCP comes with .htaccess and a web.config to route your urls properly
-- Edit app/config - database.php, mail.php - add your settings
+- Edit app/config - database.php, mail.php, packages/atticmedia/anvard/hybridauth.php - add your settings
 - Install, migrate and seed
 
 ```
