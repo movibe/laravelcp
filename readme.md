@@ -22,7 +22,6 @@ Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [lara
 
 ## Including jQuery/Bootstrap packages:
 - [jQuery SparkLines](https://github.com/gwatts/jquery.sparkline/), all those bootstrap themes had em
-- [jQuery simpleWeather](https://github.com/monkeecreate/jquery.simpleWeather/), made right here in Austin, TX
 - [bootstrap wysiwyg](https://github.com/mindmup/bootstrap-wysiwyg), sexy, light weight
 - [BootBox Dialogs](https://github.com/makeusabrew/bootbox), nice modal wrapper
 - [jQuery poller](https://github.com/gcphost/jquery.poller), my own work to reduce ajax querys
