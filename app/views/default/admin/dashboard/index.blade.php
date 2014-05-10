@@ -19,8 +19,8 @@
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
 	<script type="text/javascript">
 		/* add user online polling */
-		$.fn.poller('add',{'id':'#widget-usersonline .panel-body', 'type':'users_online', 'ratio': '5'});
-	
+		$.fn.poller('add',{'id':'#widget-usersonline .panel-body', 'type':'template', 'func':'admin/helpers/users-online', 'value':'10',  'ratio': '5'});
+
 		/* run gridster */
 		$.fn.gridster.responsive();
 

@@ -1,1 +1,1 @@
-@include(Theme::path('admin/helpers/users-online'), array('limit' => '10'))
+@include(Theme::path('admin/helpers/users-online'), array('value' => '10'))

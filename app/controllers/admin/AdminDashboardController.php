@@ -87,7 +87,7 @@ class AdminDashboardController extends AdminController {
 						$_results[$_poll->id]=array('type'=>'html', 'args'=>Theme::make($_poll->func, array('value'=>$_poll->value))->render());
 					break;
 					case "plugin":	
-						if($_poll->func) $_results[$_poll->id]=call_user_func($_poll->func, $_poll->value);						
+						if($_poll->func) $_results[$_poll->id]=call_user_func($_poll->func, $_poll->value);
 					break;
 					case "check_logs":
 						$list = Activity::
@@ -96,9 +96,6 @@ class AdminDashboardController extends AdminController {
 							->get()->toArray();
 						Session::put('usersonline_lastcheck', time());
 						$_results[$_poll->id]=array('type'=>'function', 'func'=>'fnUpdateGrowler', 'args'=>$list);
-					break;
-					case "users_online":
-						$_results[$_poll->id]=array('type'=>'html', 'args'=>Theme::make('admin/helpers/users-online')->render());
 					break;
 				}
 			}
