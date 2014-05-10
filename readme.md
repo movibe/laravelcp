@@ -29,6 +29,9 @@ forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Boo
 - [jQuery poller](https://github.com/gcphost/jquery.poller), my own work to reduce ajax querys
 - [Gridster Responsive](https://github.com/gcphost/gridster-responsive), used with gridster for the dashboard (buggie)
 - [Select2](https://github.com/ivaynberg/select2), used for user lists (or any select you need with 100+ of rows)
+- [bootstrap growl](https://github.com/ifightcrime/bootstrap-growl), used for notifications
+- [bootstrap datetime picker](http://tarruda.github.io/bootstrap-datetimepicker/)
+
 
 ## Including L4 packages:
 - oAuth logins thanks to [Anvard](https://bitbucket.org/atticmedia/anvard/overview) & [HybridAuth](http://hybridauth.sourceforge.net/), every site should have 0Auth
@@ -37,13 +40,16 @@ forked from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Boo
 - [LavaCharts](http://kevinkhill.github.io/LavaCharts/), google charts, gotta have em
 - [ActivityLog](https://github.com/Regulus343/ActivityLog), gotta know whats goin on!
 - [L4-honeypot](https://github.com/msurguy/Honeypot), stop spammers!
-
+- [Profane Filter](https://github.com/rtablada/profane)
+- [l4-gravatar](https://github.com/thomaswelton/laravel-gravatar)
 
 ## Available Plugins
 - [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
 
 
-
+# Roadmap
+- Fix wysiwyg, doesnt like modals on the phone, doesnt like links - their demo does.. so its just me :(
+- Move everything into a vendor package, the starter site makes you have this as the 'core' but I see little reason for that, a vendor package would make installation that much easier.
 
 # BEFORE YOU BEGIN!
 
