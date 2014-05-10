@@ -74,6 +74,24 @@ We hope users will extend the application instead of modifying its core componen
 [Read more here](https://github.com/gcphost/l4-bootstrap-admin/wiki/Extending-LaravelCP)
 
 
+# Short install
+'''Want more detail? Review the original directions at the bottom'''
+
+- Download the latest release
+- Extract the archive in your web-based folder (that is ready to host a laravel app)
+-- LaravelCP comes with .htaccess and a web.config to route your urls properly
+- Edit app/config - database.php, mail.php - add your settings
+- Install, migrate and seed
+
+
+    composer install --dev
+    php artisan migrate
+    php artisan db:seed
+
+
+### You're done!-- Browse to your folder, /public/ and click login!
+- Default login is admin@example.org with the password admin
+
 
 
 # From the forked repo:
