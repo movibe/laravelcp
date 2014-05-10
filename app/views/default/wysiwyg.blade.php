@@ -72,7 +72,7 @@
 
 		<div class="btn-group">
 				<div class="input-group" style="width: 70px">
-					<input class="form-control" placeholder="URL" type="text" data-edit="createLink" style="width: 70px"/>
+					<input class="form-control" placeholder="http://" type="text" data-edit="createLink" style="width: 70px"/>
 					<span class="input-group-btn">
 						<button class="btn  btn-default" type="button">Add</button>
 			<a class="btn hidden-xs btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
