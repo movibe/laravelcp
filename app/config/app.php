@@ -128,7 +128,6 @@ return array(
 		'Msurguy\Honeypot\HoneypotServiceProvider',
 		'Rtablada\Profane\FilterServiceProvider',
 		'Liebig\Cron\CronServiceProvider',
-
 		//'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
 
     ),

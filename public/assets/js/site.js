@@ -8,6 +8,10 @@ $(document).on('click','.modalfy',function(a){a.preventDefault();modalfyRun(this
 $(document).on('click','.link-through',function(a){window.location=$(this).attr('href')});
 $(document).on("submit",".form-ajax",function(e){$("input[type=button], input[type=submit]").attr("disabled",true).addClass("disabled");$.post($(this).attr("action"),$(this).serialize(),function(e){$("#site-modal").html(e);$("html, body, #site-modal").animate({scrollTop:0},0);$("input[type=button], input[type=submit]").attr("disabled",false).removeClass("disabled");});return false})
 $(document).on('click','.btn-toggle',function(a){a.preventDefault();$(this).find('.btn').toggleClass('active');if($(this).find('.btn-primary').size()>0){$(this).find('.btn').toggleClass('btn-primary')}if($(this).find('.btn-danger').size()>0){$(this).find('.btn').toggleClass('btn-danger')}if($(this).find('.btn-success').size()>0){$(this).find('.btn').toggleClass('btn-success')}if($(this).find('.btn-info').size()>0){$(this).find('.btn').toggleClass('btn-info')}});
+$(document).on('click','[data-toggle=collapse]',function() {
+    $('.sidebar').toggleClass('hidden-xs').css('height','100%');
+  });
+
 
 function modalfyRun(e,t){$.ajax({type:"GET",url:t}).done(function(e){if(e){$("#site-modal").html(e).modal()}else{console.log(e);bootbox.alert(lang_unable_to_exec)}}).fail(function(e,t){console.log(e);bootbox.alert(lang_unable_to_exec+t)})}
 function throttle(b,a){var c=null;return function(){var e=this,d=arguments;clearTimeout(c);c=window.setTimeout(function(){b.apply(e,d)},a||500)}};

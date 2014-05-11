@@ -8,7 +8,7 @@ return array(
  
     'port' => 587,
  
-    'from' => array('address' => 'test@gamecp.com', 'name' => 'Awesome Laravel 4 Auth App'),
+    'from' => array('address' => 'test@gamecp.com', 'name' => 'LaravelCP'),
  
     'encryption' => 'tls',
  

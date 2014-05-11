@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
   <div class="row">
-	<div class=" well col-xs-10 col-sm-3 col-md-3 sidebar @if (trim($__env->yieldContent('breadcrumb')))sidebar-with-bread@endif">
+	<div class="hidden-xs  well col-xs-10 col-sm-3 col-md-3 sidebar @if (trim($__env->yieldContent('breadcrumb')))sidebar-with-bread@endif">
 		@yield('left-layout-nav')
 
 		 @if (Auth::user()->hasRole('admin'))

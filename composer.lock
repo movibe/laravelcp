@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a35591adc821416252f7bf484ab6981e",
+    "hash": "58a5f1736d46dce151010ed40323b158",
     "packages": [
         {
             "name": "anlutro/l4-settings",

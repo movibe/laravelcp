@@ -7,6 +7,3 @@
 .placeholder img{display:inline-block;border-radius:50%}
 .breadcrumb{position:fixed;width:100%}
 .dataTable{width:100%}
-@media max-width 768px {
-.sidebar{display:none}
-}

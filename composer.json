@@ -39,6 +39,7 @@
 		"lmammino/jsmin4assetic": "1.0.*",
 		"phpunit/phpunit": "dev-master"
 	},
+
 	"autoload": {
 		"classmap": [
 
