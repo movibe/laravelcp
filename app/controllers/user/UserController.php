@@ -311,7 +311,7 @@ class UserController extends BaseController {
         if ( Confide::confirm( $code ) )
         {
             return Redirect::to('user/login')
-                ->with( 'notice', Lang::get('confide::confide.alerts.confirmation') );
+                ->with( 'success', Lang::get('confide::confide.alerts.confirmation') );
         }
         else
         {
@@ -338,7 +338,7 @@ class UserController extends BaseController {
         if( Confide::forgotPassword( Input::get( 'email' ) ) )
         {
             return Redirect::to('user/login')
-                ->with( 'notice', Lang::get('confide::confide.alerts.password_forgot') );
+                ->with( 'success', Lang::get('confide::confide.alerts.password_forgot') );
         }
         else
         {
@@ -376,7 +376,7 @@ class UserController extends BaseController {
         if( Confide::resetPassword( $input ) )
         {
             return Redirect::to('user/login')
-            ->with( 'notice', Lang::get('confide::confide.alerts.password_reset') );
+            ->with( 'success', Lang::get('confide::confide.alerts.password_reset') );
         }
         else
         {

@@ -12,12 +12,12 @@
 		@yield('left-layout-nav')
 
 		 @if (Auth::user()->hasRole('admin'))
-			 <ul class="list-group">
-			  <li class="list-group-item list-group-item-info">
-				<span class="badge">{{ count(DB::select('SELECT id FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ?', array(time()-150))) }}</span>
-				{{{ Lang::get('core.users_online') }}}
-			  </li>
-			</ul>
+			<div id="usersonline">
+				@include(Theme::path('admin/helpers/users-online-short'))
+			</div>
+			<script type="text/javascript">
+				$.fn.poller('add',{'id':'#usersonline', 'type':'template', 'func':'admin/helpers/users-online-short', 'value':'',  'ratio': '5'});
+			</script>
 		@endif
 	</div>
 	<div class="col-sm-9 col-md-9 col-md-offset-3 col-sm-offset-3 main">

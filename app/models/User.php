@@ -118,7 +118,7 @@ class User extends ConfideUser {
         {
             Session::put('loginRedirect', $redirect);
             $redirectTo = Redirect::to('user/login')
-                ->with( 'notice', Lang::get('user/user.login_first') );
+                ->with( 'success', Lang::get('user/user.login_first') );
         }
         elseif(!empty($user->id) && $ifValid) // Valid user, we want to redirect.
         {
