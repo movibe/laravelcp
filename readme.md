@@ -4,7 +4,7 @@
 Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
-![ScreenShot](http://i.imgur.com/NXbVW7F.png)
+![ScreenShot](http://i.imgur.com/DduoG9F.png)
 
 [More Screenshots](https://github.com/gcphost/l4-bootstrap-admin/wiki/Screenshots)
 
