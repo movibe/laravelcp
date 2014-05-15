@@ -32,26 +32,12 @@ class Filter
 		$this->fetchRegExps();
 	}
 
-	static private function _random(){
-		$input = array('*','%','@','#','~','!', '$','&',);
-		$rand_keys = array_rand($input, 2);
-		return $input[$rand_keys[0]];
-
-	}
-
-	private function _filter_callback($matches) {
-		$return='';
-		for($i=0; $i < strlen($matches[0]) ; $i++) $return.=self::_random();
-
-		return ' '. $return.' ';
-	}
-
 	public function filter($string, $replacement = '')
 	{
 		$replacement = $replacement ? " {$replacement} " : ' ';
 		$string = " {$string} ";
 		foreach ($this->regExps as $regExp) {
-			$string = preg_replace_callback($regExp, 'self::_filter_callback', $string);
+			$string = preg_replace($regExp, $replacement, $string);
 		}
 
 		return trim($string);
