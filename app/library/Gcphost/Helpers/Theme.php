@@ -1,10 +1,6 @@
 <?php namespace Gcphost\Helpers;
 
-//use Search;
-use Route;
-use View;
-use Config;
-use Setting;
+use Search, Route, View, Config, Setting;
 
 class Theme {
 	static private $tables=array();
@@ -49,6 +45,7 @@ class Theme {
 
 	static public function AdminGroup(){
 
+
 		# Search
 		Search::AddTable('users', array('email', 'displayname', 'id'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
 		Search::AddTable('posts', array('title','slug','content','meta_title','meta_description','meta_keywords'), array('id' => array('method'=>'modal', 'action'=>'admin/slugs/?/edit')));
@@ -67,8 +64,9 @@ class Theme {
 		Route::controller('slugs', 'AdminBlogsController');
 
 		# User Mass Management
-		Route::get('user/mass/email', 'AdminUsersController@getEmailMass');
-		Route::post('user/mass/email', 'AdminUsersController@postEmail');
+		Route::get('user/mass/email', 'AdminEmailController@getEmailMass');
+		Route::post('user/mass/email', 'AdminEmailController@postIndex');
+
 		Route::get('user/mass/merge', 'AdminUsersController@getMassMergeConfirm');
 		Route::post('user/mass/merge', 'AdminUsersController@postMerge');
 		Route::delete('user/mass', 'AdminUsersController@postDeleteMass');
@@ -76,6 +74,11 @@ class Theme {
 
 		# User Profile Management
 		Route::controller('users/{user}/profile/{profile}', 'AdminProfileController');
+
+		# User Email Management
+		Route::controller('users/{user}/email', 'AdminEmailController');
+		Route::controller('users/email', 'AdminEmailController');
+		Route::get('users/{user}/emails', 'AdminEmailController@getEmails');
 
 		# User Management
 		Route::controller('users/{user}', 'AdminUsersController');

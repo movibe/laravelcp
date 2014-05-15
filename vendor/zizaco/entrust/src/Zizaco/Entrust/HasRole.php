@@ -24,7 +24,15 @@ trait HasRole
      */
     public function hasRole( $name )
     {
-        foreach ($this->roles as $role) {
+		$roles = \Cache::remember('user_roles', '1', function()
+		{
+			return $this->roles;
+		});
+
+
+
+
+        foreach ($roles as $role) {
             if( $role->name == $name )
             {
                 return true;
@@ -45,9 +53,21 @@ trait HasRole
      */
     public function can( $permission )
     {
-        foreach ($this->roles as $role) {
+  		$roles = \Cache::remember('user_roles', '1', function()
+		{
+			return $this->roles;
+		});
+
+		$permissions = \Cache::remember('user_permissions', '1', function()
+		{
+			return $this->permissions;
+		});
+
+
+
+		foreach ($roles as $role) {
             // Deprecated permission value within the role table.
-            if( is_array($role->permissions) && in_array($permission, $role->permissions) )
+            if( is_array($permissions) && in_array($permission, $permissions) )
             {
                 return true;
             }

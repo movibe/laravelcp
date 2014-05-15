@@ -9,14 +9,14 @@ class Anvard {
 
     /**
      * The configuration for Anvard
-     * 
+     *
      * @var array
      */
     protected $config;
 
     /**
      * The service used to login
-     * 
+     *
      * @var Hybrid_Provider_Adapter $adapter
      */
     protected $adapter;
@@ -25,7 +25,7 @@ class Anvard {
     /**
      * The profile of the current user from
      * the provider, once logged in
-     * 
+     *
      * @var Hybrid_User_Profile
      */
     protected $adapter_profile;
@@ -33,14 +33,14 @@ class Anvard {
     /**
      * The name of the current provider,
      * e.g. Facebook, LinkedIn, etc
-     * 
+     *
      * @var string
      */
     protected $provider;
 
     /**
      * The logger
-     * 
+     *
      * @var Writer
      */
     protected $logger;
@@ -152,7 +152,16 @@ class Anvard {
         $profile = $profile_builder
             ->where('identifier', $adapter_profile->identifier)
             ->first();
-        if ($profile) {
+
+        /**
+         * Check if user is currently logged in first
+         *    ... then check if their is a profile matching the social user
+         *    ... then check if the email matches
+         * If none of the above, create a new user.
+         */
+        if (\Auth::check()) {
+            $user = \Auth::user();
+        } elseif ($profile) {
             // ok, we found an existing user
             $user = $profile->user()->first();
             $this->logger->debug('Anvard: found a profile, id='.$profile->id);
@@ -175,6 +184,14 @@ class Anvard {
             foreach ($map as $apkey => $ukey) {
                 $user->$ukey = $adapter_profile->$apkey;
             }
+
+            // Default username,email,password/confirmation
+            $user->username = $adapter_profile->email;
+            $user->email = $adapter_profile->email;
+            $user->password = uniqid();
+            $user->password_confirmation = $user->password;
+
+            // get the custom config from the db.php config file
             $values = $this->config['db']['uservalues'];
             foreach ( $values as $key=>$value ) {
                 if (is_callable($value)) {
@@ -183,12 +200,6 @@ class Anvard {
                     $user->$key = $value;
                 }
             }
-            // @todo why did anvard have this in here.
-            //$user->role_id = 3;
-            $user->username = $adapter_profile->email;
-            $user->email = $adapter_profile->email;
-            $user->password = uniqid();
-            $user->password_confirmation = $user->password;
             $rules = $this->config['db']['userrules'];
             $result = $user->save($rules);
             if ( !$result ) {
@@ -230,6 +241,4 @@ class Anvard {
         }
         return $profile;
     }
-
-
 }

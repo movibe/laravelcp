@@ -17,9 +17,14 @@
 	</div>
 
 	@include(Theme::path('admin/helpers/todos'))
-
-
-
 @stop
 @include(Theme::path('admin/layouts/sidebar-left'))
 
+@section('head-scripts')
+	<script src="{{{ asset('assets/js/moment.min.js') }}}"></script>
+	<script src="{{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}}"></script>
+@stop
+
+@section('styles')
+	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}}"/>
+@stop

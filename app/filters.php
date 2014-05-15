@@ -11,26 +11,17 @@
 |
 */
 
-App::before(function($request)
-{
-	//
-});
-
-
-App::after(function($request, $response)
-{
-	//
-});
 
 Route::filter('json', function(){Api::$type='json';});
 Route::filter('xml', function(){ Api::$type='xml';});
 
+Route::when('*.json', 'json');
+Route::when('*.xml', 'xml');
 
 Route::filter('checkuser', function()
 {
 	if (Auth::check()){
 		DB::update('UPDATE users SET last_activity = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time()), Auth::user()->id));
-
 		if (!Request::ajax()){
 			Activity::log(array(
 				'contentID'   => Confide::user()->id,
@@ -41,8 +32,12 @@ Route::filter('checkuser', function()
 			));
 		}
 
-		/* user no longer confirmed, kick em out! */
-		if(Auth::user()->confirmed != '1'){
+
+		$value = Cache::remember('valid_user', '1', function()
+		{
+			return Auth::user()->confirmed != '1' ? true : false;
+		});
+		if($value){
 			Confide::logout();
 			return Redirect::to('suspended');
 		}
@@ -62,7 +57,7 @@ Route::filter('checkuser', function()
 |
 */
 
-Route::filter('auth', function()
+Route::filter('auth', function($route, $request)
 {
 	if (Auth::guest()) {
         Session::put('loginRedirect', Request::url());

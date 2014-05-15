@@ -31,7 +31,6 @@ class AdminProfileController extends AdminController {
      */
     public function __construct(User $user, Role $role, Permission $permission)
     {
-        parent::__construct();
         $this->user = $user;
         $this->role = $role;
         $this->permission = $permission;

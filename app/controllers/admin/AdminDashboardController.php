@@ -91,7 +91,10 @@ class AdminDashboardController extends AdminController {
 					break;
 					case "check_logs":
 						$list = Activity::
-							whereRaw('UNIX_TIMESTAMP(`activity_log`.`created_at`) > ? AND (activity_log.content_type="notification" OR activity_log.content_type="login")',array(Session::get('usersonline_lastcheck', time())))->select(array('description', 'details', 'users.displayname', 'content_type'))->groupBy(DB::raw('description, details, users.displayname, content_type'))->orderBy('activity_log.id', 'DESC')
+							whereRaw('UNIX_TIMESTAMP(`activity_log`.`created_at`) > ? AND (activity_log.content_type="notification" OR activity_log.content_type="login")',array(Session::get('usersonline_lastcheck', time())))
+							->select(array('description', 'details', 'users.displayname', 'content_type'))
+							->groupBy(DB::raw('description, details, users.displayname, content_type'))
+							->orderBy('activity_log.id', 'DESC')
 							->leftJoin('users', 'users.id', '=', 'activity_log.user_id')
 							->get()->toArray();
 						Session::put('usersonline_lastcheck', time());

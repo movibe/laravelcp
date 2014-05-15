@@ -20,6 +20,7 @@ Route::pattern('profile', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('id', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
+Route::pattern('any', '[0-9a-z].+');
 
 
 /** ------------------------------------------
@@ -27,23 +28,7 @@ Route::pattern('token', '[0-9a-z]+');
  *  ------------------------------------------
  */
 
-# json api
-Route::group(array('prefix' => 'json/admin', 'before' => 'json|auth.basic|checkuser'), function()
-{
-	Event::fire('json.admin');
-	Theme::AdminGroup();
-});
-
-# xml api
-Route::group(array('prefix' => 'xml/admin', 'before' => 'xml|auth.basic|checkuser'), function()
-{
-	Event::fire('xml.admin');
-	Theme::AdminGroup();
-});
-
-
-# web 
-Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function()
+Route::group(array('prefix' => 'admin', 'suffix' => array('.json', '.xml', '*'), 'before' => 'auth|checkuser'), function()
 {
 	Event::fire('page.admin');
 	Theme::AdminGroup();
@@ -52,8 +37,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth|checkuser'), function(
 
 Route::get('private/cron',  function()
 {
-			header('Content-Type: application/json');
-			die(json_encode(CronWrapper::Run()));
+	header('Content-Type: application/json');
+	die(json_encode(CronWrapper::Run()));
 });
 
 

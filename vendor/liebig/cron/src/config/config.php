@@ -12,7 +12,7 @@ return array(
     'databaseLogging' => true,
     
     // Enable or disable logging error jobs only
-    'logOnlyErrorJobsToDatabase' => true,
+    'logOnlyErrorJobsToDatabase' => false,
     
     // Delte old database entries after how many hours
     'deleteDatabaseEntriesAfter' => 240,
@@ -21,6 +21,9 @@ return array(
     'preventOverlapping' => true,
     
     // Enable or disable the check if the current Cron run is in time
-    'inTimeCheck' => true
+    'inTimeCheck' => true,
+    
+    // Cron application key for securing the built in Cron run route - if the value is empty, the route is disabled 
+    'cronKey' => ''
     
 );

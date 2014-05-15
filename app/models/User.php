@@ -134,5 +134,4 @@ class User extends ConfideUser {
     }
 
 
-
 }

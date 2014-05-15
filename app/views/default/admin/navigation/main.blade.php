@@ -42,7 +42,7 @@
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<span class="glyphicon"><img alt="{{{ Auth::user()->email }}}" src="{{ Gravatar::src(Auth::user()->email, 20) }}"></span>  &nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
+						&nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{{ URL::to('admin/todos') }}}"><span class="fa fa-list-alt fa-fw"></span>  &nbsp; {{{ Lang::get('core.todos') }}}</a></li>

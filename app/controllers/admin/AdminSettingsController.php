@@ -3,12 +3,6 @@
 class AdminSettingsController extends AdminController
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
     /**
      * Show a list of all the comment posts.
      *

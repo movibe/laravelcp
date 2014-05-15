@@ -1,5 +1,4 @@
 @section('styles')
-	<link href="{{{ asset('assets/css/left-layout.css') }}}" rel="stylesheet">
 @stop
 
 @section('navbar-header')

@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -56,16 +56,29 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| Application Fallback Locale
+	|--------------------------------------------------------------------------
+	|
+	| The fallback locale determines the locale to use when the current one
+	| is not available. You may change the value to correspond to any of
+	| the language folders that are provided through your application.
+	|
+	*/
+
+	'fallback_locale' => 'en',
+
+	/*
+	|--------------------------------------------------------------------------
 	| Encryption Key
 	|--------------------------------------------------------------------------
 	|
 	| This key is used by the Illuminate encrypter service and should be set
-	| to a random, long string, otherwise these encrypted values will not
-	| be safe. Make sure to change it before deploying any application!
+	| to a random, 32 character string, otherwise these encrypted strings
+	| will not be safe. Please do this before deploying an application!
 	|
 	*/
 
-	'key' => '0fiJSmH5AtyZsz2YvAtnFAjRmmSeqkP0',
+	'key' => 'VeJJgLZx4twKZc1r10EWOLnKjCRxlHo6',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,14 +91,13 @@ return array(
 	|
 	*/
 
-    'providers' => array(
-        /* Laravel Base Providers */
+	'providers' => array(
+
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
-		'Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
-		'Illuminate\Foundation\Providers\ComposerServiceProvider',
+		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
 		'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
@@ -93,33 +105,27 @@ return array(
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Hashing\HashServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-		'Illuminate\Foundation\Providers\KeyGeneratorServiceProvider',
 		'Illuminate\Log\LogServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
-		'Illuminate\Foundation\Providers\MaintenanceServiceProvider',
 		'Illuminate\Database\MigrationServiceProvider',
-		'Illuminate\Foundation\Providers\OptimizeServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Foundation\Providers\PublisherServiceProvider',
 		'Illuminate\Queue\QueueServiceProvider',
 		'Illuminate\Redis\RedisServiceProvider',
+		'Illuminate\Remote\RemoteServiceProvider',
 		'Illuminate\Auth\Reminders\ReminderServiceProvider',
-		'Illuminate\Foundation\Providers\RouteListServiceProvider',
 		'Illuminate\Database\SeedServiceProvider',
-		'Illuminate\Foundation\Providers\ServerServiceProvider',
 		'Illuminate\Session\SessionServiceProvider',
-		'Illuminate\Foundation\Providers\TinkerServiceProvider',
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Illuminate\Remote\RemoteServiceProvider',
+
 		
         /* Additional Providers */
 		"Khill\Lavacharts\LavachartsServiceProvider",
-		'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
-        'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
-        'Bllim\Datatables\DatatablesServiceProvider', // Datatables
+		'Zizaco\Confide\ConfideServiceProvider', 
+        'Zizaco\Entrust\EntrustServiceProvider', 
+        'Bllim\Datatables\DatatablesServiceProvider',
 		'anlutro\LaravelSettings\ServiceProvider',
 		'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
 		'Regulus\ActivityLog\ActivityLogServiceProvider',
@@ -128,37 +134,38 @@ return array(
 		'Msurguy\Honeypot\HoneypotServiceProvider',
 		'Rtablada\Profane\FilterServiceProvider',
 		'Liebig\Cron\CronServiceProvider',
-		//'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
 
-    ),
+		/* LaravelCP */
+		'Gcphost\Helpers\UserServiceProvider',
+//'Barryvdh\Debugbar\ServiceProvider',
+	),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Service Provider Manifest
-    |--------------------------------------------------------------------------
-    |
-    | The service provider manifest is used by Laravel to lazy load service
-    | providers which are not needed for each request, as well to keep a
-    | list of all of the services. Here, you may set its storage spot.
-    |
-    */
+	/*
+	|--------------------------------------------------------------------------
+	| Service Provider Manifest
+	|--------------------------------------------------------------------------
+	|
+	| The service provider manifest is used by Laravel to lazy load service
+	| providers which are not needed for each request, as well to keep a
+	| list of all of the services. Here, you may set its storage spot.
+	|
+	*/
 
-    'manifest' => storage_path() . '/meta',
+	'manifest' => storage_path().'/meta',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Class Aliases
-    |--------------------------------------------------------------------------
-    |
-    | This array of class aliases will be registered when this application
-    | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
-    |
-    */
+	/*
+	|--------------------------------------------------------------------------
+	| Class Aliases
+	|--------------------------------------------------------------------------
+	|
+	| This array of class aliases will be registered when this application
+	| is started. However, feel free to register as many as you wish as
+	| the aliases are "lazy" loaded so they don't hinder performance.
+	|
+	*/
 
-    'aliases' => array(
-        /* Laravel Base Aliases */ 
-		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+	'aliases' => array(
+
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
@@ -197,25 +204,30 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-        /* Additional Aliases */
-        'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
-        'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
-        'String'          => 'Andrew13\Helpers\String', // String
-        'Carbon'          => 'Carbon\Carbon', // Carbon
-        'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
-		'Setting' => 'anlutro\LaravelSettings\Facade',
-		'Activity' => 'Regulus\ActivityLog\Activity',
-		'Gravatar' => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
-		'Anvard'=>'Atticmedia\Anvard\Anvard',
-		'Api'          => 'Gcphost\Helpers\Api', 
-		'Search'          => 'Gcphost\Helpers\Search', 
-		'CronWrapper'          => 'Gcphost\Helpers\CronWrapper', 
-		'Theme'          => 'Gcphost\Helpers\Theme', 
-		'Filter' => 'Rtablada\Profane\Facades\Filter',
-		'Eloquent' => 'Rtablada\Profane\Model',
-		//'Support'	=>	'Gcphost\L4cpSupport\Helpers\Support',
-),
 
-    'available_language' => array('en'),
+        /* Additional Aliases */
+        'Confide'         => 'Zizaco\Confide\ConfideFacade',
+        'Entrust'         => 'Zizaco\Entrust\EntrustFacade',
+        'Carbon'          => 'Carbon\Carbon',
+        'Datatables'      => 'Bllim\Datatables\Datatables',
+		'Setting'		  => 'anlutro\LaravelSettings\Facade',
+		'Activity'		  => 'Regulus\ActivityLog\Activity',
+		'Gravatar'		  => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
+		'Anvard'		  => 'Atticmedia\Anvard\Anvard',
+		'CronWrapper'	  => 'Gcphost\Helpers\CronWrapper', 
+		'Filter'		  => 'Rtablada\Profane\Facades\Filter',
+		'Eloquent'		  => 'Rtablada\Profane\Model',
+
+
+		/* LaravelCP */
+        'String'          => 'Andrew13\Helpers\String',
+		'Theme'           => 'Gcphost\Helpers\Theme', 
+		'Api'			  => 'Gcphost\Helpers\Api', 
+		'Search'          => 'Gcphost\Helpers\Search', 
+		'CronWrapper'     => 'Gcphost\Helpers\CronWrapper', 
+		'LCP'			  => 'Gcphost\Helpers\LaravelCP',
+
+	),
+	'available_language' => array('en'),
 
 );

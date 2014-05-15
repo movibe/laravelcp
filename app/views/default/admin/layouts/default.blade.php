@@ -8,8 +8,7 @@
 		{{{ Lang::get('core.administration') }}}
 	@show
 	</title>
-
-	<meta name="keywords" content="@yield('keywords')"/>
+<meta http-equiv="Last-Modified" content="Sun, 06 Nov 2005 14:59:42 GMT"> 	<meta name="keywords" content="@yield('keywords')"/>
 	<meta name="author" content="@yield('author')"/>
 	<meta name="description" content="@yield('description')"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
@@ -19,6 +18,8 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}}"/>
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}"/>
 	<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}"/>
+
+	@yield('head-scripts-pre')
 
 	@include(Theme::path('admin/css'))
 	@include(Theme::path('admin/js'))

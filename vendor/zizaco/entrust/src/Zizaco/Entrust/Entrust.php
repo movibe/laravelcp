@@ -96,6 +96,7 @@ class Entrust
      */
     public function routeNeedsRole( $route, $roles, $result = null, $cumulative=true )
     {
+
         if(!is_array($roles)) {
             $roles = array($roles);
         }

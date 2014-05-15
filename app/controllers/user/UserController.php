@@ -127,7 +127,7 @@ class UserController extends BaseController {
 
 			if ( $this->user->id )
 			{
-				$user=User::find($this->user->id);
+				$user=$this->user->find($this->user->id);
 				$user->saveRoles(array(Setting::get('users.default_role_id')));
 
 				return Redirect::to('user/login')->with( 'emailvalidation', Lang::get('user/user.user_account_created') );

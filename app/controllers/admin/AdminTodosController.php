@@ -11,7 +11,6 @@ class AdminTodosController extends AdminController {
      */
     public function __construct(Todos $todo)
     {
-        parent::__construct();
         $this->todo = $todo;
     }
 

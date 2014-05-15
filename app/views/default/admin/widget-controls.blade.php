@@ -1,7 +1,7 @@
 <div class="widget-controls pull-right">
 	<div class="btn-group">
 		<a href="#" class="btn btn-default btn-sm panel-close hide-full fa fa-trash-o" data-id="{{{ $id }}}"></a>
-		<select class="colorselector" data-id="{{{ $id }}}">
+		<!--<select class="colorselector" data-id="{{{ $id }}}">
 			  <option value="" data-color=""></option>
 			  <option value="106" data-color="#A0522D">sienna</option>
 			  <option value="47" data-color="#CD5C5C">indianred</option>
@@ -20,7 +20,7 @@
 			  <option value="78" data-color="#C71585">mediumvioletred</option>
 			  <option value="123" data-color="#000000">black</option>
 		</select>
-		<a href="#" class="btn btn-default btn-sm panel-max  fa fa-expand" data-id="{{{ $id }}}"></a>
+		<a href="#" class="btn btn-default btn-sm panel-max  fa fa-expand" data-id="{{{ $id }}}"></a>-->
 		<a href="#" class="btn btn-default btn-sm panel-hide hide-full fa fa-minus" data-id="{{{ $id }}}"></a>
 	</div>	  
 </div>
