@@ -1,6 +1,6 @@
 <?php namespace Gcphost\Helpers;
 
-use Search, Route, View, Config, Setting;
+use Route, View, Config, Setting;
 
 class Theme {
 	static private $tables=array();
