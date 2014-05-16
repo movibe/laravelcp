@@ -4,20 +4,20 @@ return array(
     'providers' => array (
 	
         'Facebook' => array (
-            'enabled' => true,
+            'enabled' => false,
 			"display" => "popup",
-            'keys'    => array ( 'id' => '377670419037612', 'secret' => '86ed78042214c1fe1f718392ab2903ec' ),
+            'keys'    => array ( 'id' => '', 'secret' => '' ),
         ),
 
 
         'LinkedIn' => array (
-            'enabled' => true,
-            'keys'    => array ( 'key' => '75c8xyhnwnp51f', 'secret' => 'WC8tmjIqUs3dfrOx' )
+            'enabled' => false,
+            'keys'    => array ( 'key' => '', 'secret' => '' )
         ),
 
         'Google' => array (
-            'enabled' => true,
-            'keys'    => array ( 'id' => '755864935816.apps.googleusercontent.com', 'secret' => '-L_yqFGWuDPL5tFU8yYNyj24' )
+            'enabled' => false,
+            'keys'    => array ( 'id' => '.apps.googleusercontent.com', 'secret' => '' )
         ),
 
 	   
