@@ -3,13 +3,6 @@ use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
-    public function delete()
-    {
-		$id=$this->id;
-		if(! parent::delete()) return false;
-		return empty($this->find($id)) ? true : false;
-    } 
-
     public function validateRoles( array $roles )
     {
         $user = Confide::user();
@@ -21,4 +14,11 @@ class Role extends EntrustRole
         }
         return $roleValidation;
     }
+
+    public function delete()
+    {
+		$id=$this->id;
+		if(! parent::delete()) return false;
+		return !$this->find($id) ? true : false;
+    } 
 }
