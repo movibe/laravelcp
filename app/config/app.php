@@ -139,6 +139,11 @@ return array(
 		/* LaravelCP */
 		'Gcphost\Helpers\UserServiceProvider',
 		'Gcphost\Helpers\TodoServiceProvider',
+		'Gcphost\Helpers\BlogServiceProvider',
+		'Gcphost\Helpers\CommentServiceProvider',
+		'Gcphost\Helpers\RoleServiceProvider',
+
+
 	),
 
 	/*

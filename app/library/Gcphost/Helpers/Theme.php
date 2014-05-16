@@ -66,10 +66,12 @@ class Theme {
 		# User Mass Management
 		Route::get('user/mass/email', 'AdminEmailController@getEmailMass');
 		Route::post('user/mass/email', 'AdminEmailController@postIndex');
-
-		Route::get('user/mass/merge', 'AdminUsersController@getMassMergeConfirm');
-		Route::post('user/mass/merge', 'AdminUsersController@postMerge');
+		
 		Route::delete('user/mass', 'AdminUsersController@postDeleteMass');
+
+		Route::get('user/mass/merge', 'AdminMergeController@getMassMergeConfirm');
+		Route::post('user/mass/merge', 'AdminMergeController@postMerge');
+
 
 
 		# User Profile Management

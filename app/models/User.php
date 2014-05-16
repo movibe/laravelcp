@@ -9,11 +9,6 @@ use Carbon\Carbon;
 class User extends ConfideUser {
     use HasRole;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
 	protected $table = 'users';
 
 	public static $rules = array(
@@ -22,8 +17,6 @@ class User extends ConfideUser {
         'password_confirmation' => 'min:4',
     );
 
-
-	
 	public function profiles()
     {
         return $this->hasMany('UserProfile');
@@ -43,9 +36,15 @@ class User extends ConfideUser {
         return $this->hasMany('Post');
     }
 
+	public function deleteProfile($profile){
+		$id=$profile->id;
+		if(!$profile->delete()) return false;
+		$profile=UserProfile::find($id);
+        return empty($profile);
+	}
+
     public function delete()
     {
-
         if ($this->id === $this->currentUser()->id)
         {
             return false;
@@ -61,22 +60,22 @@ class User extends ConfideUser {
 			'updated'     => $this->currentUser()->id ? true : false,
 		));
 
-
 		Event::fire('controller.user.delete', array($this));
        
-
 		if(! parent::delete()) return false;
 		return empty($this->find($id));
-
     } 
 
-
-
+	public function emails()
+    {
+		return Activity::whereRaw('user_id = ? AND content_type="email"', array($this->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+	}
 
 	public function lastlogin(){
 		return Activity::whereRaw('user_id = ? AND content_type="login"', array($this->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
 	}
+
 	public function activity()
     {
 		return Activity::whereRaw('user_id = ? AND content_type="activity"', array($this->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
@@ -86,7 +85,6 @@ class User extends ConfideUser {
 		return UserNotes::leftjoin('users', 'users.id', '=', 'user_notes.admin_id')
 					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->where('user_notes.user_id','=',$this->id)->orderBy('users.id');
 	}
-
 
 	public function merge($user){
 		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($this->id, $user->id));
@@ -100,22 +98,11 @@ class User extends ConfideUser {
 		return $user->delete();
 	}
 
-
-
-    /**
-     * Get the date the user was created.
-     *
-     * @return string
-     */
     public function joined()
     {
         return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
     }
 
-    /**
-     * Save roles inputted from multiselect
-     * @param $inputRoles
-     */
     public function saveRoles($inputRoles)
     {
         if(! empty($inputRoles)) {
@@ -125,10 +112,6 @@ class User extends ConfideUser {
         }
     }
 
-    /**
-     * Save profiles inputted from multiselect
-     * @param $inputRoles
-     */
     public function saveProfiles($inputProfile)
     {
         if(! empty($inputProfile)) {
@@ -137,11 +120,8 @@ class User extends ConfideUser {
             $this->profiles()->detach();
         }
     }
-    /**
-     * Returns user's current role ids only.
-     * @return array|bool
-     */
-    public function currentRoleIds()
+
+	public function currentRoleIds()
     {
         $roles = $this->roles;
         $roleIds = false;
@@ -155,19 +135,11 @@ class User extends ConfideUser {
         return $roleIds;
     }
 
-    /**
-     * Redirect after auth.
-     * If ifValid is set to true it will redirect a logged in user.
-     * @param $redirect
-     * @param bool $ifValid
-     * @return mixed
-     */
-    public static function checkAuthAndRedirect($redirect, $ifValid=false)
+	public static function checkAuthAndRedirect($redirect, $ifValid=false)
     {
-        // Get the user information
         $user = Auth::user();
         $redirectTo = false;
-        if(empty($user->id) && ! $ifValid) // Not logged in redirect, set session.
+        if(empty($user->id) && ! $ifValid) 
         {
             Session::put('loginRedirect', $redirect);
             $redirectTo = Redirect::to('user/login')
@@ -185,6 +157,17 @@ class User extends ConfideUser {
     {
         return (new Confide(new ConfideEloquentRepository()))->user();
     }
+
+	public function chart(){
+		$chart = Lava::DataTable('activeusers');
+		$chart->addColumn('string', 'Active', 'active');
+		$chart->addColumn('string', 'Inactive', 'inactive');
+
+		$chart->addRow(array('Active',DB::table('users')->where('confirmed', '=', '1')->count()));
+		$chart->addRow(array('In-active',DB::table('users')->where('confirmed', '!=', '1')->count()));
+
+		Lava::PieChart('activeusers')->addOption(array('chartArea' => array('width'=>'98%', 'height'=>'98%')))->addOption(array('backgroundColor' => 'none'))->addOption(array('is3D' => 'true'))->addOption(array('legend' => 'none'));
+	}	
 
 
 }

@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Filesystem\Filesystem;
 use Gcphost\Helpers\User\UserRepository as User;
 
 class AdminUsersController extends AdminController {
@@ -26,11 +25,10 @@ class AdminUsersController extends AdminController {
 		return Api::json($this->user->clients(Input::get('q'),Input::get('page_limit'), Input::get('page'), Input::get('id'), true)->toArray());
 	}
 
-
     public function getIndex()
     {
         $users = $this->user;
-		LCP::userChart();
+		$users->chart();
        	return Theme::make('admin/users/index', compact('users'));
     }
 
@@ -77,7 +75,6 @@ class AdminUsersController extends AdminController {
         if ( $user->id )
         {
 			$list = $user->activity();
-
 			if(Api::Enabled()){
 				$u=$list->get();
 				return Api::make($u->toArray());
@@ -89,7 +86,6 @@ class AdminUsersController extends AdminController {
 
     public function getNotes($user)
     {
-
         if ( $user->id )
         {
 			$list = $user->getnotes();
@@ -127,7 +123,6 @@ class AdminUsersController extends AdminController {
 
     public function putEdit($user)
     {
-		
 		if(!Input::get( 'password' )) {
 			$rules = array(
 				'displayname' => 'required',
@@ -162,31 +157,6 @@ class AdminUsersController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
     }
 
-    public function getMassMergeConfirm()
-    {
-		$ids=explode(',',rtrim(Input::get('ids'),','));
-		$mergefrom='';
-		$mergelist=array();
-
-		if(is_array($ids) && count($ids) > 0){
-			foreach($ids as $id){
-				$user=$this->user->find($id);
-				if(!empty($user)){
-					if($mergefrom){
-						$mergelist[$id]=$user->email;
-					}else $mergefrom=$user->email;
-				}
-			}
-		}
-
-        return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
-    }
-
-    public function postMerge()
-    {
-		return LCP::merge();
-	}
- 
     public function postDeleteMass()
     {
 		$rows=json_decode(Input::get('rows'));

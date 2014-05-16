@@ -1,16 +1,15 @@
 <?php
-
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
+    public function delete()
+    {
+		$id=$this->id;
+		if(! parent::delete()) return false;
+		return empty($this->find($id));
+    } 
 
-
-    /**
-     * Provide an array of strings that map to valid roles.
-     * @param array $roles
-     * @return stdClass
-     */
     public function validateRoles( array $roles )
     {
         $user = Confide::user();

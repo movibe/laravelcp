@@ -1,18 +1,14 @@
 <?php
-
 class AdminSettingsController extends AdminController
 {
-
 	public function getIndex()
     {
 		$settings=Setting::all();
         return Theme::make('admin/settings/index', compact('comments', 'settings'));
     }
-
    
 	public function postIndex()
 	{
-
         $rules = array(
         );
 

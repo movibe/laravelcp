@@ -10,11 +10,10 @@ class AdminEmailController extends AdminController {
 
     }
 
-
 	 public function getEmails($user){
         if ( $user->id )
         {
-			$list = Activity::whereRaw('user_id = ? AND content_type="email"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+			$list = $user->emails();
 
 			if(Api::Enabled()){
 				$u=$list->get();
@@ -25,7 +24,6 @@ class AdminEmailController extends AdminController {
 				->make();
 		}
 	 }
-
    
     public function getIndex($user)
     {
@@ -37,8 +35,6 @@ class AdminEmailController extends AdminController {
         	return Theme::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
         } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
-
-
 
     public function postIndex($user=false)
     {

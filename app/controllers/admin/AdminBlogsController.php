@@ -1,25 +1,14 @@
 <?php
 use Illuminate\Filesystem\Filesystem;
+use Gcphost\Helpers\Blog\BlogRepository as Post;
 
 class AdminBlogsController extends AdminController {
     protected $post;
 
 	public function __construct(Post $post)
     {
-        parent::__construct();
         $this->post = $post;
     }
-
-	private function getPostTemplates(){
-		$path=Config::get('view.paths');
-		$fileSystem = new Filesystem;
-		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.Theme::getTheme().DIRECTORY_SEPARATOR.'site'.DIRECTORY_SEPARATOR.'layouts');
-		return $files;
-	}
-
-	private function getPostParents(){
-		return array_merge(array('0'=>''),DB::table('posts')->orderBy('title', 'asc')->lists('title','id'));
-	}
 
     public function getIndex()
     {
@@ -29,8 +18,8 @@ class AdminBlogsController extends AdminController {
 
 	public function getCreate()
 	{
-		$templates=$this->getPostTemplates();
-		$parents=$this->getPostParents();
+		$templates=$this->post->templates();
+		$parents=$this->post->parents();
         return Theme::make('admin/blogs/create_edit', compact('templates', 'parents'));
 	}
 
@@ -45,40 +34,21 @@ class AdminBlogsController extends AdminController {
 
         if ($validator->passes())
         {
-            $user = Auth::user();
-
-			$this->post->title            = Input::get('title');
-            $this->post->slug             = Str::slug(Input::get('title'));
-            $this->post->content          = Input::get('content');
-            $this->post->meta_title       = Input::get('meta-title');
-            $this->post->meta_description = Input::get('meta-description');
-            $this->post->meta_keywords    = Input::get('meta-keywords');
-            $this->post->user_id          = $user->id;
-
- 			$this->post->banner			 = Input::get('banner');
-            $this->post->display_author    = (int)Input::get('display_author');
-            $this->post->allow_comments    = (int)Input::get('allow_comments');
-            $this->post->template    = Input::get('template');
-            $this->post->parent    = (int)Input::get('parent');
-            $this->post->display_navigation    = (int)Input::get('display_navigation');
-
-            if($this->post->save())
-            {
-                return Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
-            } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+           return $this->post->createOrUpdate() ?
+				Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success')) :
+				Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
 	public function getEdit($post)
 	{
-		$templates=$this->getPostTemplates();
-		$parents=$this->getPostParents();
+		$templates=$this->post->templates();
+		$parents=$this->post->parents();
         return Theme::make('admin/blogs/create_edit', compact('post', 'templates', 'parents'));
 	}
 
 	public function putEdit($post)
 	{
-
         $rules = array(
             'title'   => 'required|min:3',
             'content' => 'required|min:3'
@@ -88,47 +58,26 @@ class AdminBlogsController extends AdminController {
 
         if ($validator->passes())
         {
-            $post->title            = Input::get('title');
-            $post->slug             = Str::slug(Input::get('title'));
-            $post->content          = Input::get('content');
-            $post->meta_title       = Input::get('meta-title');
-            $post->meta_description = Input::get('meta-description');
-            $post->meta_keywords    = Input::get('meta-keywords');
- 			$post->banner			 = Input::get('banner');
-            $post->display_author    = (int)Input::get('display_author');
-            $post->allow_comments    = (int)Input::get('allow_comments');
-            $post->template    = Input::get('template');
-            $post->parent    = (int)Input::get('parent');
-            $post->display_navigation    = (int)Input::get('display_navigation');
-
-            return $post->save() ? Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success')) : Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
+           return $this->post->createOrUpdate($post->id) ?
+				Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success')) :
+			    Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
 	}
 
     public function deleteIndex($post)
     {
-		$id = $post->id;
-		$id = $post->id;
-		if(!$post->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-		$post=Post::find($id);
-        return empty($post) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
+		return $post->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
+
     public function getData()
     {
-        $posts = Post::select(array('posts.id', 'posts.title', 'posts.id as comments', 'posts.created_at'));
-
-        if(Api::Enabled()){
-			$u=$posts->get();
-			return Api::make($u->toArray());
-		} else return Datatables::of($posts)
-
+		if(Api::Enabled()){
+			return Api::make($this->post->all()->get()->toArray());
+		} else return Datatables::of($this->post->all())
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
-
         ->add_column('actions', '<div class="btn-group"><a href="{{{ URL::to(\'admin/slugs/\' . $id . \'/edit\' ) }}}" class="btn btn-primary btn-sm modalfy" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a data-method="delete" data-row="{{{  $id }}}" data-table="blogs"  href="{{{ URL::to(\'admin/slugs/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a></div>
             ')
-
         ->make();
     }
-
 }

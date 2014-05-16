@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Filesystem\Filesystem;
 class AdminProfileController extends AdminController {
     protected $user;
     protected $role;
@@ -16,9 +15,6 @@ class AdminProfileController extends AdminController {
 
     public function deleteIndex($user, $profile)
     {
-		$id=$profile->id;
-		if(!$profile->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-		$profile=UserProfile::find($id);
-        return empty($profile) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		return $this->user->deleteProfile($profile) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
 	}
 }

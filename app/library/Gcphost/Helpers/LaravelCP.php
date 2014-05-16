@@ -28,19 +28,6 @@ class LaravelCP {
 
 	}
 
-	static public function userChart(){
-		$chart = Lava::DataTable('activeusers');
-		$chart->addColumn('string', 'Active', 'active');
-		$chart->addColumn('string', 'Inactive', 'inactive');
-
-		$chart->addRow(array('Active',DB::table('users')->where('confirmed', '=', '1')->count()));
-		$chart->addRow(array('In-active',DB::table('users')->where('confirmed', '!=', '1')->count()));
-
-		Lava::PieChart('activeusers')->addOption(array('chartArea' => array('width'=>'98%', 'height'=>'98%')))->addOption(array('backgroundColor' => 'none'))->addOption(array('is3D' => 'true'))->addOption(array('legend' => 'none'));
-	}	
-
-
-
 
 	static public function runDeleteMass($r){
 		if ($r != Confide::user()->id){
