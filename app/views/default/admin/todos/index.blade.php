@@ -12,7 +12,7 @@
 	<div class="page-header clearfix">		
 		<div class="pull-left"><h3>{{{ Lang::get('core.todos') }}}</h3></div>
 		<div class="pull-right">
-			<a href="{{{ URL::to('admin/todos/create') }}}" class="btn  btn-info modalfy"><span class="fa fa-plus"></span> {{{ Lang::get('button.create') }}}</a>
+			<a href="{{{ URL::to('admin/todos/create') }}}" class="btn btn-info modalfy"><span class="fa fa-plus"></span> {{{ Lang::get('button.create') }}}</a>
 		</div>
 	</div>
 

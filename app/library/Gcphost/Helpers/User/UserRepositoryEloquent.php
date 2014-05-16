@@ -83,8 +83,6 @@ class EloquentUserRepository implements UserRepository
         }
     }
 
-
-
 	public function all($type=null){
 		$results=User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')

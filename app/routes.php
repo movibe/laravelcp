@@ -18,10 +18,13 @@ Route::pattern('token', '[0-9a-z]+');
 Route::pattern('any', '[0-9a-z].+');
 
 $prefix = Request::segment(1);
-if(in_array($prefix, array('admin','json', 'xml')) && $prefix != 'admin'){
+if(in_array($prefix, array('json', 'xml')) && $prefix != 'admin'){
 	$before = $prefix.'|auth.basic|checkuser';
 	$prefix = $prefix.'/admin';
-} else $before='auth|checkuser';
+} else {
+	$before='auth|checkuser';
+	$prefix='admin';
+}
 
 Route::group(array('prefix' => $prefix, 'suffix' => array('.json', '.xml', '*'), 'before' => $before), function()
 {

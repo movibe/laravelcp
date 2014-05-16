@@ -73,9 +73,6 @@
                 }
             }); 
 			</script>
-
-
-
 		<div class="modal-footer">
 			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 

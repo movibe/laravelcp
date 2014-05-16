@@ -4,16 +4,22 @@
 	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-colorselector.css') }}}"/>
 	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.css') }}}"/>
 	<link rel="stylesheet" href="{{{ asset('assets/css/jquery.gridster.responsive.css') }}}"/>
-	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}}"/>
+	<link rel="stylesheet" href="{{{ asset('assets/css/bootstrap-editable.css') }}}"/>
 @stop
 @section('sub-nav-settings')
 	<li class="divider"></li>
 	<li><a href="{{{ URL::to('admin') }}}" onclick="localStorage.clear();"><span class="fa fa-trash-o fa-fw"></span> {{{ Lang::get('button.cleardashsettings') }}}</a></li>
 @stop
 
+@section('head-scripts')
+	<script src="{{{ asset('assets/js/moment.min.js') }}}"></script>
+	<script src="{{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}}"></script>
+@stop
+
 @section('scripts')
-	<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+	<script src="{{{ asset('assets/js/bootstrap-editable.min.js') }}}"></script>
+	<script src="{{{ asset('assets/js/jquery.sparkline.min.js') }}}"></script>
 	<script src="{{{ asset('assets/js/bootstrap-colorselector.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.js') }}}"></script>
 	<script src="{{{ asset('assets/js/jquery.gridster.responsive.js') }}}"></script>
