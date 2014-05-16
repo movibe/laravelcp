@@ -1,5 +1,17 @@
 <?php
 
+
+View::composer(array('*view_post'), function($view) 
+{
+	$viewdata=$view->getData();
+	if(!Auth::check()) return $view->nest('commentForm', 'default/site/blog/comment_auth');
+	if(!$viewdata['canComment']) return $view->nest('commentForm', 'default/site/blog/comment_perm');
+	return $view->nest('commentForm', 'default/site/blog/comment_form', array('post' => $viewdata['post']));
+});
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application & Route Filters

@@ -32,7 +32,7 @@
 		"atticmedia/anvard": "dev-master"
 	},
 	"require-dev": {
-		"way/generators": "dev-master",
+		"dollar/generators": "1.0.*@dev",
 		"mockery/mockery": "dev-master@dev",
 		"summerstreet/woodling": "0.1.*",
 		"barryvdh/laravel-ide-helper": "dev-master",

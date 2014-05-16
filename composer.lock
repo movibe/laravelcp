@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "497cfcca8bd848ec6b6fd7e11d05f830",
+    "hash": "e8e26e9abba424040ac50efbb2696847",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -168,12 +168,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caouecs/Laravel4-lang.git",
-                "reference": "3d2be3eccb4031cbc3db7174418d27928cd51fff"
+                "reference": "c5936858b37ac608b3c7ecc4814f709f8cd1e11f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caouecs/Laravel4-lang/zipball/3d2be3eccb4031cbc3db7174418d27928cd51fff",
-                "reference": "3d2be3eccb4031cbc3db7174418d27928cd51fff",
+                "url": "https://api.github.com/repos/caouecs/Laravel4-lang/zipball/c5936858b37ac608b3c7ecc4814f709f8cd1e11f",
+                "reference": "c5936858b37ac608b3c7ecc4814f709f8cd1e11f",
                 "shasum": ""
             },
             "type": "library",
@@ -196,7 +196,7 @@
                 "laravel",
                 "lpm"
             ],
-            "time": "2014-04-27 11:41:44"
+            "time": "2014-05-15 18:35:02"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -683,12 +683,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liebig/cron.git",
-                "reference": "dd39c004506d1400992fcf0fb21feb3f7d848492"
+                "reference": "ccc30c6b09a78ef6d643717d808c1f9f339997b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liebig/cron/zipball/dd39c004506d1400992fcf0fb21feb3f7d848492",
-                "reference": "dd39c004506d1400992fcf0fb21feb3f7d848492",
+                "url": "https://api.github.com/repos/liebig/cron/zipball/ccc30c6b09a78ef6d643717d808c1f9f339997b6",
+                "reference": "ccc30c6b09a78ef6d643717d808c1f9f339997b6",
                 "shasum": ""
             },
             "require": {
@@ -725,7 +725,7 @@
                 "cronmanager",
                 "laravel"
             ],
-            "time": "2014-05-15 08:30:41"
+            "time": "2014-05-16 07:41:09"
         },
         {
             "name": "monolog/monolog",
@@ -2904,12 +2904,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0df188624892ecc58751b3f7720c364dac99f998"
+                "reference": "6252da0cf1ed04cc790af533f0841bf5c01de44e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0df188624892ecc58751b3f7720c364dac99f998",
-                "reference": "0df188624892ecc58751b3f7720c364dac99f998",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6252da0cf1ed04cc790af533f0841bf5c01de44e",
+                "reference": "6252da0cf1ed04cc790af533f0841bf5c01de44e",
                 "shasum": ""
             },
             "require": {
@@ -2970,7 +2970,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-05-13 23:04:38"
+            "time": "2014-05-16 11:43:27"
         },
         {
             "name": "doctrine/inflector",
@@ -3102,6 +3102,68 @@
             "time": "2013-12-20 21:39:00"
         },
         {
+            "name": "dollar/generators",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wdollar/Laravel-4-Generators-Bootstrap-3.git",
+                "reference": "fbfe72010f731067b7a9903a467c808abfb7559f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wdollar/Laravel-4-Generators-Bootstrap-3/zipball/fbfe72010f731067b7a9903a467c808abfb7559f",
+                "reference": "fbfe72010f731067b7a9903a467c808abfb7559f",
+                "shasum": ""
+            },
+            "require": {
+                "mustache/mustache": "2.4.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "illuminate/console": "~4",
+                "illuminate/filesystem": "~4",
+                "illuminate/support": "~4",
+                "mockery/mockery": "0.8.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Dollar\\Generators": "src/"
+                },
+                "classmap": [
+                    "src/Dollar/Generators/Generators"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@jeffrey-way.com",
+                    "homepage": "http://jeffrye-way.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Wes Dollar",
+                    "email": "github@wesdollar.com",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Laravel 4 Generators w/ Bootstrap 3",
+            "keywords": [
+                "artisan",
+                "bootstrap",
+                "generators",
+                "laravel",
+                "scaffold"
+            ],
+            "time": "2014-05-11 14:35:11"
+        },
+        {
             "name": "lmammino/jsmin4assetic",
             "version": "dev-master",
             "source": {
@@ -3158,12 +3220,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e"
+                "reference": "2169d215819d7011110ce00de10869ec329c0667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/715721895260a951d9cb9c2b9269d5333fb37a5e",
-                "reference": "715721895260a951d9cb9c2b9269d5333fb37a5e",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/2169d215819d7011110ce00de10869ec329c0667",
+                "reference": "2169d215819d7011110ce00de10869ec329c0667",
                 "shasum": ""
             },
             "require": {
@@ -3216,7 +3278,52 @@
                 "test double",
                 "testing"
             ],
-            "time": "2014-05-02 12:25:43"
+            "time": "2014-05-16 09:29:12"
+        },
+        {
+            "name": "mustache/mustache",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobthecow/mustache.php.git",
+                "reference": "14bc3b4f6a4770b535fc433bfd0435471ed386c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/14bc3b4f6a4770b535fc433bfd0435471ed386c6",
+                "reference": "14bc3b4f6a4770b535fc433bfd0435471ed386c6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mustache": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Hileman",
+                    "email": "justin@justinhileman.info",
+                    "homepage": "http://justinhileman.com"
+                }
+            ],
+            "description": "A Mustache implementation in PHP.",
+            "homepage": "https://github.com/bobthecow/mustache.php",
+            "keywords": [
+                "mustache",
+                "templating"
+            ],
+            "time": "2013-08-13 04:49:23"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -4016,12 +4123,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "e9525fc511a51e7bfa214c6c420515c580fda35a"
+                "reference": "2158ca824145bd01877f58c987aff828bccddefa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/e9525fc511a51e7bfa214c6c420515c580fda35a",
-                "reference": "e9525fc511a51e7bfa214c6c420515c580fda35a",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/2158ca824145bd01877f58c987aff828bccddefa",
+                "reference": "2158ca824145bd01877f58c987aff828bccddefa",
                 "shasum": ""
             },
             "require": {
@@ -4056,55 +4163,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-18 20:40:13"
-        },
-        {
-            "name": "way/generators",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JeffreyWay/Laravel-4-Generators.git",
-                "reference": "1d7c9338d363899e17c13e7365a3a1c45ca13e8b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/1d7c9338d363899e17c13e7365a3a1c45ca13e8b",
-                "reference": "1d7c9338d363899e17c13e7365a3a1c45ca13e8b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "behat/behat": "~2.5.1",
-                "behat/mink": "~1.5.0",
-                "behat/mink-extension": "~1.2.0",
-                "behat/mink-goutte-driver": "~1.0.9",
-                "behat/mink-selenium2-driver": "~1.1.1",
-                "phpspec/phpspec": "~2.0",
-                "phpunit/phpunit": "~3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Way\\Generators": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeffrey Way",
-                    "email": "jeffrey@jeffrey-way.com",
-                    "homepage": "http://jeffrye-way.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Rapidly generate resources, migrations, models, and much more.",
-            "time": "2014-04-28 21:58:48"
+            "time": "2014-05-16 14:25:18"
         }
     ],
     "aliases": [
@@ -4123,7 +4182,7 @@
         "rtablada/profane": 20,
         "liebig/cron": 20,
         "atticmedia/anvard": 20,
-        "way/generators": 20,
+        "dollar/generators": 20,
         "mockery/mockery": 20,
         "barryvdh/laravel-ide-helper": 20,
         "phpunit/phpunit": 20

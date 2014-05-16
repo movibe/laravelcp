@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -134,10 +134,10 @@ return array(
 		'Msurguy\Honeypot\HoneypotServiceProvider',
 		'Rtablada\Profane\FilterServiceProvider',
 		'Liebig\Cron\CronServiceProvider',
+		'Dollar\Generators\GeneratorsServiceProvider',
 
 		/* LaravelCP */
 		'Gcphost\Helpers\UserServiceProvider',
-//'Barryvdh\Debugbar\ServiceProvider',
 	),
 
 	/*
