@@ -1,5 +1,9 @@
 @extends(Theme::path('admin/layouts/modal'))
 
+@section('title')
+	{{{ Lang::get('admin/roles/title.create_a_new_role') }}}
+@stop
+
 @section('content')
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">

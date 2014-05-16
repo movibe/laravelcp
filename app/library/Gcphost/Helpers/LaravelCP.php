@@ -6,19 +6,27 @@ use Illuminate\Filesystem\Filesystem;
 class LaravelCP {
 	static private $email;
 
-	static public function merge($_merge_to, $user){
-		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
-		DB::update('UPDATE posts set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
-		DB::update('UPDATE comments set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
-		DB::update('UPDATE activity_log set user_id = ? where user_id = ?', array($_merge_to->id, $user->id));
-		DB::table('assigned_roles')->where('user_id', '=', $user->id)->delete();
+	static public function merge(){
+		$rows=json_decode(Input::get('rows'));
+		if(is_array($rows) && count($rows) > 0){
+			if(count($rows) < 2) return Api::to(array('error',Lang::get('core.mergeerror'))) ? : \Response::json(array('result'=>'error', 'error' =>  Lang::get('core.mergeerror')));
+			$_merge_to=false;
+			foreach($rows as $i=>$r){
+				if ($r != Confide::user()->id){
+					$user = User::find($r);
+					if(!empty($user)){
+						if(!$_merge_to){
+							$_merge_to=$user;
+							continue;
+						}
+						$user->merge($user);
+					} else  return Api::to(array('error', '')) ? : \Response::json(array('result'=>'error', 'error' =>  ''));
+				}
+			}
+		}
+		if(!Api::make(array('success'))) return \Response::json(array('result'=>'success'));
 
-		Event::fire('controller.user.merge', array($user));
-
-		return $user->delete();
 	}
-
-
 
 	static public function userChart(){
 		$chart = Lava::DataTable('activeusers');

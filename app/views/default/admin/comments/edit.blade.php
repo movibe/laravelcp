@@ -1,5 +1,9 @@
 @extends(Theme::path('admin/layouts/modal'))
 
+@section('title')
+	{{{ Lang::get('admin/comments/title.comment_update') }}}
+@stop
+
 @section('content')
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>

@@ -8,7 +8,6 @@ class AdminUsersController extends AdminController {
     protected $role;
     protected $permission;
 
-
     public function __construct(User $user, Role $role, Permission $permission)
     {
         $this->user = $user;
@@ -47,7 +46,6 @@ class AdminUsersController extends AdminController {
 
     public function postCreate()
     {
-
   		$rules = array(
 			'displayname'      => 'required',
 			'email'      => 'required|email',
@@ -75,11 +73,10 @@ class AdminUsersController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
     }
 
-
 	 public function getActivity($user){
         if ( $user->id )
         {
-			$list = Activity::whereRaw('user_id = ? AND content_type="activity"', array($user->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+			$list = $user->activity();
 
 			if(Api::Enabled()){
 				$u=$list->get();
@@ -90,6 +87,22 @@ class AdminUsersController extends AdminController {
 		}
 	 }
 
+    public function getNotes($user)
+    {
+
+        if ( $user->id )
+        {
+			$list = $user->getnotes();
+			if(Api::Enabled()){
+				$u=$list->get();
+				return Api::make($u->toArray());
+			} else return Datatables::of($list)
+				 ->edit_column('note','<textarea name="user_notes[{{{$id}}}]" class="form-control" style="width: 100%">{{{ $note }}}</textarea>')
+				 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
+				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
+				->make();
+		}
+	}
 
 	public function postResetpassword($user){
 		if(!Confide::forgotPassword( $user->email)){
@@ -103,36 +116,15 @@ class AdminUsersController extends AdminController {
         {
             $roles = $this->role->all();
 			$profiles=$user->profiles;
+			$last_login = $user->lastlogin();
 
             $permissions = $this->permission->all();
         	$mode = 'edit';
-
-			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
 			return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'mode', 'profiles', 'last_login'));
         } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
 
-    public function getNotes($user)
-    {
-
-        if ( $user->id )
-        {
-			$list = UserNotes::leftjoin('users', 'users.id', '=', 'user_notes.admin_id')
-					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->where('user_notes.user_id','=',$user->id)->orderBy('users.id');
-			if(Api::Enabled()){
-				$u=$list->get();
-				return Api::make($u->toArray());
-			} else return Datatables::of($list)
-				 ->edit_column('note','<textarea name="user_notes[{{{$id}}}]" class="form-control" style="width: 100%">{{{ $note }}}</textarea>')
-				 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
-				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
-				->make();
-		}
-	}
-
-
-	
     public function putEdit($user)
     {
 		
@@ -170,31 +162,6 @@ class AdminUsersController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));
     }
 
-
-
-    public function postMerge()
-    {
-		$rows=json_decode(Input::get('rows'));
-		if(is_array($rows) && count($rows) > 0){
-			if(count($rows) < 2) return Api::to(array('error',Lang::get('core.mergeerror'))) ? : Response::json(array('result'=>'error', 'error' =>  Lang::get('core.mergeerror')));
-			$_merge_to=false;
-			foreach($rows as $i=>$r){
-				if ($r != Confide::user()->id){
-					$user = $this->user->find($r);
-					if(!empty($user)){
-						if(!$_merge_to){
-							$_merge_to=$user;
-							continue;
-						}
-						LCP::merge($_merge_to, $user);
-					} else  return Api::to(array('error', '')) ? : Response::json(array('result'=>'error', 'error' =>  ''));
-				}
-			}
-		}
-		if(!Api::make(array('success'))) return Response::json(array('result'=>'success'));
-    }
-
-
     public function getMassMergeConfirm()
     {
 		$ids=explode(',',rtrim(Input::get('ids'),','));
@@ -215,6 +182,10 @@ class AdminUsersController extends AdminController {
         return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
     }
 
+    public function postMerge()
+    {
+		return LCP::merge();
+	}
  
     public function postDeleteMass()
     {
@@ -225,33 +196,11 @@ class AdminUsersController extends AdminController {
 		if(!Api::make(array('success'))) return Response::json(array('result'=>'success'));
 	}
 
-
     public function deleteIndex($user)
     {
-        if ($user->id === Confide::user()->id)
-        {
-            return Api::to(array('error', Lang::get('admin/users/messages.delete.impossible'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.delete.impossible'));
-        }
-
-		$id=$user->id;
-
-		Activity::log(array(
-			'contentID'   => $user->id,
-			'contentType' => 'account_deleted',
-			'description' => $user->id,
-			'details'     => '',
-			'updated'     => Confide::user()->id ? true : false,
-		));
-
-
-		Event::fire('controller.user.delete', array($user));
-
-		if(!$user->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-		$user=$this->user->find($id);
-        return empty($user) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
         
+        return !($user->delete()) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
-
 
     public function getData()
     {

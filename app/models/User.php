@@ -45,8 +45,61 @@ class User extends ConfideUser {
 
     public function delete()
     {
-        return parent::delete();
-    }
+
+        if ($this->id === $this->currentUser()->id)
+        {
+            return false;
+        }
+
+		$id=$this->id;
+
+		Activity::log(array(
+			'contentID'   => $this->id,
+			'contentType' => 'account_deleted',
+			'description' => $this->id,
+			'details'     => '',
+			'updated'     => $this->currentUser()->id ? true : false,
+		));
+
+
+		Event::fire('controller.user.delete', array($this));
+       
+
+		if(! parent::delete()) return false;
+		return $this->find($id);
+
+    } 
+
+
+
+
+	public function lastlogin(){
+		return Activity::whereRaw('user_id = ? AND content_type="login"', array($this->id))->select(array('details'))->orderBy('id', 'DESC')->first();
+
+	}
+	public function activity()
+    {
+		return Activity::whereRaw('user_id = ? AND content_type="activity"', array($this->id))->select(array('user_id','description', 'details','ip_address', 'updated_at'))->orderBy('id', 'DESC');
+	}
+
+	public function getnotes(){
+		return UserNotes::leftjoin('users', 'users.id', '=', 'user_notes.admin_id')
+					->select(array('user_notes.id', 'user_notes.note', 'user_notes.created_at', 'user_notes.updated_at', 'users.displayname'))->where('user_notes.user_id','=',$this->id)->orderBy('users.id');
+	}
+
+
+	public function merge($user){
+		DB::update('UPDATE user_profiles set user_id = ? where user_id = ?', array($this->id, $user->id));
+		DB::update('UPDATE posts set user_id = ? where user_id = ?', array($this->id, $user->id));
+		DB::update('UPDATE comments set user_id = ? where user_id = ?', array($this->id, $user->id));
+		DB::update('UPDATE activity_log set user_id = ? where user_id = ?', array($this->id, $user->id));
+		DB::table('assigned_roles')->where('user_id', '=', $this->id)->delete();
+
+		Event::fire('controller.user.merge', array($user));
+
+		return $user->delete();
+	}
+
 
 
     /**

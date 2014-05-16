@@ -51,6 +51,7 @@ class AdminEmailController extends AdminController {
      */
     public function postIndex($user=false)
     {
+		$title = Lang::get('core.email');
 
 		if(is_array(Input::get('to')) && count(Input::get('to')) >0){
 			$_results=false;
@@ -62,10 +63,10 @@ class AdminEmailController extends AdminController {
 			}
 			if($_results == true){
 				$message=Lang::get('admin/users/messages.email.success');
-				return Theme::make('admin/users/email_results', compact('message', '_results'));
+				return Theme::make('admin/users/email_results', compact('title','message', '_results'));
 			} else {
 				$message=Lang::get('admin/users/messages.email.error');
-				return Theme::make('admin/users/email_results', compact('message', '_results'));
+				return Theme::make('admin/users/email_results', compact('title','message', '_results'));
 			}
 		} elseif (isset($user))
         {
@@ -74,7 +75,7 @@ class AdminEmailController extends AdminController {
 			} else return Api::to(array('error', Lang::get('admin/users/messages.email.error'))) ? : Redirect::to('admin/users/' . $user->id . '/email')->with('error', Lang::get('admin/users/messages.email.error'));
 		} else {
 			$message=Lang::get('admin/users/messages.email.error');
-			Theme::make('admin/users/email_results', compact('message'));
+			Theme::make('admin/users/email_results', compact('title','message'));
 		}
     }
 
@@ -97,10 +98,10 @@ class AdminEmailController extends AdminController {
 		
 		}
 
-
+		$title = Lang::get('core.email');
 		$mode = 'edit';
 		$templates=LCP::emailTemplates();
-		return Theme::make('admin/users/send_email', compact('mode', 'multi', 'templates'));
+		return Theme::make('admin/users/send_email', compact('title','mode', 'multi', 'templates'));
 	}
 
 }

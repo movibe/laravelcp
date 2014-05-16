@@ -1,5 +1,13 @@
 @extends(Theme::path('admin/layouts/modal'))
 
+@section('title')
+	@if (isset($todo))
+		{{{ Lang::get('admin/todos/title.update') }}}
+	@else
+		{{{ Lang::get('admin/todos/title.create_a_new') }}}
+	@endif
+@stop
+
 @section('content')
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">

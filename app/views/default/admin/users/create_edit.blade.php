@@ -1,5 +1,13 @@
 @extends(Theme::path('admin/layouts/modal'))
 
+@section('title')
+	@if (isset($user))
+		{{{ Lang::get('admin/users/title.user_update') }}}
+	@else
+		{{{ Lang::get('admin/users/title.create_a_new_user') }}}
+	@endif
+@stop
+
 @section('content')
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>

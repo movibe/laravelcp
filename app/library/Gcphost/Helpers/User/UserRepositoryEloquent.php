@@ -12,7 +12,6 @@ class EloquentUserRepository implements UserRepository
         $this->user = $user;
     }
 
-
 	public function createOrUpdate($id = null)
     {
         if(is_null($id)) {
