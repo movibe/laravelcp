@@ -62,7 +62,7 @@ class User extends ConfideUser {
 		Event::fire('controller.user.delete', array($this));
        
 		if(! parent::delete()) return false;
-		return empty($this->find($id));
+		return empty($this->find($id)) ? true : false;
     } 
 
 	public function emails()

@@ -7,7 +7,7 @@ class Role extends EntrustRole
     {
 		$id=$this->id;
 		if(! parent::delete()) return false;
-		return empty($this->find($id));
+		return empty($this->find($id)) ? true : false;
     } 
 
     public function validateRoles( array $roles )

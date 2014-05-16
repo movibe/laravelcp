@@ -6,7 +6,7 @@ class Todos extends Eloquent {
     {
 		$id=$this->id;
 		if(! parent::delete()) return false;
-		return empty($this->find($id));
+		return empty($this->find($id)) ? true : false;
     } 
 
 	public function assign(){
