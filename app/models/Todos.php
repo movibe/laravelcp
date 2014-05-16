@@ -1,10 +1,8 @@
 <?php
-
 class Todos extends Eloquent {
-
 	protected $table = 'todos';
 
-    public function delete()
+	public function delete()
     {
 		$id=$this->id;
 		if(! parent::delete()) return false;
@@ -15,5 +13,4 @@ class Todos extends Eloquent {
 		$this->admin_id=Confide::user()->id;
         return $this->save();
 	}
-
 }

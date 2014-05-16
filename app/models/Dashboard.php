@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Filesystem\Filesystem;
 
 class Dashboard extends Eloquent {
@@ -38,8 +37,13 @@ class Dashboard extends Eloquent {
 							->get()->toArray();
 	}
 
-	static public function online(){
-		return DB::select('SELECT email FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ?', array(time()-600));
+	static public function online($value=10){
+		return DB::select('SELECT email, displayname, id, last_activity FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ? LIMIT ?', array(time()-150, $value));
+	}
+
+	static public function onlineTotal(){
+		$total=DB::select('SELECT count(*) as total FROM users WHERE UNIX_TIMESTAMP(`last_activity`) > ?', array(time()-150));
+		return $total[0]->total;
 	}
 
 	static public function googleGraph($minigraph_data,$type='activity'){
@@ -49,15 +53,11 @@ class Dashboard extends Eloquent {
 				$stocksTable->addColumn('string', 'Week', 'count');
 				$stocksTable->addColumn('number', 'Hits', 'projected');
 				$stocksTable->addColumn('number', 'Unique', 'projected');
-				
 				foreach(array_reverse($minigraph_data['activity']['data'],true) as $i=>$d){
-					
 					$data[0]=$i==0 ? "This week" : Carbon::now()->subWeeks($i)->diffForHumans(); 
 					$data[1] = $d; 
 					$data[2] = $minigraph_data['activity_unique']['data'][$i];
-
 					$stocksTable->addRow($data);
-
 				}
 				Lava::LineChart('Stocks')->setConfig();
 			break;

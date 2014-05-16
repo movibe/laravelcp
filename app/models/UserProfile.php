@@ -1,5 +1,4 @@
 <?php
-
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
 use Zizaco\Confide\ConfideEloquentRepository;

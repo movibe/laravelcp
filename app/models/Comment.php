@@ -1,5 +1,4 @@
 <?php
-
 class Comment extends Eloquent{
 	public function content()
 	{
@@ -46,5 +45,4 @@ class Comment extends Eloquent{
 		if(!parent::delete()) return false;
 		return empty($this->find($id));
     } 
-
 }

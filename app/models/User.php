@@ -1,5 +1,4 @@
 <?php
-
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
 use Zizaco\Confide\ConfideEloquentRepository;
@@ -168,6 +167,4 @@ class User extends ConfideUser {
 
 		Lava::PieChart('activeusers')->addOption(array('chartArea' => array('width'=>'98%', 'height'=>'98%')))->addOption(array('backgroundColor' => 'none'))->addOption(array('is3D' => 'true'))->addOption(array('legend' => 'none'));
 	}	
-
-
 }

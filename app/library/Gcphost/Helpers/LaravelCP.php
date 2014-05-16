@@ -1,5 +1,4 @@
 <?php namespace Gcphost\Helpers;
-
 use User, Confide,Activity,Input,Mail,Config,Event, Lava, DB;
 use Illuminate\Filesystem\Filesystem;
 
@@ -27,7 +26,6 @@ class LaravelCP {
 		if(!Api::make(array('success'))) return \Response::json(array('result'=>'success'));
 
 	}
-
 
 	static public function runDeleteMass($r){
 		if ($r != Confide::user()->id){
@@ -78,7 +76,5 @@ class LaravelCP {
 		}
 
 		return $send;
-
 	}
-
 }
