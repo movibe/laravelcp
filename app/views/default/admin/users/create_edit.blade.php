@@ -59,18 +59,13 @@
 						</table>
 					</div>
 					<hr/>
-
 					<textarea class="form-control" name="user_notes[]" placeholder="{{{Lang::get('core.new_note')}}}"></textarea>
-
-
 					<div class="modal-footer">
 						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
 						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')); }} 
 						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')); }} 
 					</div>
 				</div>
-
-
 
 				<div class="tab-pane" id="tab-details">
 					<div class="list-group">

@@ -49,8 +49,8 @@
 @endforeach
 </div>		
 @foreach($results as $index=>$data)
-<script type="text/javascript">
-	$('#accord-{{ $index }}').collapse('show');
-</script>
-{{ ''; break }}
+	<script type="text/javascript">
+		$('#accord-{{ $index }}').collapse('show');
+	</script>
+	{{ ''; break }}
 @endforeach

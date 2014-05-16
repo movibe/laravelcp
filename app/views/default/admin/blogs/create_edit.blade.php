@@ -135,7 +135,6 @@
 					</div>
 				</div>
 
-
 				<div class="form-group {{{ $errors->has('display_author') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label" for="display_author">{{{ Lang::get('core.display_author') }}}</label>
@@ -196,6 +195,4 @@
 			$('.template-tag').html($(this).html());
 		});
 	</script>
-
-
 @stop

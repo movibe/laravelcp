@@ -1,6 +1,3 @@
-@section('styles')
-@stop
-
 @section('navbar-header')
 	<button type="button" class="fa fa-bars navbar-toggle hidden-sm hidden-md hidden-lg pull-left subnav-toggle" data-toggle="collapse" data-target=".sidebar"></button>
 @stop

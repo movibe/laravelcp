@@ -1,23 +1,23 @@
-	@include(Theme::path('admin/dt-loading'))
+@include(Theme::path('admin/dt-loading'))
 
-	<div id="todos-container" class="dt-wrapper">
-		<table id="todos" class="table table-responsive table-striped table-hover table-bordered">
-			<thead>
-				<tr>
-					<th></th>
-					<th class="">{{{ Lang::get('table.title') }}}</th>
-					<th class="">{{{ Lang::get('table.status') }}}</th>
-					<th class="">{{{ Lang::get('table.description') }}}</th>
-					<th class="" >{{{ Lang::get('table.created_at') }}}</th>
-					<th class="" >{{{ Lang::get('core.due_at') }}}</th>
-					<th class="" >{{{ Lang::get('core.assigned_to') }}}</th>
-					<th class="">{{{ Lang::get('table.actions') }}}</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-	</div>
+<div id="todos-container" class="dt-wrapper">
+	<table id="todos" class="table table-responsive table-striped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th class="">{{{ Lang::get('table.title') }}}</th>
+				<th class="">{{{ Lang::get('table.status') }}}</th>
+				<th class="">{{{ Lang::get('table.description') }}}</th>
+				<th class="" >{{{ Lang::get('table.created_at') }}}</th>
+				<th class="" >{{{ Lang::get('core.due_at') }}}</th>
+				<th class="" >{{{ Lang::get('core.assigned_to') }}}</th>
+				<th class="">{{{ Lang::get('table.actions') }}}</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
 
 <script src="{{{ asset('assets/js/jquery.dataTables.min.js') }}}"></script>
 <script src="{{{ asset('assets/js/datatables.js') }}}"></script>

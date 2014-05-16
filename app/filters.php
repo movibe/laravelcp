@@ -1,6 +1,4 @@
 <?php
-
-
 View::composer(array('*view_post'), function($view) 
 {
 	$viewdata=$view->getData();
@@ -8,21 +6,6 @@ View::composer(array('*view_post'), function($view)
 	if(!$viewdata['canComment']) return $view->nest('commentForm', 'default/site/blog/comment_perm');
 	return $view->nest('commentForm', 'default/site/blog/comment_form', array('post' => $viewdata['post']));
 });
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Application & Route Filters
-|--------------------------------------------------------------------------
-|
-| Below you will find the "before" and "after" events for the application
-| which may be used to do any work before or after a request into your
-| application. Here you may also register your custom route filters.
-|
-*/
-
 
 Route::filter('json', function(){Api::$type='json';});
 Route::filter('xml', function(){ Api::$type='xml';});
@@ -56,19 +39,6 @@ Route::filter('checkuser', function()
 	}
 });
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Authentication Filters
-|--------------------------------------------------------------------------
-|
-| The following filters are used to verify that the user of the current
-| session is logged into this application. The "basic" filter easily
-| integrates HTTP Basic authentication for quick, simple checking.
-|
-*/
-
 Route::filter('auth', function($route, $request)
 {
 	if (Auth::guest()) {
@@ -82,55 +52,19 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
-/*
-|--------------------------------------------------------------------------
-| Guest Filter
-|--------------------------------------------------------------------------
-|
-| The "guest" filter is the counterpart of the authentication filters as
-| it simply checks that the current user is not logged in. A redirect
-| response will be issued if they are, which you may freely change.
-|
-*/
-
 Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('user/login/');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Role Permissions
-|--------------------------------------------------------------------------
-|
-| Access filters based on roles.
-|
-*/
-
-// Check for role on all admin routes
 Entrust::routeNeedsRole( 'admin*', array('admin'), Redirect::to('/nopermission') );
-
-// Check for permissions on admin actions
 Entrust::routeNeedsPermission( 'admin/slugs*', 'manage_blogs', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/comments*', 'manage_comments', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/users*', 'manage_users', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/settings*', 'manage_settings', Redirect::to('/admin') );
-
 Entrust::routeNeedsPermission( 'admin/search*', 'site_search', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/todos*', 'manage_todos', Redirect::to('/admin') );
-
-
-/*
-|--------------------------------------------------------------------------
-| CSRF Protection Filter
-|--------------------------------------------------------------------------
-|
-| The CSRF filter is responsible for protecting your application against
-| cross-site request forgery attacks. If this special token in a user
-| session does not match the one given in this request, we'll bail.
-|
-*/
 
 Route::filter('csrf', function()
 {
@@ -140,18 +74,8 @@ Route::filter('csrf', function()
 	}
 });
 
-/*
-|--------------------------------------------------------------------------
-| Language
-|--------------------------------------------------------------------------
-|
-| Detect the browser language.
-|
-*/
-
 Route::filter('detectLang',  function($route, $request, $lang = 'auto')
 {
-
     if($lang != "auto" && in_array($lang , Config::get('app.available_language')))
     {
         Config::set('app.locale', $lang);
