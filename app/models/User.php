@@ -66,7 +66,7 @@ class User extends ConfideUser {
        
 
 		if(! parent::delete()) return false;
-		return $this->find($id);
+		return empty($this->find($id));
 
     } 
 

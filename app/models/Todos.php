@@ -1,12 +1,19 @@
 <?php
 
-use Zizaco\Confide\ConfideUser;
-use Zizaco\Confide\Confide;
-use Zizaco\Confide\ConfideEloquentRepository;
-
-class Todos  extends Eloquent {
+class Todos extends Eloquent {
 
 	protected $table = 'todos';
-	public static $unguarded = true;
+
+    public function delete()
+    {
+		$id=$this->id;
+		if(! parent::delete()) return false;
+		return empty($this->find($id));
+    } 
+
+	public function assign(){
+		$this->admin_id=Confide::user()->id;
+        return $this->save();
+	}
 
 }

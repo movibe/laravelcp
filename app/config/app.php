@@ -138,6 +138,7 @@ return array(
 
 		/* LaravelCP */
 		'Gcphost\Helpers\UserServiceProvider',
+		'Gcphost\Helpers\TodoServiceProvider',
 	),
 
 	/*

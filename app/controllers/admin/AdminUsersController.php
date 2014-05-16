@@ -199,7 +199,7 @@ class AdminUsersController extends AdminController {
     public function deleteIndex($user)
     {
         
-        return !($user->delete()) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return $user->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
     public function getData()

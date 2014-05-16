@@ -1,43 +1,25 @@
 <?php
 use Illuminate\Filesystem\Filesystem;
+use Gcphost\Helpers\Todo\TodoRepository as Todos;
 
 class AdminTodosController extends AdminController {
 
     protected $todo;
 
-    /**
-     * Inject the models.
-     * @param Post $post
-     */
     public function __construct(Todos $todo)
     {
         $this->todo = $todo;
     }
 
-    /**
-     * get index
-     *
-     * @return Response
-     */
 	public function getIndex(){
 		return Theme::make('admin/todos/index');
 	}
 
-    /**
-     * get create
-     *
-     * @return Response
-     */
 	public function getCreate()
 	{
         return Theme::make('admin/todos/create_edit');
 	}
 
-    /**
-     * post create
-     *
-     * @return Response
-     */
 	public function postCreate(){
 		$rules = array(
 			'title' => 'required',
@@ -47,33 +29,18 @@ class AdminTodosController extends AdminController {
 
         if ($validator->passes())
         {
-            $this->todo->title            = Input::get('title');
-            $this->todo->description            = Input::get('description');
-            $this->todo->status            = Input::get('status');
-            $this->todo->due_at		  = Carbon::parse(Input::get('due_at'));
-
-            return $this->todo->save() ?
+            return $this->todo->createOrUpdate() ?
 				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
 				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error'));
         } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
 	}
 
-    /**
-     * get edit
-     *
-     * @return Response
-     */
 	public function getEdit($todo)
 	{
         return Theme::make('admin/todos/create_edit', compact('todo'));
 	}
 
 
-    /**
-     * put edit
-     *
-     * @return Response
-     */
 	public function putEdit($todo){
 		$rules = array(
 			'title' => 'required',
@@ -83,53 +50,26 @@ class AdminTodosController extends AdminController {
 
         if ($validator->passes())
         {
-            $todo->title            = Input::get('title');
-            $todo->description      = Input::get('description');
-            $todo->status		  = Input::get('status');
-            $todo->due_at		  = Carbon::parse(Input::get('due_at'));
-
-             return $todo->save() ?
+             return $this->todo->createOrUpdate($todo->id) ?
 				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
 				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error'));
         } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($validator);
 	}
 
-    /**
-     * delete
-     *
-     * @return Response
-     */
     public function deleteIndex($todo)
     {
-		$id = $todo->id;
-		if(!$todo->delete()) return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-		$todos=Todos::find($id);
-        return empty($todos) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		return $todo->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
-    /**
-     * assign to current user
-     *
-     * @return Response
-     */
 	public function postAssign($todo){
-		$todo->admin_id=Confide::user()->id;
-        return $todo->save() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return $todo->assign() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
 	}
 
-    /**
-     * get data
-     *
-     * @return Response
-     */
      public function getData()
     {
-		$list = Todos::leftjoin('users', 'users.id', '=', 'todos.admin_id')
-				->select(array('todos.id', 'todos.title', 'todos.status', 'todos.description', 'todos.created_at', 'todos.due_at', 'users.displayname'));
 		if(Api::Enabled()){
-			$u=$list->get();
-			return Api::make($u->toArray());
-		} else return Datatables::of($list)
+			return Api::make($this->todo->all()->get()->toArray());
+		} else return Datatables::of($this->todo->all())
 			 ->edit_column('status','{{{ Lang::get(\'admin/todos/todos.status_\'.$status) }}}')
 			 ->edit_column('due_at','{{{ Carbon::parse($due_at)->diffForHumans() }}}')
 			 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
