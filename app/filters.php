@@ -27,8 +27,8 @@ View::composer(array('*view_post'), function($view)
 Route::filter('json', function(){Api::$type='json';});
 Route::filter('xml', function(){ Api::$type='xml';});
 
-Route::when('*.json', 'json');
-Route::when('*.xml', 'xml');
+Route::when('json', 'json');
+Route::when('xml', 'xml');
 
 Route::filter('checkuser', function()
 {

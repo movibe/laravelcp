@@ -1,5 +1,4 @@
 <?php
-
 Route::model('user', 'User');
 Route::model('profile', 'UserProfile');
 Route::model('comment', 'Comment');
@@ -8,10 +7,6 @@ Route::model('post', 'Post');
 Route::model('todo', 'Todos');
 Route::model('role', 'Role');
 
-/** ------------------------------------------
- *  Route constraint patterns
- *  ------------------------------------------
- */
 Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
 Route::pattern('user', '[0-9]+');
@@ -22,32 +17,23 @@ Route::pattern('id', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 Route::pattern('any', '[0-9a-z].+');
 
+$prefix = Request::segment(1);
+if(in_array($prefix, array('admin','json', 'xml')) && $prefix != 'admin'){
+	$before = $prefix.'|auth.basic|checkuser';
+	$prefix = $prefix.'/admin';
+} else $before='auth|checkuser';
 
-/** ------------------------------------------
- *  Admin Routes
- *  ------------------------------------------
- */
-
-Route::group(array('prefix' => 'admin', 'suffix' => array('.json', '.xml', '*'), 'before' => 'auth|checkuser'), function()
+Route::group(array('prefix' => $prefix, 'suffix' => array('.json', '.xml', '*'), 'before' => $before), function()
 {
 	Event::fire('page.admin');
 	Theme::AdminGroup();
 });
-
 
 Route::get('private/cron',  function()
 {
 	header('Content-Type: application/json');
 	die(json_encode(CronWrapper::Run()));
 });
-
-
-
-
-/** ------------------------------------------
- *  Frontend Routes
- *  ------------------------------------------
- */
 
 Event::fire('page.site');
 
@@ -62,22 +48,12 @@ Route::controller('user/{user}/profile/{profile}', 'UserController');
 Route::controller('user/{user}', 'UserController');
 Route::controller('user', 'UserController');
 
-//:: Application Routes ::
-
-# Filter for detect language
 Route::when('contact-us','detectLang');
 
-# Contact Us Static Page
 Route::post('contact-us', 'BlogController@postContactUs');
 Route::get('contact-us', 'BlogController@getContactUs');
 
-# Get javascript translations
-Route::get('translation.js', 'BlogController@getJavascript');
-
-
-# Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
-# Index Page - Last route, no matches
 Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
