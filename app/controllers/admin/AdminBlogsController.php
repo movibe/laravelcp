@@ -2,30 +2,14 @@
 use Illuminate\Filesystem\Filesystem;
 
 class AdminBlogsController extends AdminController {
-
-
-    /**
-     * Post Model
-     * @var Post
-     */
     protected $post;
 
-    /**
-     * Inject the models.
-     * @param Post $post
-     */
-    public function __construct(Post $post)
+	public function __construct(Post $post)
     {
         parent::__construct();
         $this->post = $post;
     }
 
-
-    /**
-     * fetch template files
-     *
-     * @return Response
-     */
 	private function getPostTemplates(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
@@ -33,31 +17,16 @@ class AdminBlogsController extends AdminController {
 		return $files;
 	}
 
-    /**
-     * get posts parents
-     *
-     * @return Response
-     */
 	private function getPostParents(){
 		return array_merge(array('0'=>''),DB::table('posts')->orderBy('title', 'asc')->lists('title','id'));
 	}
 
-    /**
-     * Show a list of all the blog posts.
-     *
-     * @return View
-     */
     public function getIndex()
     {
         $posts = $this->post;
         return Theme::make('admin/blogs/index', compact('posts'));
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function getCreate()
 	{
 		$templates=$this->getPostTemplates();
@@ -65,11 +34,6 @@ class AdminBlogsController extends AdminController {
         return Theme::make('admin/blogs/create_edit', compact('templates', 'parents'));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function postCreate()
 	{
         $rules = array(
@@ -79,14 +43,11 @@ class AdminBlogsController extends AdminController {
 
 		$validator = Validator::make(Input::all(), $rules);
 
-        // Check if the form validates with success
         if ($validator->passes())
         {
-            // Create a new blog post
             $user = Auth::user();
 
-            // Update the blog post data
-            $this->post->title            = Input::get('title');
+			$this->post->title            = Input::get('title');
             $this->post->slug             = Str::slug(Input::get('title'));
             $this->post->content          = Input::get('content');
             $this->post->meta_title       = Input::get('meta-title');
@@ -108,13 +69,6 @@ class AdminBlogsController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $post
-     * @return Response
-     */
 	public function getEdit($post)
 	{
 		$templates=$this->getPostTemplates();
@@ -122,12 +76,6 @@ class AdminBlogsController extends AdminController {
         return Theme::make('admin/blogs/create_edit', compact('post', 'templates', 'parents'));
 	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $post
-     * @return Response
-     */
 	public function putEdit($post)
 	{
 
@@ -138,7 +86,6 @@ class AdminBlogsController extends AdminController {
 
         $validator = Validator::make(Input::all(), $rules);
 
-        // Check if the form validates with success
         if ($validator->passes())
         {
             $post->title            = Input::get('title');
@@ -158,13 +105,6 @@ class AdminBlogsController extends AdminController {
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
 	}
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $post
-     * @return Response
-     */
     public function deleteIndex($post)
     {
 		$id = $post->id;
@@ -173,12 +113,6 @@ class AdminBlogsController extends AdminController {
 		$post=Post::find($id);
         return empty($post) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
     }
-
-    /**
-     * Show a list of all the blog posts formatted for Datatables.
-     *
-     * @return Datatables JSON
-     */
     public function getData()
     {
         $posts = Post::select(array('posts.id', 'posts.title', 'posts.id as comments', 'posts.created_at'));

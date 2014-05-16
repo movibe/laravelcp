@@ -3,7 +3,6 @@ use Illuminate\Filesystem\Filesystem;
 use Gcphost\Helpers\Todo\TodoRepository as Todos;
 
 class AdminTodosController extends AdminController {
-
     protected $todo;
 
     public function __construct(Todos $todo)
@@ -39,7 +38,6 @@ class AdminTodosController extends AdminController {
 	{
         return Theme::make('admin/todos/create_edit', compact('todo'));
 	}
-
 
 	public function putEdit($todo){
 		$rules = array(

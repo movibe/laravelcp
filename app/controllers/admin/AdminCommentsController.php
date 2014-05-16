@@ -2,50 +2,22 @@
 
 class AdminCommentsController extends AdminController
 {
-
-    /**
-     * Comment Model
-     * @var Comment
-     */
     protected $comment;
-
-    /**
-     * Inject the models.
-     * @param Comment $comment
-     */
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
     }
-
-    /**
-     * Show a list of all the comment posts.
-     *
-     * @return View
-     */
     public function getIndex()
     {
         $comments = $this->comment;
         return Theme::make('admin/comments/index', compact('comments'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $comment
-     * @return Response
-     */
 	public function getEdit($comment)
 	{
         return Theme::make('admin/comments/edit', compact('comment'));
 	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $comment
-     * @return Response
-     */
 	public function putEdit($comment)
 	{
         $rules = array(
@@ -54,7 +26,6 @@ class AdminCommentsController extends AdminController
 
         $validator = Validator::make(Input::all(), $rules);
 
-        // Check if the form validates with success
         if ($validator->passes())
         {
             $comment->content = Input::get('content');
@@ -66,13 +37,6 @@ class AdminCommentsController extends AdminController
         } else return Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->withInput()->withErrors($validator);
 	}
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $comment
-     * @return Response
-     */
 	public function deleteIndex($comment)
 	{
 		$id = $comment->id;
@@ -81,11 +45,6 @@ class AdminCommentsController extends AdminController
         return empty($comment) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));        
 	}
 
-    /**
-     * Show a list of all the comments formatted for Datatables.
-     *
-     * @return Datatables JSON
-     */
     public function getData()
     {
         $comments = Comment::leftjoin('posts', 'posts.id', '=', 'comments.post_id')

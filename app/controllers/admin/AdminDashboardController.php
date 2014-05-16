@@ -2,12 +2,6 @@
 use Illuminate\Filesystem\Filesystem;
 
 class AdminDashboardController extends AdminController {
-
-	/**
-	 * Admin dashboard
-	 *
-	 */
-
 	private function widgets(){
 		$path=Config::get('view.paths');
 		$fileSystem = new Filesystem;
@@ -15,7 +9,6 @@ class AdminDashboardController extends AdminController {
 		$files=$fileSystem->allFiles($path[0].DIRECTORY_SEPARATOR.$theme.DIRECTORY_SEPARATOR."admin".DIRECTORY_SEPARATOR."widgets");
 		return $files;
 	}
-
 
 	private function graphData($type, $from, $to, $distinct=false){
 		if($distinct){
@@ -34,7 +27,6 @@ class AdminDashboardController extends AdminController {
 		$results['medium']=round($total/$time);
 		return $results;
 	}
-
 
 	public function getIndex()
 	{
@@ -73,8 +65,6 @@ class AdminDashboardController extends AdminController {
 
 		return Theme::make('admin/dashboard/index');
 	}
-
-
 
 	public function postPolling(){
 

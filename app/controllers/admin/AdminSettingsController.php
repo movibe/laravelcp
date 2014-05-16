@@ -3,25 +3,13 @@
 class AdminSettingsController extends AdminController
 {
 
-    /**
-     * Show a list of all the comment posts.
-     *
-     * @return View
-     */
-    public function getIndex()
+	public function getIndex()
     {
 		$settings=Setting::all();
         return Theme::make('admin/settings/index', compact('comments', 'settings'));
     }
 
    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $comment
-     * @return Response
-     */
 	public function postIndex()
 	{
 

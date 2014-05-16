@@ -1,38 +1,11 @@
 <?php
 
 class AdminRolesController extends AdminController {
-
-
-    /**
-     * User Model
-     * @var User
-     */
     protected $user;
-
-    /**
-     * Role Model
-     * @var Role
-     */
     protected $role;
-
-    /**
-     * Permission Model
-     * @var Permission
-     */
     protected $permission;
-
-    /**
-     * Protected Roles
-     */
 	private $protected_roles=array('admin','client');
 
-
-    /**
-     * Inject the models.
-     * @param User $user
-     * @param Role $role
-     * @param Permission $permission
-     */
     public function __construct(User $user, Role $role, Permission $permission)
     {
         parent::__construct();
@@ -41,22 +14,12 @@ class AdminRolesController extends AdminController {
         $this->permission = $permission;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function getIndex()
+	public function getIndex()
     {
         $roles = $this->role;
         return Theme::make('admin/roles/index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function getCreate()
     {
         $permissions = $this->permission->all();
@@ -64,11 +27,6 @@ class AdminRolesController extends AdminController {
         return Theme::make('admin/roles/create', compact('permissions', 'selectedPermissions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function postCreate()
     {
 
@@ -84,16 +42,13 @@ class AdminRolesController extends AdminController {
 			if(in_array(Input::get('name'), $this->protected_roles)) 
 				return Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
 
-			// Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token');
 
             $this->role->name = $inputs['name'];
             $this->role->save();
 
-            // Save permissions
             $this->role->perms()->sync($this->permission->preparePermissionsForSave($inputs['permissions']));
 
-            // Was the role created?
             if ($this->role->id)
             {
                 return Api::to(array('success', Lang::get('admin/roles/messages.create.success') )) ? : Redirect::to('admin/roles/' . $this->role->id . '/edit')->with('success', Lang::get('admin/roles/messages.create.success'));
@@ -103,12 +58,6 @@ class AdminRolesController extends AdminController {
 
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $role
-     * @return Response
-     */
     public function getEdit($role)
     {
         if(!empty($role))
@@ -120,15 +69,8 @@ class AdminRolesController extends AdminController {
         return Theme::make('admin/roles/edit', compact('role', 'permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param $role
-     * @return Response
-     */
     public function putEdit($role)
     {
-        // Declare the rules for the form validation
         $rules = array(
             'name' => 'required'
         );
@@ -136,10 +78,7 @@ class AdminRolesController extends AdminController {
 		if((in_array(Input::old('name', $role->name), $this->protected_roles) &&Input::old('name', $role->name) != Input::get('name'))||( in_array(Input::get('name'), $this->protected_roles)  && Input::old('name', $role->name) != Input::get('name'))) 
 			return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
 
-        // Validate the inputs
         $validator = Validator::make(Input::all(), $rules);
-
-        // Check if the form validates with success
         if ($validator->passes())
         {
             $role->name        = Input::get('name');
@@ -151,20 +90,11 @@ class AdminRolesController extends AdminController {
             }
             else return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
         }
-
-        // Form validation failed
         return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->withInput()->withErrors($validator);
     }
 
 
 
-    /**
-     * Remove the specified user from storage.
-     *
-     * @param $role
-     * @internal param $id
-     * @return Response
-     */
     public function deleteIndex($role)
     {
 		$id=$role->id;
@@ -173,11 +103,6 @@ class AdminRolesController extends AdminController {
         return empty($roles) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
-    /**
-     * Show a list of all the roles formatted for Datatables.
-     *
-     * @return Datatables JSON
-     */
     public function getData()
     {
         $roles = Role::select(array('roles.id',  'roles.name', 'roles.id as users', 'roles.created_at'));
@@ -186,7 +111,6 @@ class AdminRolesController extends AdminController {
 			$u=$roles->get();
 			return Api::make($u->toArray());
 		} else return Datatables::of($roles)
-        // ->edit_column('created_at','{{{ Carbon::now()->diffForHumans(Carbon::createFromFormat(\'Y-m-d H\', $test)) }}}')
         ->edit_column('users', '{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}')
 
 

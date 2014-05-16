@@ -2,9 +2,7 @@
 use Gcphost\Helpers\User\UserRepository as User;
 
 class AdminEmailController extends AdminController {
-
     protected $user;
-
 
     public function __construct(User $user)
     {
@@ -33,9 +31,7 @@ class AdminEmailController extends AdminController {
     {
         if ( $user->id )
         {
-            // Title
         	$title = $user->email;
-        	// mode
         	$mode = 'edit';
 			$templates=LCP::emailTemplates();
         	return Theme::make('admin/users/send_email', compact('user', 'title', 'mode', 'templates'));
@@ -44,11 +40,6 @@ class AdminEmailController extends AdminController {
 
 
 
-    /**
-     * post mail
-     *
-     * @return Response
-     */
     public function postIndex($user=false)
     {
 		$title = Lang::get('core.email');
@@ -79,29 +70,18 @@ class AdminEmailController extends AdminController {
 		}
     }
 
-
-    /**
-     * get mass mail
-     *
-     * @return Response
-     */
 	public function getEmailMass($a=false){
 		$ids=explode(',',rtrim(Input::get('ids'),','));
 		$multi=array();
-
-
 		if(is_array($ids) && count($ids) > 0){
 			foreach($ids as $id){
 				$user=$this->user->find($id);
 				if(!empty($user)) $multi[$id]=$user->email;
 			}
-		
 		}
-
 		$title = Lang::get('core.email');
 		$mode = 'edit';
 		$templates=LCP::emailTemplates();
 		return Theme::make('admin/users/send_email', compact('title','mode', 'multi', 'templates'));
 	}
-
 }
