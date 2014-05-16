@@ -1,7 +1,7 @@
 @extends(Theme::path('admin/layouts/default'))
 
 @section('title')
-	{{{ $title }}} :: @parent
+	{{{ Lang::get('admin/users/title.user_management') }}} :: @parent
 @stop
 
 @section('left-layout-nav')
@@ -17,7 +17,7 @@
 
 @section('left-layout-content')
 	<div class="page-header clearfix">
-		<h3 class="pull-left">{{{ $title }}}</h3>
+		<h3 class="pull-left">{{{ Lang::get('admin/users/title.user_management') }}}</h3>
 		<div class="pull-right">
 			<a href="{{{ URL::to('admin/users/create') }}}" class="btn  btn-info modalfy"><span class="fa fa-plus"></span> {{{ Lang::get('button.create') }}}</a>
 		</div>

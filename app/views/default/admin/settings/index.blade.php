@@ -1,7 +1,7 @@
 @extends(Theme::path('admin/layouts/default'))
 
 @section('title')
-	{{{ $title }}} :: @parent
+	{{{ Lang::get('admin/settings/title.title') }}} :: @parent
 @stop
 
 @section('left-layout-nav')
@@ -10,7 +10,7 @@
 
 @section('left-layout-content')
 	<div class="page-header">
-		<h3>{{{ $title }}}</h3>
+		<h3>{{{ Lang::get('admin/settings/title.title') }}}</h3>
 	</div>
 
 	{{ Form::open(array('class' => 'form-horizontal')) }}

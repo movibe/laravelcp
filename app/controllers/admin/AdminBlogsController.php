@@ -50,8 +50,7 @@ class AdminBlogsController extends AdminController {
     public function getIndex()
     {
         $posts = $this->post;
-        $title = Lang::get('admin/blogs/title.blog_management');
-        return Theme::make('admin/blogs/index', compact('posts', 'title'));
+        return Theme::make('admin/blogs/index', compact('posts'));
     }
 
 	/**
@@ -63,8 +62,7 @@ class AdminBlogsController extends AdminController {
 	{
 		$templates=$this->getPostTemplates();
 		$parents=$this->getPostParents();
-        $title = Lang::get('admin/blogs/title.create_a_new_blog');
-        return Theme::make('admin/blogs/create_edit', compact('title', 'templates', 'parents'));
+        return Theme::make('admin/blogs/create_edit', compact('templates', 'parents'));
 	}
 
 	/**
@@ -119,10 +117,9 @@ class AdminBlogsController extends AdminController {
      */
 	public function getEdit($post)
 	{
-        $title = Lang::get('admin/blogs/title.blog_update');
 		$templates=$this->getPostTemplates();
 		$parents=$this->getPostParents();
-        return Theme::make('admin/blogs/create_edit', compact('post', 'title', 'templates', 'parents'));
+        return Theme::make('admin/blogs/create_edit', compact('post', 'templates', 'parents'));
 	}
 
     /**

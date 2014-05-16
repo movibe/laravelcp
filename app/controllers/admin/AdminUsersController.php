@@ -32,8 +32,7 @@ class AdminUsersController extends AdminController {
     {
         $users = $this->user;
 		LCP::userChart();
-        $title = Lang::get('admin/users/title.user_management');
-       	return Theme::make('admin/users/index', compact('users', 'title'));
+       	return Theme::make('admin/users/index', compact('users'));
     }
 
     public function getCreate()
@@ -43,8 +42,7 @@ class AdminUsersController extends AdminController {
         $selectedRoles = Input::old('roles', array());
         $selectedPermissions = Input::old('permissions', array());
 		$mode = 'create';
-		$title = Lang::get('admin/users/title.create_a_new_user');
-		return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'title', 'mode'));
+		return Theme::make('admin/users/create_edit', compact('roles', 'permissions', 'selectedRoles', 'selectedPermissions', 'mode'));
     }
 
     public function postCreate()
@@ -107,12 +105,11 @@ class AdminUsersController extends AdminController {
 			$profiles=$user->profiles;
 
             $permissions = $this->permission->all();
-        	$title = Lang::get('admin/users/title.user_update');
         	$mode = 'edit';
 
 			$last_login = Activity::whereRaw('user_id = ? AND content_type="login"', array($user->id))->select(array('details'))->orderBy('id', 'DESC')->first();
 
-			return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'title', 'mode', 'profiles', 'last_login'));
+			return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'mode', 'profiles', 'last_login'));
         } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
     }
 

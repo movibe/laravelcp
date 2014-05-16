@@ -1,7 +1,7 @@
 @extends(Theme::path('admin/layouts/default'))
 
 @section('title')
-	{{{ $title }}} :: @parent
+	{{{ Lang::get('admin/comments/title.comment_management') }}} :: @parent
 @stop
 
 @section('left-layout-nav')
@@ -10,7 +10,7 @@
 
 @section('left-layout-content')
 	<div class="page-header clearfix">
-		<h3>{{{ $title }}}</h3>
+		<h3>{{{ Lang::get('admin/comments/title.comment_management') }}}</h3>
 	</div>
 
 	@include(Theme::path('admin/dt-loading'))

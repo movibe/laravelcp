@@ -1,30 +1,20 @@
 @extends(Theme::path('site/layouts/default'))
-
-{{-- Web site Title --}}
 @section('title')
 {{{ String::title($post->title) }}} ::
 @parent
 @stop
-
-{{-- Update the Meta Title --}}
 @section('meta_title')
 @parent
-
 @stop
-
-{{-- Update the Meta Description --}}
 @section('meta_description')
 @parent
 
 @stop
-
-{{-- Update the Meta Keywords --}}
 @section('meta_keywords')
 @parent
 
 @stop
 
-{{-- Content --}}
 @section('content')
 
 @if($post->banner)<a href="{{{ $post->url() }}}" class="thumbnail"><img width="100%" src="{{{ $post->banner }}}" alt=""></a>@endif
@@ -47,47 +37,40 @@
 </div>
 
 @if($post->allow_comments)
-<hr />
+	<hr />
+	<a id="comments"></a>
+	<h4>{{{ $comments->count() }}} {{{ Lang::get('site.comments') }}}</h4>
 
-
-<a id="comments"></a>
-<h4>{{{ $comments->count() }}} {{{ Lang::get('site.comments') }}}</h4>
-
-@if ($comments->count())
-@foreach ($comments as $comment)
-<div class="row">
-	<div class="col-md-1">
-		<img alt="{{{ $comment->author->email }}}" src="{{ Gravatar::src($comment->author->email, 60) }}">
-	</div>
-	<div class="col-md-11">
+	@if ($comments->count())
+		@foreach ($comments as $comment)
 		<div class="row">
-			<div class="col-md-11">
-				<span class="muted">{{{ $comment->author->displayname }}}</span>
-				&bull;
-				{{{ $comment->date() }}}
+			<div class="col-md-1">
+				<img alt="{{{ $comment->author->email }}}" src="{{ Gravatar::src($comment->author->email, 60) }}">
 			</div>
-
 			<div class="col-md-11">
-				<hr />
-			</div>
+				<div class="row">
+					<div class="col-md-11">
+						<span class="muted">{{{ $comment->author->displayname }}}</span>
+						&bull;
+						{{{ $comment->date() }}}
+					</div>
 
-			<div class="col-md-11">
-				{{{ $comment->content() }}}
+					<div class="col-md-11">
+						<hr />
+					</div>
+
+					<div class="col-md-11">
+						{{{ $comment->content() }}}
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<hr />
-@endforeach
-@else
-<hr />
-@endif
+		<hr />
+		@endforeach
+	@else
+		<hr />
+	@endif
 
-{{ $commentForm }}
-
-
-
-
-
+	{{ $commentForm }}
 @endif
 @stop

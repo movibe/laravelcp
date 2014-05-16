@@ -30,8 +30,7 @@ class AdminTodosController extends AdminController {
      */
 	public function getCreate()
 	{
-        $title = Lang::get('admin/todos/title.create_a_new');
-        return Theme::make('admin/todos/create_edit', compact('title'));
+        return Theme::make('admin/todos/create_edit');
 	}
 
     /**
@@ -66,8 +65,7 @@ class AdminTodosController extends AdminController {
      */
 	public function getEdit($todo)
 	{
-        $title = Lang::get('admin/todos/title.update');
-        return Theme::make('admin/todos/create_edit', compact('todo', 'title'));
+        return Theme::make('admin/todos/create_edit', compact('todo'));
 	}
 
 

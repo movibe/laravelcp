@@ -26,8 +26,7 @@ class AdminCommentsController extends AdminController
     public function getIndex()
     {
         $comments = $this->comment;
-        $title = Lang::get('admin/comments/title.comment_management');
-        return Theme::make('admin/comments/index', compact('comments', 'title'));
+        return Theme::make('admin/comments/index', compact('comments'));
     }
 
     /**
@@ -38,8 +37,7 @@ class AdminCommentsController extends AdminController
      */
 	public function getEdit($comment)
 	{
-        $title = Lang::get('admin/comments/title.comment_update');
-        return Theme::make('admin/comments/edit', compact('comment', 'title'));
+        return Theme::make('admin/comments/edit', compact('comment'));
 	}
 
     /**

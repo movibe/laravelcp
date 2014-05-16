@@ -49,8 +49,7 @@ class AdminRolesController extends AdminController {
     public function getIndex()
     {
         $roles = $this->role;
-        $title = Lang::get('admin/roles/title.role_management');
-        return Theme::make('admin/roles/index', compact('roles', 'title'));
+        return Theme::make('admin/roles/index', compact('roles'));
     }
 
     /**
@@ -62,8 +61,7 @@ class AdminRolesController extends AdminController {
     {
         $permissions = $this->permission->all();
         $selectedPermissions = Input::old('permissions', array());
-        $title = Lang::get('admin/roles/title.create_a_new_role');
-        return Theme::make('admin/roles/create', compact('permissions', 'selectedPermissions', 'title'));
+        return Theme::make('admin/roles/create', compact('permissions', 'selectedPermissions'));
     }
 
     /**
@@ -119,8 +117,7 @@ class AdminRolesController extends AdminController {
         }
         else return Api::to(array('error', Lang::get('admin/roles/messages.does_not_exist'))) ? : Redirect::to('admin/roles')->with('error', Lang::get('admin/roles/messages.does_not_exist'));
         
-        $title = Lang::get('admin/roles/title.role_update');
-        return Theme::make('admin/roles/edit', compact('role', 'permissions', 'title'));
+        return Theme::make('admin/roles/edit', compact('role', 'permissions'));
     }
 
     /**
