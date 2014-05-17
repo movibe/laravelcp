@@ -1,0 +1,8 @@
+Options -Indexes -MultiViews
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} \.(css|html|jpg|gif|png|zip|rar|doc|xls|js|tif|tiff|docx|xlsx|ico)$
+    RewriteRule ^(.*)$ $1 [L,QSA]
+
+

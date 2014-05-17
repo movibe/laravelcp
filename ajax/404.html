@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>404</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-7">
+				<div class="inner6">
+					<a href="/home" class="closeIcon fa-times"></a>
+					<h2 class="small">Sorry! <br>Page not found!</h2>			
+					<p class="fontStyle4">The page you are looking for might have been removed, had its name changed, <br> or is temporarily unavailable.</p>
+                	<p class="fontStyle4">Please try using our search box below to look for information on the website.</p>
+					<!--search form-->
+					<form id="search" class="search" action="./search.php" data-type="ajax" method="GET" accept-charset="utf-8"> 
+					    <input type="text" class="form-control" onfocus="if(this.value =='' ) this.value=''" onblur="if(this.value=='') this.value=''" value="" name="s"/>
+					    <a href="javascript:void(0)" onclick="$('#search').submit()" class="btn btn-default">Search</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
