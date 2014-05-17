@@ -27,9 +27,9 @@
 @section('content')
 
 @if (isset($user))
-	{{ Form::open(array('url' => array('admin/users/' . $user->id . '/email'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
+	{{ Form::open_horizontal(array('url' => array('admin/users/' . $user->id . '/email'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
 @else
-	{{ Form::open(array('url' => array('admin/user/mass/email'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
+	{{ Form::open_horizontal(array('url' => array('admin/user/mass/email'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
 @endif
 
 	@if(isset($multi) && count($multi) > 0)
@@ -44,11 +44,9 @@
 		</div>
 	</div>
 	@endif
-	<div class="form-group">
-		<div class="col-md-12">
-			<input type="text" name="subject" placeholder="{{{ Lang::get('core.subject') }}}" style="width:100%" class="form-control"/>
-		</div>
-	</div>
+
+	{{ Form::input_group('text', 'subject', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('core.subject')), '', false) }} 
+
 	<div class="form-group">
 		<div class="col-md-12">
 			@include(Theme::path('wysiwyg'))
@@ -56,8 +54,8 @@
 	</div>
 	<div class="modal-footer">
 			<div class="pull-left">
-				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} &nbsp;
-				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
+				{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} &nbsp;
+				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')) }} 
 			</div>
 
 			<div class="pull-right">
@@ -73,12 +71,14 @@
 							<li><a href="emails.default">Default</a></li>
 							@foreach($templates as $id=>$var)
 								@if($var->getFilename() != 'default.blade.php')
-								<li><a href="emails.{{{ str_replace(DIRECTORY_SEPARATOR, '.',preg_replace('/.blade.php/i', '',$var->getRelativePathname())) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a></li>
+									<li>
+										<a href="emails.{{{ str_replace(DIRECTORY_SEPARATOR, '.',preg_replace('/.blade.php/i', '',$var->getRelativePathname())) }}}">{{{ str_replace(DIRECTORY_SEPARATOR, '.',rtrim($var->getRelativePathname(),'.blade.php')) }}}</a>
+									</li>
 								@endif
 							@endforeach
 						</ul>
 					</div>
-				{{ Form::submit(Lang::get('button.send'), array('class' => 'btn-responsive btn btn-success')); }} 
+				{{ Form::submit(Lang::get('button.send'), array('class' => 'btn-responsive btn btn-success')) }} 
 			</div>
 
 			<input type="hidden" id="email-template" name="template" value="emails.default"/>
@@ -90,5 +90,5 @@
 		$('#editor').wysiwyg({ fileUploadError: showErrorAlert, hotKeys: {}} );
 	</script>
 
-	{{ Form::close(); }}
+	{{ Form::close() }}
 @stop

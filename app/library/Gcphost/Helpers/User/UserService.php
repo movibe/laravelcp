@@ -146,7 +146,7 @@ class UserService {
 
     public function getCreate()
     {
-        $roles = $this->role->all();
+		$roles = $this->role->lists('name', 'id');
         $permissions = $this->permission->all();
         $selectedRoles = Input::old('roles', array());
         $selectedPermissions = Input::old('permissions', array());
@@ -158,7 +158,7 @@ class UserService {
     {
         if ( $user->id )
         {
-            $roles = $this->role->all();
+			$roles = $this->role->lists('name', 'id');
 			$profiles=$user->profiles;
 			$last_login = $user->lastlogin();
 

@@ -17,23 +17,22 @@
 		}
 	</script>
 	@endif
+	
+	<div class="tab-content">
 
-	{{ Form::open(array('method' => 'put','class' => 'form-horizontal form-ajax')) }}
-		<div class="tab-content">
-			<div class="tab-pane active" id="tab-general">
-				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-						<textarea class="form-control full-width" placeholder="{{{ Lang::get('core.content') }}}" name="content" value="content" rows="10">{{{ Input::old('content', $comment->content) }}}</textarea>
-						{{ $errors->first('content', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-			</div>
-		</div>
+	{{ Form::open_horizontal(array('method' => 'put','class' => 'form-ajax')) }}
+
+		<fieldset>
+
+			{{ Form::textarea_group('content', '', Input::old('content', $comment->content), $errors, array('class'=>'full-width','placeholder' => Lang::get('core.content'), 'rows'=>'10', 'required'=>'required'), '', false) }} 
+
+		</fieldset>
 
 		<div class="modal-footer">
-			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
-			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')); }} 
+			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')) }} 
+			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
-	{{ Form::close(); }}
+	{{ Form::close() }}
+	</div>
 @stop

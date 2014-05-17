@@ -13,7 +13,7 @@
 		<h3>{{{ Lang::get('admin/settings/title.title') }}}</h3>
 	</div>
 
-	{{ Form::open(array('class' => 'form-horizontal')) }}
+	{{ Form::open() }}
 		 @foreach($settings as $a => $b)
 		 @if (is_array($b))
 				@section('tabs')
@@ -30,28 +30,30 @@
 								 <td><label class="control-label">{{ Lang::has('core::settings.'.$c) ? trans('core::settings.'.$c) : preg_replace('/_/i', ' ', $c) }}</label></td>
 								 <td>
 									@if($c == "contact_address")
-										<textarea class="col-lg-12 form-control" name="settings[{{ $a }}.{{ $c }}]">{{ $d }}</textarea>
+										{{ Form::textarea_line('settings['. $a .'.'. $c.']', '', $d, $errors, '','',false) }} 
 									@elseif($c == "bootswatch")
-										<select class="form-control" name="settings[{{ $a }}.{{ $c }}]">
-											<option value="default" {{ $d=='default' ? 'selected' : false }}>Default</option>
-											<option value="amelia" {{ $d=='amelia' ? 'selected' : false }}>Amelia</option>
-											<option value="cerulean" {{ $d=='cerulean' ? 'selected' : false }}>Cerulean</option>
-											<option value="cosmo" {{ $d=='cosmo' ? 'selected' : false }}>Cosmo</option>
-											<option value="cyborg" {{ $d=='cyborg' ? 'selected' : false }}>Cyborg</option>
-											<option value="darkly" {{ $d=='darkly' ? 'selected' : false }}>Darkly</option>
-											<option value="flatly" {{ $d=='flatly' ? 'selected' : false }}>Flatly</option>
-											<option value="journal" {{ $d=='journal' ? 'selected' : false }}>Journal</option>
-											<option value="lumen" {{ $d=='lumen' ? 'selected' : false }}>Lumen</option>
-											<option value="readable" {{ $d=='readable' ? 'selected' : false }}>Readable</option>
-											<option value="simplex" {{ $d=='simplex' ? 'selected' : false }}>Simplex</option>
-											<option value="slate" {{ $d=='slate' ? 'selected' : false }}>Slate</option>
-											<option value="spacelab" {{ $d=='spacelab' ? 'selected' : false }}>Spacelab</option>
-											<option value="superhero" {{ $d=='superhero' ? 'selected' : false }}>Superhero</option>
-											<option value="united" {{ $d=='united' ? 'selected' : false }}>United</option>
-											<option value="yeti" {{ $d=='yeti' ? 'selected' : false }}>Yeti</option>
-										</select>
+										{{ Form::select_basic('settings['. $a .'.'. $c.']', '',
+												array(
+													'default' => 'Default',
+													'amelia' => 'Amelia',
+													'cerulean' => 'Cerulean',
+													'cosmo' => 'Cosmo',
+													'cyborg' => 'Cyborg',
+													'darkly' => 'Darkly',
+													'flatly' => 'Flatly',
+													'journal' => 'Journal',
+													'lumen' => 'Lumen',
+													'readable' => 'Readable',
+													'simplex' => 'Simplex',
+													'slate' => 'Slate',
+													'spacelab' => 'Spacelab',
+													'superhero' => 'Superhero',
+													'united' => 'United',
+													'yeti' => 'Yeti'
+													),
+													$d, $errors,'', '',false) }} 	
 									@else
-										<input class="col-lg-12 form-control" type="text" name="settings[{{ $a }}.{{ $c }}]" value="{{ $d }}">
+										{{ Form::input_basic('text', 'settings['. $a .'.'. $c.']', '', $d, $errors) }} 
 									@endif
 								</td>
 							</tr>
@@ -67,10 +69,10 @@
 
 		<div class="form-group">
 			<div class="col-md-12">
-				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')); }} 
-				{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')); }} 
+				{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-default')) }} 
+				{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-success')) }} 
 			</div>
 		</div>
-	{{ Form::close(); }}
+	{{ Form::close() }}
 @stop
 @include(Theme::path('admin/layouts/sidebar-left'))

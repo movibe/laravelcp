@@ -15,40 +15,17 @@
   <li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('site.profile') }}}</a></li>
 </ul>
 <br/>
-{{ Form::open(array('autocomplete' => 'off','url' => URL::to('user/' . $user->id . '/edit'), 'class' => 'form-horizontal')) }}
+{{ Form::open_horizontal(array('autocomplete' => 'off','url' => URL::to('user/' . $user->id . '/edit'))) }}
 <div class="tab-content">
 	<div class="tab-pane active" id="tab-general">
-		<div class="form-group {{{ $errors->has('displayname') ? 'has-error' : '' }}}">
-			<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
-			<div class="col-md-10">
-				<input required class="form-control" type="text" name="displayname" id="displayname" value="{{{ Input::old('displayname', $user->displayname) }}}" />
-				{{ $errors->first('displayname', '<span class="help-block">:message</span>') }}
-			</div>
-		</div>
 
-		<div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
-			<label class="col-md-2 control-label" for="email">{{{ Lang::get('core.email') }}}</label>
-			<div class="col-md-10">
-				<input required validate class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
-				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
-			</div>
-		</div>
+		{{ Form::input_group('text', 'displayname', Lang::get('core.fullname'), $user->displayname, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-user') }} 
 
-		<div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
-			<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
-			<div class="col-md-10">
-				<input class="form-control" type="password" name="password" id="password" value="" />
-				{{ $errors->first('password', '<span class="help-block">:message</span>') }}
-			</div>
-		</div>
+		{{ Form::input_group('email', 'email', Lang::get('confide::confide.e_mail'), $user->email, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-envelope') }} 
+		
+		{{ Form::input_group('password', 'password', Lang::get('confide::confide.password'), '', $errors, '', '', true,'', 'fa fa-fw fa-lock') }} 
 
-		<div class="form-group {{{ $errors->has('password_confirmation') ? 'has-error' : '' }}}">
-			<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
-			<div class="col-md-10">
-				<input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
-				{{ $errors->first('password_confirmation', '<span class="help-block">:message</span>') }}
-			</div>
-		</div>
+		{{ Form::input_group('password', 'password_confirmation', Lang::get('confide::confide.password_confirmation'), '', $errors, '', '', true,'', 'fa fa-fw fa-lock') }} 
 
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
@@ -99,7 +76,7 @@
 		</div>
 	</div>
 </div>
-{{ Form::close(); }}
+{{ Form::close() }}
 
 @stop
 @section('scripts')

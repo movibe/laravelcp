@@ -12,6 +12,21 @@ class TodosService {
         $this->todo = $todo;
     }
 
+	public function index(){
+		return Theme::make('admin/todos/index');
+	}
+
+	public function getCreate()
+	{
+        return Theme::make('admin/todos/create_edit');
+	}
+
+	public function getEdit($todo)
+	{
+        $due = preg_replace('/0000-00-00 00:00:00/i', '',Input::old('due_at', isset($todo) ? $todo->due_at : null));
+		return Theme::make('admin/todos/create_edit', compact('due','todo'));
+	}
+
 	public function create(){
 
         $validator = Validator::make(Input::all(), $this->rules);

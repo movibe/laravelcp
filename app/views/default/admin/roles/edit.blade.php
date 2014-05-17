@@ -19,16 +19,13 @@
 		<li><a href="#tab-permissions" data-toggle="tab">{{{ Lang::get('core.permissions') }}}</a></li>
 	</ul>
 
-	{{ Form::open(array('method' => 'put','class' => 'form-horizontal form-ajax')) }}
+	{{ Form::open_horizontal(array('method' => 'put','class' => 'form-ajax')) }}
 
 		<div class="tab-content">
+
+
 			<div class="tab-pane active" id="tab-general">
-				<div class="form-group {{{ $errors->has('name') ? 'error' : '' }}}">
-					<label class="col-md-2 control-label" for="name">{{{ Lang::get('core.name') }}}</label>
-					<div class="col-md-10">
-							<input required class="form-control" type="text"  name="name" id="name" value="{{{ Input::old('name', $role->name) }}}"/>
-					</div>
-				</div>
+				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', $role->name), $errors, array('required'=>'required')) }}
 			</div>
 
 			<div class="tab-pane" id="tab-permissions">
@@ -52,9 +49,11 @@
 		</div>
 
 		<div class="modal-footer">
-			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
-			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')); }} 
+			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')) }} 
+			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
-	{{ Form::close(); }}
+
+	{{ Form::close() }}
+
 @stop

@@ -7,14 +7,13 @@ class AdminTodosController extends BaseController {
         $this->service = $service;
     }
 
-
 	public function getIndex(){
-		return Theme::make('admin/todos/index');
+        return $this->service->index();
 	}
 
 	public function getCreate()
 	{
-        return Theme::make('admin/todos/create_edit');
+        return $this->service->getCreate();
 	}
 
 	public function postCreate()
@@ -24,7 +23,7 @@ class AdminTodosController extends BaseController {
 
 	public function getEdit($todo)
 	{
-        return Theme::make('admin/todos/create_edit', compact('todo'));
+       return $this->service->getEdit($todo);
 	}
 
 	public function putEdit($todo){

@@ -25,20 +25,16 @@
 	@endif
 
 	@if (isset($post))
-		{{ Form::open(array('method' => 'put','url' => URL::to('admin/slugs/' . $post->id . '/edit'), 'class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
+		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/slugs/' . $post->id . '/edit'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@else
-		{{ Form::open(array('class' => 'form-horizontal form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
+		{{ Form::open_horizontal(array('class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
 	@endif
 
 		<div class="tab-content">
 			<div class="tab-pane active" id="tab-general">
 
-				<div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
-                    <div class="col-md-12">
-						<input required placeholder="{{{ Lang::get('admin/slugs.post_title') }}}" class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($post) ? $post->title : null) }}}" />
-						{{ $errors->first('title', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
+				{{ Form::input_group('text', 'title', '', isset($post) ? $post->title : null, $errors, array('required'=>'required', 'placeholder'=>Lang::get('admin/slugs.post_title')), '', false)}} 
+
 
 				<div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
@@ -55,50 +51,21 @@
 			</div>
 
 			<div class="tab-pane" id="tab-meta-data">
-				<div class="form-group {{{ $errors->has('meta-title') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="meta-title">{{{ Lang::get('admin/slugs.meta_title') }}}</label>
-						<input class="form-control" type="text" name="meta-title" id="meta-title" value="{{{ Input::old('meta-title', isset($post) ? $post->meta_title : null) }}}" />
-						{{ $errors->first('meta-title', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
 
-				<div class="form-group {{{ $errors->has('meta-description') ? 'has-error' : '' }}}">
-					<div class="col-md-12 controls">
-                        <label class="control-label" for="meta-description">{{{ Lang::get('admin/slugs.meta_description') }}}</label>
-						<input class="form-control" type="text" name="meta-description" id="meta-description" value="{{{ Input::old('meta-description', isset($post) ? $post->meta_description : null) }}}" />
-						{{{ $errors->first('meta-description', '<span class="help-block">:message</span>') }}}
-					</div>
-				</div>
+				{{ Form::input_group('text', 'meta-title', Lang::get('admin/slugs.meta_title'), isset($post) ? $post->meta_title : null, $errors,'', '')}} 
 
-				<div class="form-group {{{ $errors->has('meta-keywords') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="meta-keywords">{{{ Lang::get('admin/slugs.meta_keywords') }}}</label>
-						<input class="form-control" type="text" name="meta-keywords" id="meta-keywords" value="{{{ Input::old('meta-keywords', isset($post) ? $post->meta_keywords : null) }}}" />
-						{{ $errors->first('meta-keywords', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-
+				{{ Form::input_group('text', 'meta-description', Lang::get('admin/slugs.meta_description'), isset($post) ? $post->meta_description : null, $errors,'', '')}} 
+				
+				{{ Form::input_group('text', 'meta-keywords', Lang::get('admin/slugs.meta_keywords'), isset($post) ? $post->meta_keywords : null, $errors,'', '')}} 
+			
 			</div>
 
 			<div class="tab-pane" id="tab-settings">
-				<div class="form-group {{{ $errors->has('banner') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="banner">{{{ Lang::get('admin/slugs.banner') }}}</label>
-						<input class="form-control" type="text" name="banner" id="banner" value="{{{ Input::old('banner', isset($post) ? $post->banner : null) }}}" />
-						{{ $errors->first('banner', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
 
-
-				<div class="form-group {{{ $errors->has('parent') ? 'has-error' : '' }}}">
-					<div class="col-md-12">
-                        <label class="control-label" for="parent">{{{ Lang::get('core.parent') }}}</label>
-						{{ Form::select('parent', $parents, Input::old('parent', isset($post) ? $post->parent : null),array('class' => 'form-control')); }}
-						{{ $errors->first('parent', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-
+				{{ Form::input_group('text', 'banner', Lang::get('admin/slugs.banner'), isset($post) ? $post->banner : null, $errors,'', '')}} 
+				
+				{{ Form::input_group('text', 'parent', Lang::get('core.parent'), isset($post) ? $post->parent : null, $errors,'', '')}} 
+				
 				<div class="form-group {{{ $errors->has('template') ? 'has-error' : '' }}}">
 					<div class="col-md-12">
                         <label class="col-md-4 control-label">{{{ Lang::get('core.template') }}}</label>
@@ -170,11 +137,11 @@
 		</div>
 
 		<div class="modal-footer">
-			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')); }} 
-			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')); }} 
+			{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn btn-responsive btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+			{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn btn-responsive btn-default')) }} 
+			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
-	{{ Form::close(); }}
+	{{ Form::close() }}
 @stop
 @section('styles')
 	<style type="text/css"> 

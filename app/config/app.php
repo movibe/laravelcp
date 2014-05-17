@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -137,7 +137,6 @@ return array(
 		'Rtablada\Profane\FilterServiceProvider',
 		'Liebig\Cron\CronServiceProvider',
 		'Dollar\Generators\GeneratorsServiceProvider',
-		'Former\FormerServiceProvider',
 
 		/* LaravelCP */
 		'Gcphost\Helpers\UserServiceProvider',
@@ -197,7 +196,7 @@ return array(
 		//'Eloquent'        => 'Illuminate\Database\Eloquent\Model',
 		'Event'           => 'Illuminate\Support\Facades\Event',
 		'File'            => 'Illuminate\Support\Facades\File',
-		'Form'            => 'Illuminate\Support\Facades\Form',
+		//'Form'            => 'Illuminate\Support\Facades\Form',
 		'Hash'            => 'Illuminate\Support\Facades\Hash',
 		'HTML'            => 'Illuminate\Support\Facades\HTML',
 		'Input'           => 'Illuminate\Support\Facades\Input',
@@ -234,7 +233,9 @@ return array(
 		'CronWrapper'	  => 'Gcphost\Helpers\CronWrapper', 
 		'Filter'		  => 'Rtablada\Profane\Facades\Filter',
 		'Eloquent'		  => 'Rtablada\Profane\Model',
-		'Former' => 'Former\Facades\Former',
+		'Alert'           => 'Caouecs\Bootstrap3\Alert',
+		'Breadcrumb'      => 'Caouecs\Bootstrap3\Breadcrumb',
+		'Form'            => 'Caouecs\Bootstrap3\Form',
 
 		/* LaravelCP */
         'String'          => 'Andrew13\Helpers\String',

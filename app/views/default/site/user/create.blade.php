@@ -15,54 +15,30 @@
 	@endforeach</div>
 <br/>
 <br/>
-<h4> {{{ Lang::get('site.create_with_or') }}}</h4>
+<h4>{{{ Lang::get('site.create_with_or') }}}</h4>
 
-
-<form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
-    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+{{ Form::open_horizontal(array('url' => (Confide::checkAction('UserController@store')) ?: URL::to('user'))) }}
 	{{ Form::honeypot('create_hp', 'create_hp_time') }}
 
     <fieldset>
-		<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
-			<div class="input-group">
-			<input required class="form-control" placeholder="{{{ Lang::get('core.fullname') }}}" type="text" name="name" value="{{{ Input::old('name') }}}">
-				<span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
-			</div>
-			{{ $errors->first('name', '<span class="help-block">:message</span>') }}
-		</div>
-       <div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
-            <div class="input-group">
-				<input required validate type="email" class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" name="email" id="email" value="{{{ Input::old('email') }}}">
-				<span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span></span>
-			</div>
-			{{ $errors->first('email', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
-			 <div class="input-group">
-				<input pattern=".{3,}" required class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
-				<span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
-			</div>
-			{{ $errors->first('password', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group {{{ $errors->has('password_confirmation') ? 'has-error' : '' }}}">
-			 <div class="input-group">
-	          <input pattern=".{3,}" required class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
-				<span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
-			</div>
-			{{ $errors->first('password_confirmation', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group {{{ $errors->has('terms') ? 'has-error' : '' }}}">
-			  <input required id="site_terms" type="checkbox" name="terms" checked> 
-			  <label for="site_terms">{{ Lang::get('core.agree_tos') }}</label>
-			  {{ $errors->first('terms', '<span class="help-block">:message</span>') }}
-        </div>
 
+		{{ Form::input_group('text', 'displayname', '', Input::old('displayname'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('core.fullname')), '', false,'', 'fa fa-fw fa-user') }} 
 
-        <div class="form-actions form-group">
-          <button type="submit" class="btn btn-primary">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
-        </div>
+		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
+		
+		{{ Form::input_group('password', 'password', '', '', $errors, array('pattern' => '.{3,}', 'required'=>'required', 'placeholder'=>Lang::get('confide::confide.password')), '', false,'', 'fa fa-fw fa-lock') }} 
+
+		{{ Form::input_group('password', 'password_confirmation', '', '', $errors, array('pattern' => '.{3,}', 'required'=>'required', 'placeholder'=>Lang::get('confide::confide.password_confirmation')), '', false,'', 'fa fa-fw fa-lock') }} 
+
+		{{ Form::checkbox_group('terms', Lang::get('core.agree_tos'), '1', '', $errors, array('required'=>'required','checked'=>'checked'), '',false) }}
+
+		{{ Form::submit_group(array('submit_title'=>Lang::get('confide::confide.signup.submit')),'',false) }}
+
     </fieldset>
-</form>
+
+{{ Form::close() }}
+
+
 <div id="site_tos" class="hide">
 	<div class="inner_tos">
 		@include(Theme::path('site/tos'))
@@ -72,12 +48,9 @@
 @stop
 
 @section('styles')
-	<style type="text/css">
 		.inner_tos{ height: 250px; overflow: auto }
-	</style>
 @stop
 @section('scripts')
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.2.0/bootbox.min.js"></script>
 	<script type="text/javascript">
 		$(document).on("click", ".site_tos", function(e) {
 			e.preventDefault();   

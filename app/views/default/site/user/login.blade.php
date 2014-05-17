@@ -11,45 +11,19 @@
 <div class="page-header">
 	<h1>{{{ Lang::get('user/user.login') }}}</h1>
 </div>
-{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
+
+{{ Form::open_horizontal() }}
+
     <fieldset>
-        <div class="form-group">
-            <!--<label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.e_mail') }}</label>-->
-            <div class="col-md-10">
-               <div class="input-group">
-				 <input required validate class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.e_mail') }}" type="email" name="email" id="email" value="{{ Input::old('email') }}"><span class="input-group-addon"><span class="fa fa-fw fa-envelope"></span>
-				</span></div>
-            </div>
-        </div>
-        <div class="form-group">
-           <!-- <label class="col-md-2 control-label" for="password">
-                {{ Lang::get('confide::confide.password') }}
-            </label>-->
-            <div class="col-md-10">
 
-			<div class="input-group">
-				<input required class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">
-				  <span class="input-group-btn">
-					 <a class="btn btn-default" href="forgot">{{ Lang::get('button.reset') }}</a>
-				  </span>
-			</div>
-            </div>
-        </div>
+		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
 
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="checkbox">
-                    <label for="remember">{{ Lang::get('confide::confide.login.remember') }}
-                        <input type="hidden" name="remember" value="0">
-                        <input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
-                    </label>
-                </div>
-            </div>
-        </div>
+		{{ Form::input_group('password', 'password', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.password')), '', false,'','','<a class="btn btn-default" href="forgot">'. Lang::get('button.reset') .'</a>') }} 
+
+		{{ Form::checkbox_group('remember', Lang::get('confide::confide.login.remember'), '1', '', $errors, '', '',false) }}
 
         <div class="form-group">
             <div class=" col-md-12">
-
 				<button tabindex="3" type="submit" class="btn btn-primary">{{{ Lang::get('user/user.login') }}}</button>
 				{{ Lang::get('core.or') }}
 				<div class="btn-group">
@@ -59,7 +33,9 @@
             </div>
         </div>
     </fieldset>
-</form>
+
+{{ Form::close() }}
+
 @stop
 
 @section('scripts')

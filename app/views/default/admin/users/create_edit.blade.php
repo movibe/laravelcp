@@ -31,9 +31,9 @@
 	@endif
 
 	@if (isset($user))
-		{{ Form::open(array('method' => 'put','url' => URL::to('admin/users/' . $user->id . '/edit'), 'class' => 'form-horizontal form-ajax')) }}
+		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/users/' . $user->id . '/edit'),'class' => 'form-ajax')) }}
 	@else
-		{{ Form::open(array('class' => 'form-horizontal form-ajax')) }}
+		{{ Form::open_horizontal(array('class' => 'form-ajax')) }}
 	@endif
 
 		<div class="tab-content">
@@ -58,12 +58,15 @@
 							</tbody>
 						</table>
 					</div>
+
 					<hr/>
-					<textarea class="form-control" name="user_notes[]" placeholder="{{{Lang::get('core.new_note')}}}"></textarea>
+						
+					{{ Form::textarea_line('user_notes[]', '', '', $errors, array('placeholder' => Lang::get('core.new_note')), '', false) }} 
+
 					<div class="modal-footer">
-						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')); }} 
-						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')); }} 
+						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')) }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')) }} 
 					</div>
 				</div>
 
@@ -107,6 +110,7 @@
 						</table>
 					</div>
 				</div>
+
 				<div class="tab-pane" id="tab-email">
 					@include(Theme::path('admin/dt-loading'))
 
@@ -126,78 +130,31 @@
 						</table>
 					</div>
 				</div>
-
 			@endif
 
 			<div class="tab-pane active" id="tab-general">
 
+				{{ Form::input_group('text', 'displayname', Lang::get('core.fullname'), isset($user) ? $user->displayname : null, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-user') }} 
 
-				<div class="form-group {{{ $errors->has('displayname') ? 'has-error' : '' }}}">
-					<label class="col-md-2 control-label" for="displayname">{{{ Lang::get('core.fullname') }}}</label>
-					<div class="col-md-10">
-						<input class="form-control" type="text" name="displayname" id="displayname" value="{{{ Input::old('displayname', isset($user) ? $user->displayname : null) }}}" />
-						{{ $errors->first('displayname', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-
-				<div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
-					<label class="col-md-2 control-label" for="email">{{{ Lang::get('button.email') }}}</label>
-					<div class="col-md-10">
-						<input class="form-control" required validate type="email" name="email" id="email" value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
-						{{ $errors->first('email', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-
+				{{ Form::input_group('email', 'email', Lang::get('confide::confide.e_mail'), isset($user) ? $user->email : null, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-envelope') }} 
 				
-				<div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
-					<label class="col-md-2 control-label" for="password">{{{ Lang::get('core.password') }}}</label>
-					<div class="col-md-10">
-						<input @if ($mode == 'create')pattern=".{4,}" required@endif class="form-control" type="password" name="password" id="password" value="" />
-						{{ $errors->first('password', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
+				{{ Form::input_group('password', 'password', Lang::get('confide::confide.password'), '', $errors, '', '', true,'', 'fa fa-fw fa-lock') }} 
 
-				
-				<div class="form-group {{{ $errors->has('password_confirmation') ? 'has-error' : '' }}}">
-					<label class="col-md-2 control-label" for="password_confirmation">{{{ Lang::get('core.password') }}} {{{ Lang::get('core.confirm') }}}</label>
-					<div class="col-md-10">
-						<input @if ($mode == 'create')pattern=".{4,}" required@endif class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" />
-						{{ $errors->first('password_confirmation', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
+				{{ Form::input_group('password', 'password_confirmation', Lang::get('confide::confide.password_confirmation'), '', $errors, '', '', true,'', 'fa fa-fw fa-lock') }} 
 
-				
-				<div class="form-group {{{ $errors->has('activated') || $errors->has('confirm') ? 'has-error' : '' }}}">
-					<label class="col-md-2 control-label" for="confirm">{{{ Lang::get('core.active') }}}</label>
-					<div class="col-md-6">
-						@if ($mode == 'create')
-							<select class="form-control" name="confirm" id="confirm">
-								<option value="1"{{{ (Input::old('confirm', 0) === 1 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
-								<option value="0"{{{ (Input::old('confirm', 0) === 0 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
-							</select>
-						@else
-							<select class="form-control" {{{ ($user->id === Confide::user()->id ? ' disabled="disabled"' : '') }}} name="confirm" id="confirm">
-								<option value="1"{{{ ($user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
-								<option value="0"{{{ ( ! $user->confirmed ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
-							</select>
-						@endif
-						{{ $errors->first('confirm', '<span class="help-block">:message</span>') }}
-					</div>
-				</div>
-
-				<div class="form-group {{{ $errors->has('roles') ? 'has-error' : '' }}}">
-	                <label class="col-md-2 control-label" for="roles">{{{ Lang::get('core.roles') }}}</label>
+				{{ Form::select_group('confirm',  Lang::get('core.active'),
+					array(
+						'1' => Lang::get('general.yes'),
+						'2' => Lang::get('general.no'),
+						),
+						isset($user) ? $user->confirmed : null, $errors) }} 	
+					
+				{{ Form::select_group('roles[]',  Lang::get('core.roles'), $roles,
+						isset($user) ? $user->currentRoleIds() : null, $errors, array('multiple'=>'multiple')) }} 	
+	
+				<div class="form-group">
+	                <label class="col-md-2 control-label" for="roles"></label>
 	                <div class="col-md-6">
-		                <select class="form-control" name="roles[]" id="roles[]" multiple>
-		                        @foreach ($roles as $role)
-									@if ($mode == 'create')
-		                        		<option value="{{{ $role->id }}}"{{{ ( in_array($role->id, $selectedRoles) ? ' selected="selected"' : '') }}}>{{{ $role->name }}}</option>
-		                        	@else
-										<option value="{{{ $role->id }}}"{{{ ( array_search($role->id, $user->currentRoleIds()) !== false && array_search($role->id, $user->currentRoleIds()) >= 0 ? ' selected="selected"' : '') }}}>{{{ $role->name }}}</option>
-									@endif
-		                        @endforeach
-						</select>
-
 						<span class="help-block">
 							{{{ Lang::get('admin/users/messages.select_group') }}}
 						</span>
@@ -219,9 +176,9 @@
 					</div>
 					@endif
 					<div class="pull-right">
-						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')); }} 
-						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')); }} 
+						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+						{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')) }} 
+						{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')) }} 
 					</div>
 				</div>
 			</div>
@@ -249,13 +206,13 @@
 				@endif
 				</div>
 				<div class="modal-footer">
-					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")); }} 
-					{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')); }} 
-					{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')); }} 
+					{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
+					{{ Form::reset(Lang::get('button.reset'), array('class' => 'btn-responsive btn btn-default')) }} 
+					{{ Form::submit(Lang::get('button.save'), array('class' => 'btn-responsive btn btn-success')) }} 
 				</div>
 			</div>
 
-	{{ Form::close(); }}
+	{{ Form::close() }}
 @stop
 
 
