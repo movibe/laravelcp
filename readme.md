@@ -1,7 +1,7 @@
 #LaravelCP
 #####A modular control panel written in PHP using Laravel 4, jQuery 2, Bootstrap 3 & FontAwesome 4. (starter site)
 [![Build Status](https://travis-ci.org/gcphost/laravelcp.png)](https://travis-ci.org/gcphost/laravelcp)
-Follow us  [@laravelcp](https://twitter.com/laravelcp), original fork from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
+Follow us  [@laravelcp](https://twitter.com/laravelcp), [laravelcp.com](http://laravelcp.com), original fork from [laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
 
 ![ScreenShot](http://i.imgur.com/DduoG9F.png)
