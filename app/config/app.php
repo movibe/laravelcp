@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -233,6 +233,8 @@ return array(
 		'CronWrapper'	  => 'Gcphost\Helpers\CronWrapper', 
 		'Filter'		  => 'Rtablada\Profane\Facades\Filter',
 		'Eloquent'		  => 'Rtablada\Profane\Model',
+
+		/* form */
 		'Alert'           => 'Caouecs\Bootstrap3\Alert',
 		'Breadcrumb'      => 'Caouecs\Bootstrap3\Breadcrumb',
 		'Form'            => 'Caouecs\Bootstrap3\Form',
