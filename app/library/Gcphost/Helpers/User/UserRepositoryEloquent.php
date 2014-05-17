@@ -44,8 +44,8 @@ class EloquentUserRepository implements UserRepository
             $user->prepareRules($oldUser, $user);
 
 			if($user->confirmed == null) $user->confirmed = $oldUser->confirmed;
-            
-            if(!empty(Input::get( 'password' ))) {
+            $pw=Input::get( 'password' );
+            if(!empty($pw)) {
 				$user->password = Input::get( 'password' );
 				$user->password_confirmation = Input::get( 'password_confirmation' );
             } else {
@@ -199,8 +199,9 @@ class EloquentUserRepository implements UserRepository
             $user->email = Input::get( 'email' );
             
             $user->prepareRules($oldUser, $user);
-            
-            if(!empty(Input::get( 'password' ))) {
+
+            $pw=Input::get( 'password' );
+            if(!empty($pw)) {
 				$user->password = Input::get( 'password' );
 				$user->password_confirmation = Input::get( 'password_confirmation' );
             } else {
