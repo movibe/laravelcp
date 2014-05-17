@@ -1,5 +1,5 @@
 <?php
-class AdminDashboardController extends AdminController {
+class AdminDashboardController extends BaseController {
 	public function getIndex()
 	{
 		$minigraph_data=array();

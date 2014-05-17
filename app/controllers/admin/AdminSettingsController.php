@@ -1,5 +1,5 @@
 <?php
-class AdminSettingsController extends AdminController
+class AdminSettingsController extends BaseController
 {
 	public function getIndex()
     {

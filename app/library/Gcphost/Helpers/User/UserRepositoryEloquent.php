@@ -1,6 +1,6 @@
 <?php namespace Gcphost\Helpers\User;
 
-use Confide,UserNotes,UserProfile,Input,User, DB;
+use Redirect,Session,Event,Activity,Auth,Confide,UserNotes,UserProfile,Input,User, DB;
 
 class EloquentUserRepository implements UserRepository
 {
@@ -79,6 +79,16 @@ class EloquentUserRepository implements UserRepository
 				}
 			}
 			
+			Event::fire('controller.user.create', array($this->user));
+			Activity::log(array(
+				'contentID'   => $this->user->id,
+				'contentType' => 'account_created',
+				'description' => $this->user->id,
+				'details'     => 'account_created',
+				'updated'     => Confide::user()->id ? true : false,
+			));
+
+
 			return true;
         }
     }
@@ -118,5 +128,105 @@ class EloquentUserRepository implements UserRepository
 		}
 		return $users->paginate($limit);
 	}
+
+	public function logout(){
+		Event::fire('user.logout', array(Confide::user()));
+ 
+		Activity::log(array(
+			'contentID'   => Confide::user()->id,
+			'contentType' => 'logout',
+			'description' => Confide::user()->id,
+			'details'     => '',
+			'updated'     => Confide::user()->id,
+		));
+
+	}
+
+	public function updateLogin($input){
+		DB::update('UPDATE users SET last_login = ? WHERE id = ?', array(date( 'Y-m-d H:i:s', time() ), Auth::user()->id));
+		Activity::log(array(
+			'contentID'   => Confide::user()->id,
+			'contentType' => 'login',
+			'description' => 'info',
+			'details'     => gethostbyaddr($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] .' ('.gethostbyaddr($_SERVER['REMOTE_ADDR']).')' : $_SERVER['REMOTE_ADDR'],
+			'updated'     => Confide::user()->id ? true : false,
+		));
+
+		Event::fire('user.login', array($input));
+
+            $r = Session::get('loginRedirect');
+            if (!empty($r))
+            {
+                Session::forget('loginRedirect');
+                return Redirect::to($r);
+            }
+            return Redirect::to('/admin');
+
+	}
+
+	public function publicCreateOrUpdate($id = null)
+    {
+        if(is_null($id)) {
+            $user = new User;
+			$user->displayname = Input::get( 'displayname' );
+			$user->email = Input::get( 'email' );
+			$user->password = Input::get( 'password' );
+			$user->password_confirmation = Input::get( 'password_confirmation' );
+			$user->save();
+
+			if ( $user->id )
+			{
+				$this->id=$user->id;
+				$user->saveRoles(array(Setting::get('users.default_role_id')));
+			} else return false;
+
+			Activity::log(array(
+				'contentID'   => $user->id,
+				'contentType' => 'account_created',
+				'description' => $user->id,
+				'details'     => 'Created from site',
+				'updated'     => false,
+			));
+
+			Event::fire('user.create', array($user));
+
+			return true;
+        }
+        else {
+			$user = User::find($id);
+			$oldUser = clone $user;
+            $user->displayname = Input::get( 'displayname' );
+            $user->email = Input::get( 'email' );
+            
+            $user->prepareRules($oldUser, $user);
+            
+            if(!empty(Input::get( 'password' ))) {
+				$user->password = Input::get( 'password' );
+				$user->password_confirmation = Input::get( 'password_confirmation' );
+            } else {
+                unset($user->password);
+                unset($user->password_confirmation);
+            }
+
+            if(!$user->amend()) return false;
+
+            $user->saveRoles(Input::get( 'roles' ));
+
+			foreach(Input::get('user_profiles') as $id=>$profile){
+				$pro = UserProfile::find($id);
+				if(!empty($pro)){
+					$pro->fill($profile)->push();
+				} else {
+					$pro = new UserProfile($profile);
+					if($pro->title) $user->profiles()->save($pro);
+				}
+			}
+			
+			Event::fire('user.edit', array($user));
+
+			return true;
+        }
+	}
+
 
 }

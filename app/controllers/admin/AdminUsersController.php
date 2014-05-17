@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\User\UserRepository as User;
 
-class AdminUsersController extends AdminController {
+class AdminUsersController extends BaseController {
 
     protected $user;
     protected $role;
@@ -54,20 +54,9 @@ class AdminUsersController extends AdminController {
 
         if ($validator->passes())
         {
-			if ( $this->user->createOrUpdate() )
-			{
-				Event::fire('controller.user.create', array($this->user));
-				Activity::log(array(
-					'contentID'   => $this->user->id,
-					'contentType' => 'account_created',
-					'description' => $this->user->id,
-					'details'     => 'account_created',
-					'updated'     => Confide::user()->id ? true : false,
-				));
-
-				return Api::to(array('success', Lang::get('admin/users/messages.create.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success'));
-			}
-			else return Api::to(array('error', $this->user->errors()->all() )) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $this->user->errors()->all() );
+			return $this->user->createOrUpdate() ?
+				Api::to(array('success', Lang::get('admin/users/messages.create.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.create.success')) :
+				Api::to(array('error', $this->user->errors()->all() )) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with( 'error', $this->user->errors()->all() );
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withInput(Input::except('password'))->with('error', Lang::get('admin/users/messages.edit.error'))->withErrors($validator);
     }
 
@@ -78,9 +67,7 @@ class AdminUsersController extends AdminController {
 			if(Api::Enabled()){
 				$u=$list->get();
 				return Api::make($u->toArray());
-			} else return Datatables::of($list)
-				 ->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')
-				->make();
+			} else return Datatables::of($list)->edit_column('updated_at','{{{ Carbon::parse($updated_at)->diffForHumans() }}}')->make();
 		}
 	 }
 

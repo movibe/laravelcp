@@ -1,5 +1,5 @@
 <?php
-class AdminProfileController extends AdminController {
+class AdminProfileController extends BaseController {
     protected $user;
     protected $role;
     protected $permission;

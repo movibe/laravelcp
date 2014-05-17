@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\Comment\CommentRepository as Comment;
 
-class AdminCommentsController extends AdminController
+class AdminCommentsController extends BaseController
 {
     protected $comment;
 

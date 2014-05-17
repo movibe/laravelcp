@@ -1,138 +1,67 @@
 <?php
+use Gcphost\Helpers\Blog\BlogRepository as Post;
 
 class BlogController extends BaseController {
-
-    /**
-     * Post Model
-     * @var Post
-     */
     protected $post;
-
-    /**
-     * User Model
-     * @var User
-     */
     protected $user;
 
-    /**
-     * Inject the models.
-     * @param Post $post
-     * @param User $user
-     */
     public function __construct(Post $post, User $user)
     {
-        parent::__construct();
-
         $this->post = $post;
         $this->user = $user;
     }
     
-
-	public function getJavascript(){
-
-		$contents = View::make('translations');
-		$response = Response::make($contents);
-		$response->header('Content-Type', 'application/javascript');
-		return $response;
-
-	}
-
-
-	/**
-	 * Returns all the blog posts.
-	 *
-	 * @return View
-	 */
 	public function getIndex()
 	{
 		$home = $this->post->where('slug', '=', 'home')->first();
 		if(count($home) == 1){
 			return Theme::make('site/blog/home', compact('home'));
-
 		} else {
 			$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
 			return Theme::make('site/blog/index', compact('posts'));
 		}
 	}
 
-	/**
-	 * View a blog post.
-	 *
-	 * @param  string  $slug
-	 * @return View
-	 * @throws NotFoundHttpException
-	 */
 	public function getView($slug)
 	{
 		$post = $this->post->where('slug', '=', $slug)->first();
 
 		if (is_null($post)) return App::abort(404);
 		
-
-		$comments = $post->comments()->orderBy('created_at', 'ASC')->get();
+		$comments = $post->getcomments();
 
         $user = $this->user->currentUser();
         $canComment = false;
         if(!empty($user))$canComment = $user->can('post_comment');
         
-
 		return Theme::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
 	}
 
-	/**
-	 * View a blog post.
-	 *
-	 * @param  string  $slug
-	 * @return Redirect
-	 */
 	public function postView($slug)
 	{
-
         $user = $this->user->currentUser();
         $canComment = $user->can('post_comment');
-		if ( ! $canComment)
-		{
-			return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.login_to_post'));
-		}
+		if(!$canComment) return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.login_to_post'));
+		
+		$post = $this->post->getpost($slug);
 
-		// Get this blog post data
-		$post = $this->post->where('slug', '=', $slug)->first();
-
-		// Declare the rules for the form validation
 		$rules = array(
 			'comment' => 'required|min:3',
 			'comment_hp'   => 'honeypot',
 			'comment_time'   => 'required|honeytime:5'
 		);
 
-		// Validate the inputs
 		$validator = Validator::make(Input::all(), $rules);
 
-		// Check if the form validates with success
 		if ($validator->passes())
 		{
-			// Save the comment
-			$comment = new Comment;
-			$comment->user_id = Auth::user()->id;
-			$comment->content = Input::get('comment');
-
-			// Was the comment saved with success?
-			if($post->comments()->save($comment))
-			{
-				// Redirect to this blog post page
-				return Redirect::to($slug . '#comments')->with('success',  Lang::get('site.comment_added'));
-			}
-
-			// Redirect to this blog post page
-			return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.comment_not_Added'));
-		}
-
-		// Redirect to this blog post page
-		return Redirect::to($slug)->withInput()->withErrors($validator);
+			return $post->comment() ?
+				Redirect::to($slug . '#comments')->with('success',  Lang::get('site.comment_added')) :
+				Redirect::to($slug . '#comments')->with('error',  Lang::get('site.comment_not_Added'));
+		} else return Redirect::to($slug)->withInput()->withErrors($validator);
 	}
 
 	public function postContactUs(){
-
 			$rules = array(
 				'email'     => "required|email",
 				'conact_us'   => 'honeypot',
@@ -143,20 +72,9 @@ class BlogController extends BaseController {
 
 			if ($validator->passes())
 			{
-				try{
-					$body='From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body');
-
-					$send=Mail::send('emails/default', array('body'=>$body), function($message)
-					{
-						$message->to(Setting::get('site.contact_email'))->subject(Input::get('subject'));
-						$message->replyTo(Input::get('email', Input::get('name')));
-
-					});
-				} catch (Exception $e) {
-				 return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
-				}
+				if(!LCP::sendEmailContactUs())
+					return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
 			} else return Redirect::to('contact-us')->withInput()->with( 'error', Lang::get('core.email_not_sent') );
-
         return Redirect::to('contact-us')->with( 'success', Lang::get('core.email_sent') );
 
 	}
@@ -164,5 +82,4 @@ class BlogController extends BaseController {
 	public function getContactUs(){
 		return Theme::make('site/contact-us');
 	}
-
 }

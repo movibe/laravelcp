@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\User\UserRepository as User;
 
-class AdminEmailController extends AdminController {
+class AdminEmailController extends BaseController {
     protected $user;
 
     public function __construct(User $user)

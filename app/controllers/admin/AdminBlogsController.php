@@ -2,7 +2,7 @@
 use Illuminate\Filesystem\Filesystem;
 use Gcphost\Helpers\Blog\BlogRepository as Post;
 
-class AdminBlogsController extends AdminController {
+class AdminBlogsController extends BaseController {
     protected $post;
 
 	public function __construct(Post $post)

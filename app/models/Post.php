@@ -43,6 +43,25 @@ class Post extends Eloquent {
 		return $this->hasMany('Comment');
 	}
 
+	public function getcomments(){
+		return $this->comments()->orderBy('created_at', 'ASC')->get();
+	}
+
+
+	public function comment()
+    {
+
+		$comment = new Comment;
+		$comment->user_id = Auth::user()->id;
+		$comment->content = Input::get('comment');
+
+		if($this->comments()->save($comment)){
+			return true;
+ 		} else return false;
+    }
+
+
+
     public function date($date=null)
     {
         if(is_null($date)) {

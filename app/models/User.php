@@ -166,5 +166,37 @@ class User extends ConfideUser {
 		$chart->addRow(array('In-active',DB::table('users')->where('confirmed', '!=', '1')->count()));
 
 		Lava::PieChart('activeusers')->addOption(array('chartArea' => array('width'=>'98%', 'height'=>'98%')))->addOption(array('backgroundColor' => 'none'))->addOption(array('is3D' => 'true'))->addOption(array('legend' => 'none'));
-	}	
+	}
+	
+	public function runCancel($job, $data){
+		Event::fire('user.cancel', array($data));
+		User::where('id', $data['id'])->update(array('confirmed' => false, 'cancelled' => true));
+	}
+
+	public function cancel($token){
+		switch($token){
+			case 'now':
+				$this->runCancel('', array('id' => $this->id));
+			break;
+			case 'later':
+				$date = Carbon::now()->addMinutes(15);
+				Queue::later($date, 'UserController@runCancel', array('id' => $this->id));
+			break;
+			case 'tomorrow':
+				$date = Carbon::tomorrow();
+				Queue::later($date, 'UserController@runCancel', array('id' => $this->id));
+			break;
+			case 'disable':
+				if($this->cancelled) DB::table('users')->where('id', $this->id)->update(array('confirmed' => true, 'cancelled' => false));
+			break;
+		}
+
+		Activity::log(array(
+			'contentID'   => $this->id,
+			'contentType' => 'account_cancelled',
+			'description' => $this->id,
+			'details'     => '',
+			'updated'     => $this->id,
+		));
+	}
 }

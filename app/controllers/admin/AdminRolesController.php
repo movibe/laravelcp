@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\Role\RoleRepository as Role;
 
-class AdminRolesController extends AdminController {
+class AdminRolesController extends BaseController {
     protected $user;
     protected $role;
     protected $permission;

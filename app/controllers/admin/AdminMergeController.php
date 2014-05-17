@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\User\UserRepository as User;
 
-class AdminMergeController extends AdminController {
+class AdminMergeController extends BaseController {
     protected $user;
     protected $role;
     protected $permission;

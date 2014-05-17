@@ -1,5 +1,5 @@
 <?php
-class AdminSearchController extends AdminController
+class AdminSearchController extends BaseController
 {
     public function getIndex($search)
     {

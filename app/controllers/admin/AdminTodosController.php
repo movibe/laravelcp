@@ -1,7 +1,7 @@
 <?php
 use Gcphost\Helpers\Todo\TodoRepository as Todos;
 
-class AdminTodosController extends AdminController {
+class AdminTodosController extends BaseController {
     protected $todo;
 
     public function __construct(Todos $todo)
