@@ -29,7 +29,8 @@
 		"msurguy/honeypot": "dev-master",
 		"rtablada/profane": "dev-master",
 		"liebig/cron": "dev-master",
-		"atticmedia/anvard": "dev-master"
+		"atticmedia/anvard": "dev-master",
+		"anahkiasen/former": "dev-master"
 	},
 	"require-dev": {
 		"dollar/generators": "1.0.*@dev",

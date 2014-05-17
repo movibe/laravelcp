@@ -2,7 +2,7 @@
 class UserController extends BaseController {
     protected $service;
 
-    public function __construct(SiteService $service)
+    public function __construct(SiteUserService $service)
     {
         $this->service = $service;
     }

@@ -3,8 +3,104 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e8e26e9abba424040ac50efbb2696847",
+    "hash": "774a6d142e6d16e7773f70565f526dcd",
     "packages": [
+        {
+            "name": "anahkiasen/former",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Anahkiasen/former.git",
+                "reference": "fce6790e10bbd0acf3f5a5224d56477ecd44ba7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Anahkiasen/former/zipball/fce6790e10bbd0acf3f5a5224d56477ecd44ba7b",
+                "reference": "fce6790e10bbd0acf3f5a5224d56477ecd44ba7b",
+                "shasum": ""
+            },
+            "require": {
+                "anahkiasen/html-object": "1.*",
+                "illuminate/config": "~4",
+                "illuminate/container": "~4",
+                "illuminate/http": "~4",
+                "illuminate/routing": "~4",
+                "illuminate/session": "~4",
+                "illuminate/translation": "~4"
+            },
+            "require-dev": {
+                "illuminate/database": "~4",
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Former": "src",
+                    "Laravel": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Fabre",
+                    "email": "ehtnam6@gmail.com"
+                }
+            ],
+            "description": "A powerful form builder",
+            "homepage": "http://anahkiasen.github.com/former/",
+            "keywords": [
+                "bootstrap",
+                "form",
+                "foundation",
+                "laravel"
+            ],
+            "time": "2014-02-09 00:37:24"
+        },
+        {
+            "name": "anahkiasen/html-object",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Anahkiasen/html-object.git",
+                "reference": "776aff25a4db27964d95b2332e2f379b0aac9ff0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Anahkiasen/html-object/zipball/776aff25a4db27964d95b2332e2f379b0aac9ff0",
+                "reference": "776aff25a4db27964d95b2332e2f379b0aac9ff0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HtmlObject": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anahkiasen",
+                    "email": "ehtnam6@gmail.com"
+                }
+            ],
+            "description": "A set of classes to create and manipulate HTML objects abstractions",
+            "time": "2014-01-27 22:41:20"
+        },
         {
             "name": "anlutro/l4-settings",
             "version": "dev-master",
@@ -3625,12 +3721,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "270cdf04ea2965711205e8c64bf1d56d058cc76e"
+                "reference": "9aa084d94122f838d87393f47e2330592b2629ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/270cdf04ea2965711205e8c64bf1d56d058cc76e",
-                "reference": "270cdf04ea2965711205e8c64bf1d56d058cc76e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9aa084d94122f838d87393f47e2330592b2629ed",
+                "reference": "9aa084d94122f838d87393f47e2330592b2629ed",
                 "shasum": ""
             },
             "require": {
@@ -3691,7 +3787,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-13 14:02:36"
+            "time": "2014-05-17 05:57:05"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4182,6 +4278,7 @@
         "rtablada/profane": 20,
         "liebig/cron": 20,
         "atticmedia/anvard": 20,
+        "anahkiasen/former": 20,
         "dollar/generators": 20,
         "mockery/mockery": 20,
         "barryvdh/laravel-ide-helper": 20,

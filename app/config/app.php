@@ -137,6 +137,7 @@ return array(
 		'Rtablada\Profane\FilterServiceProvider',
 		'Liebig\Cron\CronServiceProvider',
 		'Dollar\Generators\GeneratorsServiceProvider',
+		'Former\FormerServiceProvider',
 
 		/* LaravelCP */
 		'Gcphost\Helpers\UserServiceProvider',
@@ -233,7 +234,7 @@ return array(
 		'CronWrapper'	  => 'Gcphost\Helpers\CronWrapper', 
 		'Filter'		  => 'Rtablada\Profane\Facades\Filter',
 		'Eloquent'		  => 'Rtablada\Profane\Model',
-
+		'Former' => 'Former\Facades\Former',
 
 		/* LaravelCP */
         'String'          => 'Andrew13\Helpers\String',
