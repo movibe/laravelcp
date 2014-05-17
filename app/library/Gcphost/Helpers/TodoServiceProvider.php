@@ -8,7 +8,8 @@ class TodoServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Gcphost\Helpers\Todo\TodoRepository',
-			'Gcphost\Helpers\Todo\EloquentTodoRepository'
+			'Gcphost\Helpers\Todo\EloquentTodoRepository',
+			'Gcphost\Helpers\Todo\TodoService'
 		);
 	}
 }

@@ -1,7 +1,5 @@
 <?php
-
 class AdminUsersController extends BaseController {
-
     protected $service;
 
     public function __construct(UserService $service)

@@ -2,84 +2,33 @@
 use Gcphost\Helpers\Blog\BlogRepository as Post;
 
 class BlogController extends BaseController {
-    protected $post;
-    protected $user;
+    protected $service;
 
-    public function __construct(Post $post, User $user)
+    public function __construct(SiteBlog $service)
     {
-        $this->post = $post;
-        $this->user = $user;
+        $this->service = $service;
     }
     
 	public function getIndex()
 	{
-		$home = $this->post->where('slug', '=', 'home')->first();
-		if(count($home) == 1){
-			return Theme::make('site/blog/home', compact('home'));
-		} else {
-			$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
-			return Theme::make('site/blog/index', compact('posts'));
-		}
+		return $this->service->index();
 	}
 
 	public function getView($slug)
 	{
-		$post = $this->post->where('slug', '=', $slug)->first();
-
-		if (is_null($post)) return App::abort(404);
-		
-		$comments = $post->getcomments();
-
-        $user = $this->user->currentUser();
-        $canComment = false;
-        if(!empty($user))$canComment = $user->can('post_comment');
-        
-		return Theme::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
+		return $this->service->view($slug);
 	}
 
 	public function postView($slug)
 	{
-        $user = $this->user->currentUser();
-        $canComment = $user->can('post_comment');
-		if(!$canComment) return Redirect::to($slug . '#comments')->with('error',  Lang::get('site.login_to_post'));
-		
-		$post = $this->post->getpost($slug);
-
-		$rules = array(
-			'comment' => 'required|min:3',
-			'comment_hp'   => 'honeypot',
-			'comment_time'   => 'required|honeytime:5'
-		);
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->passes())
-		{
-			return $post->comment() ?
-				Redirect::to($slug . '#comments')->with('success',  Lang::get('site.comment_added')) :
-				Redirect::to($slug . '#comments')->with('error',  Lang::get('site.comment_not_Added'));
-		} else return Redirect::to($slug)->withInput()->withErrors($validator);
+		return $this->service->post($slug);
 	}
 
 	public function postContactUs(){
-			$rules = array(
-				'email'     => "required|email",
-				'conact_us'   => 'honeypot',
-				'contact_us_time'   => 'required|honeytime:5'
-			);
-			 
-			$validator = Validator::make(Input::get(), $rules);
-
-			if ($validator->passes())
-			{
-				if(!LCP::sendEmailContactUs())
-					return Redirect::to('contact-us')->with( 'error', Lang::get('core.email_not_sent') );
-			} else return Redirect::to('contact-us')->withInput()->with( 'error', Lang::get('core.email_not_sent') );
-        return Redirect::to('contact-us')->with( 'success', Lang::get('core.email_sent') );
-
+		return $this->service->postContactUs();
 	}
 
 	public function getContactUs(){
-		return Theme::make('site/contact-us');
+		return $this->service->getContactUs();
 	}
 }

@@ -1,20 +1,14 @@
 <?php
 class AdminProfileController extends BaseController {
-    protected $user;
-    protected $role;
-    protected $permission;
-	private $email;
+    protected $service;
 
-	public function __construct(User $user, Role $role, Permission $permission)
+    public function __construct(ProfileService $service)
     {
-        $this->user = $user;
-        $this->role = $role;
-        $this->permission = $permission;
-
+        $this->service = $service;
     }
-
+	
     public function deleteIndex($user, $profile)
     {
-		return $this->user->deleteProfile($profile) ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		return $this->service->delete($user, $profile);
 	}
 }

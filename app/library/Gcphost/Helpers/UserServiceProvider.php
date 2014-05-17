@@ -9,7 +9,6 @@ class UserServiceProvider extends ServiceProvider {
 		$this->app->bind(
 			'Gcphost\Helpers\User\UserRepository',
 			'Gcphost\Helpers\User\EloquentUserRepository',
-			'Gcphost\Helpers\User\UserValidator',
 			'Gcphost\Helpers\User\UserService'
 		);
 	}

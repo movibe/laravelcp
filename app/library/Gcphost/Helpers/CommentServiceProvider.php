@@ -8,7 +8,8 @@ class CommentServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Gcphost\Helpers\Comment\CommentRepository',
-			'Gcphost\Helpers\Comment\EloquentCommentRepository'
+			'Gcphost\Helpers\Comment\EloquentCommentRepository',
+			'Gcphost\Helpers\Comment\CommentService'
 		);
 	}
 }

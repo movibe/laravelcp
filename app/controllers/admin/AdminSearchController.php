@@ -1,9 +1,14 @@
 <?php
 class AdminSearchController extends BaseController
 {
-    public function getIndex($search)
+    protected $service;
+
+    public function __construct(SearchService $service)
     {
-		$results=Search::Query($search);
-		return Theme::make('admin/search/index', compact('results'));
+        $this->service = $service;
+    }
+	public function getIndex($search)
+    {
+		return $this->service->index($search);
     }
 }

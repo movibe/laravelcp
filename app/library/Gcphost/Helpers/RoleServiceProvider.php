@@ -8,7 +8,9 @@ class RoleServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Gcphost\Helpers\Role\RoleRepository',
-			'Gcphost\Helpers\Role\EloquentRoleRepository'
+			'Gcphost\Helpers\Role\EloquentRoleRepository',
+			'Gcphost\Helpers\Role\RoleService'
+
 		);
 	}
 }

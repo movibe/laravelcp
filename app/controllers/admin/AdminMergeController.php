@@ -1,40 +1,19 @@
 <?php
-use Gcphost\Helpers\User\UserRepository as User;
-
 class AdminMergeController extends BaseController {
-    protected $user;
-    protected $role;
-    protected $permission;
+    protected $service;
 
-    public function __construct(User $user, Role $role, Permission $permission)
+    public function __construct(MergeService $service)
     {
-        $this->user = $user;
-        $this->role = $role;
-        $this->permission = $permission;
+        $this->service = $service;
     }
 
     public function getMassMergeConfirm()
     {
-		$ids=explode(',',rtrim(Input::get('ids'),','));
-		$mergefrom='';
-		$mergelist=array();
-
-		if(is_array($ids) && count($ids) > 0){
-			foreach($ids as $id){
-				$user=$this->user->find($id);
-				if(!empty($user)){
-					if($mergefrom){
-						$mergelist[$id]=$user->email;
-					}else $mergefrom=$user->email;
-				}
-			}
-		}
-
-        return Theme::make('admin/users/confirm_merge', compact('mergelist','mergefrom'));
+		return $this->service->get();
     }
 
     public function postMerge()
     {
-		return LCP::merge();
+		return $this->service->post();
 	}
  }

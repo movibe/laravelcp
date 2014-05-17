@@ -144,6 +144,14 @@ return array(
 		'Gcphost\Helpers\BlogServiceProvider',
 		'Gcphost\Helpers\CommentServiceProvider',
 		'Gcphost\Helpers\RoleServiceProvider',
+		'Gcphost\Helpers\DesktopServiceProvider',
+		'Gcphost\Helpers\EmailServiceProvider',
+		'Gcphost\Helpers\MergeServiceProvider',
+		'Gcphost\Helpers\ProfileServiceProvider',
+		'Gcphost\Helpers\SearchServiceProvider',
+		'Gcphost\Helpers\SettingServiceProvider',
+		'Gcphost\Helpers\SiteUserServiceProvider',
+		'Gcphost\Helpers\SiteBlogServiceProvider',
 
 
 	),

@@ -1,215 +1,104 @@
 <?php
-use Gcphost\Helpers\User\UserRepository as User;
-
 class UserController extends BaseController {
-    protected $user;
+    protected $service;
 
-    public function __construct(User $user)
+    public function __construct(SiteService $service)
     {
-        $this->user = $user;
+        $this->service = $service;
     }
 
 	public function getCancel($user, $token){
-		$user->cancel($token);
-		return Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') );
+		return $this->service->cancel();
 	}
 
     public function invalidtoken()
     {
-        return Theme::make('site/invalidtoken');
+		return $this->service->invalidtoken();
     }   
 	
     public function noPermission()
     {
-        return Theme::make('site/nopermission');
+		return $this->service->noPermission();
     }
 
     public function suspended()
     {
-        return Theme::make('site/suspended');
+		return $this->service->suspended();
     }
 	
     public function getIndex()
     {
-        list($user,$redirect) = $this->user->checkAuthAndRedirect('user');
-        if($redirect) return $redirect;
-		$profiles=$user->profiles;
-
-        return Theme::make('site/user/index', compact('user', 'profiles'));
+		return $this->service->index();
     }
 
     public function postIndex()
     {
-		$rules = array(
-			'displayname' => 'required',
-			'terms'     => "required|accepted",
-			'name'      => 'required',
-			'email'     => "required|email",
-			'password'   => 'required|confirmed|min:4',
-			'create_hp'   => 'honeypot',
-			'create_hp_time'   => 'required|honeytime:3'
-		);
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->passes())
-		{
-			$this->user->publicCreateOrUpdate();
-		   
-		} else return Redirect::to('user/create')
-					->withInput(Input::except('password','password_confirmation'))
-					->withErrors($validator);
-
-        $error = $user->errors()->all();
-
-        return empty($error) ? 
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :
-            Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
+		return $this->service->post();
     }
 
     public function postEdit($user)
     {
-		if(!Input::get( 'password' )) {
-			$rules = array(
-				'displayname' => 'required',
-				'email' => 'required|email',
-				'password' => 'min:4|confirmed',
-				'password_confirmation' => 'min:4',
-			);
-		} else {
-			$rules = array(
-				'displayname' => 'required',
-				'email' => 'required|email',
-			);
-		}
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->passes())
-        {
-			 $this->user->publicCreateOrUpdate($user->id);
-			
-        } else return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($validator);
-        
-        $error = $user->errors()->all();
-
-        return empty($error) ?
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) :
-            Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
+		return $this->service->edit($user);
     }
 
     public function getCreate()
     {
- 		$anvard = App::make('anvard');
-		$providers = $anvard->getProviders();
-
-		return Theme::make('site/user/create', compact('providers'));
+		return $this->service->getCreate();
     }
 
     public function getDelete($user, $profile)
     {
-		$error=$user->deleteProfile($profile);
-        return $error == 1 ?
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) :
-            Redirect::to('user')->with( 'error', Lang::get('user/user.user_account_not_updated') );
+		return $this->service->getDelete($user, $profile);
 	}
 
     public function getLogin()
     {
-		$user = Auth::user();
-		if(!empty($user->id)) return Redirect::to('/');
-		
-		$anvard = App::make('anvard');
-		$providers = $anvard->getProviders();
-
-		return Theme::make('site/user/login', compact('providers'));
+		return $this->service->getLogin();
     }
 
     public function postLogin()
     {
-        $input = array(
-            'email'    => Input::get( 'email' ), // May be the username too
-            'password' => Input::get( 'password' ),
-            'remember' => Input::get( 'remember' ),
-        );
+		return $this->service->postLogin();
 
-        if ( Confide::logAttempt( $input, true ) )
-        {
-			return $this->user->updateLogin($input);
-        }
-        else
-        {
-            if ( Confide::isThrottled( $input ) ) {
-                $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
-            } elseif ( $this->user->checkUserExists( $input ) && ! $this->user->isConfirmed( $input ) ) {
-                $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
-            } else $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
-
-            return Redirect::to('user/login')->withInput(Input::except('password'))->with( 'error', $err_msg );
-        }
     }
 
-    public function getConfirm( $code )
+    public function getConfirm($code)
     {
-        return Confide::confirm( $code ) ?
-            Redirect::to('user/login')->with( 'success', Lang::get('confide::confide.alerts.confirmation') ) :
-			Redirect::to('user/login')->with( 'error', Lang::get('confide::confide.alerts.wrong_confirmation') );
+		return $this->service->getConfirm($code);
     }
 
     public function getForgot()
     {
-        return Theme::make('site/user/forgot');
+		return $this->service->getForgot();
     }
 
     public function postForgot()
     {
-        return Confide::forgotPassword( Input::get( 'email' ) ) ?
-            Redirect::to('user/login')->with( 'success', Lang::get('confide::confide.alerts.password_forgot') ) :
-			Redirect::to('user/forgot')->withInput()->with( 'error', Lang::get('confide::confide.alerts.wrong_password_forgot') );
+		return $this->service->postForgot();
     }
 
-    public function getReset( $token )
+    public function getReset($token)
     {
-        return Theme::make('site/user/reset')->with('token',$token);
+		return $this->service->getReset($token);
     }
   
     public function postReset()
     {
-        $input = array(
-            'token'=>Input::get( 'token' ),
-            'password'=>Input::get( 'password' ),
-            'password_confirmation'=>Input::get( 'password_confirmation' ),
-        );
-
-        return Confide::resetPassword( $input ) ?
-            Redirect::to('user/login')->with( 'success', Lang::get('confide::confide.alerts.password_reset') ) :
-            Redirect::to('user/reset/'.$input['token'])->withInput()->with( 'error', Lang::get('confide::confide.alerts.wrong_password_reset'));
+		return $this->service->postReset();
     }
 
     public function getLogout()
     {
-		$this->user->logout();	   
-		Confide::logout();
-        return Redirect::to('/');
+		return $this->service->getLogout();
     }
 
 	public function getSettings()
     {
-        list($user,$redirect) = User::checkAuthAndRedirect('user/settings');
-        if($redirect) return $redirect;
-
-        return Theme::make('site/user/profile', compact('user'));
+		return $this->service->getSettings();
     }
 
     public function processRedirect($url1,$url2,$url3)
     {
-        $redirect = '';
-        if( ! empty( $url1 ) )
-        {
-            $redirect = $url1;
-            $redirect .= (empty($url2)? '' : '/' . $url2);
-            $redirect .= (empty($url3)? '' : '/' . $url3);
-        }
-        return $redirect;
+		return $this->service->processRedirect($url1,$url2,$url3);
     }
 }

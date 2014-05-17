@@ -8,7 +8,8 @@ class BlogServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Gcphost\Helpers\Blog\BlogRepository',
-			'Gcphost\Helpers\Blog\EloquentBlogRepository'
+			'Gcphost\Helpers\Blog\EloquentBlogRepository',
+			'Gcphost\Helpers\Blog\BlogService'
 		);
 	}
 }
