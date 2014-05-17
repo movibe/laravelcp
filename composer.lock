@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e0ec599c5e082f8c20d290e85808f2f2",
+    "hash": "ad40d2bd114d7a254ca99071d1203a05",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -161,53 +161,6 @@
                 "laravel4"
             ],
             "time": "2014-05-07 16:43:04"
-        },
-        {
-            "name": "caouecs/bootstrap3",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/caouecs/Laravel4-Bootstrap3.git",
-                "reference": "7ff79eacd7f507f0a79aa37a740c7d0b090c4bd1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/caouecs/Laravel4-Bootstrap3/zipball/7ff79eacd7f507f0a79aa37a740c7d0b090c4bd1",
-                "reference": "7ff79eacd7f507f0a79aa37a740c7d0b090c4bd1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/migrations"
-                ],
-                "psr-0": {
-                    "Caouecs\\Bootstrap3": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "caouecs",
-                    "email": "caouecs@caouecs.net",
-                    "homepage": "https://github.com/caouecs",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Bootstrap 3 for Laravel 4",
-            "keywords": [
-                "bootstrap3",
-                "laravel",
-                "lpm"
-            ],
-            "time": "2014-03-04 09:34:05"
         },
         {
             "name": "caouecs/laravel4-lang",
@@ -376,6 +329,53 @@
                 "zf2"
             ],
             "time": "2013-12-04 14:19:30"
+        },
+        {
+            "name": "gcphost/bootstrap3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gcphost/Laravel4-Bootstrap3.git",
+                "reference": "cba4f0da5d1087697b77313ff776c818e48e7889"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gcphost/Laravel4-Bootstrap3/zipball/cba4f0da5d1087697b77313ff776c818e48e7889",
+                "reference": "cba4f0da5d1087697b77313ff776c818e48e7889",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Caouecs\\Bootstrap3": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net",
+                    "homepage": "https://github.com/caouecs",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Bootstrap 3.1 for Laravel 4.1",
+            "keywords": [
+                "bootstrap3",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2014-05-17 23:42:55"
         },
         {
             "name": "hybridauth/hybridauth",
@@ -1751,12 +1751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "446f3446e060014fc1510c72d7af29dfe11d383f"
+                "reference": "778356eb2e846327f25ec326d2ec6ff32f1e363b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/446f3446e060014fc1510c72d7af29dfe11d383f",
-                "reference": "446f3446e060014fc1510c72d7af29dfe11d383f",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/778356eb2e846327f25ec326d2ec6ff32f1e363b",
+                "reference": "778356eb2e846327f25ec326d2ec6ff32f1e363b",
                 "shasum": ""
             },
             "require": {
@@ -1797,7 +1797,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-13 08:58:07"
+            "time": "2014-05-17 20:48:34"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1963,12 +1963,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "7d464f35b8404c20f1f5135b5ce87af53ef2cef9"
+                "reference": "473f988bf3684896608056a5c8c05ce67348a1e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/7d464f35b8404c20f1f5135b5ce87af53ef2cef9",
-                "reference": "7d464f35b8404c20f1f5135b5ce87af53ef2cef9",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/473f988bf3684896608056a5c8c05ce67348a1e9",
+                "reference": "473f988bf3684896608056a5c8c05ce67348a1e9",
                 "shasum": ""
             },
             "require": {
@@ -2009,7 +2009,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-04-28 17:43:58"
+            "time": "2014-05-17 20:48:34"
         },
         {
             "name": "symfony/http-kernel",
@@ -2018,12 +2018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "3b606b750c666548c198402f9e8be9f047dca04e"
+                "reference": "d5746a530c872d926b01b909ee05a505642b6220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/3b606b750c666548c198402f9e8be9f047dca04e",
-                "reference": "3b606b750c666548c198402f9e8be9f047dca04e",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/d5746a530c872d926b01b909ee05a505642b6220",
+                "reference": "d5746a530c872d926b01b909ee05a505642b6220",
                 "shasum": ""
             },
             "require": {
@@ -2039,6 +2039,7 @@
                 "symfony/config": "~2.0",
                 "symfony/console": "~2.2",
                 "symfony/dependency-injection": "~2.0",
+                "symfony/filesystem": "~2.4",
                 "symfony/finder": "~2.0",
                 "symfony/process": "~2.0",
                 "symfony/routing": "~2.2",
@@ -2051,6 +2052,7 @@
                 "symfony/config": "",
                 "symfony/console": "",
                 "symfony/dependency-injection": "",
+                "symfony/filesystem": "",
                 "symfony/finder": ""
             },
             "type": "library",
@@ -2082,7 +2084,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-05-15 07:35:53"
+            "time": "2014-05-17 20:48:34"
         },
         {
             "name": "symfony/process",
@@ -3424,12 +3426,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "437f10e92e38bac67aca34ed60716e700ddca3a1"
+                "reference": "2b7576920b70702fe0cda90ea02606b4bc8fbdd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/437f10e92e38bac67aca34ed60716e700ddca3a1",
-                "reference": "437f10e92e38bac67aca34ed60716e700ddca3a1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2b7576920b70702fe0cda90ea02606b4bc8fbdd8",
+                "reference": "2b7576920b70702fe0cda90ea02606b4bc8fbdd8",
                 "shasum": ""
             },
             "require": {
@@ -3481,7 +3483,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-17 13:22:12"
+            "time": "2014-05-17 15:47:16"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4229,7 +4231,7 @@
         "rtablada/profane": 20,
         "liebig/cron": 20,
         "atticmedia/anvard": 20,
-        "caouecs/bootstrap3": 20,
+        "gcphost/bootstrap3": 20,
         "dollar/generators": 20,
         "mockery/mockery": 20,
         "barryvdh/laravel-ide-helper": 20,
