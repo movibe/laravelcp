@@ -6,6 +6,10 @@ class AdminRolesController extends BaseController {
     protected $role;
     protected $permission;
 	private $protected_roles=array('admin','client');
+    var $rules = array(
+            'name' => 'required'
+        );
+
 
     public function __construct(User $user, Role $role, Permission $permission)
     {
@@ -29,11 +33,7 @@ class AdminRolesController extends BaseController {
 
     public function postCreate()
     {
-        $rules = array(
-            'name' => 'required'
-        );
-
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = Validator::make(Input::all(), $this->rules);
         if ($validator->passes())
         {
             $inputs = Input::except('csrf_token');
@@ -57,14 +57,10 @@ class AdminRolesController extends BaseController {
 
     public function putEdit($role)
     {
-        $rules = array(
-            'name' => 'required'
-        );
-
 		if((in_array(Input::old('name', $role->name), $this->protected_roles) &&Input::old('name', $role->name) != Input::get('name'))||( in_array(Input::get('name'), $this->protected_roles)  && Input::old('name', $role->name) != Input::get('name'))) 
 			return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
         if ($validator->passes())
         {
             $inputs = Input::except('csrf_token');

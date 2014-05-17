@@ -1,4 +1,6 @@
-<?php
+<?php 
+namespace Gcphost\Helpers;
+
 
 return array(
 
@@ -13,7 +15,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------

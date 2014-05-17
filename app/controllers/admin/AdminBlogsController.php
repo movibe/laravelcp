@@ -4,6 +4,10 @@ use Gcphost\Helpers\Blog\BlogRepository as Post;
 
 class AdminBlogsController extends BaseController {
     protected $post;
+    var $rules = array(
+            'title'   => 'required|min:3',
+            'content' => 'required|min:3'
+    );
 
 	public function __construct(Post $post)
     {
@@ -25,12 +29,7 @@ class AdminBlogsController extends BaseController {
 
 	public function postCreate()
 	{
-        $rules = array(
-            'title'   => 'required|min:3',
-            'content' => 'required|min:3'
-        );
-
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = Validator::make(Input::all(), $this->rules);
 
         if ($validator->passes())
         {
@@ -49,12 +48,7 @@ class AdminBlogsController extends BaseController {
 
 	public function putEdit($post)
 	{
-        $rules = array(
-            'title'   => 'required|min:3',
-            'content' => 'required|min:3'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if ($validator->passes())
         {

@@ -3,6 +3,9 @@ use Gcphost\Helpers\Todo\TodoRepository as Todos;
 
 class AdminTodosController extends BaseController {
     protected $todo;
+	var $rules = array(
+			'title' => 'required',
+		);
 
     public function __construct(Todos $todo)
     {
@@ -19,11 +22,8 @@ class AdminTodosController extends BaseController {
 	}
 
 	public function postCreate(){
-		$rules = array(
-			'title' => 'required',
-		);
 
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if ($validator->passes())
         {
@@ -39,11 +39,7 @@ class AdminTodosController extends BaseController {
 	}
 
 	public function putEdit($todo){
-		$rules = array(
-			'title' => 'required',
-		);
-
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $this->rules);
 
         if ($validator->passes())
         {
