@@ -40,6 +40,7 @@ Follow us  [@laravelcp](https://twitter.com/laravelcp), [laravelcp.com](http://l
 - [L4-honeypot](https://github.com/msurguy/Honeypot), stop spammers!
 - [Profane Filter](https://github.com/rtablada/profane)
 - [l4-gravatar](https://github.com/thomaswelton/laravel-gravatar)
+- [bootstrap3 forms](https://github.com/gcphost/Laravel4-Bootstrap3/)
 
 ## Available Plugins
 - [l4cp-support plugin](https://github.com/gcphost/l4cp-support) beta
