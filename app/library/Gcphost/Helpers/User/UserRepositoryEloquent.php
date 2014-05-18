@@ -73,7 +73,8 @@ class EloquentUserRepository implements UserRepository
 					if($note){
 						$not->fill(array('id'=>$id,'note'=>$note))->push();
 					} else $not->delete();
-				} else {
+				} elseif($note) {
+					
 					$not = new UserNotes(array('id'=>$id,'note'=>$note, 'admin_id' =>Confide::user()->id));
 					$user->notes()->save($not);
 				}
