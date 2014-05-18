@@ -43,7 +43,6 @@ class SiteUserService {
 		$rules = array(
 			'displayname' => 'required',
 			'terms'     => "required|accepted",
-			'name'      => 'required',
 			'email'     => "required|email",
 			'password'   => 'required|confirmed|min:4',
 			'create_hp'   => 'honeypot',
@@ -60,7 +59,7 @@ class SiteUserService {
 					->withInput(Input::except('password','password_confirmation'))
 					->withErrors($validator);
 
-        $error = $user->errors()->all();
+        $error = $this->user->errors()->all();
 
         return empty($error) ? 
             Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :

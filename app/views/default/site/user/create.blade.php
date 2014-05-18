@@ -30,14 +30,13 @@
 
 		{{ Form::input_group('password', 'password_confirmation', '', '', $errors, array('pattern' => '.{3,}', 'required'=>'required', 'placeholder'=>Lang::get('confide::confide.password_confirmation')), '', false,'', 'fa fa-fw fa-lock') }} 
 
-		{{ Form::checkbox_group('terms', Lang::get('core.agree_tos'), '1', '', $errors, array('required'=>'required','checked'=>'checked'), '',false) }}
+		{{ Form::checkbox_group('terms', Lang::get('core.agree_tos'), '1', '', $errors, array('id'=>'site_terms','required'=>'required','checked'=>'checked'), '',false) }}
 
 		{{ Form::submit_group(array('submit_title'=>Lang::get('confide::confide.signup.submit')),'',false) }}
 
     </fieldset>
 
 {{ Form::close() }}
-
 
 <div id="site_tos" class="hide">
 	<div class="inner_tos">

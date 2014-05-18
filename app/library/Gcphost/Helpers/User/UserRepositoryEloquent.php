@@ -1,6 +1,6 @@
 <?php namespace Gcphost\Helpers\User;
 
-use Redirect,Session,Event,Activity,Auth,Confide,UserNotes,UserProfile,Input,User, DB;
+use Setting,Redirect,Session,Event,Activity,Auth,Confide,UserNotes,UserProfile,Input,User, DB;
 
 class EloquentUserRepository implements UserRepository
 {

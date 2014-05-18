@@ -59,7 +59,7 @@
 		<br/>
 		<div class="tab-content">
 			<div class="tab-pane" id="tab-create">
-				@include(Theme::path('admin/users/profiles'))
+				@include(Theme::path('site/user/profiles'))
 			</div>
 
 			@foreach($profiles as $index=>$profile)
