@@ -70,15 +70,19 @@ class EmailService {
 	public function emailmass(){
 		$ids=explode(',',rtrim(Input::get('ids'),','));
 		$multi=array();
+		$selected=array();
 		if(is_array($ids) && count($ids) > 0){
 			foreach($ids as $id){
 				$user=$this->user->find($id);
-				if(!empty($user)) $multi[$id]=$user->email;
+				if(!empty($user)){
+					$multi[$id]=$user->email;
+					$selected=$id;
+				}
 			}
 		}
 		$title = Lang::get('core.email');
 		$mode = 'edit';
 		$templates=LCP::emailTemplates();
-		return Theme::make('admin/users/send_email', compact('title','mode', 'multi', 'templates'));
+		return Theme::make('admin/users/send_email', compact('title','mode', 'multi', 'selected','templates'));
 	}
 }

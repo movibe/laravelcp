@@ -33,16 +33,7 @@
 @endif
 
 	@if(isset($multi) && count($multi) > 0)
-	<div class="form-group">
-		<div class="col-md-12">
-		
-			<select name="to[]" multiple style="width: 100%; height: 40px;" class="form-control">
-				@foreach ($multi as $i=>$email)
-					<option value="{{{ $i }}}" selected>{{{ $email }}}</option>
-				@endforeach
-			</select>		
-		</div>
-	</div>
+		{{ Form::select_group('to[]', '', $multi, $selected, $errors,array('multiple'=>'multiple','required'=>'required', 'style'=>'width: 100%; height: 40px;'), '',false) }} 	
 	@endif
 
 	{{ Form::input_group('text', 'subject', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('core.subject')), '', false) }} 
@@ -83,7 +74,6 @@
 
 			<input type="hidden" id="email-template" name="template" value="emails.default"/>
 			<textarea class="hide" id="wysiwyg-body" name="body"></textarea>
-
 	</div>
 	<script type="text/javascript">
 		initToolbarBootstrapBindings();  
