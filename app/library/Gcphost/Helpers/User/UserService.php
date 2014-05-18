@@ -35,7 +35,7 @@ class UserService {
 
     public function edit($user)
     {
-		if(!Input::get( 'password' )) {
+		if(Input::get( 'password' )) {
 			$rules = $this->rules;
 		} else $rules = array(
 				'displayname' => 'required',

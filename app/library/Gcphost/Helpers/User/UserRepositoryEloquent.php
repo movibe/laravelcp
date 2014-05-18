@@ -32,9 +32,9 @@ class EloquentUserRepository implements UserRepository
 				$user = $user->find($user->id);
 				$user->profiles()->save($profile);
 			} else return false;
+
 			return true;
-        }
-        else {
+        } else {
 			$user = User::find($id);
 			$oldUser = clone $user;
             $user->displayname = Input::get( 'displayname' );
@@ -53,7 +53,7 @@ class EloquentUserRepository implements UserRepository
                 unset($user->password_confirmation);
             }
 
-            if(!$user->amend()) return false;
+            if(!$user->save()) return false;
 
             $user->saveRoles(Input::get( 'roles' ));
 
@@ -209,7 +209,7 @@ class EloquentUserRepository implements UserRepository
                 unset($user->password_confirmation);
             }
 
-            if(!$user->amend()) return false;
+            if(!$user->save()) return false;
 
             $user->saveRoles(Input::get( 'roles' ));
 
