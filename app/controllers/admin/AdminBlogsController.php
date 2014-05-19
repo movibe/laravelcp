@@ -38,7 +38,12 @@ class AdminBlogsController extends BaseController {
         return $this->service->delete($post);
     }
 
-    public function getData()
+    public function getPage()
+    {
+        return $this->service->page(Input::get('limit'));
+	}
+
+	public function getData()
     {
         return $this->service->get();
     }

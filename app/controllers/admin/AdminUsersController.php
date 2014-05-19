@@ -62,9 +62,13 @@ class AdminUsersController extends BaseController {
 
     public function deleteIndex($user)
     {
-        
-  		return $this->service->delete($user);
+		return $this->service->delete($user);
     }
+
+    public function getPage()
+    {
+        return $this->service->page(Input::get('limit'));
+	}
 
     public function getData()
     {

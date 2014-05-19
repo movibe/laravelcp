@@ -39,7 +39,12 @@ class AdminTodosController extends BaseController {
        return $this->service->assign($todo);
 	}
 
-     public function getData()
+    public function getPage()
+    {
+        return $this->service->page(Input::get('limit'));
+	}
+
+	public function getData()
     {
         return $this->service->get();
 	}

@@ -37,6 +37,11 @@ class AdminRolesController extends BaseController {
        return $this->service->delete($role);
     }
 
+    public function getPage()
+    {
+        return $this->service->page(Input::get('limit'));
+	}
+
     public function getData()
     {
        return $this->service->get();

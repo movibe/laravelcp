@@ -59,6 +59,10 @@ class TodosService {
         return $todo->assign() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
 	}
 
+	public function page($limit=10){
+		return $this->todo->paginate($limit);
+	}
+
     public function get()
     {
 		if(Api::Enabled()){

@@ -119,24 +119,6 @@ class UserService {
         return $user->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
-    public function get()
-    {
-   		if(Api::Enabled()){
-			return Api::make($this->user->all()->get()->toArray());
-		} else return Datatables::of($this->user->all())
-        ->add_column('actions', '<div class="btn-group">
-		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
-		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>
-		@if($id == Auth::user()->id)
-			<a href="#" class="disabled btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-		@else
-			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-		@endif</div>
-            ')
-
-        ->make();
-    }
-
     public function index()
     {
         $users = $this->user;
@@ -167,5 +149,27 @@ class UserService {
 
 			return Theme::make('admin/users/create_edit', compact('user', 'roles', 'permissions', 'mode', 'profiles', 'last_login'));
         } else return Api::to(array('error', Lang::get('admin/users/messages.does_not_exist'))) ? : Redirect::to('admin/users')->with('error', Lang::get('admin/users/messages.does_not_exist'));
+    }
+
+	public function page($limit=10){
+		return $this->user->paginate($limit);
+	}
+	
+	public function get()
+    {
+   		if(Api::Enabled()){
+			return Api::make($this->user->all()->get()->toArray());
+		} else return Datatables::of($this->user->all())
+        ->add_column('actions', '<div class="btn-group">
+		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
+		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>
+		@if($id == Auth::user()->id)
+			<a href="#" class="disabled btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		@else
+			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
+		@endif</div>
+            ')
+
+        ->make();
     }
 }

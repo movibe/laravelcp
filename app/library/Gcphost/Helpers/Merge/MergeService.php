@@ -13,7 +13,7 @@ class MergeService {
         $this->permission = $permission;
     }
 
-}    public function get()
+	public function get()
     {
 		$ids=explode(',',rtrim(Input::get('ids'),','));
 		$mergefrom='';
@@ -38,3 +38,4 @@ class MergeService {
 		return LCP::merge();
 	}
 
+}

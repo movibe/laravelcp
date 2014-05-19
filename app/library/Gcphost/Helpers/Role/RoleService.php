@@ -76,7 +76,11 @@ class RoleService {
 		return $role->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
-    public function get()
+	public function page($limit=10){
+		return $this->role->paginate($limit);
+	}
+
+	public function get()
     {
 		if(Api::Enabled()){
 			return Api::make($this->role->all()->get()->toArray());
