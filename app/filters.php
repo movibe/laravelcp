@@ -16,7 +16,7 @@ Route::when('xml', 'xml');
 Route::filter('auth', function($route, $request)
 {
 	if (Auth::guest()) {
-        Session::put('loginRedirect', $redirect);
+        Session::put('loginRedirect', Request::url());
         return Redirect::to('user/login/');
     }
 });
@@ -58,18 +58,22 @@ Route::filter('guest', function()
 	if (Auth::check()) return Redirect::to('user/login/');
 });
 
-$client_roles = Cache::remember('client_roles', '60', function()
-{
-	return Role::where('access', '=','client')->lists('name');
-});
 
-$admin_roles = Cache::remember('admin_roles', '60', function()
-{
-	return Role::where('access', '=','admin')->lists('name');
-});
+if (Auth::check()){
 
-Entrust::routeNeedsRole( 'client*', $client_roles, Redirect::to('/nopermission'), false );
-Entrust::routeNeedsRole( 'admin*', $admin_roles, Redirect::to('/nopermission'), false );
+	$client_roles = Cache::remember('client_roles', '60', function()
+	{
+		return Role::where('access', '=','client')->lists('name');
+	});
+
+	$admin_roles = Cache::remember('admin_roles', '60', function()
+	{
+		return Role::where('access', '=','admin')->lists('name');
+	});
+
+	Entrust::routeNeedsRole( 'client*', $client_roles, Redirect::to('/nopermission'), false );
+	Entrust::routeNeedsRole( 'admin*', $admin_roles, Redirect::to('/nopermission'), false );
+}
 
 Entrust::routeNeedsPermission( 'admin/slugs*', 'manage_blogs', Redirect::to('/admin') );
 Entrust::routeNeedsPermission( 'admin/comments*', 'manage_comments', Redirect::to('/admin') );

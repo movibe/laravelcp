@@ -162,12 +162,12 @@ class EloquentUserRepository implements UserRepository
 			foreach( Auth::user()->roles as $role )
 			{
 				switch($role->name){
-					case 'client':
-						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
-					break;
-
 					case 'admin':
 						$r='/admin';
+					break;
+
+					case 'client':
+						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
 					break;
 
 					case 'site_user':
@@ -178,7 +178,8 @@ class EloquentUserRepository implements UserRepository
 						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
 					break;
 				}
-			}
+			}	
+
 		} else Session::forget('loginRedirect');
 
 		return Redirect::to($r);
@@ -230,8 +231,6 @@ class EloquentUserRepository implements UserRepository
             }
 
             if(!$user->save()) return false;
-
-            $user->saveRoles(Input::get( 'roles' ));
 
 			foreach(Input::get('user_profiles') as $id=>$profile){
 				$pro = UserProfile::find($id);
