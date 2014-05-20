@@ -152,6 +152,7 @@ return array(
 		'Gcphost\Helpers\SettingServiceProvider',
 		'Gcphost\Helpers\SiteUserServiceProvider',
 		'Gcphost\Helpers\SiteBlogServiceProvider',
+		'Gcphost\Helpers\ClientServiceProvider',
 
 
 	),

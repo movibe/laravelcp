@@ -34,6 +34,17 @@ if(in_array($prefix, array('admin','json', 'xml'))){
 		Theme::AdminGroup();
 	});
 } else {
+
+	Route::group(array('prefix' => 'client', 'suffix' => array('.json', '.xml', '*'), 'before' => 'auth|checkuser'), function()
+	{
+		Event::fire('page.client');
+		
+		Route::controller('/', 'ClientController');
+
+	});
+
+
+
 	Route::get('private/cron',  function()
 	{
 		header('Content-Type: application/json');

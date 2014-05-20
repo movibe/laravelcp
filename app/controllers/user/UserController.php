@@ -59,7 +59,6 @@ class UserController extends BaseController {
     public function postLogin()
     {
 		return $this->service->postLogin();
-
     }
 
     public function getConfirm($code)
