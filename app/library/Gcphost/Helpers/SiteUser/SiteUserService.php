@@ -199,16 +199,4 @@ class SiteUserService {
 
         return Theme::make('site/user/profile', compact('user'));
     }
-
-    public function processRedirect($url1,$url2,$url3)
-    {
-        $redirect = '';
-        if( ! empty( $url1 ) )
-        {
-            $redirect = $url1;
-            $redirect .= (empty($url2)? '' : '/' . $url2);
-            $redirect .= (empty($url3)? '' : '/' . $url3);
-        }
-        return $redirect;
-    }
 }

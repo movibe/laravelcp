@@ -13,6 +13,13 @@ Route::filter('xml', function(){ Api::$type='xml';});
 Route::when('json', 'json');
 Route::when('xml', 'xml');
 
+Route::filter('auth', function($route, $request)
+{
+	if (Auth::guest()) {
+        Session::put('loginRedirect', $redirect);
+        return Redirect::to('user/login/');
+    }
+});
 Route::filter('checkuser', function()
 {
 	if (Auth::check()){
@@ -39,13 +46,7 @@ Route::filter('checkuser', function()
 	}
 });
 
-Route::filter('auth', function($route, $request)
-{
-	if (Auth::guest()) {
-        Session::put('loginRedirect', Request::url());
-        return Redirect::to('user/login/');
-    }
-});
+
 
 Route::filter('auth.basic', function()
 {

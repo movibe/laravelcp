@@ -154,15 +154,33 @@ class EloquentUserRepository implements UserRepository
 		));
 
 		Event::fire('user.login', array($input));
+		
 
-            $r = Session::get('loginRedirect');
-            if (!empty($r))
-            {
-                Session::forget('loginRedirect');
-                return Redirect::to($r);
-            }
-            return Redirect::to('/admin');
+		$r = Session::get('loginRedirect');
+		if(empty($r)){
+			foreach( Auth::user()->roles as $role )
+			{
+				switch($role->name){
+					case 'client':
+						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
+					break;
 
+					case 'admin':
+						$r='/admin';
+					break;
+
+					case 'site_user':
+						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
+					break;
+
+					default:
+						$r= Setting::get('login.login_url') ? Setting::get('login.login_url') : '/';
+					break;
+				}
+			}
+		} else Session::forget('loginRedirect');
+
+		return Redirect::to($r);
 	}
 
 	public function publicCreateOrUpdate($id = null)

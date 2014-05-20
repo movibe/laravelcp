@@ -96,9 +96,4 @@ class UserController extends BaseController {
     {
 		return $this->service->getSettings();
     }
-
-    public function processRedirect($url1,$url2,$url3)
-    {
-		return $this->service->processRedirect($url1,$url2,$url3);
-    }
 }
