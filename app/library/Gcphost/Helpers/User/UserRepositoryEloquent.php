@@ -141,6 +141,7 @@ class EloquentUserRepository implements UserRepository
 			'updated'     => Confide::user()->id,
 		));
 
+		Confide::logout();
 	}
 
 	public function updateLogin($input){

@@ -188,8 +188,7 @@ class SiteUserService {
     public function getLogout()
     {
 		$this->user->logout();	   
-		Confide::logout();
-        return Redirect::to('/');
+        return Redirect::to(Setting::get('login.logout_url') ? Setting::get('login.logout_url') : '/');
     }
 
 	public function getSettings()

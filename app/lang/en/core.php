@@ -16,6 +16,7 @@ return array(
 	'activity' => 'Activity',
 	'details' => 'Details',
 	'profile' => 'Profile',
+	'access' => 'Access',
 	'created' => 'Created',
 	'lastlogin' => 'Last Log In',
 	'lastactivity' => 'Last Activity',

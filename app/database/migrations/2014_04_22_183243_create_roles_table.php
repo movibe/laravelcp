@@ -14,6 +14,7 @@ class CreateRolesTable extends Migration {
         Schema::create('roles', function($table) {
             $table->increments('id');
             $table->string('name', 255);
+            $table->string('access', 255)->nullable();
             $table->timestamp('created_at')->default("0000-00-00 00:00:00");
             $table->timestamp('updated_at')->default("0000-00-00 00:00:00");
         });

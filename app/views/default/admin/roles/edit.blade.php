@@ -26,6 +26,14 @@
 
 			<div class="tab-pane active" id="tab-general">
 				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', $role->name), $errors, array('required'=>'required')) }}
+				
+				{{ Form::select_group('access',  Lang::get('core.access'),
+					array(
+						'' => '',
+						'client' => 'client',
+						'admin' => 'admin',
+						),
+						isset($role) ? $role->access : null, $errors) }} 	
 			</div>
 
 			<div class="tab-pane" id="tab-permissions">
