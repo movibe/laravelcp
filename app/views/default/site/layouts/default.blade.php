@@ -48,7 +48,6 @@
 					</div>
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('') }}}">{{{ Lang::get('site.home') }}}</a></li>
 							<li {{ (Request::is('contact-us') ? ' class="active"' : '') }}><a href="{{{ URL::to('contact-us') }}}">{{{ Lang::get('site.contactus') }}}</a></li>
 							@foreach (DB::select('SELECT title, slug FROM posts WHERE parent = 0 AND display_navigation = 1') as $row)
 								<li {{ (Request::is($row->slug) ? ' class="active"' : '') }}>

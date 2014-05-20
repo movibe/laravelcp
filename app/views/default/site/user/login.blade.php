@@ -25,11 +25,13 @@
         <div class="form-group">
             <div class=" col-md-12">
 				<button tabindex="3" type="submit" class="btn btn-primary">{{{ Lang::get('user/user.login') }}}</button>
-				{{ Lang::get('core.or') }}
-				<div class="btn-group">
-				@foreach ($providers as $provider)
-						<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="{{ Lang::get('core.loginwith') }} {{{ $provider }}}" class="btn btn-default" ><span class="fa fa-lg fa-fw fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
-				@endforeach</div>
+				@if(count($providers) > 0)
+					{{ Lang::get('core.or') }}
+					<div class="btn-group">
+					@foreach ($providers as $provider)
+							<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title="{{ Lang::get('core.loginwith') }} {{{ $provider }}}" class="btn btn-default" ><span class="fa fa-lg fa-fw fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
+					@endforeach</div>
+				@endif
             </div>
         </div>
     </fieldset>

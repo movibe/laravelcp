@@ -9,13 +9,15 @@
 <div class="page-header">
 	<h1>{{{ Lang::get('site.sign_up') }}}</h1>
 </div>
-<h4> {{{ Lang::get('site.created_with') }}}</h4><div class="btn-group">
-	@foreach ($providers as $provider)
-		<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title=" {{{ Lang::get('site.created_with') }}} {{{ $provider }}}" class="confirm_terms btn btn-default" ><span style="font-size: 18px"  class="fa fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
-	@endforeach</div>
-<br/>
-<br/>
-<h4>{{{ Lang::get('site.create_with_or') }}}</h4>
+@if(count($providers) > 0)
+	<h4> {{{ Lang::get('site.created_with') }}}</h4><div class="btn-group">
+		@foreach ($providers as $provider)
+			<a href="{{ URL::to('user/login/'.strtolower($provider)) }}" title=" {{{ Lang::get('site.created_with') }}} {{{ $provider }}}" class="confirm_terms btn btn-default" ><span style="font-size: 18px"  class="fa fa-{{ preg_replace('/google/i','google-plus',strtolower($provider)) }}-square"></span></a>
+		@endforeach</div>
+	<br/>
+	<br/>
+	<h4>{{{ Lang::get('site.create_with_or') }}}</h4>
+@endif
 
 {{ Form::open_horizontal(array('url' => (Confide::checkAction('UserController@store')) ?: URL::to('user'))) }}
 	{{ Form::honeypot('create_hp', 'create_hp_time') }}
