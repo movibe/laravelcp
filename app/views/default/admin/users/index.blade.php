@@ -62,7 +62,7 @@
 	<script src="{{{ asset('assets/js/jquery.dataTables.min.js') }}}"></script>
 	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
 	<script type="text/javascript">
-		dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)');
+		dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', null,null ,null ,[{ "bSearchable": false },null,null,{ "bSearchable": false },null]);
 	</script>
 @stop
 

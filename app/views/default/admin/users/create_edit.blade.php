@@ -240,9 +240,10 @@
 	})
 
 	$('a').tooltip();
-	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true');
-	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false');
-	dtLoad('#usernotes', "{{URL::to('admin/users/' . $user->id . '/notes') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true');
+	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true',[null,null,null,null]);
+	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', null,[null,null,null,null,null]);
+	dtLoad('#usernotes', "{{URL::to('admin/users/' . $user->id . '/notes') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true',[null,null,null,null]);
 </script>
 @endif
 @stop
+

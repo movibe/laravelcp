@@ -97,9 +97,10 @@ class EloquentUserRepository implements UserRepository
 	public function all($type=null){
 		$results=User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
                     ->leftjoin('roles', 'roles.id', '=', 'assigned_roles.role_id')
-                    ->select(DB::raw('users.id, users.displayname,users.email, group_concat(roles.name SEPARATOR \', \') as rolename'))
-					->groupBy(DB::raw('users.id , users.displayname , users.email'));
+                    ->select('users.id', 'users.displayname','users.email', DB::raw('group_concat(roles.name SEPARATOR \', \') as rolename'))
+					->groupBy('users.id' , 'users.displayname' , 'users.email');
 		if($type === false || $type == true) $results->where('roles.name', $type ? '=' : '!=', 'admin');
+
 		return $results;
 	}
 
