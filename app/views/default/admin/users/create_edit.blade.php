@@ -164,9 +164,12 @@
 				<div class="modal-footer">
 					@if ($mode != 'create')
 					<div class="pull-left">
+
 						@if($user->id == Auth::user()->id)
 							 <a href="#" class="disabled btn-responsive btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@else
+							 <a href="{{{ URL::to('admin/users/' . $user->id . '/switch' ) }}}" class="btn-responsive btn btn-default">{{{ Lang::get('button.login_as') }}}</a>
+
 							<a data-row="[{ $user->id }}" data-table="users" data-method="delete" href="{{{ URL::to('admin/users/' . $user->id . '' ) }}}" class="confirm-ajax-update btn-responsive btn btn-danger">{{{ Lang::get('button.delete') }}}</a>
 						@endif
 

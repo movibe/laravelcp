@@ -117,7 +117,13 @@ class UserService {
     public function delete($user)
     {
         return $user->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
-    }
+    } 
+	
+	public function switchuser($user)
+    {
+		Auth::login($user);
+		return Redirect::to('/');
+	}
 
     public function index()
     {

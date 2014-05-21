@@ -20,6 +20,7 @@ Route::filter('auth', function($route, $request)
         return Redirect::to('user/login/');
     }
 });
+
 Route::filter('checkuser', function()
 {
 	if (Auth::check()){

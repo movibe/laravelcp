@@ -22,6 +22,11 @@ class AdminUsersController extends BaseController {
 		return $this->service->index();
     }
 
+    public function getSwitch($user)
+    {
+		return $this->service->switchuser($user);
+    }
+
     public function getCreate()
     {
 		return $this->service->getCreate();

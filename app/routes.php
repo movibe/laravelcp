@@ -31,7 +31,59 @@ if(in_array($prefix, array('admin','json', 'xml'))){
 	Route::group(array('prefix' => $newprefix, 'suffix' => array('.json', '.xml', '*'), 'before' => $before), function()
 	{
 		Event::fire('page.admin');
-		Theme::AdminGroup();
+
+		# Search
+		Search::AddTable('users', array('email', 'displayname', 'id'), array('id' => array('method'=>'modal', 'action'=>'admin/users/?/edit')));
+		Search::AddTable('posts', array('title','slug','content','meta_title','meta_description','meta_keywords'), array('id' => array('method'=>'modal', 'action'=>'admin/slugs/?/edit')));
+		Search::AddTable('todos', array('title','description'), array('id' => array('method'=>'modal', 'action'=>'admin/todos/?/edit')));
+		Route::controller('search/{postSlug}', 'AdminSearchController');
+
+		# Settings Management
+		Route::controller('settings', 'AdminSettingsController');
+
+		# Comment Management
+		Route::controller('comments/{comment}', 'AdminCommentsController');
+		Route::controller('comments', 'AdminCommentsController');
+
+		# Slug Management
+		Route::controller('slugs/{post}', 'AdminBlogsController');
+		Route::controller('slugs', 'AdminBlogsController');
+
+		# User Mass Management
+		Route::get('user/mass/email', 'AdminEmailController@getEmailMass');
+		Route::post('user/mass/email', 'AdminEmailController@postIndex');
+		
+		Route::delete('user/mass', 'AdminUsersController@postDeleteMass');
+
+		Route::get('user/mass/merge', 'AdminMergeController@getMassMergeConfirm');
+		Route::post('user/mass/merge', 'AdminMergeController@postMerge');
+
+
+
+		# User Profile Management
+		Route::controller('users/{user}/profile/{profile}', 'AdminProfileController');
+
+		# User Email Management
+		Route::controller('users/{user}/email', 'AdminEmailController');
+		Route::controller('users/email', 'AdminEmailController');
+		Route::get('users/{user}/emails', 'AdminEmailController@getEmails');
+
+		# User Management
+		Route::controller('users/{user}', 'AdminUsersController');
+		Route::controller('users', 'AdminUsersController');
+		
+
+		# User Role Management
+		Route::controller('roles/{role}', 'AdminRolesController');
+		Route::controller('roles', 'AdminRolesController');
+
+		# Todos
+		Route::controller('todos/{todo}', 'AdminTodosController');
+		Route::controller('todos', 'AdminTodosController');
+	   
+		# Admin Dashboard
+		Route::controller('/', 'AdminDashboardController');	
+	
 	});
 } else {
 

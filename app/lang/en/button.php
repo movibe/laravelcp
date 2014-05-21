@@ -2,6 +2,7 @@
 
 return array(
 
+	'login_as' => 'Login as',
 	'send'   => 'Send',
 	'email'   => 'E-mail',
 	'edit'   => 'Edit',
