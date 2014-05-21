@@ -72,7 +72,14 @@
 									</ul>
 								</li>
 								@else
-									<li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+									<li class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											{{{ Auth::user()->email }}}	<span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+										</ul>
+									</li>
 								@endif
 							@else
 								<li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">{{{ Lang::get('user/user.login') }}}</a></li>

@@ -17,8 +17,8 @@
 						<span class="fa fa-fw fa-users"></span> {{{ Lang::get('core.users') }}} <span class="caret"></span>
 					</a>
 					<ul aria-labelledby="nav_users" class="dropdown-menu">
-						<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/users') }}}"><span class="fa fa-user fa-fw"></span> &nbsp; {{{ Lang::get('core.users') }}}</a></li>
-						<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/roles') }}}"><span class="fa fa-warning fa-fw"></span> &nbsp; {{{ Lang::get('Roles') }}}</a></li>
+						@if(Auth::user()->can("manage_users"))<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/users') }}}"><span class="fa fa-user fa-fw"></span> &nbsp; {{{ Lang::get('core.users') }}}</a></li>@endif
+						@if(Auth::user()->can("manage_roles"))<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/roles') }}}"><span class="fa fa-warning fa-fw"></span> &nbsp; {{{ Lang::get('Roles') }}}</a></li>@endif
 					</ul>
 				</li>
 				@yield('main-nav-post')
@@ -26,17 +26,17 @@
 			<ul class="nav navbar-nav navbar-right">
 				@yield('sub-nav-pre')
 				
-				<li><a href="#" class="nav-search"><span class="fa fa-lg fa-search fa-fw"></span></a></li>
+				@if(Auth::user()->can("site_search"))<li><a href="#" class="nav-search"><span class="fa fa-lg fa-search fa-fw"></span></a></li>@endif
 
 				<li class="dropdown{{ (Request::is('admin/settings*') ? ' active' : '') }}" title="{{{ Lang::get('core.settings') }}}">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span class="fa fa-lg fa-cogs fa-fw"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/settings') }}}"><span class="fa fa-cog fa-fw"></span>  &nbsp; {{{ Lang::get('core.settings') }}}</a></li>
-						<li class="divider"></li>
-						<li{{ (Request::is('admin/slugs*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/slugs') }}}"><span class="fa fa-sitemap fa-fw"></span>  &nbsp; {{{ Lang::get('core.slugs') }}}</a></li>						
-						<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/comments') }}}"><span class="fa fa-comments fa-fw"></span>  &nbsp; {{{ Lang::get('core.comments') }}}</a></li>
+						@if(Auth::user()->can("manage_settings"))<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/settings') }}}"><span class="fa fa-cog fa-fw"></span>  &nbsp; {{{ Lang::get('core.settings') }}}</a></li>
+						<li class="divider"></li>@endif
+						@if(Auth::user()->can("manage_blogs"))<li{{ (Request::is('admin/slugs*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/slugs') }}}"><span class="fa fa-sitemap fa-fw"></span>  &nbsp; {{{ Lang::get('core.slugs') }}}</a></li>@endif
+						@if(Auth::user()->can("manage_comments"))<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/comments') }}}"><span class="fa fa-comments fa-fw"></span>  &nbsp; {{{ Lang::get('core.comments') }}}</a></li>@endif
 						@yield('sub-nav-settings')
 					</ul>
 				</li>
@@ -45,8 +45,8 @@
 						&nbsp; {{{ Auth::user()->email }}}	<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{{ URL::to('admin/todos') }}}"><span class="fa fa-list-alt fa-fw"></span>  &nbsp; {{{ Lang::get('core.todos') }}}</a></li>
-						<li class="divider"></li>
+						@if(Auth::user()->can("manage_todos"))<li><a href="{{{ URL::to('admin/todos') }}}"><span class="fa fa-list-alt fa-fw"></span>  &nbsp; {{{ Lang::get('core.todos') }}}</a></li>
+						<li class="divider"></li>@endif
 						<li><a href="{{{ URL::to('user') }}}"><span class="fa fa-wrench fa-fw"></span>  &nbsp; {{{ Lang::get('core.profile') }}}</a></li>
 						<li class="divider"></li>
 						<li><a href="{{{ URL::to('user/logout') }}}"><span class="fa fa-sign-out fa-fw"></span>  &nbsp; {{{ Lang::get('core.logout') }}}</a></li>
