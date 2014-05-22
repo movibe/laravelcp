@@ -27,9 +27,9 @@
 @section('content')
 
 @if (isset($user))
-	{{ Form::open_horizontal(array('url' => array('admin/users/' . $user->id . '/email'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
+	{{ Form::open_horizontal(array('url' => array('admin/users/' . $user->id . '/email'), 'files'=>true,'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
 @else
-	{{ Form::open_horizontal(array('url' => array('admin/user/mass/email'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
+	{{ Form::open_horizontal(array('url' => array('admin/user/mass/email'), 'files'=>true,'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
 @endif
 
 	@if(isset($multi) && count($multi) > 0)

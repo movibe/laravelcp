@@ -44,30 +44,43 @@ class LaravelCP {
 	}
 
 	static public function sendEmailContactUs(){
-		$body='From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body');
+		$data=array(
+			'body'=>'From:'. Input::get('name'). ' ('. Input::get('email') .')<br/><br/>'.Input::get('body'), 
+			'subject'=>Input::get('subject'), 
+			'email'=>Input::get('email'), 
+			'name'=>Input::get('name'), 
+			'to' => Setting::get('site.contact_email')
+		);
 
-		$send=Mail::send(Theme::path('emails/default'), array('body'=>$body), function($message)
+		$send=Mail::later(60,Theme::path('emails/default'), $data, function($message)
 		{
-			$message->to(Setting::get('site.contact_email'))->subject(Input::get('subject'));
-			$message->replyTo(Input::get('email', Input::get('name')));
+			$message->to($data['to'])->subject($data['subject']);
+			$message->replyTo($data['email'], $data['name']);
 
 		});
-		return $send;
+
+		return true;
 	}
 
 
-	static public function sendEmail($user, $template='emails.default'){
+	static public function sendEmail($user, $template='emails.default', $delay=30){
 		//if (!View::exists($template))$template='emails.default';
 		
 		Event::fire('controller.user.email', array($user));
 
-		self::$email=$user->email;
-
-		$send=Mail::send(Theme::path(str_replace('.','/',$template)), array('body'=>Input::get('body'), 'user' => $user), function($message)
+		$data=array(
+			'body'=>Input::get('body'), 
+			'subject'=>Input::get('subject'), 
+			'files'=>Input::file('email_attachment'), 
+			'user' => $user,
+			'to' => $user->email
+		);
+		$tpl=Theme::path(str_replace('.','/',$template));
+		$send=Mail::later($delay, $tpl, $data, function($message) use ($data)
 		{
-			$message->to(self::$email)->subject(Input::get('subject'));
+			$message->to($data['to'])->subject($data['subject']);
 
-			$files=Input::file('email_attachment');
+			$files=$data['files'];
 			if(count($files) > 1){
 				foreach($files as $file) $message->attach($file->getRealPath(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()));
 			} elseif(count($files) == 1) $message->attach($files->getRealPath(), array('as' => $files->getClientOriginalName(), 'mime' => $files->getMimeType()));
@@ -82,6 +95,6 @@ class LaravelCP {
 			'updated'     => $user->id ? true : false,
 		));
 
-		return $send;
+		return true;
 	}
 }
