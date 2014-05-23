@@ -157,6 +157,8 @@ class UserService {
    		if(Api::Enabled()){
 			return Api::make($this->user->all()->get()->toArray());
 		} else return Datatables::of($this->user->all())
+		->edit_column('displayname', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$displayname}}}</a>')
+		->edit_column('email', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$email}}}</a>')
         ->add_column('actions', '<div class="btn-group">
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
 		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>

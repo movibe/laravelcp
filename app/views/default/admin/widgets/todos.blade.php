@@ -1,3 +1,4 @@
+@if(Auth::user()->can("manage_todos"))
 <li id="widget-todos" data-row="4" data-col="1" data-sizex="1" data-sizey="5">
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
@@ -10,3 +11,4 @@
 		</div>
 	</div>	
 </li>
+@endif
