@@ -30,8 +30,8 @@ class CommentService {
         if ($validator->passes())
         {
 			return $this->comment->createOrUpdate($comment->id) ?
-				Api::to(array('success', Lang::get('admin/comments/messages.update.success'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('success', Lang::get('admin/comments/messages.update.success')) :
-				Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('error', Lang::get('admin/comments/messages.update.error'));
+				(Api::to(array('success', Lang::get('admin/comments/messages.update.success'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('success', Lang::get('admin/comments/messages.update.success'))) :
+				(Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->with('error', Lang::get('admin/comments/messages.update.error')));
         } else return Api::to(array('error', Lang::get('admin/comments/messages.update.error'))) ? : Redirect::to('admin/comments/' . $comment->id . '/edit')->withInput()->withErrors($validator);
 	}
 

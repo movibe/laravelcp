@@ -34,8 +34,8 @@ class BlogService {
         if ($validator->passes())
         {
            return $this->post->createOrUpdate() ?
-				Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success')) :
-				Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+				(Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'))) :
+				(Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error')));
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
 	}
 
@@ -53,8 +53,8 @@ class BlogService {
         if ($validator->passes())
         {
            return $this->post->createOrUpdate($post->id) ?
-				Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success')) :
-			    Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error'));
+				(Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'))) :
+			    (Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error')));
         } else return Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
 	}
 

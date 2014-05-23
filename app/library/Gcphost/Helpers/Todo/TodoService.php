@@ -34,8 +34,8 @@ class TodosService {
         if ($validator->passes())
         {
             return $this->todo->createOrUpdate() ?
-				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
-				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error'));
+				(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
+				(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error')));
         } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
 	}
 
@@ -45,8 +45,8 @@ class TodosService {
         if ($validator->passes())
         {
              return $this->todo->createOrUpdate($todo->id) ?
-				Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success')) : 
-				Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error'));
+				(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
+				(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error')));
         } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($validator);
 	}
 

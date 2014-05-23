@@ -17,13 +17,13 @@ class RolesTableSeeder extends Seeder {
 
         $clientRole = new Role;
         $clientRole->name = 'client';
-        $adminRole->access = 'client';
+        $clientRole->access = 'client';
         $clientRole->save();
 
-        $adminRole = new Role;
-        $adminRole->name = 'manager';
-        $adminRole->access = 'admin';
-        $adminRole->save();
+        $managerRole = new Role;
+        $managerRole->name = 'manager';
+        $managerRole->access = 'admin';
+        $managerRole->save();
 
 
         $user = User::where('email','=','admin@example.org')->first();

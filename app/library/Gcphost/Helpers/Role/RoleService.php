@@ -39,8 +39,8 @@ class RoleService {
             $inputs = Input::except('csrf_token');
 			if(in_array(Input::get('name'), $this->protected_roles))return Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
             return $this->role->createOrUpdate(null, $this->permission->preparePermissionsForSave($inputs['permissions'])) ?
-                Api::to(array('success', Lang::get('admin/roles/messages.create.success') )) ? : Redirect::to('admin/roles/' . $this->role->id . '/edit')->with('success', Lang::get('admin/roles/messages.create.success')) : 
-				Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->withInput()->with('error', Lang::get('admin/roles/messages.create.error'));
+                (Api::to(array('success', Lang::get('admin/roles/messages.create.success') )) ? : Redirect::to('admin/roles/' . $this->role->id . '/edit')->with('success', Lang::get('admin/roles/messages.create.success'))) : 
+				(Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->withInput()->with('error', Lang::get('admin/roles/messages.create.error')));
         } else return Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->withInput()->withErrors($validator);
     }
 
@@ -65,8 +65,8 @@ class RoleService {
         {
             $inputs = Input::except('csrf_token');
 			return $this->role->createOrUpdate($role->id, $this->permission->preparePermissionsForSave($inputs['permissions'])) ?
-                Api::to(array('success', Lang::get('admin/roles/messages.update.success'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('success', Lang::get('admin/roles/messages.update.success')) :
-				Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
+                (Api::to(array('success', Lang::get('admin/roles/messages.update.success'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('success', Lang::get('admin/roles/messages.update.success'))) :
+				(Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error')));
         }
         return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->withInput()->withErrors($validator);
     }

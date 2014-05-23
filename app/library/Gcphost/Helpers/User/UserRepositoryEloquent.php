@@ -122,7 +122,7 @@ class EloquentUserRepository implements UserRepository
 
 
 	public function clients($query=false, $limit='10', $page='0', $id=false, $admins=null){
-		$users=self::all($admins);
+		$users=self::all($admins)->select(DB::raw('users.displayname as text'),'users.id');
 		if($query) $users->where('displayname', 'LIKE', '%'.$query.'%');
 		if($id){
 			if(preg_match('/,/s', $id)) return $users->whereIn('users.id', explode(',',$id))->get();

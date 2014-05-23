@@ -1,12 +1,14 @@
 <?php namespace Gcphost\Helpers;
 
-use Route, View, Config, Setting;
+use  View, Config, Setting;
 
 class Theme {
 	static private $tables=array();
 	static private $actions=array();
 	static private $path;
 	
+
+
 	private function getTemplates(){
 		$fileSystem = new Filesystem;
 		$files=$fileSystem->allFiles($path[0]);
