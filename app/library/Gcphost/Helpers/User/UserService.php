@@ -24,9 +24,12 @@ class UserService {
         $validator = Validator::make(Input::all(), $this->rules);
 
         if ($validator->passes()){	
-			return $this->user->createOrUpdate() ?
+			$save=$this->user->createOrUpdate();
+			$errors=$save->errors();
+			Event::fire('controller.user.create', array($this->user));
+			return count($errors->all()) == 0 ?
 				(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
-				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/create')->with('error', Lang::get('admin/users/messages.edit.error')));
+				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/create')->withErrors($errors));
 		} else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withErrors($validator);
 	}
 
@@ -42,11 +45,12 @@ class UserService {
 
         if ($validator->passes())
         {
-			if ( $this->user->createOrUpdate($user->id) ){
-				Event::fire('controller.user.edit', array($user));
-			   return Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'));
-			} else 
-				return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('error', Lang::get('admin/users/messages.edit.error'));			
+			$save=$this->user->createOrUpdate($user->id);
+			$errors=$save->errors();
+			Event::fire('controller.user.edit', array($user));
+			return count($errors->all()) == 0 ?
+				(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
+				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($errors));
         } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
     }
 
@@ -105,7 +109,9 @@ class UserService {
 
     public function delete($user)
     {
-        return $user->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+        return $user->delete() ? 
+			Api::json(array('result'=>'success')) :
+			Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     } 
 	
 	public function switchuser($user)

@@ -2,7 +2,11 @@
 use Illuminate\Support\Facades\URL; 
 use Illuminate\Filesystem\Filesystem;
 
-class Post extends Eloquent {
+class Post extends \LaravelBook\Ardent\Ardent {
+    public static $rules = array(
+            'title'   => 'required|min:3',
+            'content' => 'required|min:3'
+    );
 
 	public function user()
     {

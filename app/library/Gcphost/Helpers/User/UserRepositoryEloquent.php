@@ -6,6 +6,7 @@ class EloquentUserRepository implements UserRepository
 {
 	public $modelClassName="User";
 	public $id;
+	public $user;
 
 	public function __construct(User $user)
     {
@@ -31,9 +32,8 @@ class EloquentUserRepository implements UserRepository
 				$profile = new UserProfile($pro['new']);
 				$user = $user->find($user->id);
 				$user->profiles()->save($profile);
-			} else return false;
-
-			return true;
+			} 
+			return $user;
         } else {
 			$user = User::find($id);
 			$oldUser = clone $user;
@@ -53,7 +53,7 @@ class EloquentUserRepository implements UserRepository
                 unset($user->password_confirmation);
             }
 
-            if(!$user->save()) return false;
+            if(!$user->save()) return $user;
 
             $user->saveRoles(Input::get( 'roles' ));
 
@@ -90,9 +90,71 @@ class EloquentUserRepository implements UserRepository
 			));
 
 
-			return true;
+			return $user;
         }
     }
+
+	public function publicCreateOrUpdate($id = null)
+    {
+        if(is_null($id)) {
+            $user = new User;
+			$user->displayname = Input::get( 'displayname' );
+			$user->email = Input::get( 'email' );
+			$user->password = Input::get( 'password' );
+			$user->password_confirmation = Input::get( 'password_confirmation' );
+			$user->save();
+
+			if ( $user->id )
+			{
+				$this->id=$user->id;
+				$user->saveRoles(array(Setting::get('users.default_role_id')));
+			} 
+
+			Activity::log(array(
+				'contentID'   => $user->id,
+				'contentType' => 'account_created',
+				'description' => $user->id,
+				'details'     => 'Created from site',
+				'updated'     => false,
+			));
+
+			Event::fire('user.create', array($user));
+
+			return $user;
+        } else {
+			$user = User::find($id);
+			$oldUser = clone $user;
+            $user->displayname = Input::get( 'displayname' );
+            $user->email = Input::get( 'email' );
+            
+            $user->prepareRules($oldUser, $user);
+
+            $pw=Input::get( 'password' );
+            if(!empty($pw)) {
+				$user->password = Input::get( 'password' );
+				$user->password_confirmation = Input::get( 'password_confirmation' );
+            } else {
+                unset($user->password);
+                unset($user->password_confirmation);
+            }
+
+            if(!$user->save()) return $user;
+
+			foreach(Input::get('user_profiles') as $id=>$profile){
+				$pro = UserProfile::find($id);
+				if(!empty($pro)){
+					$pro->fill($profile)->push();
+				} else {
+					$pro = new UserProfile($profile);
+					if($pro->title) $user->profiles()->save($pro);
+				}
+			}
+			
+			Event::fire('user.edit', array($user));
+
+			return $user;
+        }
+	}
 
 	public function all($type=null){
 		$results=User::leftjoin('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
@@ -185,69 +247,4 @@ class EloquentUserRepository implements UserRepository
 
 		return Redirect::to($r);
 	}
-
-	public function publicCreateOrUpdate($id = null)
-    {
-        if(is_null($id)) {
-            $user = new User;
-			$user->displayname = Input::get( 'displayname' );
-			$user->email = Input::get( 'email' );
-			$user->password = Input::get( 'password' );
-			$user->password_confirmation = Input::get( 'password_confirmation' );
-			$user->save();
-
-			if ( $user->id )
-			{
-				$this->id=$user->id;
-				$user->saveRoles(array(Setting::get('users.default_role_id')));
-			} else return false;
-
-			Activity::log(array(
-				'contentID'   => $user->id,
-				'contentType' => 'account_created',
-				'description' => $user->id,
-				'details'     => 'Created from site',
-				'updated'     => false,
-			));
-
-			Event::fire('user.create', array($user));
-
-			return true;
-        }
-        else {
-			$user = User::find($id);
-			$oldUser = clone $user;
-            $user->displayname = Input::get( 'displayname' );
-            $user->email = Input::get( 'email' );
-            
-            $user->prepareRules($oldUser, $user);
-
-            $pw=Input::get( 'password' );
-            if(!empty($pw)) {
-				$user->password = Input::get( 'password' );
-				$user->password_confirmation = Input::get( 'password_confirmation' );
-            } else {
-                unset($user->password);
-                unset($user->password_confirmation);
-            }
-
-            if(!$user->save()) return false;
-
-			foreach(Input::get('user_profiles') as $id=>$profile){
-				$pro = UserProfile::find($id);
-				if(!empty($pro)){
-					$pro->fill($profile)->push();
-				} else {
-					$pro = new UserProfile($profile);
-					if($pro->title) $user->profiles()->save($pro);
-				}
-			}
-			
-			Event::fire('user.edit', array($user));
-
-			return true;
-        }
-	}
-
-
 }

@@ -6,6 +6,7 @@ class EloquentCommentRepository implements CommentRepository
 {
 	public $modelClassName="Todo";
 	public $id;
+	public $comment;
 
 	public function __construct(Comment $comment)
     {
@@ -21,11 +22,9 @@ class EloquentCommentRepository implements CommentRepository
 
         $comment->content = Input::get('content');
 		$comment->save();
+		if ( $comment->id ) $this->id=$comment->id;
 
-		if($comment->id){
- 			$this->id=$comment->id;
-			return true;
- 		} else return false;
+		return $comment;
     }
 
 

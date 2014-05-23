@@ -1,5 +1,9 @@
 <?php
-class Comment extends Eloquent{
+class Comment extends \LaravelBook\Ardent\Ardent {
+	public static $rules = array(
+		'content' => 'required|min:3'
+    );
+	
 	public function content()
 	{
 		return nl2br($this->content);
@@ -45,4 +49,5 @@ class Comment extends Eloquent{
 		if(!parent::delete()) return false;
 		return !$this->find($id) ? true : false;
     } 
+
 }

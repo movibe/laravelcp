@@ -4,10 +4,6 @@ use Gcphost\Helpers\Blog\BlogRepository as Post;
 
 class BlogService {
     protected $post;
-    var $rules = array(
-            'title'   => 'required|min:3',
-            'content' => 'required|min:3'
-    );
 
 	public function __construct(Post $post)
     {
@@ -29,14 +25,13 @@ class BlogService {
 
 	public function create()
 	{
-		$validator = Validator::make(Input::all(), $this->rules);
 
-        if ($validator->passes())
-        {
-           return $this->post->createOrUpdate() ?
-				(Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'))) :
-				(Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->with('error', Lang::get('admin/blogs/messages.create.error')));
-        } else return Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withInput()->withErrors($validator);
+		$save=$this->post->createOrUpdate();
+		$errors = $save->errors();
+
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/blogs/messages.create.success'))) ? : Redirect::to('admin/slugs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'))) :
+			(Api::to(array('error', Lang::get('admin/blogs/messages.create.error'))) ? : Redirect::to('admin/slugs/create')->withErrors($errors));
 	}
 
 	public function getEdit($post)
@@ -48,19 +43,19 @@ class BlogService {
 
 	public function edit($post)
 	{
-        $validator = Validator::make(Input::all(), $this->rules);
+		$save=$this->post->createOrUpdate($post->id);
+		$errors = $save->errors();
 
-        if ($validator->passes())
-        {
-           return $this->post->createOrUpdate($post->id) ?
-				(Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'))) :
-			    (Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('error', Lang::get('admin/blogs/messages.update.error')));
-        } else return Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withInput()->withErrors($validator);
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/blogs/messages.update.success'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.update.success'))) :
+			(Api::to(array('error', Lang::get('admin/blogs/messages.update.error'))) ? : Redirect::to('admin/slugs/' . $post->id . '/edit')->withErrors( $errors));
 	}
 
     public function delete($post)
     {
-		return $post->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		return $post->delete() ? 
+			Api::json(array('result'=>'success')) :
+			Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
 	public function page($limit=10){

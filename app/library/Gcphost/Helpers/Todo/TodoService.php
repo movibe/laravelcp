@@ -28,31 +28,28 @@ class TodosService {
 	}
 
 	public function create(){
+		$save=$this->todo->createOrUpdate();
+		$errors = $save->errors();
 
-        $validator = Validator::make(Input::all(), $this->rules);
-
-        if ($validator->passes())
-        {
-            return $this->todo->createOrUpdate() ?
-				(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
-				(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->with('error', Lang::get('admin/todos/messages.create.error')));
-        } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $this->todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
+			(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/create')->withErrors($errors));
 	}
 
 	public function edit($todo){
-       $validator = Validator::make(Input::all(), $this->rules);
+		$save=$this->todo->createOrUpdate($todo->id);
+		$errors = $save->errors();
 
-        if ($validator->passes())
-        {
-             return $this->todo->createOrUpdate($todo->id) ?
-				(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
-				(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('error', Lang::get('admin/todos/messages.create.error')));
-        } else return Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($validator);
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/todos/messages.create.success'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->with('success', Lang::get('admin/todos/messages.create.success'))) : 
+			(Api::to(array('error', Lang::get('admin/todos/messages.create.error'))) ? : Redirect::to('admin/todos/' . $todo->id . '/edit')->withErrors($errors));
 	}
 
     public function delete($todo)
     {
-		return $todo->delete() ? Api::json(array('result'=>'success')) : Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		return $todo->delete() ? 
+			Api::json(array('result'=>'success')) :
+			Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
 
 	public function assign($todo){

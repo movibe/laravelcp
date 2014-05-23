@@ -24,11 +24,9 @@ class EloquentTodoRepository implements TodoRepository
 		$todo->status           = Input::get('status');
 		$todo->due_at		    = Carbon::parse(Input::get('due_at'));
 		$todo->save();
+		if ( $todo->id ) $this->id=$todo->id;
 
-		if($todo->id){
- 			$this->id=$todo->id;
-			return true;
- 		} else return false;
+		return $todo;
     }
 
 

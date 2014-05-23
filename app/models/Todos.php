@@ -1,6 +1,10 @@
 <?php
-class Todos extends Eloquent {
+class Todos extends \LaravelBook\Ardent\Ardent {
 	protected $table = 'todos';
+	
+	public static $rules = array(
+		'title' => 'required'
+    );
 
 	public function assign(){
 		$this->admin_id=Confide::user()->id;

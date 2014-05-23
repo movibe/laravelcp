@@ -21,19 +21,12 @@ class EloquentRoleRepository implements RoleRepository
 
 		$role->name = Input::get('name');
 		$role->access = Input::get('access');
-
-		
 		$role->save();
-
 		$role->perms()->sync($permissions);
+		if ( $role->id ) $this->id=$role->id;
 
-		if($role->id){
- 			$this->id=$role->id;
-			return true;
- 		} else return false;
+		return $role;
     }
-
-
 
 	public function all(){
 		return Role::select(array('roles.id',  'roles.name', 'roles.id as users', 'roles.created_at'));

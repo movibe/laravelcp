@@ -53,17 +53,15 @@ class SiteUserService {
 
 		if ($validator->passes())
 		{
-			$this->user->publicCreateOrUpdate();
-		   
+			$save=$this->user->publicCreateOrUpdate();
+			$errors = $save->errors();
+
+			return count($errors->all()) == 0 ?
+				Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :
+				Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($errors );
 		} else return Redirect::to('user/create')
 					->withInput(Input::except('password','password_confirmation'))
 					->withErrors($validator);
-
-        $error = $this->user->errors()->all();
-
-		return empty($error) ? 
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :
-            Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
     }
 
     public function edit($user)
@@ -86,15 +84,13 @@ class SiteUserService {
 
         if ($validator->passes())
         {
-			 $this->user->publicCreateOrUpdate($user->id);
-			
-        } else return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($validator);
-        
-        $error = $user->errors()->all();
+			$save=$this->user->publicCreateOrUpdate($user->id);
+			$errors = $save->errors();
 
-        return empty($error) ?
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) :
-            Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
+			return count($errors->all()) == 0 ?
+				Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) :
+				Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($errors);
+        } else return Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($validator);
     }
 
     public function getCreate()
@@ -107,10 +103,8 @@ class SiteUserService {
 
     public function getDelete($user, $profile)
     {
-		$error=$user->deleteProfile($profile);
-        return $error == 1 ?
-            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) :
-            Redirect::to('user')->with( 'error', Lang::get('user/user.user_account_not_updated') );
+        return $user->deleteProfile($profile) ?
+            Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_updated') ) : Redirect::to('user')->with( 'error', Lang::get('user/user.user_account_not_updated') );
 	}
 
     public function getLogin()

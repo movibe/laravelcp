@@ -33,11 +33,9 @@ class EloquentBlogRepository implements BlogRepository
 		$post->parent    = (int)Input::get('parent');
 		$post->display_navigation    = (int)Input::get('display_navigation');
 		$post->save();
+		if ( $post->id ) $this->id=$post->id;
 
-		if($post->id){
- 			$this->id=$post->id;
-			return true;
- 		} else return false;
+		return $post;
     }
 
 	public function all(){
