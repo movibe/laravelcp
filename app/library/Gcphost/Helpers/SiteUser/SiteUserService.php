@@ -61,7 +61,7 @@ class SiteUserService {
 
         $error = $this->user->errors()->all();
 
-        return empty($error) ? 
+		return empty($error) ? 
             Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :
             Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->with( 'error', $error );
     }

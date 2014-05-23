@@ -72,6 +72,7 @@ class BlogService {
 		if(Api::Enabled()){
 			return Api::make($this->post->all()->get()->toArray());
 		} else return Datatables::of($this->post->all())
+		->edit_column('title', '<a href="{{{ URL::to(\'admin/slugs/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$title}}}</a>')
         ->edit_column('comments', '{{ DB::table(\'comments\')->where(\'post_id\', \'=\', $id)->count() }}')
         ->add_column('actions', '<div class="btn-group"><a href="{{{ URL::to(\'admin/slugs/\' . $id . \'/edit\' ) }}}" class="btn btn-primary btn-sm modalfy" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a data-method="delete" data-row="{{{  $id }}}" data-table="blogs"  href="{{{ URL::to(\'admin/slugs/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a></div>

@@ -24,19 +24,14 @@ trait HasRole
      */
     public function hasRole( $name )
     {
-		$roles = \Cache::remember('entrust_has_role', '1', function()
-		{
-			return $this->roles;
-		});
-
-		foreach ( $roles as $role) {
+        foreach ($this->roles as $role) {
             if( $role->name == $name )
             {
                 return true;
             }
         }
 
-        return false; 
+        return false;
     }
 
     /**
@@ -48,30 +43,25 @@ trait HasRole
      *
      * @return boolean
      */
-	public function can( $permission )
+    public function can( $permission )
     {
-  		return  \Cache::remember('enturst_user_can', '1', function() use ($permission)
-		{
+        foreach ($this->roles as $role) {
+            // Deprecated permission value within the role table.
+            if( is_array($role->permissions) && in_array($permission, $role->permissions) )
+            {
+                return true;
+            }
 
-			foreach ($this->roles as $role) {
-				// Deprecated permission value within the role table.
-			   if( is_array($role->permissions) && in_array($permission, $role->permissions) )
-				{
-					return true;
-				}
+            // Validate against the Permission table
+            foreach($role->perms as $perm) {
+                if($perm->name == $permission) {
+                    return true;
+                }
+            }
+        }
 
-				// Validate against the Permission table
-				foreach($role->perms as $perm) {
-					if($perm->name == $permission) {
-						return true;
-					}
-				}
-			}
-
-			return false;
-		});
+        return false;
     }
-
 
     /**
      * Checks role(s) and permission(s) and returns bool, array or both
