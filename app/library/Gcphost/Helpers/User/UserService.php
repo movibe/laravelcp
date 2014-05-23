@@ -6,11 +6,6 @@ class UserService {
     protected $role;
     protected $permission;
     protected $validator;
-	var $rules = array(
-			'displayname'      => 'required',
-			'email'      => 'required|email',
-			'password'   => 'required|confirmed|min:4'
-		);
 
     function __construct(User $user, Role $role, Permission $permission)
     {
@@ -21,37 +16,22 @@ class UserService {
  
     public function create()
     {
-        $validator = Validator::make(Input::all(), $this->rules);
-
-        if ($validator->passes()){	
-			$save=$this->user->createOrUpdate();
-			$errors=$save->errors();
-			Event::fire('controller.user.create', array($this->user));
-			return count($errors->all()) == 0 ?
-				(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
-				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/create')->withErrors($errors));
-		} else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withErrors($validator);
+		$save=$this->user->createOrUpdate();
+		$errors=$save->errors();
+		Event::fire('controller.user.create', array($this->user));
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
+			(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/create')->withErrors($errors));
 	}
 
     public function edit($user)
     {
-		if(Input::get( 'password' )) {
-			$rules = $this->rules;
-		} else $rules = array(
-				'displayname' => 'required',
-				'email' => 'required|email');
-		
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->passes())
-        {
-			$save=$this->user->createOrUpdate($user->id);
-			$errors=$save->errors();
-			Event::fire('controller.user.edit', array($user));
-			return count($errors->all()) == 0 ?
-				(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
-				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($errors));
-        } else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($validator);
+		$save=$this->user->createOrUpdate($user->id);
+		$errors=$save->errors();
+		Event::fire('controller.user.edit', array($user));
+		return count($errors->all()) == 0 ?
+			(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
+			(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/' . $user->id . '/edit')->withErrors($errors));
     }
 
 

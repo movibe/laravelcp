@@ -21,7 +21,7 @@ class EloquentRoleRepository implements RoleRepository
 
 		$role->name = Input::get('name');
 		$role->access = Input::get('access');
-		$role->save();
+		$role->updateUniques();
 		$role->perms()->sync($permissions);
 		if ( $role->id ) $this->id=$role->id;
 

@@ -61,7 +61,7 @@
 
 					<hr/>
 						
-					{{ Form::textarea_line('user_notes[]', '', '', $errors, array('placeholder' => Lang::get('core.new_note')), '', false) }} 
+					{{ Form::textarea_line('new_note', '', '', null, array('placeholder' => Lang::get('core.new_note')), '', false) }} 
 
 					<div class="modal-footer">
 						{{ Form::reset(Lang::get('button.cancel'), array('class' => 'btn-responsive btn btn-danger', 'onclick'=>"$('#site-modal').modal('hide')")) }} 
@@ -242,7 +242,7 @@
 	$('a').tooltip();
 	dtLoad('#activitylog', "{{URL::to('admin/users/' . $user->id . '/activity') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true',[null,null,null,null,null]);
 	dtLoad('#emaillog', "{{URL::to('admin/users/' . $user->id . '/emails') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', null,[null,null,null,null,null]);
-	dtLoad('#usernotes', "{{URL::to('admin/users/' . $user->id . '/notes') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true',[null,null,null,null]);
+	dtLoad('#usernotes', "{{URL::to('admin/users/' . $user->id . '/notes') }}", 'td:eq(2), th:eq(2)', 'td:eq(1), th:eq(1)', '','false', 'true',[null,null,null,null,null]);
 </script>
 @endif
 @stop

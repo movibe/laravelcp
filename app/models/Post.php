@@ -4,7 +4,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class Post extends \LaravelBook\Ardent\Ardent {
     public static $rules = array(
-            'title'   => 'required|min:3',
+            'title'   => 'unique:posts|required|min:3',
             'content' => 'required|min:3'
     );
 

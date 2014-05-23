@@ -58,7 +58,7 @@ class SiteUserService {
 
 			return count($errors->all()) == 0 ?
 				Redirect::to('user')->with( 'success', Lang::get('user/user.user_account_created') ) :
-				Redirect::to('user')->withInput(Input::except('password','password_confirmation'))->withErrors($errors );
+				Redirect::to('user/create')->withInput(Input::except('password','password_confirmation'))->withErrors($errors );
 		} else return Redirect::to('user/create')
 					->withInput(Input::except('password','password_confirmation'))
 					->withErrors($validator);

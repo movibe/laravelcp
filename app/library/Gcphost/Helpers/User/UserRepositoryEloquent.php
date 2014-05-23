@@ -22,7 +22,7 @@ class EloquentUserRepository implements UserRepository
 			$user->password = Input::get( 'password' );
 			$user->password_confirmation = Input::get( 'password_confirmation' );
 			$user->confirmed = Input::get( 'confirm' );
-			$user->save();
+			$user->updateUniques();
 
 			if ( $user->id )
 			{
@@ -53,7 +53,7 @@ class EloquentUserRepository implements UserRepository
                 unset($user->password_confirmation);
             }
 
-            if(!$user->save()) return $user;
+            if(!$user->updateUniques()) return $user;
 
             $user->saveRoles(Input::get( 'roles' ));
 
@@ -66,8 +66,9 @@ class EloquentUserRepository implements UserRepository
 					if($pro->title) $user->profiles()->save($pro);
 				}
 			}
-
-			foreach(Input::get('user_notes') as $id=>$note){
+			
+			$notes=array_merge(array(Input::get('new_note')),(is_array(Input::get('user_notes')) ? Input::get('user_notes') : array()));
+			foreach($notes as $id=>$note){
 				$not = UserNotes::find($id);
 				if(!empty($not)){
 					if($note){
@@ -102,7 +103,7 @@ class EloquentUserRepository implements UserRepository
 			$user->email = Input::get( 'email' );
 			$user->password = Input::get( 'password' );
 			$user->password_confirmation = Input::get( 'password_confirmation' );
-			$user->save();
+			$user->updateUniques();
 
 			if ( $user->id )
 			{
@@ -138,7 +139,7 @@ class EloquentUserRepository implements UserRepository
                 unset($user->password_confirmation);
             }
 
-            if(!$user->save()) return $user;
+            if(!$user->updateUniques()) return $user;
 
 			foreach(Input::get('user_profiles') as $id=>$profile){
 				$pro = UserProfile::find($id);

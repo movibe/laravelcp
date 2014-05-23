@@ -3,6 +3,9 @@ use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
+    public static $rules = array(
+            'name'   => 'unique:roles|required|min:3',
+    );
 
 	public function validateRoles( array $roles )
     {

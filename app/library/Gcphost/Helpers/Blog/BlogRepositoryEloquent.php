@@ -32,7 +32,7 @@ class EloquentBlogRepository implements BlogRepository
 		$post->template    = Input::get('template');
 		$post->parent    = (int)Input::get('parent');
 		$post->display_navigation    = (int)Input::get('display_navigation');
-		$post->save();
+		$post->updateUniques();
 		if ( $post->id ) $this->id=$post->id;
 
 		return $post;

@@ -2,7 +2,9 @@
 <div class="alert alert-danger alert-block">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
 	<h4>{{{ Lang::get('core.error') }}}</h4>
-	{{{ Lang::get('core.check_for_errors') }}}
+    @foreach ($errors->all() as $m)
+    {{ $m }}
+    @endforeach
 </div>
 @endif
 
