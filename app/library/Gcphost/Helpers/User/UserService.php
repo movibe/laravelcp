@@ -12,7 +12,6 @@ class UserService {
 			'password'   => 'required|confirmed|min:4'
 		);
 
-
     function __construct(User $user, Role $role, Permission $permission)
     {
         $this->user = $user;
@@ -29,8 +28,7 @@ class UserService {
 				(Api::to(array('success', Lang::get('admin/users/messages.edit.success'))) ? : Redirect::to('admin/users/' . $this->user->id . '/edit')->with('success', Lang::get('admin/users/messages.edit.success'))) :
 				(Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? : Redirect::to('admin/users/create')->with('error', Lang::get('admin/users/messages.edit.error')));
 		} else return Api::to(array('error', Lang::get('admin/users/messages.edit.error'))) ? :  Redirect::to('admin/users/create')->withErrors($validator);
-  }
-
+	}
 
     public function edit($user)
     {
@@ -168,7 +166,6 @@ class UserService {
 			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
 		@endif</div>
             ')
-
         ->make();
     }
 }
