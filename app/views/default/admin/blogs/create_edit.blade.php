@@ -54,19 +54,19 @@
 
 			<div class="tab-pane" id="tab-meta-data">
 
-				{{ Form::input_group('text', 'meta-title', Lang::get('admin/slugs.meta_title'), isset($post) ? $post->meta_title : null, $errors,'', '')}} 
+				{{ Form::input_group('text', 'meta-title', Lang::get('admin/slugs.meta_title'), isset($post) ? $post->meta_title : null, $errors,array('maxlength'=>'70'), '')}} 
 
-				{{ Form::input_group('text', 'meta-description', Lang::get('admin/slugs.meta_description'), isset($post) ? $post->meta_description : null, $errors,'', '')}} 
+				{{ Form::input_group('text', 'meta-description', Lang::get('admin/slugs.meta_description'), isset($post) ? $post->meta_description : null, $errors,array('maxlength'=>'256'), '')}} 
 				
-				{{ Form::input_group('text', 'meta-keywords', Lang::get('admin/slugs.meta_keywords'), isset($post) ? $post->meta_keywords : null, $errors,'', '')}} 
+				{{ Form::input_group('text', 'meta-keywords', Lang::get('admin/slugs.meta_keywords'), isset($post) ? $post->meta_keywords : null, $errors,array('maxlength'=>'256'), '')}} 
 			
 			</div>
 
 			<div class="tab-pane" id="tab-settings">
 
-				{{ Form::input_group('text', 'banner', Lang::get('admin/slugs.banner'), isset($post) ? $post->banner : null, $errors,'', '')}} 
+				{{ Form::input_group('text', 'banner', Lang::get('admin/slugs.banner'), isset($post) ? $post->banner : null, $errors,array('maxlength'=>'256'), '')}} 
 				
-				{{ Form::input_group('text', 'parent', Lang::get('core.parent'), isset($post) ? $post->parent : null, $errors,'', '')}} 
+				{{ Form::input_group('text', 'parent', Lang::get('core.parent'), isset($post) ? $post->parent : null, $errors,array('maxlength'=>'70'), '')}} 
 				
 				<div class="form-group {{{ $errors->has('template') ? 'has-error' : '' }}}">
 					<div class="col-md-12">

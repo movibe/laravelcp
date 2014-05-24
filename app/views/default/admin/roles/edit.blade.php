@@ -26,7 +26,7 @@
 
 
 			<div class="tab-pane active" id="tab-general">
-				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', $role->name), $errors, array('required'=>'required')) }}
+				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', $role->name), $errors, array('maxlength'=>'70','required'=>'required')) }}
 				
 				{{ Form::select_group('access',  Lang::get('core.access'),
 					array(

@@ -43,7 +43,7 @@
 		{{ Form::select_group('to[]', '', $multi, $selected, $errors,array('multiple'=>'multiple','required'=>'required', 'style'=>'width: 100%; height: 40px;'), '',false) }} 	
 	@endif
 
-	{{ Form::input_group('text', 'subject', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('core.subject')), '', false) }} 
+	{{ Form::input_group('text', 'subject', '', '', $errors, array('maxlength'=>'256','required'=>'required', 'placeholder'=>Lang::get('core.subject')), '', false) }} 
 
 	<div class="form-group">
 		<div class="col-md-12">

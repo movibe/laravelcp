@@ -3,7 +3,7 @@ class Todos extends \LaravelBook\Ardent\Ardent {
 	protected $table = 'todos';
 	
 	public static $rules = array(
-		'title' => 'required'
+		'title' => 'required|max:70'
     );
 
 	public function assign(){

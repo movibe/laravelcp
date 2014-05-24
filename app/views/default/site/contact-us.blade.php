@@ -18,9 +18,8 @@
                 <div class="row">
                     <div class="col-md-6">
 
-						{{ Form::input_group('text', 'name', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('site.your_name')), '', false, 'fa fa-fw fa-user') }} 
+						{{ Form::input_group('text', 'name', '', '', $errors, array('maxlength'=>'70','required'=>'required', 'placeholder'=>Lang::get('site.your_name')), '', false, 'fa fa-fw fa-user') }} 
 
-						{{ Form::input_group('email', 'email', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('site.your_email')), '', false, 'fa fa-fw fa-envelope') }} 
 						
 						{{ Form::input_group('email', 'email', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('site.your_email')), '', false, 'fa fa-fw fa-envelope') }} 
 						

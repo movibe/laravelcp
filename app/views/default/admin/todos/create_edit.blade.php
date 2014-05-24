@@ -25,7 +25,7 @@
 		{{ Form::open_horizontal(array('class' => 'form-ajax')) }}
 	@endif
 
-		{{ Form::input_group('text', 'title', '', Input::old('title', isset($todo) ? $todo->title : null), $errors, array('required'=>'required', 'placeholder'=>Lang::get('admin/todos/todos.post_title')), '', false,'') }} 
+		{{ Form::input_group('text', 'title', '', Input::old('title', isset($todo) ? $todo->title : null), $errors, array('maxlength'=>'70','required'=>'required', 'placeholder'=>Lang::get('admin/todos/todos.post_title')), '', false,'') }} 
 
 		{{ Form::textarea_group('description', '', Input::old('description', isset($todo) ? $todo->description : null), $errors, array('placeholder' => Lang::get('admin/todos/todos.post_description'), 'required'=>'required'), '', false) }} 
 

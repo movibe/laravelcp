@@ -16,7 +16,7 @@
 
     <fieldset>
 
-		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
+		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('maxlength'=>'254','required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
 
 		{{ Form::input_group('password', 'password', '', '', $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.password')), '', false,'','','<a class="btn btn-default" href="forgot">'. Lang::get('button.reset') .'</a>') }} 
 

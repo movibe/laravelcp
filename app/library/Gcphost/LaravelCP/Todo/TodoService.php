@@ -65,8 +65,8 @@ class TodosService {
 		if(Api::Enabled()){
 			return Api::make($this->todo->all()->get()->toArray());
 		} else return Datatables::of($this->todo->all())
-			->edit_column('title', '<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$title}}}</a>')
-			->edit_column('description', '<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$description}}}</a>')
+			->edit_column('title', '<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{ Str::limit($title, 40, \'...\') }}}</a>')
+			->edit_column('description', '<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{ Str::limit($description, 40, \'...\') }}}</a>')
 
 			 ->edit_column('status','<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{ Lang::get(\'admin/todos/todos.status_\'.$status) }}}</a>')
 			 ->edit_column('due_at','{{{ Carbon::parse($due_at)->diffForHumans() }}}')

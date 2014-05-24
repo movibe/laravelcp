@@ -11,8 +11,8 @@ class User extends ConfideUser {
 	protected $table = 'users';
 
 	public static $rules = array(
-        'displayname' => 'required',
-		'email' => 'unique:users|required|email',
+        'displayname' => 'required|min:4|max:70',
+		'email' => 'unique:users|required|email|max:254',
         'password' => 'min:4|confirmed',
         'password_confirmation' => 'min:4',
     );

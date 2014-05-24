@@ -24,9 +24,9 @@
 
     <fieldset>
 
-		{{ Form::input_group('text', 'displayname', '', Input::old('displayname'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('core.fullname')), '', false,'', 'fa fa-fw fa-user') }} 
+		{{ Form::input_group('text', 'displayname', '', Input::old('displayname'), $errors, array('maxlength'=>'70','required'=>'required', 'placeholder'=>Lang::get('core.fullname')), '', false,'', 'fa fa-fw fa-user') }} 
 
-		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
+		{{ Form::input_group('email', 'email', '', Input::old('email'), $errors, array('maxlength'=>'254','required'=>'required', 'placeholder'=>Lang::get('confide::confide.e_mail')), '', false,'', 'fa fa-fw fa-envelope') }} 
 		
 		{{ Form::input_group('password', 'password', '', '', $errors, array('pattern' => '.{3,}', 'required'=>'required', 'placeholder'=>Lang::get('confide::confide.password')), '', false,'', 'fa fa-fw fa-lock') }} 
 

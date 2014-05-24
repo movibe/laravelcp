@@ -71,7 +71,7 @@
 					<h4 class="modal-title">{{{Lang::get('core.search')}}}</h4>
 				</div>
 				<div class="modal-body">
-					{{ Form::input_group('text', 'search-input', '', '', $errors, array('class'=>'search-input','required'=>'required', 'placeholder'=>Lang::get('core.search_placeholder')), '', false, '','', '<button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>') }} 
+					{{ Form::input_group('text', 'search-input', '', '', $errors, array('class'=>'search-input','maxlength'=>'256','required'=>'required', 'placeholder'=>Lang::get('core.search_placeholder')), '', false, '','', '<button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>') }} 
 					<br/>
 					<div id="site-search-results"></div>				
 				</div>

@@ -136,9 +136,9 @@
 
 			<div class="tab-pane active" id="tab-general">
 
-				{{ Form::input_group('text', 'displayname', Lang::get('core.fullname'), isset($user) ? $user->displayname : null, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-user') }} 
+				{{ Form::input_group('text', 'displayname', Lang::get('core.fullname'), isset($user) ? $user->displayname : null, $errors, array('maxlength'=>'70','required'=>'required'), '', true,'', 'fa fa-fw fa-user') }} 
 
-				{{ Form::input_group('email', 'email', Lang::get('confide::confide.e_mail'), isset($user) ? $user->email : null, $errors, array('required'=>'required'), '', true,'', 'fa fa-fw fa-envelope') }} 
+				{{ Form::input_group('email', 'email', Lang::get('confide::confide.e_mail'), isset($user) ? $user->email : null, $errors, array('maxlength'=>'254','required'=>'required'), '', true,'', 'fa fa-fw fa-envelope') }} 
 				
 				{{ Form::input_group('password', 'password', Lang::get('confide::confide.password'), '', $errors, '', '', true,'', 'fa fa-fw fa-lock') }} 
 
