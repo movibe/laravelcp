@@ -1,7 +1,11 @@
 @extends(Theme::path('admin/layouts/modal'))
 
 @section('title')
+	@if (isset($role))
 	{{{ Lang::get('admin/roles/title.role_update') }}}
+	@else
+	{{{ Lang::get('admin/roles/title.create_a_new_role') }}}
+	@endif
 @stop
 
 @section('content')
@@ -20,13 +24,18 @@
 		<li><a href="#tab-permissions" data-toggle="tab">{{{ Lang::get('core.permissions') }}}</a></li>
 	</ul>
 
-	{{ Form::open_horizontal(array('method' => 'put','class' => 'form-ajax')) }}
+	@if (isset($role))
+		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/roles/' . $role->id . '/edit'),'class' => 'form-ajax')) }}
+	@else
+		{{ Form::open_horizontal(array('method' => 'post','class' => 'form-ajax')) }}
+	@endif
+
 
 		<div class="tab-content">
 
 
 			<div class="tab-pane active" id="tab-general">
-				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', $role->name), $errors, array('maxlength'=>'70','required'=>'required')) }}
+				{{ Form::input_group('text', 'name', Lang::get('core.name'), Input::old('name', isset($role) ? $role->name : null), $errors, array('maxlength'=>'70','required'=>'required')) }}
 				
 				{{ Form::select_group('access',  Lang::get('core.access'),
 					array(
@@ -38,22 +47,16 @@
 			</div>
 
 			<div class="tab-pane" id="tab-permissions">
-				<div class="form-group">
-					<div class="btn-group" data-toggle="buttons">
-						<button class="btn btn-success" onclick="$('.btn-group').find('.btn').button('toggle')">{{{ Lang::get('core.all') }}}</button>
-					</div><p></p><div class="btn-group" data-toggle="buttons">
-						@foreach ($permissions as $index => $permission)
-							<label class="btn btn-primary {{{ (isset($permission['checked']) && $permission['checked'] == true ? ' active' : '')}}}">
-								<input type="hidden" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="0" />
-								<input  type="checkbox" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="1"{{{ (isset($permission['checked']) && $permission['checked'] == true ? ' checked' : '')}}} /></span>
-								{{{ $permission['display_name'] }}}
-							 </label>
-							 @if ($index % 4 == 0)
-								</div><p></p><div class="btn-group" data-toggle="buttons">
-							 @endif
-						@endforeach
-					</div>
-				</div>
+				<p><button class="btn btn-success" onclick="$('.permission-list').find(':checkbox').prop('checked', true);return false;">{{{ Lang::get('core.all') }}}</button></p>
+				<ul class="permission-list list-group checked-list-box">
+					@foreach ($permissions as $index => $permission)
+						<li class="list-group-item">
+							<input type="hidden" id="permissions[{{{ $permission['id'] }}}]" name="permissions[{{{ $permission['id'] }}}]" value="0" />
+							<input type="checkbox" id="permissions{{{ $permission['id'] }}}" name="permissions[{{{ $permission['id'] }}}]" value="1"{{{ (isset($permission['checked']) && $permission['checked'] == true) ? ' checked' : ''}}} />
+							<label for="permissions{{{ $permission['id'] }}}">{{{ $permission['display_name'] }}}</label>
+						</li>
+					@endforeach
+				</ul>
 			</div>
 		</div>
 

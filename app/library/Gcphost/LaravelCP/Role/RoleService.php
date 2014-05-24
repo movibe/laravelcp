@@ -24,7 +24,7 @@ class RoleService {
     {
         $permissions = $this->permission->all();
         $selectedPermissions = Input::old('permissions', array());
-        return Theme::make('admin/roles/create', compact('permissions', 'selectedPermissions'));
+        return Theme::make('admin/roles/create_edit', compact('permissions', 'selectedPermissions'));
     }
 
     public function create()
@@ -48,7 +48,7 @@ class RoleService {
         }
         else return Api::to(array('error', Lang::get('admin/roles/messages.does_not_exist'))) ? : Redirect::to('admin/roles')->with('error', Lang::get('admin/roles/messages.does_not_exist'));
         
-        return Theme::make('admin/roles/edit', compact('role', 'permissions'));
+        return Theme::make('admin/roles/create_edit', compact('role', 'permissions'));
     }
 
     public function edit($role)
