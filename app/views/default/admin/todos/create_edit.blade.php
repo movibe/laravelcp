@@ -15,8 +15,9 @@
 			var oTable = parent.$('#todos').dataTable();
 			oTable.fnReloadAjax();
 		}
+		closeModel()
 	</script>
-	@endif
+	@else
 
 	@if (isset($todo))
 		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/todos/' . $todo->id . '/edit'),'class' => 'form-ajax')) }}
@@ -64,4 +65,5 @@
 			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
 	{{ Form::close() }}
+	@endif
 @stop

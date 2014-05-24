@@ -5,9 +5,6 @@
 @stop
 
 @section('content')
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
-	</ul>
 
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">
@@ -15,8 +12,13 @@
 			var oTable = parent.$('#comments').dataTable();
 			oTable.fnReloadAjax();
 		}
+		closeModel();
 	</script>
-	@endif
+	@else
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
+	</ul>
 	
 	<div class="tab-content">
 
@@ -35,4 +37,5 @@
 		</div>
 	{{ Form::close() }}
 	</div>
+	@endif
 @stop

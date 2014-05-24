@@ -9,20 +9,22 @@
 @stop
 
 @section('content')
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
-		<li><a href="#tab-meta-data" data-toggle="tab">{{{ Lang::get('admin/slugs.meta_data') }}}</a></li>
-		<li><a href="#tab-settings" data-toggle="tab">{{{ Lang::get('core.settings') }}}</a></li>
-	</ul>
 
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">
 		if(parent.$('#blogs').html()){
 			var oTable = parent.$('#blogs').dataTable();
 			oTable.fnReloadAjax();
-		}
+		}		
+		closeModel();
 	</script>
-	@endif
+	@else
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
+		<li><a href="#tab-meta-data" data-toggle="tab">{{{ Lang::get('admin/slugs.meta_data') }}}</a></li>
+		<li><a href="#tab-settings" data-toggle="tab">{{{ Lang::get('core.settings') }}}</a></li>
+	</ul>
 
 	@if (isset($post))
 		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/slugs/' . $post->id . '/edit'),'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html())")) }}
@@ -142,6 +144,7 @@
 			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
 	{{ Form::close() }}
+	@endif
 @stop
 @section('styles')
 	<style type="text/css"> 

@@ -7,10 +7,13 @@
 @section('content')
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">
-		var oTable = parent.$('#roles').dataTable();
-		oTable.fnReloadAjax();
+		if(parent.$('#roles').html()){
+			var oTable = parent.$('#roles').dataTable();
+			oTable.fnReloadAjax();
+		}
+		closeModel();
 	</script>
-	@endif
+	@else
 
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
@@ -57,4 +60,5 @@
 			{{ Form::submit(Lang::get('button.save'), array('class' => 'btn btn-responsive btn-success')) }} 
 		</div>
 	{{ Form::close() }}
+	@endif
 @stop

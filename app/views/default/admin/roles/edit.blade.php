@@ -11,8 +11,9 @@
 			var oTable = parent.$('#roles').dataTable();
 			oTable.fnReloadAjax();
 		}
+		closeModel();
 	</script>
-	@endif
+	@else
 
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
@@ -63,5 +64,5 @@
 		</div>
 
 	{{ Form::close() }}
-
+	@endif
 @stop

@@ -9,6 +9,17 @@
 @stop
 
 @section('content')
+
+	@if ($message = Session::get('success'))
+	<script type="text/javascript">
+		if($('#users').html()){
+			var oTable = $('#users').dataTable();
+			oTable.fnReloadAjax();
+		}
+		closeModel();
+	</script>
+	@else
+
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#tab-general" data-toggle="tab">{{{ Lang::get('core.general') }}}</a></li>
 		<li><a href="#tab-profile" data-toggle="tab">{{{ Lang::get('core.profile') }}}</a></li>
@@ -20,15 +31,6 @@
 		@endif
 		@yield('user-edit-tabs')
 	</ul>
-
-	@if ($message = Session::get('success'))
-	<script type="text/javascript">
-		if($('#users').html()){
-			var oTable = $('#users').dataTable();
-			oTable.fnReloadAjax();
-		}
-	</script>
-	@endif
 
 	@if (isset($user))
 		{{ Form::open_horizontal(array('method' => 'put','url' => URL::to('admin/users/' . $user->id . '/edit'),'class' => 'form-ajax')) }}
@@ -217,6 +219,7 @@
 			</div>
 
 	{{ Form::close() }}
+	@endif
 @stop
 
 
