@@ -8,7 +8,7 @@
 
 	@if ($message = Session::get('success'))
 	<script type="text/javascript">
-		if(parent.$('#blogs').html()){
+		if(parent.$('#comments').html()){
 			var oTable = parent.$('#comments').dataTable();
 			oTable.fnReloadAjax();
 		}

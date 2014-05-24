@@ -77,6 +77,7 @@ class BlogService {
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
 					<li><a href="{{{ URL::to(\'admin/slugs/\' . $id . \'/edit\' ) }}}" class="modalfy" >{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li class="divider"></li>
 					<li><a data-method="delete" data-row="{{{  $id }}}" data-table="blogs" href="{{{ URL::to(\'admin/slugs/\' . $id . \'\' ) }}}" class="confirm-ajax-update ">{{{ Lang::get(\'button.delete\') }}}</a></li>
 				</ul>
 			</div>

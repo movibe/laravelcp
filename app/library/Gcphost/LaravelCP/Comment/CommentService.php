@@ -55,7 +55,9 @@ class CommentService {
 					  <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="{{{ URL::to(\'admin/comments/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a> <a data-row="{{{  $id }}}" data-method="delete" data-table="comments" href="{{{ URL::to(\'admin/comments/\' . $id . \'\' ) }}}" class="confirm-ajax-update ">{{{ Lang::get(\'button.delete\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/comments/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li class="divider"></li>
+					<li><a data-row="{{{  $id }}}" data-method="delete" data-table="comments" href="{{{ URL::to(\'admin/comments/\' . $id . \'\' ) }}}" class="confirm-ajax-update ">{{{ Lang::get(\'button.delete\') }}}</a></li>
 				</ul>
 			</div>
 		')

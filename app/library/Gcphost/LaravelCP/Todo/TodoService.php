@@ -77,6 +77,7 @@ class TodosService {
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
 					<li><a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li class="divider"></li>
 					<li><a href="{{{ URL::to(\'admin/todos/\' . $id . \'/assign\' ) }}}" data-row="{{{  $id }}}" data-table="todos" class="confirm-ajax-update ">{{{ Lang::get(\'button.assign_to_me\') }}}</a></li>
 					<li class="divider"></li>
 					<li><a data-row="{{{  $id }}}" data-table="todos" data-method="delete" href="{{{ URL::to(\'admin/todos/\' . $id . \'\' ) }}}" class="confirm-ajax-update">{{{ Lang::get(\'button.delete\') }}}</a></li>
