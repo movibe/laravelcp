@@ -1,5 +1,5 @@
 <?php
-use Gcphost\Helpers\Comment\CommentRepository as Comment;
+use Gcphost\LaravelCP\Comment\CommentRepository as Comment;
 
 class AdminCommentsController extends BaseController
 {

@@ -1,5 +1,5 @@
 <?php 
-namespace Gcphost\Helpers;
+namespace Gcphost\LaravelCP;
 
 
 return array(
@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -139,21 +139,20 @@ return array(
 		'Dollar\Generators\GeneratorsServiceProvider',
 
 		/* LaravelCP */
-		'Gcphost\Helpers\UserServiceProvider',
-		'Gcphost\Helpers\TodoServiceProvider',
-		'Gcphost\Helpers\BlogServiceProvider',
-		'Gcphost\Helpers\CommentServiceProvider',
-		'Gcphost\Helpers\RoleServiceProvider',
-		'Gcphost\Helpers\DesktopServiceProvider',
-		'Gcphost\Helpers\EmailServiceProvider',
-		'Gcphost\Helpers\MergeServiceProvider',
-		'Gcphost\Helpers\ProfileServiceProvider',
-		'Gcphost\Helpers\SearchServiceProvider',
-		'Gcphost\Helpers\SettingServiceProvider',
-		'Gcphost\Helpers\SiteUserServiceProvider',
-		'Gcphost\Helpers\SiteBlogServiceProvider',
-		'Gcphost\Helpers\ClientServiceProvider',
-
+		'Gcphost\LaravelCP\UserServiceProvider',
+		'Gcphost\LaravelCP\TodoServiceProvider',
+		'Gcphost\LaravelCP\BlogServiceProvider',
+		'Gcphost\LaravelCP\CommentServiceProvider',
+		'Gcphost\LaravelCP\RoleServiceProvider',
+		'Gcphost\LaravelCP\DesktopServiceProvider',
+		'Gcphost\LaravelCP\EmailServiceProvider',
+		'Gcphost\LaravelCP\MergeServiceProvider',
+		'Gcphost\LaravelCP\ProfileServiceProvider',
+		'Gcphost\LaravelCP\SearchServiceProvider',
+		'Gcphost\LaravelCP\SettingServiceProvider',
+		'Gcphost\LaravelCP\SiteUserServiceProvider',
+		'Gcphost\LaravelCP\SiteBlogServiceProvider',
+		'Gcphost\LaravelCP\ClientServiceProvider',
 
 	),
 
@@ -194,7 +193,7 @@ return array(
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
-		//'Eloquent'        => 'Illuminate\Database\Eloquent\Model',
+		'Eloquent'        => 'Illuminate\Database\Eloquent\Model',
 		'Event'           => 'Illuminate\Support\Facades\Event',
 		'File'            => 'Illuminate\Support\Facades\File',
 		//'Form'            => 'Illuminate\Support\Facades\Form',
@@ -231,9 +230,9 @@ return array(
 		'Activity'		  => 'Regulus\ActivityLog\Activity',
 		'Gravatar'		  => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
 		'Anvard'		  => 'Atticmedia\Anvard\Anvard',
-		'CronWrapper'	  => 'Gcphost\Helpers\CronWrapper', 
+		'CronWrapper'	  => 'Gcphost\LaravelCP\CronWrapper', 
 		'Filter'		  => 'Rtablada\Profane\Facades\Filter',
-		'Eloquent'		  => 'Rtablada\Profane\Model',
+		'Profane'		  => 'Rtablada\Profane\Model',
 
 		/* form */
 		'Alert'           => 'Caouecs\Bootstrap3\Alert',
@@ -241,12 +240,12 @@ return array(
 		'Form'            => 'Caouecs\Bootstrap3\Form',
 
 		/* LaravelCP */
-        'String'          => 'Andrew13\Helpers\String',
-		'Theme'           => 'Gcphost\Helpers\Theme', 
-		'Api'			  => 'Gcphost\Helpers\Api', 
-		'Search'          => 'Gcphost\Helpers\Search', 
-		'CronWrapper'     => 'Gcphost\Helpers\CronWrapper', 
-		'LCP'			  => 'Gcphost\Helpers\LaravelCP',
+        'String'          => 'Gcphost\LaravelCP\String',
+		'Theme'           => 'Gcphost\LaravelCP\Theme', 
+		'Api'			  => 'Gcphost\LaravelCP\Api', 
+		'Search'          => 'Gcphost\LaravelCP\Search', 
+		'CronWrapper'     => 'Gcphost\LaravelCP\CronWrapper', 
+		'LaravelCP'			  => 'Gcphost\LaravelCP\LaravelCP',
 
 	),
 	'available_language' => array('en'),

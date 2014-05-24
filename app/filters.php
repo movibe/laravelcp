@@ -16,7 +16,7 @@ Route::when('xml', 'xml');
 Route::filter('auth', function($route, $request)
 {
 	if (Auth::guest()) {
-        Session::put('loginRedirect', Request::url());
+        if (!Request::ajax()) Session::put('loginRedirect', Request::url());
         return Redirect::to('user/login/');
     }
 });

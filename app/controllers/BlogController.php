@@ -1,5 +1,5 @@
 <?php
-use Gcphost\Helpers\Blog\BlogRepository as Post;
+use Gcphost\LaravelCP\Blog\BlogRepository as Post;
 
 class BlogController extends BaseController {
     protected $service;
