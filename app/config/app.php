@@ -245,7 +245,7 @@ return array(
 		'Api'			  => 'Gcphost\LaravelCP\Api', 
 		'Search'          => 'Gcphost\LaravelCP\Search', 
 		'CronWrapper'     => 'Gcphost\LaravelCP\CronWrapper', 
-		'LaravelCP'			  => 'Gcphost\LaravelCP\LaravelCP',
+		'LaravelCP'		  => 'Gcphost\LaravelCP\LaravelCP',
 
 	),
 	'available_language' => array('en'),

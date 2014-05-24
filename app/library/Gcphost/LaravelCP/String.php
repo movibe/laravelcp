@@ -1,4 +1,4 @@
-<?php namespace Andrew13\Helpers;
+<?php namespace Gcphost\LaravelCP;
 
 use Carbon\Carbon;
 use tidy;
