@@ -26,6 +26,13 @@
 
 @section('content')
 
+	@if ($message = Session::get('success'))
+	<script type="text/javascript">
+		closeModel();
+	</script>
+	@else
+
+
 @if (isset($user))
 	{{ Form::open_horizontal(array('url' => array('admin/users/' . $user->id . '/email'), 'files'=>true,'class' => 'form-ajax', 'onsubmit' => "$('#wysiwyg-body').html($('#editor').html());")) }}
 @else
@@ -81,4 +88,5 @@
 	</script>
 
 	{{ Form::close() }}
+	@endif
 @stop
