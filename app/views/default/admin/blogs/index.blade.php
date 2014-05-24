@@ -19,14 +19,14 @@
 	@include(Theme::path('admin/dt-loading'))
 
 	<div id="blogs-container" class="dt-wrapper">
-		<table id="blogs" class="table table-striped table-hover table-bordered">
+		<table id="blogs" class="table table-responsive table-striped table-hover table-bordered">
 			<thead>
 				<tr>
 					<th></th>
-					<th class="col-md-4">{{{ Lang::get('admin/blogs/table.title') }}}</th>
+					<th class="col-md-6">{{{ Lang::get('admin/blogs/table.title') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/blogs/table.comments') }}}</th>
-					<th class="col-md-2">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
-					<th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+					<th class="col-md-3">{{{ Lang::get('admin/blogs/table.created_at') }}}</th>
+					<th class="col-md-1">{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,7 +40,7 @@
 	<script src="{{{ asset('assets/js/jquery.dataTables.min.js') }}}"></script>
 	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
 	<script type="text/javascript">
-		dtLoad('#blogs', 'slugs/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', '', 'false', 'true',[null,null,null,null,null]);
+		dtLoad('#blogs', 'slugs/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', '', 'false', 'true',[null,null,null,null,{ "bSortable": false }]);
 	</script>
 @stop
 

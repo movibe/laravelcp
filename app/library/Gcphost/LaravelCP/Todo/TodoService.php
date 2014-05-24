@@ -3,9 +3,6 @@ use Gcphost\LaravelCP\Todo\TodoRepository as Todos;
 
 class TodosService {
     protected $todo;
-	var $rules = array(
-			'title' => 'required',
-		);
 
     public function __construct(Todos $todo)
     {
@@ -72,12 +69,24 @@ class TodosService {
 			 ->edit_column('due_at','{{{ Carbon::parse($due_at)->diffForHumans() }}}')
 			 ->edit_column('created_at','{{{ Carbon::parse($created_at)->diffForHumans() }}}')
 			 ->edit_column('displayname','{{{ $displayname ? : "Nobody" }}}')
-	        ->add_column('actions', '<div class="btn-group" style="width: 200px">
-		<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
-		<a href="{{{ URL::to(\'admin/todos/\' . $id . \'/assign\' ) }}}" data-row="{{{  $id }}}" data-table="todos" class="confirm-ajax-update btn btn-sm btn-default">{{{ Lang::get(\'button.assign_to_me\') }}}</a>
-			<a data-row="{{{  $id }}}" data-table="todos" data-method="delete" href="{{{ URL::to(\'admin/todos/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-		</div>
+	        ->add_column('actions', '
+			 <div class="btn-group btn-hover">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					  <span class="fa fa-lg fa-cog fa-fw"></span>
+					  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="{{{ URL::to(\'admin/todos/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/todos/\' . $id . \'/assign\' ) }}}" data-row="{{{  $id }}}" data-table="todos" class="confirm-ajax-update ">{{{ Lang::get(\'button.assign_to_me\') }}}</a></li>
+					<li class="divider"></li>
+					<li><a data-row="{{{  $id }}}" data-table="todos" data-method="delete" href="{{{ URL::to(\'admin/todos/\' . $id . \'\' ) }}}" class="confirm-ajax-update">{{{ Lang::get(\'button.delete\') }}}</a></li>
+				</ul>	 
+			</div>
             ')
 			->make();
 	}
 }
+
+
+
+

@@ -143,14 +143,23 @@ class UserService {
 		} else return Datatables::of($this->user->all())
 		->edit_column('displayname', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$displayname}}}</a>')
 		->edit_column('email', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$email}}}</a>')
-        ->add_column('actions', '<div class="btn-group">
-		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a> 
-		<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy btn btn-sm btn-default">{{{ Lang::get(\'button.email\') }}}</a>
-		@if($id == Auth::user()->id)
-			<a href="#" class="disabled btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-		@else
-			<a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger">{{{ Lang::get(\'button.delete\') }}}</a>
-		@endif</div>
+        ->add_column('actions', '
+			 <div class="btn-group btn-hover">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					  <span class="fa fa-lg fa-cog fa-fw"></span>
+					  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.email\') }}}</a></li>
+					<li class="divider"></li>
+					@if($id == Auth::user()->id)
+						<li><a href="#" class="disabled ">{{{ Lang::get(\'button.delete\') }}}</a></li>
+					@else
+						<li><a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update ">{{{ Lang::get(\'button.delete\') }}}</a></li>
+					@endif
+				</ul>
+			</div>
             ')
         ->make();
     }

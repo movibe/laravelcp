@@ -84,9 +84,19 @@ class RoleService {
 		->edit_column('name', '<a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$name}}}</a>')
 
         ->edit_column('users', '{{{ DB::table(\'assigned_roles\')->where(\'role_id\', \'=\', $id)->count()  }}}')
-        ->add_column('actions', '<div class="btn-group"><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy btn btn-sm btn-primary">{{{ Lang::get(\'button.edit\') }}}</a>
-                                <a @if($id == Setting::get("users.default_role_id"))disabled=disabled@endif data-row="{{{  $id }}}" data-method="delete" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'\' ) }}}" class="confirm-ajax-update btn btn-sm btn-danger" @if($name == "admin" || $name == "users")disabled@endif>{{{ Lang::get(\'button.delete\') }}}</a></div>
-                    ')
+        ->add_column('actions', '
+			 <div class="btn-group btn-hover">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					  <span class="fa fa-lg fa-cog fa-fw"></span>
+					  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li class="divider"></li>
+					<li><a @if($id == Setting::get("users.default_role_id"))disabled=disabled@endif data-row="{{{  $id }}}" data-method="delete" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'\' ) }}}" class="confirm-ajax-update " @if($name == "admin" || $name == "users")disabled@endif>{{{ Lang::get(\'button.delete\') }}}</a></li>
+				</ul>
+			</div>
+         ')
         ->make();
     }
 

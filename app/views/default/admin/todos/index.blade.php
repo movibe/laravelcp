@@ -9,6 +9,9 @@
 @stop
 
 @section('left-layout-content')
+
+
+
 	<div class="page-header clearfix">		
 		<div class="pull-left"><h3>{{{ Lang::get('core.todos') }}}</h3></div>
 		<div class="pull-right">

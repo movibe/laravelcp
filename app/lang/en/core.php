@@ -65,7 +65,7 @@ return array(
 	'agree_tos' => 'I agree with the <a href="#" class="site_tos">Terms and Conditions</a>.',
 	'must_agree_tos' => 'You must agree with the Terms and Conditions.',
 	'user_logged_in'=> 'User Logged In',
-	'assigned_to'=> 'Assigned to',
+	'assigned_to'=> 'Assigned',
 	'due_at' => 'Due',
 	'delete_error' => 'Unable to delete',
 );

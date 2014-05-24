@@ -41,9 +41,9 @@ class SiteUserService {
     public function post()
     {
 		$rules = array(
-			'displayname' => 'required',
+			'displayname' => 'required|max:70',
 			'terms'     => "required|accepted",
-			'email'     => "required|email",
+			'email'     => "required|email|max:254",
 			'password'   => 'required|confirmed|min:4',
 			'create_hp'   => 'honeypot',
 			'create_hp_time'   => 'required|honeytime:3'

@@ -63,7 +63,7 @@ class SiteBlog {
 
 	public function postContactUs(){
 			$rules = array(
-				'email'     => "required|email",
+				'email'     => "required|email|max:254",
 				'conact_us'   => 'honeypot',
 				'contact_us_time'   => 'required|honeytime:5'
 			);

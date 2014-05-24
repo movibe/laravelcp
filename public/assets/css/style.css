@@ -53,6 +53,15 @@ table.dataTable thead .sorting_desc_disabled { background: url('../images/sort_d
 	ul.nav li.dropdown:hover>ul.dropdown-menu{display:block}
 }
 
+@media(min-width:480px){
+	/*div.btn-group:hover ul.dropdown-menu{
+		display: block;    
+	}
+
+	div.btn-group ul.dropdown-menu{
+		margin-top: 0px;    
+	}*/
+}
 
 .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:1000;border-top:0;overflow-x:hidden;overflow-y:auto;margin:0;padding:60px 0 0}
 .sidebar-with-bread{top:90px}

@@ -33,7 +33,7 @@
 					<th>{{{ Lang::get('admin/users/table.username') }}}</th>
 					<th>{{{ Lang::get('admin/users/table.email') }}}</th>
 					<th>{{{ Lang::get('admin/users/table.roles') }}}</th>
-					<th style="min-width:160px">{{{ Lang::get('table.actions') }}}</th>
+					<th style="width: 40px;">{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,7 +62,7 @@
 	<script src="{{{ asset('assets/js/jquery.dataTables.min.js') }}}"></script>
 	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
 	<script type="text/javascript">
-		dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', null,null ,null ,[{ "bSearchable": false },null,null,{ "bSearchable": false },null]);
+		dtLoad('#users', 'users/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', null,null ,null ,[{ "bSearchable": false },null,null,{ "bSearchable": false },{ "bSortable": false }]);
 	</script>
 @stop
 

@@ -25,8 +25,8 @@
 					<th></th>
 					<th class="col-md-6">{{{ Lang::get('admin/roles/table.name') }}}</th>
 					<th class="col-md-2">{{{ Lang::get('admin/roles/table.users') }}}</th>
-					<th class="col-md-2">{{{ Lang::get('admin/roles/table.created_at') }}}</th>
-					<th class="col-md-2" >{{{ Lang::get('table.actions') }}}</th>
+					<th class="col-md-3">{{{ Lang::get('admin/roles/table.created_at') }}}</th>
+					<th style="col-md-1">{{{ Lang::get('table.actions') }}}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +40,6 @@
 	<script src="{{{ asset('assets/js/jquery.dataTables.min.js') }}}"></script>
 	<script src="{{{ asset('assets/js/datatables.js') }}}"></script>
 	<script type="text/javascript">
-		dtLoad('#roles', 'roles/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', '', 'false', 'true',[null,null,null,null,null]);
+		dtLoad('#roles', 'roles/data', 'td:eq(1), th:eq(1)', 'td:eq(2), th:eq(2)', '', 'false', 'true',[null,null,null,null,{ "bSortable": false }]);
 	</script>
 @stop
