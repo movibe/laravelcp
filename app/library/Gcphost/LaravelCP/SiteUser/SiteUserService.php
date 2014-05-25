@@ -95,7 +95,10 @@ class SiteUserService {
 
     public function getCreate()
     {
- 		$anvard = App::make('anvard');
+		$user = Auth::user();
+		if(!empty($user->id)) return Redirect::to('/');
+
+		$anvard = App::make('anvard');
 		$providers = $anvard->getProviders();
 
 		return Theme::make('site/user/create', compact('providers'));

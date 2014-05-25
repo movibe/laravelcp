@@ -79,7 +79,9 @@
 											{{{ Auth::user()->email }}}	<span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
-											<li><a href="{{{ URL::to('user/logout') }}}">{{{ Lang::get('core.logout') }}}</a></li>
+											<li><a href="{{{ URL::to('user') }}}"><span class="fa fa-wrench fa-fw"></span>  &nbsp; {{{ Lang::get('core.profile') }}}</a></li>
+											<li class="divider"></li>
+											<li><a href="{{{ URL::to('user/logout') }}}"><span class="fa fa-sign-out fa-fw"></span>  &nbsp; {{{ Lang::get('core.logout') }}}</a></li>
 										</ul>
 									</li>
 								@endif
