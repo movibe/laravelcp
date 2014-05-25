@@ -57,7 +57,7 @@ class InstallLaravelCP extends Command {
 		
 		while(!$password) $password = $this->secret('- What is the password you want to use? ');
 
-		while(!in_array($role, $roles)) $password = $this->secret('- What is the role do you want to have? ['.implode('|', $roles).']? ');
+		while(!in_array($role, $roles)) $role = $this->secret('- What is the role do you want to have? ['.implode('|', $roles).']? ');
 
 		if ($this->argument('confirm') || $this->confirm('- Do you wish to continue? [yes|no] '))
 		{

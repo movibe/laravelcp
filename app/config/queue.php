@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'beanstalkd',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return array(
 
 		'beanstalkd' => array(
 			'driver' => 'beanstalkd',
-			'host'   => 'localhost',
+			'host'   => '192.168.1.110',
 			'queue'  => 'default',
 		),
 
