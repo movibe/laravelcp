@@ -6,7 +6,7 @@ class UsersTableSeeder extends Seeder {
     {
         DB::table('users')->delete();
 
-
+/*
         $users = array(
             array(
                 'email'      => 'admin@example.org',
@@ -35,6 +35,7 @@ class UsersTableSeeder extends Seeder {
         );
 
         DB::table('users')->insert( $users );
+*/
     }
 
 }

@@ -1,5 +1,5 @@
 <?php namespace Gcphost\LaravelCP;
-use Setting,User, Confide,Activity,Input,Mail,Config,Event, Lava, DB;
+use Setting,User,Confide,Activity,Input,Mail,Config,Event, Lava, DB;
 use Illuminate\Filesystem\Filesystem;
 
 class LaravelCP {
@@ -18,8 +18,8 @@ class LaravelCP {
 							$_merge_to=$user;
 							continue;
 						}
-						$user->merge($user);
-					} else  return Api::to(array('error', '')) ? : \Response::json(array('result'=>'error', 'error' =>  ''));
+						if(!$user->merge($user)) return Api::to(array('error', 'Failed to delete ' . $r)) ? : \Response::json(array('result'=>'error', 'error' =>  'Failed to delete '.$r));
+					} else  return Api::to(array('error', 'Could not find user '. $r)) ? : \Response::json(array('result'=>'error', 'error' =>  'Could not find user '. $r));
 				}
 			}
 		}
@@ -32,7 +32,7 @@ class LaravelCP {
 			if(!empty($user)){
 				Event::fire('controller.user.delete', array($user));
 				$user->delete();
-			} else return Api::to(array('error', '')) ? : Response::json(array('result'=>'error', 'error' =>  ''));
+			} else return Api::to(array('error', '')) ? : \Response::json(array('result'=>'error', 'error' =>  ''));
 		}
 	}
 
@@ -61,7 +61,6 @@ class LaravelCP {
 
 		return true;
 	}
-
 
 	static public function sendEmail($user, $template='emails.default', $delay=30){
 		//if (!View::exists($template))$template='emails.default';

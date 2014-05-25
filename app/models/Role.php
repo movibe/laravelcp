@@ -24,4 +24,8 @@ class Role extends EntrustRole
 		if(! parent::delete()) return false;
 		return !$this->find($id) ? true : false;
     } 
+
+	public function byName($name){
+		return $this->where('name', '=', $name)->first();
+	}
 }

@@ -68,6 +68,28 @@ We hope users will extend the application instead of modifying its core componen
     php artisan db:seed
 ```
 
+- Install your user(s):
+
+You can run the command directly:
+
+```
+    php artisan command:install_laravelcp
+```
+
+Or inline:
+
+```
+    php artisan command:install_laravelcp "Admin User" admin@example.org admin admin yes
+    php artisan command:install_laravelcp "Site User" user@example.org site site_user yes
+    php artisan command:install_laravelcp "Manager User" manager@example.org manager manager yes
+    php artisan command:install_laravelcp "Client User" client@example.org client client yes
+```
+
+With options:
+```
+    php artisan command:install_laravelcp "<full name>" <email> <password> <group> <confirm>
+```
+
 
 ### You're done!
 Browse to your folder, /public/ and click login!

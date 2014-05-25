@@ -142,7 +142,7 @@ class UserService {
 			return Api::make($this->user->all()->get()->toArray());
 		} else return Datatables::of($this->user->all())
 		->edit_column('displayname', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$displayname}}}</a>')
-		->edit_column('email', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{$email}}}</a>')
+		->edit_column('email', '<a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy">{{{$email}}}</a>')
         ->add_column('actions', '
 			 <div class="btn-group btn-hover">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
