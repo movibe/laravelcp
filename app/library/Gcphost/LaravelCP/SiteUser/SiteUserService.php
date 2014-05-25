@@ -71,12 +71,12 @@ class SiteUserService {
 				'displayname' => 'required',
 				'email' => 'required|email',
 				'password' => 'min:4|confirmed',
-				'password_confirmation' => 'min:4',
+				'password_confirmation' => 'min:4'
 			);
 		} else {
 			$rules = array(
 				'displayname' => 'required',
-				'email' => 'required|email',
+				'email' => 'required|email'
 			);
 		}
 
@@ -84,7 +84,7 @@ class SiteUserService {
 
         if ($validator->passes())
         {
-			$save=$this->user->publicCreateOrUpdate($user->id);
+			$save=$this->user->publicCreateOrUpdate(Auth::user()->id);
 			$errors = $save->errors();
 
 			return count($errors->all()) == 0 ?
@@ -124,9 +124,9 @@ class SiteUserService {
     public function postLogin()
     {
         $input = array(
-            'email'    => Input::get( 'email' ), // May be the username too
+            'email'    => Input::get( 'email' ),
             'password' => Input::get( 'password' ),
-            'remember' => Input::get( 'remember' ),
+            'remember' => Input::get( 'remember' )
         );
 
         if ( Confide::logAttempt( $input, true ) )
@@ -174,7 +174,7 @@ class SiteUserService {
         $input = array(
             'token'=>Input::get( 'token' ),
             'password'=>Input::get( 'password' ),
-            'password_confirmation'=>Input::get( 'password_confirmation' ),
+            'password_confirmation'=>Input::get( 'password_confirmation' )
         );
 
         return Confide::resetPassword( $input ) ?

@@ -26,13 +26,13 @@ class SiteBlog {
 	{
 		$post = $this->post->where('slug', '=', $slug)->first();
 
-		if (is_null($post)) return App::abort(404);
+		if(is_null($post)) return App::abort(404);
 		
 		$comments = $post->getcomments();
 
         $user = $this->user->currentUser();
         $canComment = false;
-        if(!empty($user))$canComment = $user->can('post_comment');
+        if(!empty($user)) $canComment = $user->can('post_comment');
         
 		return Theme::make('site/blog/view_post', compact('post', 'comments', 'canComment'));
 	}
