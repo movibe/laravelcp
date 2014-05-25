@@ -66,6 +66,7 @@ We hope users will extend the application instead of modifying its core componen
     composer install --dev
     php artisan migrate
     php artisan db:seed
+    php artisan optimize --force
 ```
 
 - Install your user(s):
@@ -94,6 +95,10 @@ With options:
 ### You're done!
 Browse to your folder, /public/ and click login!
 Default login is admin@example.org with the password admin
+
+### Please note
+This is not a vendor application so you must replace the files each time you want to update. You can use a git manager to assist with that.
+We will be moving to a vendor package shortly.
 
 
 
