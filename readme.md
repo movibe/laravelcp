@@ -108,6 +108,12 @@ If you like the project I really need help with the phpunit testing stuff, so fe
 Have a suggestion? Post it in the 'issues'.
 
 
+# Association 
+LaravelCP is not directly associated with Laravel or Taylor Otwell (creator of Laravel). 
+
+
+
+
 # From the forked repo:
 @[laravel4-starter-kit](https://github.com/andrewelkins/Laravel-4-Bootstrap-Starter-Site)
 
