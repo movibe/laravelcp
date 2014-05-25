@@ -5,7 +5,6 @@ class RoleService {
     protected $user;
     protected $role;
     protected $permission;
-	private $protected_roles=array('admin','client');
 
     public function __construct(User $user, Role $role, Permission $permission)
     {
@@ -30,7 +29,7 @@ class RoleService {
     public function create()
     {
 		$inputs = Input::except('csrf_token');
-		if(in_array(Input::get('name'), $this->protected_roles))return Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
+		if(in_array(Input::get('name'), \Role::$protected))return Api::to(array('error', Lang::get('admin/roles/messages.create.error'))) ? : Redirect::to('admin/roles/create')->with('error', Lang::get('admin/roles/messages.create.error'));
 		
 		$save=$this->role->createOrUpdate(null, $this->permission->preparePermissionsForSave($inputs['permissions']));
 		$errors = $save->errors();
@@ -53,7 +52,7 @@ class RoleService {
 
     public function edit($role)
     {
-		if((in_array(Input::old('name', $role->name), $this->protected_roles) &&Input::old('name', $role->name) != Input::get('name'))||( in_array(Input::get('name'), $this->protected_roles)  && Input::old('name', $role->name) != Input::get('name'))) 
+		if((in_array(Input::old('name', $role->name), \Role::$protected) &&Input::old('name', $role->name) != Input::get('name'))||( in_array(Input::get('name'), \Role::$protected)  && Input::old('name', $role->name) != Input::get('name'))) 
 			return Api::to(array('error', Lang::get('admin/roles/messages.update.error'))) ? : Redirect::to('admin/roles/' . $role->id . '/edit')->with('error', Lang::get('admin/roles/messages.update.error'));
 
 		$inputs = Input::except('csrf_token');
