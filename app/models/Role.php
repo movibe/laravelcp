@@ -7,6 +7,12 @@ class Role extends EntrustRole
 		'name'   => 'unique:roles|required|min:3|max:70',
     );
 
+	public static $protected = array(
+		'admin',
+		'client',
+		'site_user'
+	);
+
 	public function validateRoles( array $roles )
     {
         $user = Confide::user();

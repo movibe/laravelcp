@@ -1,6 +1,16 @@
 <?php
 use Illuminate\Filesystem\Filesystem;
 
+/*
+
+This is more-or-less now just a helper class.
+Since laravel does state a model can do anything we originally coded here
+
+Ideally I think this is suited for a service file or a regular helper class
+
+*/
+
+
 class Dashboard extends Eloquent {
 	static public function widgets(){
 		$path=Config::get('view.paths');

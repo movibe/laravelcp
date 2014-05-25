@@ -150,14 +150,14 @@ class UserService {
 					  <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{ Lang::get(\'button.edit\') }}}</a></li>
 					<li class="divider"></li>
-					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.email\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/users/\' . $id . \'/email\' ) }}}" class="modalfy">{{{ Lang::get(\'button.email\') }}}</a></li>
 					<li class="divider"></li>
 					@if($id == Auth::user()->id)
-						<li><a href="#" class="disabled ">{{{ Lang::get(\'button.delete\') }}}</a></li>
+						<li><a href="#disabled" class="disabled">{{{ Lang::get(\'button.delete\') }}}</a></li>
 					@else
-						<li><a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update ">{{{ Lang::get(\'button.delete\') }}}</a></li>
+						<li><a data-row="{{{  $id }}}" data-table="users" data-method="delete" href="{{{ URL::to(\'admin/users/\' . $id . \'\' ) }}}" class="confirm-ajax-update">{{{ Lang::get(\'button.delete\') }}}</a></li>
 					@endif
 				</ul>
 			</div>

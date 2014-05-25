@@ -146,11 +146,11 @@
 
 				{{ Form::select_group('confirm',  Lang::get('core.active'),
 					array(
-						'1' => Lang::get('general.yes'),
 						'2' => Lang::get('general.no'),
+						'1' => Lang::get('general.yes'),
 						),
 						isset($user) ? $user->confirmed : null, $errors) }} 	
-					
+
 				{{ Form::select_group('roles[]',  Lang::get('core.roles'), $roles,
 						isset($user) ? $user->currentRoleIds() : null, $errors, array('multiple'=>'multiple')) }} 	
 	

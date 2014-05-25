@@ -67,7 +67,9 @@ class RoleService {
 
     public function delete($role)
     {
-		return $role->delete() ? 
+		if(in_array($role->name, \Role::$protected)){
+			return Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
+		} else return $role->delete() ? 
 			Api::json(array('result'=>'success')) : 
 			Api::json(array('result'=>'error', 'error' =>Lang::get('core.delete_error')));
     }
@@ -91,13 +93,16 @@ class RoleService {
 					  <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu pull-right" role="menu">
-					<li><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy ">{{{ Lang::get(\'button.edit\') }}}</a></li>
+					<li><a href="{{{ URL::to(\'admin/roles/\' . $id . \'/edit\' ) }}}" class="modalfy">{{{ Lang::get(\'button.edit\') }}}</a></li>
 					<li class="divider"></li>
-					<li><a @if($id == Setting::get("users.default_role_id"))disabled=disabled@endif data-row="{{{  $id }}}" data-method="delete" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'\' ) }}}" class="confirm-ajax-update " @if($name == "admin" || $name == "users")disabled@endif>{{{ Lang::get(\'button.delete\') }}}</a></li>
+					@if(in_array($name, Role::$protected) || $id == Setting::get("users.default_role_id"))
+						<li><a href="#disabled" class="disabled">{{{ Lang::get(\'button.delete\') }}}</a></li>
+					@else
+						<li><a data-row="{{{  $id }}}" data-method="delete" data-table="roles" href="{{{ URL::to(\'admin/roles/\' . $id . \'\' ) }}}" class="confirm-ajax-update">{{{ Lang::get(\'button.delete\') }}}</a></li>
+					@endif 
 				</ul>
 			</div>
          ')
         ->make();
     }
-
 }
