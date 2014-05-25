@@ -8,7 +8,7 @@ class UserTest extends TestCase {
     public function testIsConfirmedByEmail()
     {
         $user = Woodling::retrieve('UserAdmin');
-        $this->assertEquals( $user->isConfirmed(array('email'=>'admin@example.org')), 1 );
+        $this->assertEquals( $user->isConfirmed(array('email'=>'test@example.org')), 1 );
     }
 
     public function testIsConfirmedByEmailFail()
