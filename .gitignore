@@ -219,7 +219,8 @@ app/config/mail.php
 app/config/mail.php
 app/config/mail.php
 app/config/mail.php
-/vendor/
+vendor/
+app/storage
 
 #Node
 node_modules/
