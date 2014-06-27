@@ -219,10 +219,37 @@ app/config/mail.php
 app/config/mail.php
 app/config/mail.php
 app/config/mail.php
-vendor/
-app/storage/
+
+
+# Laravel
+/bootstrap/compiled.php
+/app/storage
+/vendor
 
 #Node
-node_modules/
-public/vendor/
-public/packages/
+/node_modules
+/public/vendor
+/public/packages
+
+# Configuration
+/app/config/local
+/app/config/staging
+/app/config/production
+/app/storage
+
+# Basset development collections
+/public/assets/compiled/public
+/public/assets/compiled/admin
+
+# Composer
+composer.phar
+composer.lock
+
+# OS
+.DS_Store
+.idea/
+vagrant
+.vagrant
+
+# Packages
+_ide_helpers.php
