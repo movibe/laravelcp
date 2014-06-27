@@ -31,7 +31,8 @@
 		"liebig/cron": "dev-master",
 		"atticmedia/anvard": "dev-master",
 		"gcphost/bootstrap3": "dev-master",
-		"gcphost/l4cp-support": "dev-master"
+		"gcphost/l4cp-support": "dev-master",
+		"pda/pheanstalk": "2.0.*"
 	},
 	"require-dev": {
 		"dollar/generators": "1.0.*@dev",
@@ -39,7 +40,8 @@
 		"summerstreet/woodling": "0.1.*",
 		"barryvdh/laravel-ide-helper": "dev-master",
 		"lmammino/jsmin4assetic": "1.0.*",
-		"phpunit/phpunit": "dev-master"
+		"phpunit/phpunit": "dev-master",
+		"barryvdh/laravel-debugbar": "*"
 	},
 
 	"autoload": {
