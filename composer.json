@@ -30,7 +30,8 @@
 		"rtablada/profane": "dev-master",
 		"liebig/cron": "dev-master",
 		"atticmedia/anvard": "dev-master",
-		"gcphost/bootstrap3": "dev-master"
+		"gcphost/bootstrap3": "dev-master",
+		"gcphost/l4cp-support": "dev-master"
 	},
 	"require-dev": {
 		"dollar/generators": "1.0.*@dev",

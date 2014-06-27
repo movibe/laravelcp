@@ -154,6 +154,10 @@ return array(
 		'Gcphost\LaravelCP\SiteBlogServiceProvider',
 		'Gcphost\LaravelCP\ClientServiceProvider',
 
+		/* Support */
+		'Gcphost\L4cpSupport\L4cpSupportServiceProvider',
+  		'Rtablada\Profane\FilterServiceProvider',
+
 	),
 
 	/*
@@ -246,6 +250,10 @@ return array(
 		'Search'          => 'Gcphost\LaravelCP\Search', 
 		'CronWrapper'     => 'Gcphost\LaravelCP\CronWrapper', 
 		'LaravelCP'		  => 'Gcphost\LaravelCP\LaravelCP',
+
+		/* Support */
+		'Support' =>  'Gcphost\L4cpSupport\Helpers\Support',
+  		'Filter' => 'Rtablada\Profane\Facades\Filter',
 
 	),
 	'available_language' => array('en'),
