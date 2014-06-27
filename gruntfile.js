@@ -284,7 +284,7 @@ module.exports = function(grunt) {
           '<%= assetsDir %>/js/bootstrap.js',
           '<%= assetsDir %>/js/loading-bar.js',
           '<%= assetsDir %>/js/angular-animate.js',
-          '<%= assetsDir %>/js/ngProgress.js'
+          '<%= assetsDir %>/js/ngProgress.js',
           '<%= assetsDir %>/js/frontend.js'
         ],
         dest: '<%= assetsDir %>/tmp/frontend-concat.js',
@@ -309,7 +309,7 @@ module.exports = function(grunt) {
           '<%= assetsDir %>/js/bootstrap.js',
           '<%= assetsDir %>/js/loading-bar.js',
           '<%= assetsDir %>/js/angular-animate.js',
-          '<%= assetsDir %>/js/ngProgress.js'
+          '<%= assetsDir %>/js/ngProgress.js',
           '<%= assetsDir %>/js/backend.js'
         ],
         dest: '<%= assetsDir %>/tmp/backend-concat.js',
