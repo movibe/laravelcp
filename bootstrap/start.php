@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-    'local' => array('i7baby'), // Change this to your local machine hostname.
+    'local' => array('MacBook-Air-de-Willian-2.local'), // Change this to your local machine hostname.
     'staging' => array('i7baby'),
     'production' => array('i7baby'),
 

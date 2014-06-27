@@ -225,6 +225,7 @@ app/config/mail.php
 /bootstrap/compiled.php
 /app/storage
 /vendor
+/app/config/local
 
 #Node
 /node_modules
