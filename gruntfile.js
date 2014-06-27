@@ -253,9 +253,9 @@ module.exports = function(grunt) {
         },
         files: {
           //compiling frontend.less into frontend.css
-          "<%= assetsDir %>/less/frontend.css": "<%= assetsDir %>/css/frontend.less",
-          //compiling backend.less into backend.css
-          "<%= assetsDir %>/less/backend.css": "<%= assetsDir %>/css/backend.less"
+          "<%= assetsDir %>/css/frontend.css": "<%= assetsDir %>/less/frontend.less",
+          //compiling backend.css into backend.css
+          "<%= assetsDir %>/css/backend.css": "<%= assetsDir %>/less/backend.less"
         }
       }
     },
@@ -322,7 +322,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         files: {
-          '<%= assetsDir %>/frontend.min.css': ['<%= assetsDir %>/tmp/frontend-concat.css'],
+          '<%= assetsDir %>/css/frontend.min.css': ['<%= assetsDir %>/css/frontend.css'],
         }
       },
       css_backend: {
@@ -330,7 +330,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         files: {
-          '<%= assetsDir %>/backend.min.css': ['<%= assetsDir %>/tmp/backend-concat.css'],
+          '<%= assetsDir %>/css/backend.min.css': ['<%= assetsDir %>/css/backend.css'],
         }
       }
     },
